@@ -8,6 +8,7 @@
         "dev": "nodemon src/index.ts"
     },
     "devDependencies": {
+        "@types/google-protobuf": "^3.15.6",
         "@types/node": "^17.0.17",
         "@types/ws": "^8.5.3",
         "nodemon": "^2.0.16",
