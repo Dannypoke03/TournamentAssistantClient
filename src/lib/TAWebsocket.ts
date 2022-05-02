@@ -81,7 +81,7 @@ export class TAWebsocket {
     }
 
     private handlePacket(packet: Packet.Packet) {
-        if (packet.packet === Packet.ConnectResponse.name) {
+        if (packet.connect_response) {
             const connectResponse = packet.connect_response;
             if (!this.taClient.Self && connectResponse.self) {
                 this.taClient.init(connectResponse);
