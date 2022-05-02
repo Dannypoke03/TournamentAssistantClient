@@ -6,7 +6,7 @@
 import * as dependency_1 from "./discord";
 import * as dependency_2 from "./models";
 import * as pb_1 from "google-protobuf";
-export namespace TA.packet {
+export namespace Packet {
     export class Acknowledgement extends pb_1.Message {
         constructor(data?: any[] | {
             packet_id?: string;
@@ -440,8 +440,8 @@ export namespace TA.packet {
     export class ConnectResponse extends pb_1.Message {
         constructor(data?: any[] | {
             response?: Response;
-            self?: dependency_2.TA.Models.User;
-            state?: dependency_2.TA.Models.State;
+            self?: dependency_2.Models.User;
+            state?: dependency_2.Models.State;
             server_version?: number;
         }) {
             super();
@@ -468,15 +468,15 @@ export namespace TA.packet {
             pb_1.Message.setWrapperField(this, 1, value);
         }
         get self() {
-            return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.User, 2) as dependency_2.TA.Models.User;
+            return pb_1.Message.getWrapperField(this, dependency_2.Models.User, 2) as dependency_2.Models.User;
         }
-        set self(value: dependency_2.TA.Models.User) {
+        set self(value: dependency_2.Models.User) {
             pb_1.Message.setWrapperField(this, 2, value);
         }
         get state() {
-            return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.State, 3) as dependency_2.TA.Models.State;
+            return pb_1.Message.getWrapperField(this, dependency_2.Models.State, 3) as dependency_2.Models.State;
         }
-        set state(value: dependency_2.TA.Models.State) {
+        set state(value: dependency_2.Models.State) {
             pb_1.Message.setWrapperField(this, 3, value);
         }
         get server_version() {
@@ -487,8 +487,8 @@ export namespace TA.packet {
         }
         static fromObject(data: {
             response?: ReturnType<typeof Response.prototype.toObject>;
-            self?: ReturnType<typeof dependency_2.TA.Models.User.prototype.toObject>;
-            state?: ReturnType<typeof dependency_2.TA.Models.State.prototype.toObject>;
+            self?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
+            state?: ReturnType<typeof dependency_2.Models.State.prototype.toObject>;
             server_version?: number;
         }) {
             const message = new ConnectResponse({});
@@ -496,10 +496,10 @@ export namespace TA.packet {
                 message.response = Response.fromObject(data.response);
             }
             if (data.self != null) {
-                message.self = dependency_2.TA.Models.User.fromObject(data.self);
+                message.self = dependency_2.Models.User.fromObject(data.self);
             }
             if (data.state != null) {
-                message.state = dependency_2.TA.Models.State.fromObject(data.state);
+                message.state = dependency_2.Models.State.fromObject(data.state);
             }
             if (data.server_version != null) {
                 message.server_version = data.server_version;
@@ -509,8 +509,8 @@ export namespace TA.packet {
         toObject() {
             const data: {
                 response?: ReturnType<typeof Response.prototype.toObject>;
-                self?: ReturnType<typeof dependency_2.TA.Models.User.prototype.toObject>;
-                state?: ReturnType<typeof dependency_2.TA.Models.State.prototype.toObject>;
+                self?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
+                state?: ReturnType<typeof dependency_2.Models.State.prototype.toObject>;
                 server_version?: number;
             } = {};
             if (this.response != null) {
@@ -552,10 +552,10 @@ export namespace TA.packet {
                         reader.readMessage(message.response, () => message.response = Response.deserialize(reader));
                         break;
                     case 2:
-                        reader.readMessage(message.self, () => message.self = dependency_2.TA.Models.User.deserialize(reader));
+                        reader.readMessage(message.self, () => message.self = dependency_2.Models.User.deserialize(reader));
                         break;
                     case 3:
-                        reader.readMessage(message.state, () => message.state = dependency_2.TA.Models.State.deserialize(reader));
+                        reader.readMessage(message.state, () => message.state = dependency_2.Models.State.deserialize(reader));
                         break;
                     case 4:
                         message.server_version = reader.readInt32();
@@ -716,7 +716,7 @@ export namespace TA.packet {
     }
     export class LoadedSong extends pb_1.Message {
         constructor(data?: any[] | {
-            level?: dependency_2.TA.Models.PreviewBeatmapLevel;
+            level?: dependency_2.Models.PreviewBeatmapLevel;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -727,23 +727,23 @@ export namespace TA.packet {
             }
         }
         get level() {
-            return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.PreviewBeatmapLevel, 1) as dependency_2.TA.Models.PreviewBeatmapLevel;
+            return pb_1.Message.getWrapperField(this, dependency_2.Models.PreviewBeatmapLevel, 1) as dependency_2.Models.PreviewBeatmapLevel;
         }
-        set level(value: dependency_2.TA.Models.PreviewBeatmapLevel) {
+        set level(value: dependency_2.Models.PreviewBeatmapLevel) {
             pb_1.Message.setWrapperField(this, 1, value);
         }
         static fromObject(data: {
-            level?: ReturnType<typeof dependency_2.TA.Models.PreviewBeatmapLevel.prototype.toObject>;
+            level?: ReturnType<typeof dependency_2.Models.PreviewBeatmapLevel.prototype.toObject>;
         }) {
             const message = new LoadedSong({});
             if (data.level != null) {
-                message.level = dependency_2.TA.Models.PreviewBeatmapLevel.fromObject(data.level);
+                message.level = dependency_2.Models.PreviewBeatmapLevel.fromObject(data.level);
             }
             return message;
         }
         toObject() {
             const data: {
-                level?: ReturnType<typeof dependency_2.TA.Models.PreviewBeatmapLevel.prototype.toObject>;
+                level?: ReturnType<typeof dependency_2.Models.PreviewBeatmapLevel.prototype.toObject>;
             } = {};
             if (this.level != null) {
                 data.level = this.level.toObject();
@@ -766,7 +766,7 @@ export namespace TA.packet {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.level, () => message.level = dependency_2.TA.Models.PreviewBeatmapLevel.deserialize(reader));
+                        reader.readMessage(message.level, () => message.level = dependency_2.Models.PreviewBeatmapLevel.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -1314,7 +1314,7 @@ export namespace TA.packet {
     export namespace Event {
         export class PlayerAddedEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                player?: dependency_2.TA.Models.Player;
+                player?: dependency_2.Models.Player;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -1325,23 +1325,23 @@ export namespace TA.packet {
                 }
             }
             get player() {
-                return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.Player, 1) as dependency_2.TA.Models.Player;
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.Player, 1) as dependency_2.Models.Player;
             }
-            set player(value: dependency_2.TA.Models.Player) {
+            set player(value: dependency_2.Models.Player) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                player?: ReturnType<typeof dependency_2.TA.Models.Player.prototype.toObject>;
+                player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
             }) {
                 const message = new PlayerAddedEvent({});
                 if (data.player != null) {
-                    message.player = dependency_2.TA.Models.Player.fromObject(data.player);
+                    message.player = dependency_2.Models.Player.fromObject(data.player);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    player?: ReturnType<typeof dependency_2.TA.Models.Player.prototype.toObject>;
+                    player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
                 } = {};
                 if (this.player != null) {
                     data.player = this.player.toObject();
@@ -1364,7 +1364,7 @@ export namespace TA.packet {
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.player, () => message.player = dependency_2.TA.Models.Player.deserialize(reader));
+                            reader.readMessage(message.player, () => message.player = dependency_2.Models.Player.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -1380,7 +1380,7 @@ export namespace TA.packet {
         }
         export class PlayerUpdatedEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                player?: dependency_2.TA.Models.Player;
+                player?: dependency_2.Models.Player;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -1391,23 +1391,23 @@ export namespace TA.packet {
                 }
             }
             get player() {
-                return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.Player, 1) as dependency_2.TA.Models.Player;
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.Player, 1) as dependency_2.Models.Player;
             }
-            set player(value: dependency_2.TA.Models.Player) {
+            set player(value: dependency_2.Models.Player) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                player?: ReturnType<typeof dependency_2.TA.Models.Player.prototype.toObject>;
+                player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
             }) {
                 const message = new PlayerUpdatedEvent({});
                 if (data.player != null) {
-                    message.player = dependency_2.TA.Models.Player.fromObject(data.player);
+                    message.player = dependency_2.Models.Player.fromObject(data.player);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    player?: ReturnType<typeof dependency_2.TA.Models.Player.prototype.toObject>;
+                    player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
                 } = {};
                 if (this.player != null) {
                     data.player = this.player.toObject();
@@ -1430,7 +1430,7 @@ export namespace TA.packet {
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.player, () => message.player = dependency_2.TA.Models.Player.deserialize(reader));
+                            reader.readMessage(message.player, () => message.player = dependency_2.Models.Player.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -1446,7 +1446,7 @@ export namespace TA.packet {
         }
         export class PlayerLeftEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                player?: dependency_2.TA.Models.Player;
+                player?: dependency_2.Models.Player;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -1457,23 +1457,23 @@ export namespace TA.packet {
                 }
             }
             get player() {
-                return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.Player, 1) as dependency_2.TA.Models.Player;
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.Player, 1) as dependency_2.Models.Player;
             }
-            set player(value: dependency_2.TA.Models.Player) {
+            set player(value: dependency_2.Models.Player) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                player?: ReturnType<typeof dependency_2.TA.Models.Player.prototype.toObject>;
+                player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
             }) {
                 const message = new PlayerLeftEvent({});
                 if (data.player != null) {
-                    message.player = dependency_2.TA.Models.Player.fromObject(data.player);
+                    message.player = dependency_2.Models.Player.fromObject(data.player);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    player?: ReturnType<typeof dependency_2.TA.Models.Player.prototype.toObject>;
+                    player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
                 } = {};
                 if (this.player != null) {
                     data.player = this.player.toObject();
@@ -1496,7 +1496,7 @@ export namespace TA.packet {
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.player, () => message.player = dependency_2.TA.Models.Player.deserialize(reader));
+                            reader.readMessage(message.player, () => message.player = dependency_2.Models.Player.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -1512,7 +1512,7 @@ export namespace TA.packet {
         }
         export class CoordinatorAddedEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                coordinator?: dependency_2.TA.Models.Coordinator;
+                coordinator?: dependency_2.Models.Coordinator;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -1523,23 +1523,23 @@ export namespace TA.packet {
                 }
             }
             get coordinator() {
-                return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.Coordinator, 1) as dependency_2.TA.Models.Coordinator;
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.Coordinator, 1) as dependency_2.Models.Coordinator;
             }
-            set coordinator(value: dependency_2.TA.Models.Coordinator) {
+            set coordinator(value: dependency_2.Models.Coordinator) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                coordinator?: ReturnType<typeof dependency_2.TA.Models.Coordinator.prototype.toObject>;
+                coordinator?: ReturnType<typeof dependency_2.Models.Coordinator.prototype.toObject>;
             }) {
                 const message = new CoordinatorAddedEvent({});
                 if (data.coordinator != null) {
-                    message.coordinator = dependency_2.TA.Models.Coordinator.fromObject(data.coordinator);
+                    message.coordinator = dependency_2.Models.Coordinator.fromObject(data.coordinator);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    coordinator?: ReturnType<typeof dependency_2.TA.Models.Coordinator.prototype.toObject>;
+                    coordinator?: ReturnType<typeof dependency_2.Models.Coordinator.prototype.toObject>;
                 } = {};
                 if (this.coordinator != null) {
                     data.coordinator = this.coordinator.toObject();
@@ -1562,7 +1562,7 @@ export namespace TA.packet {
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.coordinator, () => message.coordinator = dependency_2.TA.Models.Coordinator.deserialize(reader));
+                            reader.readMessage(message.coordinator, () => message.coordinator = dependency_2.Models.Coordinator.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -1578,7 +1578,7 @@ export namespace TA.packet {
         }
         export class CoordinatorLeftEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                coordinator?: dependency_2.TA.Models.Coordinator;
+                coordinator?: dependency_2.Models.Coordinator;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -1589,23 +1589,23 @@ export namespace TA.packet {
                 }
             }
             get coordinator() {
-                return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.Coordinator, 1) as dependency_2.TA.Models.Coordinator;
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.Coordinator, 1) as dependency_2.Models.Coordinator;
             }
-            set coordinator(value: dependency_2.TA.Models.Coordinator) {
+            set coordinator(value: dependency_2.Models.Coordinator) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                coordinator?: ReturnType<typeof dependency_2.TA.Models.Coordinator.prototype.toObject>;
+                coordinator?: ReturnType<typeof dependency_2.Models.Coordinator.prototype.toObject>;
             }) {
                 const message = new CoordinatorLeftEvent({});
                 if (data.coordinator != null) {
-                    message.coordinator = dependency_2.TA.Models.Coordinator.fromObject(data.coordinator);
+                    message.coordinator = dependency_2.Models.Coordinator.fromObject(data.coordinator);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    coordinator?: ReturnType<typeof dependency_2.TA.Models.Coordinator.prototype.toObject>;
+                    coordinator?: ReturnType<typeof dependency_2.Models.Coordinator.prototype.toObject>;
                 } = {};
                 if (this.coordinator != null) {
                     data.coordinator = this.coordinator.toObject();
@@ -1628,7 +1628,7 @@ export namespace TA.packet {
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.coordinator, () => message.coordinator = dependency_2.TA.Models.Coordinator.deserialize(reader));
+                            reader.readMessage(message.coordinator, () => message.coordinator = dependency_2.Models.Coordinator.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -1644,7 +1644,7 @@ export namespace TA.packet {
         }
         export class MatchCreatedEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                match?: dependency_2.TA.Models.Match;
+                match?: dependency_2.Models.Match;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -1655,23 +1655,23 @@ export namespace TA.packet {
                 }
             }
             get match() {
-                return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.Match, 1) as dependency_2.TA.Models.Match;
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.Match, 1) as dependency_2.Models.Match;
             }
-            set match(value: dependency_2.TA.Models.Match) {
+            set match(value: dependency_2.Models.Match) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                match?: ReturnType<typeof dependency_2.TA.Models.Match.prototype.toObject>;
+                match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject>;
             }) {
                 const message = new MatchCreatedEvent({});
                 if (data.match != null) {
-                    message.match = dependency_2.TA.Models.Match.fromObject(data.match);
+                    message.match = dependency_2.Models.Match.fromObject(data.match);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    match?: ReturnType<typeof dependency_2.TA.Models.Match.prototype.toObject>;
+                    match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject>;
                 } = {};
                 if (this.match != null) {
                     data.match = this.match.toObject();
@@ -1694,7 +1694,7 @@ export namespace TA.packet {
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.match, () => message.match = dependency_2.TA.Models.Match.deserialize(reader));
+                            reader.readMessage(message.match, () => message.match = dependency_2.Models.Match.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -1710,7 +1710,7 @@ export namespace TA.packet {
         }
         export class MatchUpdatedEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                match?: dependency_2.TA.Models.Match;
+                match?: dependency_2.Models.Match;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -1721,23 +1721,23 @@ export namespace TA.packet {
                 }
             }
             get match() {
-                return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.Match, 1) as dependency_2.TA.Models.Match;
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.Match, 1) as dependency_2.Models.Match;
             }
-            set match(value: dependency_2.TA.Models.Match) {
+            set match(value: dependency_2.Models.Match) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                match?: ReturnType<typeof dependency_2.TA.Models.Match.prototype.toObject>;
+                match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject>;
             }) {
                 const message = new MatchUpdatedEvent({});
                 if (data.match != null) {
-                    message.match = dependency_2.TA.Models.Match.fromObject(data.match);
+                    message.match = dependency_2.Models.Match.fromObject(data.match);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    match?: ReturnType<typeof dependency_2.TA.Models.Match.prototype.toObject>;
+                    match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject>;
                 } = {};
                 if (this.match != null) {
                     data.match = this.match.toObject();
@@ -1760,7 +1760,7 @@ export namespace TA.packet {
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.match, () => message.match = dependency_2.TA.Models.Match.deserialize(reader));
+                            reader.readMessage(message.match, () => message.match = dependency_2.Models.Match.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -1776,7 +1776,7 @@ export namespace TA.packet {
         }
         export class MatchDeletedEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                match?: dependency_2.TA.Models.Match;
+                match?: dependency_2.Models.Match;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -1787,23 +1787,23 @@ export namespace TA.packet {
                 }
             }
             get match() {
-                return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.Match, 1) as dependency_2.TA.Models.Match;
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.Match, 1) as dependency_2.Models.Match;
             }
-            set match(value: dependency_2.TA.Models.Match) {
+            set match(value: dependency_2.Models.Match) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                match?: ReturnType<typeof dependency_2.TA.Models.Match.prototype.toObject>;
+                match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject>;
             }) {
                 const message = new MatchDeletedEvent({});
                 if (data.match != null) {
-                    message.match = dependency_2.TA.Models.Match.fromObject(data.match);
+                    message.match = dependency_2.Models.Match.fromObject(data.match);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    match?: ReturnType<typeof dependency_2.TA.Models.Match.prototype.toObject>;
+                    match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject>;
                 } = {};
                 if (this.match != null) {
                     data.match = this.match.toObject();
@@ -1826,7 +1826,7 @@ export namespace TA.packet {
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.match, () => message.match = dependency_2.TA.Models.Match.deserialize(reader));
+                            reader.readMessage(message.match, () => message.match = dependency_2.Models.Match.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -1842,7 +1842,7 @@ export namespace TA.packet {
         }
         export class QualifierCreatedEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                event?: dependency_2.TA.Models.QualifierEvent;
+                event?: dependency_2.Models.QualifierEvent;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -1853,23 +1853,23 @@ export namespace TA.packet {
                 }
             }
             get event() {
-                return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.QualifierEvent, 1) as dependency_2.TA.Models.QualifierEvent;
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.QualifierEvent, 1) as dependency_2.Models.QualifierEvent;
             }
-            set event(value: dependency_2.TA.Models.QualifierEvent) {
+            set event(value: dependency_2.Models.QualifierEvent) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                event?: ReturnType<typeof dependency_2.TA.Models.QualifierEvent.prototype.toObject>;
+                event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject>;
             }) {
                 const message = new QualifierCreatedEvent({});
                 if (data.event != null) {
-                    message.event = dependency_2.TA.Models.QualifierEvent.fromObject(data.event);
+                    message.event = dependency_2.Models.QualifierEvent.fromObject(data.event);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    event?: ReturnType<typeof dependency_2.TA.Models.QualifierEvent.prototype.toObject>;
+                    event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject>;
                 } = {};
                 if (this.event != null) {
                     data.event = this.event.toObject();
@@ -1892,7 +1892,7 @@ export namespace TA.packet {
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.event, () => message.event = dependency_2.TA.Models.QualifierEvent.deserialize(reader));
+                            reader.readMessage(message.event, () => message.event = dependency_2.Models.QualifierEvent.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -1908,7 +1908,7 @@ export namespace TA.packet {
         }
         export class QualifierUpdatedEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                event?: dependency_2.TA.Models.QualifierEvent;
+                event?: dependency_2.Models.QualifierEvent;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -1919,23 +1919,23 @@ export namespace TA.packet {
                 }
             }
             get event() {
-                return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.QualifierEvent, 1) as dependency_2.TA.Models.QualifierEvent;
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.QualifierEvent, 1) as dependency_2.Models.QualifierEvent;
             }
-            set event(value: dependency_2.TA.Models.QualifierEvent) {
+            set event(value: dependency_2.Models.QualifierEvent) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                event?: ReturnType<typeof dependency_2.TA.Models.QualifierEvent.prototype.toObject>;
+                event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject>;
             }) {
                 const message = new QualifierUpdatedEvent({});
                 if (data.event != null) {
-                    message.event = dependency_2.TA.Models.QualifierEvent.fromObject(data.event);
+                    message.event = dependency_2.Models.QualifierEvent.fromObject(data.event);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    event?: ReturnType<typeof dependency_2.TA.Models.QualifierEvent.prototype.toObject>;
+                    event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject>;
                 } = {};
                 if (this.event != null) {
                     data.event = this.event.toObject();
@@ -1958,7 +1958,7 @@ export namespace TA.packet {
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.event, () => message.event = dependency_2.TA.Models.QualifierEvent.deserialize(reader));
+                            reader.readMessage(message.event, () => message.event = dependency_2.Models.QualifierEvent.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -1974,7 +1974,7 @@ export namespace TA.packet {
         }
         export class QualifierDeletedEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                event?: dependency_2.TA.Models.QualifierEvent;
+                event?: dependency_2.Models.QualifierEvent;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -1985,23 +1985,23 @@ export namespace TA.packet {
                 }
             }
             get event() {
-                return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.QualifierEvent, 1) as dependency_2.TA.Models.QualifierEvent;
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.QualifierEvent, 1) as dependency_2.Models.QualifierEvent;
             }
-            set event(value: dependency_2.TA.Models.QualifierEvent) {
+            set event(value: dependency_2.Models.QualifierEvent) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                event?: ReturnType<typeof dependency_2.TA.Models.QualifierEvent.prototype.toObject>;
+                event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject>;
             }) {
                 const message = new QualifierDeletedEvent({});
                 if (data.event != null) {
-                    message.event = dependency_2.TA.Models.QualifierEvent.fromObject(data.event);
+                    message.event = dependency_2.Models.QualifierEvent.fromObject(data.event);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    event?: ReturnType<typeof dependency_2.TA.Models.QualifierEvent.prototype.toObject>;
+                    event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject>;
                 } = {};
                 if (this.event != null) {
                     data.event = this.event.toObject();
@@ -2024,7 +2024,7 @@ export namespace TA.packet {
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.event, () => message.event = dependency_2.TA.Models.QualifierEvent.deserialize(reader));
+                            reader.readMessage(message.event, () => message.event = dependency_2.Models.QualifierEvent.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -2040,7 +2040,7 @@ export namespace TA.packet {
         }
         export class HostAddedEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                server?: dependency_2.TA.Models.CoreServer;
+                server?: dependency_2.Models.CoreServer;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -2051,23 +2051,23 @@ export namespace TA.packet {
                 }
             }
             get server() {
-                return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.CoreServer, 1) as dependency_2.TA.Models.CoreServer;
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.CoreServer, 1) as dependency_2.Models.CoreServer;
             }
-            set server(value: dependency_2.TA.Models.CoreServer) {
+            set server(value: dependency_2.Models.CoreServer) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                server?: ReturnType<typeof dependency_2.TA.Models.CoreServer.prototype.toObject>;
+                server?: ReturnType<typeof dependency_2.Models.CoreServer.prototype.toObject>;
             }) {
                 const message = new HostAddedEvent({});
                 if (data.server != null) {
-                    message.server = dependency_2.TA.Models.CoreServer.fromObject(data.server);
+                    message.server = dependency_2.Models.CoreServer.fromObject(data.server);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    server?: ReturnType<typeof dependency_2.TA.Models.CoreServer.prototype.toObject>;
+                    server?: ReturnType<typeof dependency_2.Models.CoreServer.prototype.toObject>;
                 } = {};
                 if (this.server != null) {
                     data.server = this.server.toObject();
@@ -2090,7 +2090,7 @@ export namespace TA.packet {
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.server, () => message.server = dependency_2.TA.Models.CoreServer.deserialize(reader));
+                            reader.readMessage(message.server, () => message.server = dependency_2.Models.CoreServer.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -2106,7 +2106,7 @@ export namespace TA.packet {
         }
         export class HostDeletedEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                server?: dependency_2.TA.Models.CoreServer;
+                server?: dependency_2.Models.CoreServer;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -2117,23 +2117,23 @@ export namespace TA.packet {
                 }
             }
             get server() {
-                return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.CoreServer, 1) as dependency_2.TA.Models.CoreServer;
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.CoreServer, 1) as dependency_2.Models.CoreServer;
             }
-            set server(value: dependency_2.TA.Models.CoreServer) {
+            set server(value: dependency_2.Models.CoreServer) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                server?: ReturnType<typeof dependency_2.TA.Models.CoreServer.prototype.toObject>;
+                server?: ReturnType<typeof dependency_2.Models.CoreServer.prototype.toObject>;
             }) {
                 const message = new HostDeletedEvent({});
                 if (data.server != null) {
-                    message.server = dependency_2.TA.Models.CoreServer.fromObject(data.server);
+                    message.server = dependency_2.Models.CoreServer.fromObject(data.server);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    server?: ReturnType<typeof dependency_2.TA.Models.CoreServer.prototype.toObject>;
+                    server?: ReturnType<typeof dependency_2.Models.CoreServer.prototype.toObject>;
                 } = {};
                 if (this.server != null) {
                     data.server = this.server.toObject();
@@ -2156,7 +2156,7 @@ export namespace TA.packet {
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.server, () => message.server = dependency_2.TA.Models.CoreServer.deserialize(reader));
+                            reader.readMessage(message.server, () => message.server = dependency_2.Models.CoreServer.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -2262,7 +2262,7 @@ export namespace TA.packet {
     }
     export class PlaySong extends pb_1.Message {
         constructor(data?: any[] | {
-            gameplay_parameters?: dependency_2.TA.Models.GameplayParameters;
+            gameplay_parameters?: dependency_2.Models.GameplayParameters;
             floating_scoreboard?: boolean;
             stream_sync?: boolean;
             disable_fail?: boolean;
@@ -2297,9 +2297,9 @@ export namespace TA.packet {
             }
         }
         get gameplay_parameters() {
-            return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.GameplayParameters, 1) as dependency_2.TA.Models.GameplayParameters;
+            return pb_1.Message.getWrapperField(this, dependency_2.Models.GameplayParameters, 1) as dependency_2.Models.GameplayParameters;
         }
-        set gameplay_parameters(value: dependency_2.TA.Models.GameplayParameters) {
+        set gameplay_parameters(value: dependency_2.Models.GameplayParameters) {
             pb_1.Message.setWrapperField(this, 1, value);
         }
         get floating_scoreboard() {
@@ -2339,7 +2339,7 @@ export namespace TA.packet {
             pb_1.Message.setField(this, 8, value);
         }
         static fromObject(data: {
-            gameplay_parameters?: ReturnType<typeof dependency_2.TA.Models.GameplayParameters.prototype.toObject>;
+            gameplay_parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject>;
             floating_scoreboard?: boolean;
             stream_sync?: boolean;
             disable_fail?: boolean;
@@ -2349,7 +2349,7 @@ export namespace TA.packet {
         }) {
             const message = new PlaySong({});
             if (data.gameplay_parameters != null) {
-                message.gameplay_parameters = dependency_2.TA.Models.GameplayParameters.fromObject(data.gameplay_parameters);
+                message.gameplay_parameters = dependency_2.Models.GameplayParameters.fromObject(data.gameplay_parameters);
             }
             if (data.floating_scoreboard != null) {
                 message.floating_scoreboard = data.floating_scoreboard;
@@ -2373,7 +2373,7 @@ export namespace TA.packet {
         }
         toObject() {
             const data: {
-                gameplay_parameters?: ReturnType<typeof dependency_2.TA.Models.GameplayParameters.prototype.toObject>;
+                gameplay_parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject>;
                 floating_scoreboard?: boolean;
                 stream_sync?: boolean;
                 disable_fail?: boolean;
@@ -2432,7 +2432,7 @@ export namespace TA.packet {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.gameplay_parameters, () => message.gameplay_parameters = dependency_2.TA.Models.GameplayParameters.deserialize(reader));
+                        reader.readMessage(message.gameplay_parameters, () => message.gameplay_parameters = dependency_2.Models.GameplayParameters.deserialize(reader));
                         break;
                     case 3:
                         message.floating_scoreboard = reader.readBool();
@@ -2466,7 +2466,7 @@ export namespace TA.packet {
     }
     export class SubmitScore extends pb_1.Message {
         constructor(data?: any[] | {
-            score?: dependency_2.TA.Models.Score;
+            score?: dependency_2.Models.Score;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -2477,23 +2477,23 @@ export namespace TA.packet {
             }
         }
         get score() {
-            return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.Score, 1) as dependency_2.TA.Models.Score;
+            return pb_1.Message.getWrapperField(this, dependency_2.Models.Score, 1) as dependency_2.Models.Score;
         }
-        set score(value: dependency_2.TA.Models.Score) {
+        set score(value: dependency_2.Models.Score) {
             pb_1.Message.setWrapperField(this, 1, value);
         }
         static fromObject(data: {
-            score?: ReturnType<typeof dependency_2.TA.Models.Score.prototype.toObject>;
+            score?: ReturnType<typeof dependency_2.Models.Score.prototype.toObject>;
         }) {
             const message = new SubmitScore({});
             if (data.score != null) {
-                message.score = dependency_2.TA.Models.Score.fromObject(data.score);
+                message.score = dependency_2.Models.Score.fromObject(data.score);
             }
             return message;
         }
         toObject() {
             const data: {
-                score?: ReturnType<typeof dependency_2.TA.Models.Score.prototype.toObject>;
+                score?: ReturnType<typeof dependency_2.Models.Score.prototype.toObject>;
             } = {};
             if (this.score != null) {
                 data.score = this.score.toObject();
@@ -2516,7 +2516,7 @@ export namespace TA.packet {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.score, () => message.score = dependency_2.TA.Models.Score.deserialize(reader));
+                        reader.readMessage(message.score, () => message.score = dependency_2.Models.Score.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -2532,8 +2532,8 @@ export namespace TA.packet {
     }
     export class SongFinished extends pb_1.Message {
         constructor(data?: any[] | {
-            player?: dependency_2.TA.Models.Player;
-            beatmap?: dependency_2.TA.Models.Beatmap;
+            player?: dependency_2.Models.Player;
+            beatmap?: dependency_2.Models.Beatmap;
             type?: SongFinished.CompletionType;
             score?: number;
         }) {
@@ -2555,15 +2555,15 @@ export namespace TA.packet {
             }
         }
         get player() {
-            return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.Player, 1) as dependency_2.TA.Models.Player;
+            return pb_1.Message.getWrapperField(this, dependency_2.Models.Player, 1) as dependency_2.Models.Player;
         }
-        set player(value: dependency_2.TA.Models.Player) {
+        set player(value: dependency_2.Models.Player) {
             pb_1.Message.setWrapperField(this, 1, value);
         }
         get beatmap() {
-            return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.Beatmap, 2) as dependency_2.TA.Models.Beatmap;
+            return pb_1.Message.getWrapperField(this, dependency_2.Models.Beatmap, 2) as dependency_2.Models.Beatmap;
         }
-        set beatmap(value: dependency_2.TA.Models.Beatmap) {
+        set beatmap(value: dependency_2.Models.Beatmap) {
             pb_1.Message.setWrapperField(this, 2, value);
         }
         get type() {
@@ -2579,17 +2579,17 @@ export namespace TA.packet {
             pb_1.Message.setField(this, 4, value);
         }
         static fromObject(data: {
-            player?: ReturnType<typeof dependency_2.TA.Models.Player.prototype.toObject>;
-            beatmap?: ReturnType<typeof dependency_2.TA.Models.Beatmap.prototype.toObject>;
+            player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
+            beatmap?: ReturnType<typeof dependency_2.Models.Beatmap.prototype.toObject>;
             type?: SongFinished.CompletionType;
             score?: number;
         }) {
             const message = new SongFinished({});
             if (data.player != null) {
-                message.player = dependency_2.TA.Models.Player.fromObject(data.player);
+                message.player = dependency_2.Models.Player.fromObject(data.player);
             }
             if (data.beatmap != null) {
-                message.beatmap = dependency_2.TA.Models.Beatmap.fromObject(data.beatmap);
+                message.beatmap = dependency_2.Models.Beatmap.fromObject(data.beatmap);
             }
             if (data.type != null) {
                 message.type = data.type;
@@ -2601,8 +2601,8 @@ export namespace TA.packet {
         }
         toObject() {
             const data: {
-                player?: ReturnType<typeof dependency_2.TA.Models.Player.prototype.toObject>;
-                beatmap?: ReturnType<typeof dependency_2.TA.Models.Beatmap.prototype.toObject>;
+                player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
+                beatmap?: ReturnType<typeof dependency_2.Models.Beatmap.prototype.toObject>;
                 type?: SongFinished.CompletionType;
                 score?: number;
             } = {};
@@ -2642,10 +2642,10 @@ export namespace TA.packet {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.player, () => message.player = dependency_2.TA.Models.Player.deserialize(reader));
+                        reader.readMessage(message.player, () => message.player = dependency_2.Models.Player.deserialize(reader));
                         break;
                     case 2:
-                        reader.readMessage(message.beatmap, () => message.beatmap = dependency_2.TA.Models.Beatmap.deserialize(reader));
+                        reader.readMessage(message.beatmap, () => message.beatmap = dependency_2.Models.Beatmap.deserialize(reader));
                         break;
                     case 3:
                         message.type = reader.readEnum();
@@ -2763,7 +2763,7 @@ export namespace TA.packet {
     }
     export class ScoreRequestResponse extends pb_1.Message {
         constructor(data?: any[] | {
-            scores?: dependency_2.TA.Models.Score[];
+            scores?: dependency_2.Models.Score[];
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], []);
@@ -2774,26 +2774,26 @@ export namespace TA.packet {
             }
         }
         get scores() {
-            return pb_1.Message.getRepeatedWrapperField(this, dependency_2.TA.Models.Score, 1) as dependency_2.TA.Models.Score[];
+            return pb_1.Message.getRepeatedWrapperField(this, dependency_2.Models.Score, 1) as dependency_2.Models.Score[];
         }
-        set scores(value: dependency_2.TA.Models.Score[]) {
+        set scores(value: dependency_2.Models.Score[]) {
             pb_1.Message.setRepeatedWrapperField(this, 1, value);
         }
         static fromObject(data: {
-            scores?: ReturnType<typeof dependency_2.TA.Models.Score.prototype.toObject>[];
+            scores?: ReturnType<typeof dependency_2.Models.Score.prototype.toObject>[];
         }) {
             const message = new ScoreRequestResponse({});
             if (data.scores != null) {
-                message.scores = data.scores.map(item => dependency_2.TA.Models.Score.fromObject(item));
+                message.scores = data.scores.map(item => dependency_2.Models.Score.fromObject(item));
             }
             return message;
         }
         toObject() {
             const data: {
-                scores?: ReturnType<typeof dependency_2.TA.Models.Score.prototype.toObject>[];
+                scores?: ReturnType<typeof dependency_2.Models.Score.prototype.toObject>[];
             } = {};
             if (this.scores != null) {
-                data.scores = this.scores.map((item: dependency_2.TA.Models.Score) => item.toObject());
+                data.scores = this.scores.map((item: dependency_2.Models.Score) => item.toObject());
             }
             return data;
         }
@@ -2802,7 +2802,7 @@ export namespace TA.packet {
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
             if (this.scores !== undefined)
-                writer.writeRepeatedMessage(1, this.scores, (item: dependency_2.TA.Models.Score) => item.serialize(writer));
+                writer.writeRepeatedMessage(1, this.scores, (item: dependency_2.Models.Score) => item.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -2813,7 +2813,7 @@ export namespace TA.packet {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.scores, () => pb_1.Message.addToRepeatedWrapperField(message, 1, dependency_2.TA.Models.Score.deserialize(reader), dependency_2.TA.Models.Score));
+                        reader.readMessage(message.scores, () => pb_1.Message.addToRepeatedWrapperField(message, 1, dependency_2.Models.Score.deserialize(reader), dependency_2.Models.Score));
                         break;
                     default: reader.skipField();
                 }
@@ -2830,7 +2830,7 @@ export namespace TA.packet {
     export class ScoreRequest extends pb_1.Message {
         constructor(data?: any[] | {
             event_id?: string;
-            parameters?: dependency_2.TA.Models.GameplayParameters;
+            parameters?: dependency_2.Models.GameplayParameters;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -2850,28 +2850,28 @@ export namespace TA.packet {
             pb_1.Message.setField(this, 1, value);
         }
         get parameters() {
-            return pb_1.Message.getWrapperField(this, dependency_2.TA.Models.GameplayParameters, 2) as dependency_2.TA.Models.GameplayParameters;
+            return pb_1.Message.getWrapperField(this, dependency_2.Models.GameplayParameters, 2) as dependency_2.Models.GameplayParameters;
         }
-        set parameters(value: dependency_2.TA.Models.GameplayParameters) {
+        set parameters(value: dependency_2.Models.GameplayParameters) {
             pb_1.Message.setWrapperField(this, 2, value);
         }
         static fromObject(data: {
             event_id?: string;
-            parameters?: ReturnType<typeof dependency_2.TA.Models.GameplayParameters.prototype.toObject>;
+            parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject>;
         }) {
             const message = new ScoreRequest({});
             if (data.event_id != null) {
                 message.event_id = data.event_id;
             }
             if (data.parameters != null) {
-                message.parameters = dependency_2.TA.Models.GameplayParameters.fromObject(data.parameters);
+                message.parameters = dependency_2.Models.GameplayParameters.fromObject(data.parameters);
             }
             return message;
         }
         toObject() {
             const data: {
                 event_id?: string;
-                parameters?: ReturnType<typeof dependency_2.TA.Models.GameplayParameters.prototype.toObject>;
+                parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject>;
             } = {};
             if (this.event_id != null) {
                 data.event_id = this.event_id;
@@ -2902,7 +2902,7 @@ export namespace TA.packet {
                         message.event_id = reader.readString();
                         break;
                     case 2:
-                        reader.readMessage(message.parameters, () => message.parameters = dependency_2.TA.Models.GameplayParameters.deserialize(reader));
+                        reader.readMessage(message.parameters, () => message.parameters = dependency_2.Models.GameplayParameters.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }

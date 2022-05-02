@@ -5,7 +5,7 @@
  * git: https://github.com/thesayyn/protoc-gen-ts */
 import * as dependency_1 from "./discord";
 import * as pb_1 from "google-protobuf";
-export namespace TA.Models {
+export namespace Models {
     export class Characteristic extends pb_1.Message {
         constructor(data?: any[] | {
             serialized_name?: string;

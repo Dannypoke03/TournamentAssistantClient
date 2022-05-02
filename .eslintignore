@@ -1,4 +1,3 @@
 node_modules
 dist
-src/assets
-src/templates
+src/models/proto

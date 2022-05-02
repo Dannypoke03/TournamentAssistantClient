@@ -1,23 +1,10 @@
-import { ConnectTypes } from "../models/old/connect";
-import { ConnectResponse } from "../models/old/connectResponse";
-import { Packet, PacketType } from "../models/old/packet";
 import { Client } from "./client";
 import WebSocket from "ws";
-import { Player } from "../models/old/player";
-import { BeatmapDifficulty, Match } from "../models/old/match";
 import { uuidv4 } from "../utils/helpers";
-import { Event, EventType } from "../models/old/event";
-import { PreviewBeatmapLevel } from "../models/old/previewBeatmapLevel";
-import { LoadSong } from "../models/old/loadSong";
-import { ForwardingPacket } from "../models/old/forwardingPacket";
-import { GameOptions, GameplayModifiers } from "../models/old/gameplayModifiers";
-import { Beatmap } from "../models/old/beatmap";
-import { GameplayParameters } from "../models/old/gameplayParameters";
-import { PlayerOptions } from "../models/old/playerSpecificSettnigs";
-import { PlaySong } from "../models/old/playSong";
-import { CommandTypes } from "../models/old/command";
-import { Message } from "../models/old/message";
 import { Config } from "../models/Config";
+import { Packet } from "../models/proto/packets";
+import { Models } from "../models/proto/models";
+import { BeatmapDifficulty } from "../models/old/match";
 
 export class TAWebsocket {
 
@@ -58,21 +45,28 @@ export class TAWebsocket {
 
     private init() {
         this.ws.onopen = () => {
-            const packetData = {
-                ClientType: ConnectTypes.Coordinator,
-                Name: this.name,
-                ClientVersion: 46,
-                Password: this.password ?? undefined,
-                UserId: this.userId ?? "",
-            };
-            const packet = new Packet<PacketType.Connect>(packetData, PacketType.Connect);
+            console.log("Connected to TA server");
+            const packetData = new Packet.Connect({
+                client_type: Packet.Connect.ConnectTypes.Coordinator,
+                name: this.name,
+                client_version: 60,
+                password: this.password ?? undefined,
+                user_id: this.userId ?? "",
+            });
+            const packet = new Packet.Packet({
+                id: uuidv4(),
+                from: this.taClient.Self?.id,
+                connect: packetData
+            });
             this.sendPacket(packet);
         };
         this.ws.on("message", (event) => {
-            this.handlePacket(JSON.parse(event.toString()));
+            if (event instanceof Buffer) {
+                this.handlePacket(Packet.Packet.deserialize(new Uint8Array(event)));
+            }
         });
         this.ws.on("close", () => {
-            if (this.config.logging && this.taClient.State?.ServerSettings?.ServerName) console.error(`Socket Closed - ${this.taClient?.State?.ServerSettings?.ServerName}`);
+            if (this.config.logging && this.taClient.State?.server_settings?.server_name) console.error(`Socket Closed - ${this.taClient?.State?.server_settings?.server_name}`);
             this.taClient.reset();
             if (this.config.autoReconnect && this.reconnectAttempts < this.config.autoReconnectMaxRetries) {
                 setTimeout(() => {
@@ -87,153 +81,159 @@ export class TAWebsocket {
         });
     }
 
-    private handlePacket(packet: Packet<any>) {
-        if (packet.Type === PacketType.ConnectResponse) {
-            const connectResponse: ConnectResponse = packet.SpecificPacket;
-            if (!this.taClient.Self && connectResponse.Self) {
+    private handlePacket(packet: Packet.Packet) {
+        if (packet.packet === Packet.ConnectResponse.name) {
+            const connectResponse = packet.connect_response;
+            if (!this.taClient.Self && connectResponse.self) {
                 this.taClient.init(connectResponse);
             }
         }
         this.taClient.handlePacket(packet);
     }
 
-    sendPacket<T extends PacketType>(packet: Packet<T>) {
-        this.ws.send(JSON.stringify(packet));
+    sendPacket(packet: Packet.Packet) {
+        packet.from = this.taClient.Self?.id ?? uuidv4();
+        this.ws.send(packet.serializeBinary());
+    }
+
+    sendEvent(event: Packet.Event) {
+        this.sendPacket(new Packet.Packet({ event }));
     }
 
     // TA Helper functions
 
-    async createMatch(players: Player[]) {
-        const match: Match = {
-            Guid: uuidv4(),
-            Players: players,
-            Leader: this.taClient.Self!,
-            SelectedDifficulty: 0
-        };
-        const SpecificPacket: Event = {
-            Type: EventType.MatchCreated,
-            ChangedObject: match,
-        };
-        this.sendPacket(this.taClient.createPacket(SpecificPacket, PacketType.Event));
-        return match.Guid;
+    async createMatch(players: Models.Player[]) {
+        const match = new Models.Match({
+            guid: uuidv4(),
+            players: players,
+            leader: this.taClient.Self!
+        });
+        this.sendEvent(new Packet.Event({
+            match_created_event: new Packet.Event.MatchCreatedEvent({ match: match })
+        }));
+        return match.guid;
     }
 
-    async closeMatch(match: Match) {
-        const SpecificPacket: Event = {
-            Type: EventType.MatchDeleted,
-            ChangedObject: match,
-        };
-        this.sendPacket(this.taClient.createPacket(SpecificPacket, PacketType.Event));
+    async closeMatch(match: Models.Match) {
+        this.sendEvent(new Packet.Event({
+            match_deleted_event: new Packet.Event.MatchDeletedEvent({ match: match })
+        }));
     }
 
-    async sendMessage(ids: string[], msg: Message) {
-        const specificPacket2: ForwardingPacket = {
-            ForwardTo: ids,
-            Type: PacketType.Message,
-            SpecificPacket: msg,
-        };
-        this.sendPacket(this.taClient.createPacket(specificPacket2, PacketType.ForwardingPacket));
-    }
+    // TODO: Waiting on protobuf implementation of messages
+    // async sendMessage(ids: string[], msg: Message) {
+    //     const specificPacket2: ForwardingPacket = {
+    //         ForwardTo: ids,
+    //         Type: PacketType.Message,
+    //         SpecificPacket: msg,
+    //     };
+    //     this.sendPacket(this.taClient.createPacket(specificPacket2, PacketType.ForwardingPacket));
+    // }
 
-    async loadSong(songName: string, hash: string, difficulty: BeatmapDifficulty, taMatch: Match) {
-        const matchMap: PreviewBeatmapLevel = {
-            LevelId: `custom_level_${hash.toUpperCase()}`,
-            Name: songName,
-            Characteristics: [{
-                SerializedName: "Standard",
-                Difficulties: [
+    async loadSong(songName: string, hash: string, difficulty: BeatmapDifficulty, taMatch: Models.Match) {
+        const matchMap = new Models.PreviewBeatmapLevel({
+            level_id: hash,
+            name: songName,
+            characteristics: [Models.Characteristic.fromObject({
+                serialized_name: "Standard",
+                difficulties: [
                     difficulty
                 ]
-            }],
-            Loaded: true,
-        };
+            })],
+            loaded: true
+        });
 
-        taMatch.SelectedLevel = matchMap;
-        taMatch.SelectedCharacteristic = matchMap.Characteristics[0];
-        taMatch.SelectedDifficulty = difficulty;
+        taMatch.selected_level = matchMap;
+        taMatch.selected_characteristic = matchMap.characteristics[0];
+        taMatch.selected_difficulty = difficulty;
 
-        const updateMatchPacket: Event = {
-            Type: EventType.MatchUpdated,
-            ChangedObject: taMatch,
-        };
+        const playerIds = taMatch.players.map((x) => x.user.id);
 
-        const playerIds = taMatch.Players.map((x) => x.Id);
-        const loadSongPacket: ForwardingPacket = {
-            ForwardTo: playerIds,
-            Type: PacketType.LoadSong,
-            SpecificPacket: {
-                LevelId: taMatch.SelectedLevel.LevelId,
-                CustomHostUrl: null,
-            },
-        };
-
-        this.sendPacket(this.taClient.createPacket(loadSongPacket, PacketType.ForwardingPacket));
+        this.sendPacket(new Packet.Packet({
+            forwarding_packet: new Packet.ForwardingPacket({
+                forward_to: playerIds,
+                packet: new Packet.Packet({
+                    load_song: new Packet.LoadSong({
+                        level_id: taMatch.selected_level.level_id
+                    })
+                })
+            })
+        }));
         setTimeout(() => {
-            this.sendPacket(this.taClient.createPacket(updateMatchPacket, PacketType.Event));
+            this.sendEvent(new Packet.Event({
+                match_updated_event: new Packet.Event.MatchUpdatedEvent({ match: taMatch })
+            }));
         }, 500);
     }
 
-    playSong(match: Match, withSync = false, ids?: string[]) {
-        const gm: GameplayModifiers = { Options: GameOptions.None };
-        const beatMap: Beatmap = {
-            Characteristic: match.SelectedCharacteristic!,
-            Difficulty: match.SelectedDifficulty,
-            LevelId: match.SelectedLevel!.LevelId,
-            Name: match.SelectedLevel!.Name,
-        };
-        const gameplayParam: GameplayParameters = {
-            PlayerSettings: {
-                Options: PlayerOptions.None,
-            },
-            GameplayModifiers: gm,
-            Beatmap: beatMap,
-        };
+    playSong(match: Models.Match, withSync = false, disable_pause = false, disable_fail = false, floating_scoreboard = false) {
+        const gm = new Models.GameplayModifiers({
+            options: Models.GameplayModifiers.GameOptions.None,
+        });
+        const beatMap = new Models.Beatmap({
+            characteristic: match.selected_characteristic,
+            difficulty: match.selected_difficulty,
+            level_id: match.selected_level.level_id,
+            name: match.selected_level.name
+        });
+        const gameplayParameters = new Models.GameplayParameters({
+            player_settings: new Models.PlayerSpecificSettings({
+                options: Models.PlayerSpecificSettings.PlayerOptions.None
+            }),
+            gameplay_modifiers: gm,
+            beatmap: beatMap
+        });
 
-        const playSong: PlaySong = {
-            GameplayParameters: gameplayParam,
-            FloatingScoreboard: false,
-            StreamSync: withSync,
-            DisablePause: true,
-            DisableFail: true,
-        };
-        const playerIds = ids ? ids : match.Players.map((x) => x.Id);
-        const playSongPacket: ForwardingPacket = {
-            ForwardTo: playerIds,
-            Type: PacketType.PlaySong,
-            SpecificPacket: playSong,
-        };
+        const playSong = new Packet.PlaySong({
+            gameplay_parameters: gameplayParameters,
+            floating_scoreboard: floating_scoreboard,
+            stream_sync: withSync,
+            disable_pause: disable_pause,
+            disable_fail: disable_fail,
+        });
+        const playerIds = match.players.map((x) => x.user.id);
 
         const curTime = new Date();
         curTime.setSeconds(curTime.getSeconds() + 2);
-        match.StartTime = curTime.toISOString();
-        this.sendPacket(this.taClient.createPacket({
-            Type: EventType.MatchUpdated,
-            ChangedObject: match,
-        }, PacketType.Event));
+        match.start_time = curTime.toISOString();
+        this.sendEvent(new Packet.Event({
+            match_updated_event: new Packet.Event.MatchUpdatedEvent({ match: match })
+        }));
 
         setTimeout(() => {
-            this.sendPacket(this.taClient.createPacket(playSongPacket, PacketType.ForwardingPacket));
+            this.sendPacket(new Packet.Packet({
+                forwarding_packet: new Packet.ForwardingPacket({
+                    forward_to: playerIds,
+                    packet: new Packet.Packet({
+                        play_song: playSong
+                    })
+                })
+            }));
         }, 500);
     }
 
     returnToMenu(ids: string[]) {
-        const specificPacket: ForwardingPacket = {
-            ForwardTo: ids,
-            Type: PacketType.Command,
-            SpecificPacket: {
-                commandType: CommandTypes.ReturnToMenu,
-            },
-        };
-        this.sendPacket(this.taClient.createPacket(specificPacket, PacketType.ForwardingPacket));
+        this.sendPacket(new Packet.Packet({
+            forwarding_packet: new Packet.ForwardingPacket({
+                forward_to: ids,
+                packet: new Packet.Packet({
+                    command: new Packet.Command({
+                        command_type: Packet.Command.CommandTypes.ReturnToMenu,
+                    })
+                })
+            })
+        }));
     }
 
     close() {
         if (this.ws?.readyState == 1) {
-            const SpecificPacket: Event = {
-                Type: EventType.CoordinatorLeft,
-                ChangedObject: this.taClient.Self,
-            };
-            this.sendPacket(this.taClient.createPacket(SpecificPacket, PacketType.Event));
+            this.sendEvent(new Packet.Event({
+                coordinator_left_event: new Packet.Event.CoordinatorLeftEvent({
+                    coordinator: new Models.Coordinator({
+                        user: this.taClient.Self!
+                    })
+                })
+            }));
             this.ws.close();
         }
     }
