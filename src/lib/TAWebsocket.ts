@@ -45,7 +45,6 @@ export class TAWebsocket {
 
     private init() {
         this.ws.onopen = () => {
-            console.log("Connected to TA server");
             const packetData = new Packet.Connect({
                 client_type: Packet.Connect.ConnectTypes.Coordinator,
                 name: this.name,
