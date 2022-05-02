@@ -1,4 +1,5 @@
-const { performance } = require('perf_hooks');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { performance } = require("perf_hooks");
 export function uuidv4() {
     let d = new Date().getTime(),
         d2 = (performance && performance.now && (performance.now() * 1000)) || 0;
