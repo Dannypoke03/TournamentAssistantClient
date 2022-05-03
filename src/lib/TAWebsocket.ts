@@ -1,10 +1,10 @@
 import { Client } from "./client";
-import WebSocket from "ws";
 import { uuidv4 } from "../utils/helpers";
 import { Config } from "../models/Config";
 import { Packet } from "../models/proto/packets";
 import { Models } from "../models/proto/models";
 import { BeatmapDifficulty } from "../models/old/match";
+import WebSocket from "ws";
 
 export class TAWebsocket {
 
@@ -13,11 +13,13 @@ export class TAWebsocket {
     private name: string;
     private userId?: string;
 
-    private ws: WebSocket;
+    private ws: WebSocket | null = null;
     public taClient: Client;
 
     private config: Config;
     private reconnectAttempts = -1;
+
+    private sendToSocket: (data: any) => void = () => null;
 
     constructor({ url, name, password, userId, options }: { url: string; name: string; password?: string; userId?: string; options?: Partial<Config>; }) {
         this.config = this.loadConfig(options);
@@ -25,11 +27,8 @@ export class TAWebsocket {
         this.password = password;
         this.name = name;
         this.userId = userId;
-        this.ws = new WebSocket(`${url}`, {
-            handshakeTimeout: this.config.handshakeTimeout
-        });
         this.taClient = new Client();
-        this.init();
+        if (this.config.autoInit) this.init();
     }
 
     private loadConfig(config?: Partial<Config>): Config {
@@ -39,25 +38,24 @@ export class TAWebsocket {
             autoReconnectMaxRetries: -1,
             logging: false,
             handshakeTimeout: 5000,
+            autoInit: true,
+            sendToSocket: null,
             ...config
         };
     }
 
     private init() {
+        this.ws = new WebSocket(`${this.url}`, {
+            handshakeTimeout: this.config.handshakeTimeout
+        });
+        if (!this.config.sendToSocket) {
+            if (this.ws) this.sendToSocket = (data) => this.ws?.send(data);
+        } else {
+            this.sendToSocket = this.config.sendToSocket;
+        }
+        if (!this.ws) return;
         this.ws.onopen = () => {
-            const packetData = new Packet.Connect({
-                client_type: Packet.Connect.ConnectTypes.Coordinator,
-                name: this.name,
-                client_version: 60,
-                password: this.password ?? undefined,
-                user_id: this.userId ?? "",
-            });
-            const packet = new Packet.Packet({
-                id: uuidv4(),
-                from: this.taClient.Self?.id,
-                connect: packetData
-            });
-            this.sendPacket(packet);
+            this.coordinatorConnect();
         };
         this.ws.on("message", (event) => {
             if (event instanceof Buffer) {
@@ -69,18 +67,33 @@ export class TAWebsocket {
             this.taClient.reset();
             if (this.config.autoReconnect && this.reconnectAttempts < this.config.autoReconnectMaxRetries) {
                 setTimeout(() => {
-                    this.ws = new WebSocket(`${this.url}`);
                     this.init();
                 }, this.config.autoReconnectInterval);
                 if (this.reconnectAttempts !== -1) this.reconnectAttempts++;
             }
         });
-        this.ws.on("error", (error) => {
+        this.ws.onerror = (error) => {
             if (this.config.logging) console.error(error);
-        });
+        };
     }
 
-    private handlePacket(packet: Packet.Packet) {
+    coordinatorConnect() {
+        const packetData = new Packet.Connect({
+            client_type: Packet.Connect.ConnectTypes.Coordinator,
+            name: this.name,
+            client_version: 60,
+            password: this.password ?? undefined,
+            user_id: this.userId ?? "",
+        });
+        const packet = new Packet.Packet({
+            id: uuidv4(),
+            from: this.taClient.Self?.id,
+            connect: packetData
+        });
+        this.sendPacket(packet);
+    }
+
+    handlePacket(packet: Packet.Packet) {
         if (packet.connect_response) {
             const connectResponse = packet.connect_response;
             if (!this.taClient.Self && connectResponse.self) {
@@ -91,8 +104,9 @@ export class TAWebsocket {
     }
 
     sendPacket(packet: Packet.Packet) {
+        if (!this.ws) return;
         packet.from = this.taClient.Self?.id ?? uuidv4();
-        this.ws.send(packet.serializeBinary());
+        this.sendToSocket(packet.serializeBinary());
     }
 
     sendEvent(event: Packet.Event) {
@@ -221,7 +235,7 @@ export class TAWebsocket {
     }
 
     close() {
-        if (this.ws?.readyState == 1) {
+        if (this.ws?.readyState === WebSocket.OPEN) {
             this.sendEvent(new Packet.Event({
                 coordinator_left_event: new Packet.Event.CoordinatorLeftEvent({
                     coordinator: new Models.Coordinator({
