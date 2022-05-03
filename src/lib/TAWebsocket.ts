@@ -99,9 +99,18 @@ export class TAWebsocket {
         this.sendPacket(new Packet.Packet({ event }));
     }
 
+    forwardPacket(ids: string[], packet: Packet.Packet) {
+        this.sendPacket(new Packet.Packet({
+            forwarding_packet: new Packet.ForwardingPacket({
+                forward_to: ids,
+                packet: packet
+            })
+        }));
+    }
+
     // TA Helper functions
 
-    async createMatch(players: Models.Player[]) {
+    createMatch(players: Models.Player[]) {
         const match = new Models.Match({
             guid: uuidv4(),
             players: players,
@@ -113,7 +122,13 @@ export class TAWebsocket {
         return match.guid;
     }
 
-    async closeMatch(match: Models.Match) {
+    updateMatch(match: Models.Match) {
+        this.sendEvent(new Packet.Event({
+            match_updated_event: new Packet.Event.MatchUpdatedEvent({ match: match })
+        }));
+    }
+
+    closeMatch(match: Models.Match) {
         this.sendEvent(new Packet.Event({
             match_deleted_event: new Packet.Event.MatchDeletedEvent({ match: match })
         }));
@@ -133,7 +148,7 @@ export class TAWebsocket {
         const matchMap = new Models.PreviewBeatmapLevel({
             level_id: hash,
             name: songName,
-            characteristics: [Models.Characteristic.fromObject({
+            characteristics: [new Models.Characteristic({
                 serialized_name: "Standard",
                 difficulties: [
                     difficulty
@@ -148,20 +163,13 @@ export class TAWebsocket {
 
         const playerIds = taMatch.players.map((x) => x.user.id);
 
-        this.sendPacket(new Packet.Packet({
-            forwarding_packet: new Packet.ForwardingPacket({
-                forward_to: playerIds,
-                packet: new Packet.Packet({
-                    load_song: new Packet.LoadSong({
-                        level_id: taMatch.selected_level.level_id
-                    })
-                })
+        this.forwardPacket(playerIds, new Packet.Packet({
+            load_song: new Packet.LoadSong({
+                level_id: taMatch.selected_level.level_id
             })
         }));
         setTimeout(() => {
-            this.sendEvent(new Packet.Event({
-                match_updated_event: new Packet.Event.MatchUpdatedEvent({ match: taMatch })
-            }));
+            this.updateMatch(taMatch);
         }, 500);
     }
 
@@ -195,31 +203,19 @@ export class TAWebsocket {
         const curTime = new Date();
         curTime.setSeconds(curTime.getSeconds() + 2);
         match.start_time = curTime.toISOString();
-        this.sendEvent(new Packet.Event({
-            match_updated_event: new Packet.Event.MatchUpdatedEvent({ match: match })
-        }));
+        this.updateMatch(match);
 
         setTimeout(() => {
-            this.sendPacket(new Packet.Packet({
-                forwarding_packet: new Packet.ForwardingPacket({
-                    forward_to: playerIds,
-                    packet: new Packet.Packet({
-                        play_song: playSong
-                    })
-                })
+            this.forwardPacket(playerIds, new Packet.Packet({
+                play_song: playSong
             }));
         }, 500);
     }
 
     returnToMenu(ids: string[]) {
-        this.sendPacket(new Packet.Packet({
-            forwarding_packet: new Packet.ForwardingPacket({
-                forward_to: ids,
-                packet: new Packet.Packet({
-                    command: new Packet.Command({
-                        command_type: Packet.Command.CommandTypes.ReturnToMenu,
-                    })
-                })
+        this.forwardPacket(ids, new Packet.Packet({
+            command: new Packet.Command({
+                command_type: Packet.Command.CommandTypes.ReturnToMenu,
             })
         }));
     }

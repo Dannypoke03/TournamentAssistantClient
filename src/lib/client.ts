@@ -88,14 +88,30 @@ export class Client {
         }
     }
 
-    coordinatorAdded(data: Models.Coordinator, from: string) {
+    getPlayer(id: string) {
+        return this.State?.players.find(x => x.user.id === id);
+    }
+
+    getMatch(id: string) {
+        return this.State?.matches.find(x => x.guid === id);
+    }
+
+    getCoordinator(id: string) {
+        return this.State?.coordinators.find(x => x.user.id === id);
+    }
+
+    getEvent(id: string) {
+        return this.State?.events.find(x => x.event_id === id);
+    }
+
+    private coordinatorAdded(data: Models.Coordinator, from: string) {
         if (!this.isConnected) return;
         const index = this.State?.coordinators.findIndex(x => x.user.id === data.user.id);
         if (index == -1) this.State?.coordinators.push(data);
         this._event.emit("coordinatorAdded", { from: from, data: data });
     }
 
-    coordinatorLeft(data: Models.Coordinator, from: string) {
+    private coordinatorLeft(data: Models.Coordinator, from: string) {
         const index = this.State?.coordinators?.findIndex(x => x.user.id == data?.user.id) ?? -1;
         if (index > -1) {
             this.State?.coordinators.splice(index, 1);
@@ -103,12 +119,12 @@ export class Client {
         }
     }
 
-    matchCreated(match: Models.Match, from: string) {
+    private matchCreated(match: Models.Match, from: string) {
         if (!this.State?.matches.find(x => x.guid === match.guid)) this.State?.matches.push(match);
         this._event.emit("matchCreated", { from: from, data: match });
     }
 
-    matchUpdated(match: Models.Match, from: string) {
+    private matchUpdated(match: Models.Match, from: string) {
         const index = this.State?.matches.findIndex(x => x.guid == match.guid) ?? -1;
         if (index > -1 && this.State) {
             this.State.matches[index] = match;
@@ -116,7 +132,7 @@ export class Client {
         }
     }
 
-    matchDeleted(match: Models.Match, from: string) {
+    private matchDeleted(match: Models.Match, from: string) {
         const index = this.State?.matches.findIndex(x => x.guid == match.guid) ?? -1;
         if (index > -1) {
             this.State?.matches.splice(index, 1);
@@ -124,12 +140,12 @@ export class Client {
         }
     }
 
-    playerAdded(player: Models.Player, from: string) {
+    private playerAdded(player: Models.Player, from: string) {
         this.State?.players.push(player);
         this._event.emit("playerAdded", { from: from, data: player });
     }
 
-    playerUpdated(player: Models.Player, from: string) {
+    private playerUpdated(player: Models.Player, from: string) {
         const index = this.State?.players.findIndex(x => x.user.id == player.user.id) ?? -1;
         if (index > -1 && this.State) {
             this.State.players[index] = player;
@@ -148,7 +164,7 @@ export class Client {
         }
     }
 
-    playerLeft(player: Models.Player, from: string) {
+    private playerLeft(player: Models.Player, from: string) {
         const index = this.State?.players.findIndex(x => x.user.id == player.user.id) ?? -1;
         if (index > -1) {
             this.State?.players.splice(index, 1);
@@ -156,7 +172,7 @@ export class Client {
         }
     }
 
-    qualifierEventCreated(event: Models.QualifierEvent, from: string) {
+    private qualifierEventCreated(event: Models.QualifierEvent, from: string) {
         const index = this.State?.events.findIndex(x => x.event_id == event.event_id);
         if (index == -1) {
             this.State?.events.push(event);
@@ -164,7 +180,7 @@ export class Client {
         }
     }
 
-    qualifierEventUpdated(event: Models.QualifierEvent, from: string) {
+    private qualifierEventUpdated(event: Models.QualifierEvent, from: string) {
         const index = this.State?.events.findIndex(x => x.event_id == event.event_id);
         if (index && index > -1 && this.State) {
             this.State.events[index] = event;
@@ -172,7 +188,7 @@ export class Client {
         }
     }
 
-    qualifierEventDeleted(event: Models.QualifierEvent, from: string) {
+    private qualifierEventDeleted(event: Models.QualifierEvent, from: string) {
         const index = this.State?.events.findIndex(x => x.event_id == event.event_id);
         if (index && index > -1 && this.State) {
             this.State.events.splice(index, 1);
