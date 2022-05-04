@@ -1,5 +1,7 @@
 # Tournament Assistant Client
 
+[![NPM Version][npm-version-image]][npm-url]
+
 > A typescript & websocket based client for [Tournament Assistant](https://github.com/MatrikMoon/TournamentAssistant) a Beat Saber tournament mod
 
 ## Install
@@ -123,3 +125,6 @@ returnToMenu(ids: string[])
 ## License
 
 [MIT](./LICENSE)
+
+[npm-url]: https://npmjs.org/package/tournament-assistant-client
+[npm-version-image]: https://badgen.net/npm/v/tournament-assistant-client
