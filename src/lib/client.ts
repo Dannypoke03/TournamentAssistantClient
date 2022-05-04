@@ -1,7 +1,7 @@
 /*eslint-disable no-case-declarations */
 import EventEmitter from "events";
 import { Models } from "../models/proto/models";
-import { Packet } from "../models/proto/packets";
+import { Packets } from "../models/proto/packets";
 import { TAEventEmitter } from "../models/_EventEmitter";
 
 
@@ -14,8 +14,8 @@ export class Client {
 
     public _event: TAEventEmitter.Emitter<TAEventEmitter.Events> = new EventEmitter();
 
-    init(connectResponse?: Packet.ConnectResponse) {
-        if (connectResponse && connectResponse.response.type === Packet.Response.ResponseType.Success) {
+    init(connectResponse?: Packets.ConnectResponse) {
+        if (connectResponse && connectResponse.response.type === Packets.Response.ResponseType.Success) {
             this.Self = connectResponse.self;
             this.State = connectResponse.state;
             this.isConnected = true;
@@ -32,7 +32,7 @@ export class Client {
         this.isConnected = false;
     }
 
-    public handlePacket(packet: Packet.Packet) {
+    public handlePacket(packet: Packets.Packet) {
         if (!this.isConnected) return;
         this._event.emit("packet", packet);
         if (packet.event) {
@@ -85,6 +85,10 @@ export class Client {
             this._event.emit("songFinished", { from: packet.from, data: packet.song_finished });
         } else if (packet.submit_score) {
             this._event.emit("submitScore", { from: packet.from, data: packet.submit_score });
+        } else if (packet.message_response) {
+            this._event.emit("messageResponse", { from: packet.from, data: packet.message_response });
+        } else if (packet.message) {
+            this._event.emit("message", { from: packet.from, data: packet.message });
         }
     }
 

@@ -1,5 +1,5 @@
 import { Models } from "./proto/models";
-import { Packet } from "./proto/packets";
+import { Packets } from "./proto/packets";
 
 export namespace TAEventEmitter {
 
@@ -28,25 +28,25 @@ export namespace TAEventEmitter {
         "qualifierEventUpdated": PacketEvent<Models.QualifierEvent>;
         "qualifierEventDeleted": PacketEvent<Models.QualifierEvent>;
 
-        "acknowledgement": PacketEvent<Packet.Acknowledgement>;
-        "command": PacketEvent<Packet.Command>;
-        "connect": PacketEvent<Packet.Connect>;
-        "connectResponse": PacketEvent<Packet.ConnectResponse>;
-        "event": PacketEvent<Packet.Event>;
-        "file": PacketEvent<Packet.File>;
-        "forwardingPacket": PacketEvent<Packet.ForwardingPacket>;
-        "loadedSong": PacketEvent<Packet.LoadedSong>;
-        "loadSong": PacketEvent<Packet.LoadSong>;
-        // "message": PacketEvent<Packet.Message>;
-        // "messageResponse": PacketEvent<Packet.MessageResponse>;
-        "playSong": PacketEvent<Packet.PlaySong>;
-        "scoreRequest": PacketEvent<Packet.ScoreRequest>;
-        "scoreRequestResponse": PacketEvent<Packet.ScoreRequestResponse>;
-        "songFinished": PacketEvent<Packet.SongFinished>;
+        "acknowledgement": PacketEvent<Packets.Acknowledgement>;
+        "command": PacketEvent<Packets.Command>;
+        "connect": PacketEvent<Packets.Connect>;
+        "connectResponse": PacketEvent<Packets.ConnectResponse>;
+        "event": PacketEvent<Packets.Event>;
+        "file": PacketEvent<Packets.File>;
+        "forwardingPacket": PacketEvent<Packets.ForwardingPacket>;
+        "loadedSong": PacketEvent<Packets.LoadedSong>;
+        "loadSong": PacketEvent<Packets.LoadSong>;
+        "message": PacketEvent<Packets.Message>;
+        "messageResponse": PacketEvent<Packets.MessageResponse>;
+        "playSong": PacketEvent<Packets.PlaySong>;
+        "scoreRequest": PacketEvent<Packets.ScoreRequest>;
+        "scoreRequestResponse": PacketEvent<Packets.ScoreRequestResponse>;
+        "songFinished": PacketEvent<Packets.SongFinished>;
         // "songList": PacketEvent<Packet.SongList>;
-        "submitScore": PacketEvent<Packet.SubmitScore>;
-        "response": PacketEvent<Packet.Response>;
-        "packet": Packet.Packet;
+        "submitScore": PacketEvent<Packets.SubmitScore>;
+        "response": PacketEvent<Packets.Response>;
+        "packet": Packets.Packet;
     }
 
     type PacketEvent<T> = {

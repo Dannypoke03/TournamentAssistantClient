@@ -2683,4 +2683,93 @@ export namespace Models {
             return Score.deserialize(bytes);
         }
     }
+    export class MessageOption extends pb_1.Message {
+        constructor(data?: any[] | {
+            label?: string;
+            value?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("label" in data && data.label != undefined) {
+                    this.label = data.label;
+                }
+                if ("value" in data && data.value != undefined) {
+                    this.value = data.value;
+                }
+            }
+        }
+        get label() {
+            return pb_1.Message.getField(this, 1) as string;
+        }
+        set label(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get value() {
+            return pb_1.Message.getField(this, 2) as string;
+        }
+        set value(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            label?: string;
+            value?: string;
+        }) {
+            const message = new MessageOption({});
+            if (data.label != null) {
+                message.label = data.label;
+            }
+            if (data.value != null) {
+                message.value = data.value;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                label?: string;
+                value?: string;
+            } = {};
+            if (this.label != null) {
+                data.label = this.label;
+            }
+            if (this.value != null) {
+                data.value = this.value;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (typeof this.label === "string" && this.label.length)
+                writer.writeString(1, this.label);
+            if (typeof this.value === "string" && this.value.length)
+                writer.writeString(2, this.value);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): MessageOption {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new MessageOption();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.label = reader.readString();
+                        break;
+                    case 2:
+                        message.value = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): MessageOption {
+            return MessageOption.deserialize(bytes);
+        }
+    }
 }

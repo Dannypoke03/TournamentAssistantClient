@@ -1,7 +1,7 @@
 import { Client } from "./client";
 import { uuidv4 } from "../utils/helpers";
 import { Config } from "../models/Config";
-import { Packet } from "../models/proto/packets";
+import { Packets } from "../models/proto/packets";
 import { Models } from "../models/proto/models";
 import { BeatmapDifficulty } from "../models/old/match";
 import WebSocket from "ws";
@@ -59,7 +59,7 @@ export class TAWebsocket {
         };
         this.ws.on("message", (event) => {
             if (event instanceof Buffer) {
-                this.handlePacket(Packet.Packet.deserialize(new Uint8Array(event)));
+                this.handlePacket(Packets.Packet.deserialize(new Uint8Array(event)));
             }
         });
         this.ws.on("close", () => {
@@ -78,14 +78,14 @@ export class TAWebsocket {
     }
 
     coordinatorConnect() {
-        const packetData = new Packet.Connect({
-            client_type: Packet.Connect.ConnectTypes.Coordinator,
+        const packetData = new Packets.Connect({
+            client_type: Packets.Connect.ConnectTypes.Coordinator,
             name: this.name,
             client_version: 60,
             password: this.password ?? undefined,
             user_id: this.userId ?? "",
         });
-        const packet = new Packet.Packet({
+        const packet = new Packets.Packet({
             id: uuidv4(),
             from: this.taClient.Self?.id,
             connect: packetData
@@ -93,7 +93,7 @@ export class TAWebsocket {
         this.sendPacket(packet);
     }
 
-    handlePacket(packet: Packet.Packet) {
+    handlePacket(packet: Packets.Packet) {
         if (packet.connect_response) {
             const connectResponse = packet.connect_response;
             if (!this.taClient.Self && connectResponse.self) {
@@ -103,19 +103,19 @@ export class TAWebsocket {
         this.taClient.handlePacket(packet);
     }
 
-    sendPacket(packet: Packet.Packet) {
+    sendPacket(packet: Packets.Packet) {
         if (!this.ws) return;
         packet.from = this.taClient.Self?.id ?? uuidv4();
         this.sendToSocket(packet.serializeBinary());
     }
 
-    sendEvent(event: Packet.Event) {
-        this.sendPacket(new Packet.Packet({ event }));
+    sendEvent(event: Packets.Event) {
+        this.sendPacket(new Packets.Packet({ event }));
     }
 
-    forwardPacket(ids: string[], packet: Packet.Packet) {
-        this.sendPacket(new Packet.Packet({
-            forwarding_packet: new Packet.ForwardingPacket({
+    forwardPacket(ids: string[], packet: Packets.Packet) {
+        this.sendPacket(new Packets.Packet({
+            forwarding_packet: new Packets.ForwardingPacket({
                 forward_to: ids,
                 packet: packet
             })
@@ -130,33 +130,27 @@ export class TAWebsocket {
             players: players,
             leader: this.taClient.Self!
         });
-        this.sendEvent(new Packet.Event({
-            match_created_event: new Packet.Event.MatchCreatedEvent({ match: match })
+        this.sendEvent(new Packets.Event({
+            match_created_event: new Packets.Event.MatchCreatedEvent({ match: match })
         }));
         return match.guid;
     }
 
     updateMatch(match: Models.Match) {
-        this.sendEvent(new Packet.Event({
-            match_updated_event: new Packet.Event.MatchUpdatedEvent({ match: match })
+        this.sendEvent(new Packets.Event({
+            match_updated_event: new Packets.Event.MatchUpdatedEvent({ match: match })
         }));
     }
 
     closeMatch(match: Models.Match) {
-        this.sendEvent(new Packet.Event({
-            match_deleted_event: new Packet.Event.MatchDeletedEvent({ match: match })
+        this.sendEvent(new Packets.Event({
+            match_deleted_event: new Packets.Event.MatchDeletedEvent({ match: match })
         }));
     }
 
-    // TODO: Waiting on protobuf implementation of messages
-    // async sendMessage(ids: string[], msg: Message) {
-    //     const specificPacket2: ForwardingPacket = {
-    //         ForwardTo: ids,
-    //         Type: PacketType.Message,
-    //         SpecificPacket: msg,
-    //     };
-    //     this.sendPacket(this.taClient.createPacket(specificPacket2, PacketType.ForwardingPacket));
-    // }
+    async sendMessage(ids: string[], msg: Packets.Message) {
+        this.forwardPacket(ids, new Packets.Packet({ message: msg }));
+    }
 
     async loadSong(songName: string, hash: string, difficulty: BeatmapDifficulty, taMatch: Models.Match) {
         const matchMap = new Models.PreviewBeatmapLevel({
@@ -177,8 +171,8 @@ export class TAWebsocket {
 
         const playerIds = taMatch.players.map((x) => x.user.id);
 
-        this.forwardPacket(playerIds, new Packet.Packet({
-            load_song: new Packet.LoadSong({
+        this.forwardPacket(playerIds, new Packets.Packet({
+            load_song: new Packets.LoadSong({
                 level_id: taMatch.selected_level.level_id
             })
         }));
@@ -205,7 +199,7 @@ export class TAWebsocket {
             beatmap: beatMap
         });
 
-        const playSong = new Packet.PlaySong({
+        const playSong = new Packets.PlaySong({
             gameplay_parameters: gameplayParameters,
             floating_scoreboard: floating_scoreboard,
             stream_sync: withSync,
@@ -220,24 +214,24 @@ export class TAWebsocket {
         this.updateMatch(match);
 
         setTimeout(() => {
-            this.forwardPacket(playerIds, new Packet.Packet({
+            this.forwardPacket(playerIds, new Packets.Packet({
                 play_song: playSong
             }));
         }, 500);
     }
 
     returnToMenu(ids: string[]) {
-        this.forwardPacket(ids, new Packet.Packet({
-            command: new Packet.Command({
-                command_type: Packet.Command.CommandTypes.ReturnToMenu,
+        this.forwardPacket(ids, new Packets.Packet({
+            command: new Packets.Command({
+                command_type: Packets.Command.CommandTypes.ReturnToMenu,
             })
         }));
     }
 
     close() {
         if (this.ws?.readyState === WebSocket.OPEN) {
-            this.sendEvent(new Packet.Event({
-                coordinator_left_event: new Packet.Event.CoordinatorLeftEvent({
+            this.sendEvent(new Packets.Event({
+                coordinator_left_event: new Packets.Event.CoordinatorLeftEvent({
                     coordinator: new Models.Coordinator({
                         user: this.taClient.Self!
                     })
