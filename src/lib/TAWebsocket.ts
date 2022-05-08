@@ -28,6 +28,11 @@ export class TAWebsocket {
         this.userId = userId;
         this.taClient = new Client();
         if (this.config.autoInit) this.init();
+        if (!this.config.sendToSocket) {
+            this.sendToSocket = (data) => this.ws?.send(data);
+        } else {
+            this.sendToSocket = this.config.sendToSocket;
+        }
     }
 
     private loadConfig(config?: Partial<Config>): Config {
@@ -45,11 +50,6 @@ export class TAWebsocket {
 
     private init() {
         this.ws = new WebSocket(`${this.url}`);
-        if (!this.config.sendToSocket) {
-            if (this.ws) this.sendToSocket = (data) => this.ws?.send(data);
-        } else {
-            this.sendToSocket = this.config.sendToSocket;
-        }
         if (!this.ws) return;
         const connectTimeout = setTimeout(() => {
             if (this.ws?.readyState !== WebSocket.OPEN && this.config.handshakeTimeout > 0) {
@@ -109,7 +109,6 @@ export class TAWebsocket {
     }
 
     sendPacket(packet: Packets.Packet) {
-        if (!this.ws) return;
         packet.from = this.taClient.Self?.id ?? uuidv4();
         this.sendToSocket(packet.serializeBinary());
     }
