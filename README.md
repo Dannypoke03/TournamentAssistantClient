@@ -7,7 +7,13 @@
 ## Install
 
 ```console
-$ npm i tournament-assistant-client
+npm i tournament-assistant-client
+```
+
+### Dependencies
+
+```console
+npm i google-protobuf
 ```
 
 ## Usage
