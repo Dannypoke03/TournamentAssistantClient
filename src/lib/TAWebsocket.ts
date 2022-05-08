@@ -4,7 +4,6 @@ import { Config } from "../models/Config";
 import { Packets } from "../models/proto/packets";
 import { Models } from "../models/proto/models";
 import { BeatmapDifficulty } from "../models/old/match";
-import WebSocket from "ws";
 
 export class TAWebsocket {
 
@@ -45,24 +44,30 @@ export class TAWebsocket {
     }
 
     private init() {
-        this.ws = new WebSocket(`${this.url}`, {
-            handshakeTimeout: this.config.handshakeTimeout
-        });
+        this.ws = new WebSocket(`${this.url}`);
         if (!this.config.sendToSocket) {
             if (this.ws) this.sendToSocket = (data) => this.ws?.send(data);
         } else {
             this.sendToSocket = this.config.sendToSocket;
         }
         if (!this.ws) return;
-        this.ws.onopen = () => {
+        const connectTimeout = setTimeout(() => {
+            if (this.ws?.readyState !== WebSocket.OPEN && this.config.handshakeTimeout > 0) {
+                this.ws?.close();
+                this.ws = null;
+                this.init();
+            }
+        }, this.config.handshakeTimeout);
+        this.ws.addEventListener("open", () => {
+            clearTimeout(connectTimeout);
             this.coordinatorConnect();
-        };
-        this.ws.on("message", (event) => {
+        });
+        this.ws.addEventListener("message", (event) => {
             if (event instanceof Buffer) {
                 this.handlePacket(Packets.Packet.deserialize(new Uint8Array(event)));
             }
         });
-        this.ws.on("close", () => {
+        this.ws.addEventListener("close", () => {
             if (this.config.logging && this.taClient.State?.server_settings?.server_name) console.error(`Socket Closed - ${this.taClient?.State?.server_settings?.server_name}`);
             this.taClient.reset();
             if (this.config.autoReconnect && this.reconnectAttempts < this.config.autoReconnectMaxRetries) {
@@ -72,9 +77,9 @@ export class TAWebsocket {
                 if (this.reconnectAttempts !== -1) this.reconnectAttempts++;
             }
         });
-        this.ws.onerror = (error) => {
+        this.ws.addEventListener("error", (error) => {
             if (this.config.logging) console.error(error);
-        };
+        });
     }
 
     coordinatorConnect() {

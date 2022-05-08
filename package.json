@@ -34,7 +34,6 @@
     },
     "homepage": "https://github.com/Dannypoke03/TournamentAssistantClient#readme",
     "dependencies": {
-        "google-protobuf": "^3.20.1",
-        "ws": "^8.5.0"
+        "google-protobuf": "^3.20.1"
     }
 }
