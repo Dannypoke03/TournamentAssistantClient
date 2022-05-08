@@ -1,17 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { performance } = require("perf_hooks");
 export function uuidv4() {
-    let d = new Date().getTime(),
-        d2 = (performance && performance.now && (performance.now() * 1000)) || 0;
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
-        let r = Math.random() * 16;
-        if (d > 0) {
-            r = (d + r) % 16 | 0;
-            d = Math.floor(d / 16);
-        } else {
-            r = (d2 + r) % 16 | 0;
-            d2 = Math.floor(d2 / 16);
-        }
-        return (c == "x" ? r : (r & 0x7 | 0x8)).toString(16);
+    if (crypto.randomUUID()) return crypto.randomUUID();
+    return (1e7 + "-" + 1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c => {
+        const c2 = parseInt(c);
+        return (c2 ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c2 / 4).toString(16);
     });
 }
