@@ -67,7 +67,7 @@ export namespace Models {
             if (typeof this.serialized_name === "string" && this.serialized_name.length)
                 writer.writeString(1, this.serialized_name);
             if (this.difficulties !== undefined)
-                writer.writePackedInt32(2, this.difficulties);
+                writer.writeRepeatedInt32(2, this.difficulties);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -81,7 +81,7 @@ export namespace Models {
                         message.serialized_name = reader.readString();
                         break;
                     case 2:
-                        message.difficulties = reader.readPackedInt32();
+                        pb_1.Message.addToRepeatedField(message, 2, reader.readInt32());
                         break;
                     default: reader.skipField();
                 }

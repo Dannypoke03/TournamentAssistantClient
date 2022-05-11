@@ -15,6 +15,8 @@
     "devDependencies": {
         "@types/google-protobuf": "^3.15.6",
         "@types/node": "^17.0.17",
+        "@types/uuid": "^8.3.4",
+        "@types/websocket": "^1.0.5",
         "@types/ws": "^8.5.3",
         "@typescript-eslint/eslint-plugin": "^5.21.0",
         "@typescript-eslint/parser": "^5.21.0",
@@ -34,6 +36,9 @@
     },
     "homepage": "https://github.com/Dannypoke03/TournamentAssistantClient#readme",
     "dependencies": {
-        "google-protobuf": "^3.20.1"
+        "events": "^3.3.0",
+        "google-protobuf": "^3.20.1",
+        "uuid": "^8.3.2",
+        "websocket": "^1.0.34"
     }
 }

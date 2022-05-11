@@ -1,9 +1,11 @@
 import { Client } from "./client";
-import { uuidv4 } from "../utils/helpers";
 import { Config } from "../models/Config";
 import { Packets } from "../models/proto/packets";
 import { Models } from "../models/proto/models";
 import { BeatmapDifficulty } from "../models/old/match";
+import { v4 as uuidv4 } from "uuid";
+
+import { w3cwebsocket as webSock } from "websocket";
 
 export class TAWebsocket {
 
@@ -12,7 +14,7 @@ export class TAWebsocket {
     private name: string;
     private userId?: string;
 
-    private ws: WebSocket | null = null;
+    private ws: webSock | null = null;
     public taClient: Client;
 
     private config: Config;
@@ -41,7 +43,7 @@ export class TAWebsocket {
             autoReconnectInterval: 10000,
             autoReconnectMaxRetries: -1,
             logging: false,
-            handshakeTimeout: 5000,
+            handshakeTimeout: 0,
             autoInit: true,
             sendToSocket: null,
             ...config
@@ -49,25 +51,30 @@ export class TAWebsocket {
     }
 
     private init() {
-        this.ws = new WebSocket(`${this.url}`);
+        this.ws = new webSock(`${this.url}`);
         if (!this.ws) return;
         const connectTimeout = setTimeout(() => {
-            if (this.ws?.readyState !== WebSocket.OPEN && this.config.handshakeTimeout > 0) {
+            if (this.ws?.readyState !== webSock.OPEN && this.config.handshakeTimeout > 0) {
                 this.ws?.close();
                 this.ws = null;
                 this.init();
             }
         }, this.config.handshakeTimeout);
-        this.ws.addEventListener("open", () => {
+        this.ws.onopen = () => {
             clearTimeout(connectTimeout);
             this.coordinatorConnect();
-        });
-        this.ws.addEventListener("message", (event) => {
-            if (event instanceof Buffer) {
-                this.handlePacket(Packets.Packet.deserialize(new Uint8Array(event)));
+        };
+        this.ws.onmessage = (event) => {
+            if (event.data instanceof ArrayBuffer) {
+                try {
+                    const packet = Packets.Packet.deserializeBinary(new Uint8Array(event.data));
+                    this.handlePacket(packet);
+                } catch (error) {
+                    if (this.config.logging) console.error(error);
+                }
             }
-        });
-        this.ws.addEventListener("close", () => {
+        };
+        this.ws.onclose = () => {
             if (this.config.logging && this.taClient.State?.server_settings?.server_name) console.error(`Socket Closed - ${this.taClient?.State?.server_settings?.server_name}`);
             this.taClient.reset();
             if (this.config.autoReconnect && this.reconnectAttempts < this.config.autoReconnectMaxRetries) {
@@ -76,10 +83,10 @@ export class TAWebsocket {
                 }, this.config.autoReconnectInterval);
                 if (this.reconnectAttempts !== -1) this.reconnectAttempts++;
             }
-        });
-        this.ws.addEventListener("error", (error) => {
+        };
+        this.ws.onerror = (error) => {
             if (this.config.logging) console.error(error);
-        });
+        };
     }
 
     coordinatorConnect() {
@@ -163,15 +170,20 @@ export class TAWebsocket {
             characteristics: [new Models.Characteristic({
                 serialized_name: "Standard",
                 difficulties: [
-                    difficulty
+                    +difficulty
                 ]
             })],
             loaded: true
         });
 
         taMatch.selected_level = matchMap;
-        taMatch.selected_characteristic = matchMap.characteristics[0];
-        taMatch.selected_difficulty = difficulty;
+        taMatch.selected_characteristic = new Models.Characteristic({
+            serialized_name: "Standard",
+            difficulties: [
+                +difficulty
+            ]
+        });
+        taMatch.selected_difficulty = +difficulty;
 
         const playerIds = taMatch.players.map((x) => x.user.id);
 
@@ -233,7 +245,7 @@ export class TAWebsocket {
     }
 
     close() {
-        if (this.ws?.readyState === WebSocket.OPEN) {
+        if (this.ws?.readyState === webSock.OPEN) {
             this.sendEvent(new Packets.Event({
                 coordinator_left_event: new Packets.Event.CoordinatorLeftEvent({
                     coordinator: new Models.Coordinator({
