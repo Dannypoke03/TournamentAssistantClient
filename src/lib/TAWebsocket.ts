@@ -91,7 +91,7 @@ export class TAWebsocket {
 
     coordinatorConnect() {
         const packetData = new Packets.Connect({
-            client_type: Packets.Connect.ConnectTypes.Coordinator,
+            client_type: Models.User.ClientTypes.Coordinator,
             name: this.name,
             client_version: 61,
             password: this.password ?? undefined,
@@ -135,10 +135,10 @@ export class TAWebsocket {
 
     // TA Helper functions
 
-    createMatch(players: Models.Player[]) {
+    createMatch(players: Models.User[]) {
         const match = new Models.Match({
             guid: uuidv4(),
-            players: players,
+            associated_users: [...players, this.taClient.Self!],
             leader: this.taClient.Self!
         });
         this.sendEvent(new Packets.Event({
@@ -165,7 +165,7 @@ export class TAWebsocket {
 
     async loadSong(songName: string, hash: string, difficulty: BeatmapDifficulty, taMatch: Models.Match) {
         const matchMap = new Models.PreviewBeatmapLevel({
-            level_id: hash,
+            level_id: `custom_level_${hash}`,
             name: songName,
             characteristics: [new Models.Characteristic({
                 serialized_name: "Standard",
@@ -185,7 +185,7 @@ export class TAWebsocket {
         });
         taMatch.selected_difficulty = +difficulty;
 
-        const playerIds = taMatch.players.map((x) => x.user.id);
+        const playerIds = this.getPlayers(taMatch).map((x) => x.id);
 
         this.forwardPacket(playerIds, new Packets.Packet({
             load_song: new Packets.LoadSong({
@@ -222,7 +222,7 @@ export class TAWebsocket {
             disable_pause: disable_pause,
             disable_fail: disable_fail,
         });
-        const playerIds = match.players.map((x) => x.user.id);
+        const playerIds = this.getPlayers(match).map((x) => x.id);
 
         const curTime = new Date();
         curTime.setSeconds(curTime.getSeconds() + 2);
@@ -247,14 +247,24 @@ export class TAWebsocket {
     close() {
         if (this.ws?.readyState === webSock.OPEN) {
             this.sendEvent(new Packets.Event({
-                coordinator_left_event: new Packets.Event.CoordinatorLeftEvent({
-                    coordinator: new Models.Coordinator({
-                        user: this.taClient.Self!
-                    })
+                user_left_event: new Packets.Event.UserLeftEvent({
+                    user: this.taClient.Self!
                 })
             }));
             this.ws.close();
         }
+    }
+
+    getPlayers(match: Models.Match) {
+        return match.associated_users.filter(x => x.client_type === Models.User.ClientTypes.Player);
+    }
+
+    getCoordinators(match: Models.Match) {
+        return match.associated_users.filter(x => x.client_type === Models.User.ClientTypes.Coordinator);
+    }
+
+    getWebsockets(match: Models.Match) {
+        return match.associated_users.filter(x => x.client_type === Models.User.ClientTypes.WebsocketConnection);
     }
 
 }

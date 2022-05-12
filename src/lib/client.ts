@@ -37,22 +37,18 @@ export class Client {
         this._event.emit("packet", packet);
         if (packet.event) {
             const event = packet.event;
-            if (event.coordinator_added_event) {
-                this.coordinatorAdded(event.coordinator_added_event.coordinator, packet.from);
-            } else if (event.coordinator_left_event) {
-                this.coordinatorLeft(event.coordinator_left_event.coordinator, packet.from);
+            if (event.user_added_event) {
+                this.userAdded(event.user_added_event.user, packet.from);
+            } else if (event.user_left_event) {
+                this.userLeft(event.user_left_event.user, packet.from);
+            } else if (event.user_updated_event) {
+                this.userUpdated(event.user_updated_event.user, packet.from);
             } else if (event.match_created_event) {
                 this.matchCreated(event.match_created_event.match, packet.from);
             } else if (event.match_updated_event) {
                 this.matchUpdated(event.match_updated_event.match, packet.from);
             } else if (event.match_deleted_event) {
                 this.matchDeleted(event.match_deleted_event.match, packet.from);
-            } else if (event.player_added_event) {
-                this.playerAdded(event.player_added_event.player, packet.from);
-            } else if (event.player_updated_event) {
-                this.playerUpdated(event.player_updated_event.player, packet.from);
-            } else if (event.player_left_event) {
-                this.playerLeft(event.player_left_event.player, packet.from);
             } else if (event.qualifier_created_event) {
                 this.qualifierEventCreated(event.qualifier_created_event.event, packet.from);
             } else if (event.qualifier_updated_event) {
@@ -92,34 +88,49 @@ export class Client {
         }
     }
 
-    getPlayer(id: string) {
-        return this.State?.players.find(x => x.user.id === id);
+    getUser(id: string) {
+        return this.State?.users.find(x => x.id === id);
     }
 
     getMatch(id: string) {
         return this.State?.matches.find(x => x.guid === id);
     }
 
-    getCoordinator(id: string) {
-        return this.State?.coordinators.find(x => x.user.id === id);
-    }
-
     getEvent(id: string) {
         return this.State?.events.find(x => x.event_id === id);
     }
 
-    private coordinatorAdded(data: Models.Coordinator, from: string) {
+    private userAdded(data: Models.User, from: string) {
         if (!this.isConnected) return;
-        const index = this.State?.coordinators.findIndex(x => x.user.id === data.user.id);
-        if (index == -1) this.State?.coordinators.push(data);
-        this._event.emit("coordinatorAdded", { from: from, data: data });
+        const index = this.State?.users.findIndex(x => x.id === data.id);
+        if (index == -1) this.State?.users.push(data);
+        this._event.emit("userAdded", { from: from, data: data });
     }
 
-    private coordinatorLeft(data: Models.Coordinator, from: string) {
-        const index = this.State?.coordinators?.findIndex(x => x.user.id == data?.user.id) ?? -1;
+    private userLeft(data: Models.User, from: string) {
+        const index = this.State?.users?.findIndex(x => x.id == data?.id) ?? -1;
         if (index > -1) {
-            this.State?.coordinators.splice(index, 1);
-            this._event.emit("coordinatorLeft", { from: from, data: data });
+            this.State?.users.splice(index, 1);
+            this._event.emit("userLeft", { from: from, data: data });
+        }
+    }
+
+    private userUpdated(player: Models.User, from: string) {
+        const index = this.State?.users.findIndex(x => x.id == player.id) ?? -1;
+        if (index > -1 && this.State) {
+            this.State.users[index] = player;
+            this._event.emit("userUpdated", { from: from, data: player });
+
+            // Match update
+            const matches = this.State?.matches.filter(x => x.associated_users.some(y => y.id === player.id));
+            if (!matches || !this.State) return;
+            for (const match of matches) {
+                const p = match.associated_users.findIndex(x => x.id === player.id);
+                if (p > -1) {
+                    this.State.matches[this.State.matches.indexOf(match)].associated_users[p] = player;
+                    this.matchUpdated(match, from);
+                }
+            }
         }
     }
 
@@ -141,38 +152,6 @@ export class Client {
         if (index > -1) {
             this.State?.matches.splice(index, 1);
             this._event.emit("matchDeleted", { from: from, data: match });
-        }
-    }
-
-    private playerAdded(player: Models.Player, from: string) {
-        this.State?.players.push(player);
-        this._event.emit("playerAdded", { from: from, data: player });
-    }
-
-    private playerUpdated(player: Models.Player, from: string) {
-        const index = this.State?.players.findIndex(x => x.user.id == player.user.id) ?? -1;
-        if (index > -1 && this.State) {
-            this.State.players[index] = player;
-            this._event.emit("playerUpdated", { from: from, data: player });
-
-            // Match update
-            const matches = this.State?.matches.filter(x => x.players.some(y => y.user.id === player.user.id));
-            if (!matches || !this.State) return;
-            for (const match of matches) {
-                const p = match.players.findIndex(x => x.user.id === player.user.id);
-                if (p > -1) {
-                    this.State.matches[this.State.matches.indexOf(match)].players[p] = player;
-                    this.matchUpdated(match, from);
-                }
-            }
-        }
-    }
-
-    private playerLeft(player: Models.Player, from: string) {
-        const index = this.State?.players.findIndex(x => x.user.id == player.user.id) ?? -1;
-        if (index > -1) {
-            this.State?.players.splice(index, 1);
-            this._event.emit("playerLeft", { from: from, data: player });
         }
     }
 

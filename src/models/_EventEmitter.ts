@@ -16,14 +16,12 @@ export namespace TAEventEmitter {
 
     export type Events = {
 
-        "coordinatorAdded": PacketEvent<Models.Coordinator>;
-        "coordinatorLeft": PacketEvent<Models.Coordinator>;
+        "userAdded": PacketEvent<Models.User>;
+        "userUpdated": PacketEvent<Models.User>;
+        "userLeft": PacketEvent<Models.User>;
         "matchCreated": PacketEvent<Models.Match>;
         "matchUpdated": PacketEvent<Models.Match>;
         "matchDeleted": PacketEvent<Models.Match>;
-        "playerAdded": PacketEvent<Models.Player>;
-        "playerUpdated": PacketEvent<Models.Player>;
-        "playerLeft": PacketEvent<Models.Player>;
         "qualifierEventCreated": PacketEvent<Models.QualifierEvent>;
         "qualifierEventUpdated": PacketEvent<Models.QualifierEvent>;
         "qualifierEventDeleted": PacketEvent<Models.QualifierEvent>;

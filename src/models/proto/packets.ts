@@ -24,13 +24,13 @@ export namespace Packets {
             }
         }
         get packet_id() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set packet_id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get type() {
-            return pb_1.Message.getField(this, 2) as Acknowledgement.AcknowledgementType;
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as Acknowledgement.AcknowledgementType;
         }
         set type(value: Acknowledgement.AcknowledgementType) {
             pb_1.Message.setField(this, 2, value);
@@ -115,7 +115,7 @@ export namespace Packets {
             }
         }
         get command_type() {
-            return pb_1.Message.getField(this, 1) as Command.CommandTypes;
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as Command.CommandTypes;
         }
         set command_type(value: Command.CommandTypes) {
             pb_1.Message.setField(this, 1, value);
@@ -179,7 +179,7 @@ export namespace Packets {
     }
     export class Connect extends pb_1.Message {
         constructor(data?: any[] | {
-            client_type?: Connect.ConnectTypes;
+            client_type?: dependency_2.Models.User.ClientTypes;
             name?: string;
             password?: string;
             user_id?: string;
@@ -206,37 +206,37 @@ export namespace Packets {
             }
         }
         get client_type() {
-            return pb_1.Message.getField(this, 1) as Connect.ConnectTypes;
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as dependency_2.Models.User.ClientTypes;
         }
-        set client_type(value: Connect.ConnectTypes) {
+        set client_type(value: dependency_2.Models.User.ClientTypes) {
             pb_1.Message.setField(this, 1, value);
         }
         get name() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set name(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         get password() {
-            return pb_1.Message.getField(this, 3) as string;
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
         set password(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
         get user_id() {
-            return pb_1.Message.getField(this, 4) as string;
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
         }
         set user_id(value: string) {
             pb_1.Message.setField(this, 4, value);
         }
         get client_version() {
-            return pb_1.Message.getField(this, 5) as number;
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
         }
         set client_version(value: number) {
             pb_1.Message.setField(this, 5, value);
         }
         static fromObject(data: {
-            client_type?: Connect.ConnectTypes;
+            client_type?: dependency_2.Models.User.ClientTypes;
             name?: string;
             password?: string;
             user_id?: string;
@@ -262,7 +262,7 @@ export namespace Packets {
         }
         toObject() {
             const data: {
-                client_type?: Connect.ConnectTypes;
+                client_type?: dependency_2.Models.User.ClientTypes;
                 name?: string;
                 password?: string;
                 user_id?: string;
@@ -335,13 +335,6 @@ export namespace Packets {
             return Connect.deserialize(bytes);
         }
     }
-    export namespace Connect {
-        export enum ConnectTypes {
-            Player = 0,
-            Coordinator = 1,
-            TemporaryConnection = 2
-        }
-    }
     export class Response extends pb_1.Message {
         constructor(data?: any[] | {
             type?: Response.ResponseType;
@@ -359,13 +352,13 @@ export namespace Packets {
             }
         }
         get type() {
-            return pb_1.Message.getField(this, 1) as Response.ResponseType;
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as Response.ResponseType;
         }
         set type(value: Response.ResponseType) {
             pb_1.Message.setField(this, 1, value);
         }
         get message() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set message(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -480,7 +473,7 @@ export namespace Packets {
             pb_1.Message.setWrapperField(this, 3, value);
         }
         get server_version() {
-            return pb_1.Message.getField(this, 4) as number;
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
         }
         set server_version(value: number) {
             pb_1.Message.setField(this, 4, value);
@@ -597,25 +590,25 @@ export namespace Packets {
             }
         }
         get file_id() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set file_id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get intent() {
-            return pb_1.Message.getField(this, 2) as File.Intentions;
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as File.Intentions;
         }
         set intent(value: File.Intentions) {
             pb_1.Message.setField(this, 2, value);
         }
         get compressed() {
-            return pb_1.Message.getField(this, 3) as boolean;
+            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
         }
         set compressed(value: boolean) {
             pb_1.Message.setField(this, 3, value);
         }
         get data() {
-            return pb_1.Message.getField(this, 4) as Uint8Array;
+            return pb_1.Message.getFieldWithDefault(this, 4, new Uint8Array()) as Uint8Array;
         }
         set data(value: Uint8Array) {
             pb_1.Message.setField(this, 4, value);
@@ -782,11 +775,9 @@ export namespace Packets {
     }
     export class Event extends pb_1.Message {
         constructor(data?: any[] | ({} & (({
-            player_added_event?: Event.PlayerAddedEvent;
-            player_updated_event?: never;
-            player_left_event?: never;
-            coordinator_added_event?: never;
-            coordinator_left_event?: never;
+            user_added_event?: Event.UserAddedEvent;
+            user_updated_event?: never;
+            user_left_event?: never;
             match_created_event?: never;
             match_updated_event?: never;
             match_deleted_event?: never;
@@ -796,11 +787,9 @@ export namespace Packets {
             host_added_event?: never;
             host_deleted_event?: never;
         } | {
-            player_added_event?: never;
-            player_updated_event?: Event.PlayerUpdatedEvent;
-            player_left_event?: never;
-            coordinator_added_event?: never;
-            coordinator_left_event?: never;
+            user_added_event?: never;
+            user_updated_event?: Event.UserUpdatedEvent;
+            user_left_event?: never;
             match_created_event?: never;
             match_updated_event?: never;
             match_deleted_event?: never;
@@ -810,11 +799,9 @@ export namespace Packets {
             host_added_event?: never;
             host_deleted_event?: never;
         } | {
-            player_added_event?: never;
-            player_updated_event?: never;
-            player_left_event?: Event.PlayerLeftEvent;
-            coordinator_added_event?: never;
-            coordinator_left_event?: never;
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: Event.UserLeftEvent;
             match_created_event?: never;
             match_updated_event?: never;
             match_deleted_event?: never;
@@ -824,39 +811,9 @@ export namespace Packets {
             host_added_event?: never;
             host_deleted_event?: never;
         } | {
-            player_added_event?: never;
-            player_updated_event?: never;
-            player_left_event?: never;
-            coordinator_added_event?: Event.CoordinatorAddedEvent;
-            coordinator_left_event?: never;
-            match_created_event?: never;
-            match_updated_event?: never;
-            match_deleted_event?: never;
-            qualifier_created_event?: never;
-            qualifier_updated_event?: never;
-            qualifier_deleted_event?: never;
-            host_added_event?: never;
-            host_deleted_event?: never;
-        } | {
-            player_added_event?: never;
-            player_updated_event?: never;
-            player_left_event?: never;
-            coordinator_added_event?: never;
-            coordinator_left_event?: Event.CoordinatorLeftEvent;
-            match_created_event?: never;
-            match_updated_event?: never;
-            match_deleted_event?: never;
-            qualifier_created_event?: never;
-            qualifier_updated_event?: never;
-            qualifier_deleted_event?: never;
-            host_added_event?: never;
-            host_deleted_event?: never;
-        } | {
-            player_added_event?: never;
-            player_updated_event?: never;
-            player_left_event?: never;
-            coordinator_added_event?: never;
-            coordinator_left_event?: never;
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
             match_created_event?: Event.MatchCreatedEvent;
             match_updated_event?: never;
             match_deleted_event?: never;
@@ -866,11 +823,9 @@ export namespace Packets {
             host_added_event?: never;
             host_deleted_event?: never;
         } | {
-            player_added_event?: never;
-            player_updated_event?: never;
-            player_left_event?: never;
-            coordinator_added_event?: never;
-            coordinator_left_event?: never;
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
             match_created_event?: never;
             match_updated_event?: Event.MatchUpdatedEvent;
             match_deleted_event?: never;
@@ -880,11 +835,9 @@ export namespace Packets {
             host_added_event?: never;
             host_deleted_event?: never;
         } | {
-            player_added_event?: never;
-            player_updated_event?: never;
-            player_left_event?: never;
-            coordinator_added_event?: never;
-            coordinator_left_event?: never;
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
             match_created_event?: never;
             match_updated_event?: never;
             match_deleted_event?: Event.MatchDeletedEvent;
@@ -894,11 +847,9 @@ export namespace Packets {
             host_added_event?: never;
             host_deleted_event?: never;
         } | {
-            player_added_event?: never;
-            player_updated_event?: never;
-            player_left_event?: never;
-            coordinator_added_event?: never;
-            coordinator_left_event?: never;
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
             match_created_event?: never;
             match_updated_event?: never;
             match_deleted_event?: never;
@@ -908,11 +859,9 @@ export namespace Packets {
             host_added_event?: never;
             host_deleted_event?: never;
         } | {
-            player_added_event?: never;
-            player_updated_event?: never;
-            player_left_event?: never;
-            coordinator_added_event?: never;
-            coordinator_left_event?: never;
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
             match_created_event?: never;
             match_updated_event?: never;
             match_deleted_event?: never;
@@ -922,11 +871,9 @@ export namespace Packets {
             host_added_event?: never;
             host_deleted_event?: never;
         } | {
-            player_added_event?: never;
-            player_updated_event?: never;
-            player_left_event?: never;
-            coordinator_added_event?: never;
-            coordinator_left_event?: never;
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
             match_created_event?: never;
             match_updated_event?: never;
             match_deleted_event?: never;
@@ -936,11 +883,9 @@ export namespace Packets {
             host_added_event?: never;
             host_deleted_event?: never;
         } | {
-            player_added_event?: never;
-            player_updated_event?: never;
-            player_left_event?: never;
-            coordinator_added_event?: never;
-            coordinator_left_event?: never;
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
             match_created_event?: never;
             match_updated_event?: never;
             match_deleted_event?: never;
@@ -950,11 +895,9 @@ export namespace Packets {
             host_added_event?: Event.HostAddedEvent;
             host_deleted_event?: never;
         } | {
-            player_added_event?: never;
-            player_updated_event?: never;
-            player_left_event?: never;
-            coordinator_added_event?: never;
-            coordinator_left_event?: never;
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
             match_created_event?: never;
             match_updated_event?: never;
             match_deleted_event?: never;
@@ -965,22 +908,16 @@ export namespace Packets {
             host_deleted_event?: Event.HostDeletedEvent;
         })))) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]]);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], [[1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13]]);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("player_added_event" in data && data.player_added_event != undefined) {
-                    this.player_added_event = data.player_added_event;
+                if ("user_added_event" in data && data.user_added_event != undefined) {
+                    this.user_added_event = data.user_added_event;
                 }
-                if ("player_updated_event" in data && data.player_updated_event != undefined) {
-                    this.player_updated_event = data.player_updated_event;
+                if ("user_updated_event" in data && data.user_updated_event != undefined) {
+                    this.user_updated_event = data.user_updated_event;
                 }
-                if ("player_left_event" in data && data.player_left_event != undefined) {
-                    this.player_left_event = data.player_left_event;
-                }
-                if ("coordinator_added_event" in data && data.coordinator_added_event != undefined) {
-                    this.coordinator_added_event = data.coordinator_added_event;
-                }
-                if ("coordinator_left_event" in data && data.coordinator_left_event != undefined) {
-                    this.coordinator_left_event = data.coordinator_left_event;
+                if ("user_left_event" in data && data.user_left_event != undefined) {
+                    this.user_left_event = data.user_left_event;
                 }
                 if ("match_created_event" in data && data.match_created_event != undefined) {
                     this.match_created_event = data.match_created_event;
@@ -1008,94 +945,80 @@ export namespace Packets {
                 }
             }
         }
-        get player_added_event() {
-            return pb_1.Message.getWrapperField(this, Event.PlayerAddedEvent, 1) as Event.PlayerAddedEvent;
+        get user_added_event() {
+            return pb_1.Message.getWrapperField(this, Event.UserAddedEvent, 1) as Event.UserAddedEvent;
         }
-        set player_added_event(value: Event.PlayerAddedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], value);
+        set user_added_event(value: Event.UserAddedEvent) {
+            pb_1.Message.setOneofWrapperField(this, 1, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
         }
-        get player_updated_event() {
-            return pb_1.Message.getWrapperField(this, Event.PlayerUpdatedEvent, 2) as Event.PlayerUpdatedEvent;
+        get user_updated_event() {
+            return pb_1.Message.getWrapperField(this, Event.UserUpdatedEvent, 2) as Event.UserUpdatedEvent;
         }
-        set player_updated_event(value: Event.PlayerUpdatedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 2, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], value);
+        set user_updated_event(value: Event.UserUpdatedEvent) {
+            pb_1.Message.setOneofWrapperField(this, 2, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
         }
-        get player_left_event() {
-            return pb_1.Message.getWrapperField(this, Event.PlayerLeftEvent, 3) as Event.PlayerLeftEvent;
+        get user_left_event() {
+            return pb_1.Message.getWrapperField(this, Event.UserLeftEvent, 3) as Event.UserLeftEvent;
         }
-        set player_left_event(value: Event.PlayerLeftEvent) {
-            pb_1.Message.setOneofWrapperField(this, 3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], value);
-        }
-        get coordinator_added_event() {
-            return pb_1.Message.getWrapperField(this, Event.CoordinatorAddedEvent, 4) as Event.CoordinatorAddedEvent;
-        }
-        set coordinator_added_event(value: Event.CoordinatorAddedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 4, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], value);
-        }
-        get coordinator_left_event() {
-            return pb_1.Message.getWrapperField(this, Event.CoordinatorLeftEvent, 5) as Event.CoordinatorLeftEvent;
-        }
-        set coordinator_left_event(value: Event.CoordinatorLeftEvent) {
-            pb_1.Message.setOneofWrapperField(this, 5, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], value);
+        set user_left_event(value: Event.UserLeftEvent) {
+            pb_1.Message.setOneofWrapperField(this, 3, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
         }
         get match_created_event() {
             return pb_1.Message.getWrapperField(this, Event.MatchCreatedEvent, 6) as Event.MatchCreatedEvent;
         }
         set match_created_event(value: Event.MatchCreatedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 6, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 6, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
         }
         get match_updated_event() {
             return pb_1.Message.getWrapperField(this, Event.MatchUpdatedEvent, 7) as Event.MatchUpdatedEvent;
         }
         set match_updated_event(value: Event.MatchUpdatedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 7, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 7, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
         }
         get match_deleted_event() {
             return pb_1.Message.getWrapperField(this, Event.MatchDeletedEvent, 8) as Event.MatchDeletedEvent;
         }
         set match_deleted_event(value: Event.MatchDeletedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 8, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 8, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
         }
         get qualifier_created_event() {
             return pb_1.Message.getWrapperField(this, Event.QualifierCreatedEvent, 9) as Event.QualifierCreatedEvent;
         }
         set qualifier_created_event(value: Event.QualifierCreatedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 9, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 9, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
         }
         get qualifier_updated_event() {
             return pb_1.Message.getWrapperField(this, Event.QualifierUpdatedEvent, 10) as Event.QualifierUpdatedEvent;
         }
         set qualifier_updated_event(value: Event.QualifierUpdatedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 10, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 10, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
         }
         get qualifier_deleted_event() {
             return pb_1.Message.getWrapperField(this, Event.QualifierDeletedEvent, 11) as Event.QualifierDeletedEvent;
         }
         set qualifier_deleted_event(value: Event.QualifierDeletedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 11, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 11, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
         }
         get host_added_event() {
             return pb_1.Message.getWrapperField(this, Event.HostAddedEvent, 12) as Event.HostAddedEvent;
         }
         set host_added_event(value: Event.HostAddedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 12, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 12, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
         }
         get host_deleted_event() {
             return pb_1.Message.getWrapperField(this, Event.HostDeletedEvent, 13) as Event.HostDeletedEvent;
         }
         set host_deleted_event(value: Event.HostDeletedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 13, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 13, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
         }
         get changed_object() {
             const cases: {
-                [index: number]: "none" | "player_added_event" | "player_updated_event" | "player_left_event" | "coordinator_added_event" | "coordinator_left_event" | "match_created_event" | "match_updated_event" | "match_deleted_event" | "qualifier_created_event" | "qualifier_updated_event" | "qualifier_deleted_event" | "host_added_event" | "host_deleted_event";
+                [index: number]: "none" | "user_added_event" | "user_updated_event" | "user_left_event" | "match_created_event" | "match_updated_event" | "match_deleted_event" | "qualifier_created_event" | "qualifier_updated_event" | "qualifier_deleted_event" | "host_added_event" | "host_deleted_event";
             } = {
                 0: "none",
-                1: "player_added_event",
-                2: "player_updated_event",
-                3: "player_left_event",
-                4: "coordinator_added_event",
-                5: "coordinator_left_event",
+                1: "user_added_event",
+                2: "user_updated_event",
+                3: "user_left_event",
                 6: "match_created_event",
                 7: "match_updated_event",
                 8: "match_deleted_event",
@@ -1105,14 +1028,12 @@ export namespace Packets {
                 12: "host_added_event",
                 13: "host_deleted_event"
             };
-            return cases[pb_1.Message.computeOneofCase(this, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])];
+            return cases[pb_1.Message.computeOneofCase(this, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13])];
         }
         static fromObject(data: {
-            player_added_event?: ReturnType<typeof Event.PlayerAddedEvent.prototype.toObject>;
-            player_updated_event?: ReturnType<typeof Event.PlayerUpdatedEvent.prototype.toObject>;
-            player_left_event?: ReturnType<typeof Event.PlayerLeftEvent.prototype.toObject>;
-            coordinator_added_event?: ReturnType<typeof Event.CoordinatorAddedEvent.prototype.toObject>;
-            coordinator_left_event?: ReturnType<typeof Event.CoordinatorLeftEvent.prototype.toObject>;
+            user_added_event?: ReturnType<typeof Event.UserAddedEvent.prototype.toObject>;
+            user_updated_event?: ReturnType<typeof Event.UserUpdatedEvent.prototype.toObject>;
+            user_left_event?: ReturnType<typeof Event.UserLeftEvent.prototype.toObject>;
             match_created_event?: ReturnType<typeof Event.MatchCreatedEvent.prototype.toObject>;
             match_updated_event?: ReturnType<typeof Event.MatchUpdatedEvent.prototype.toObject>;
             match_deleted_event?: ReturnType<typeof Event.MatchDeletedEvent.prototype.toObject>;
@@ -1123,20 +1044,14 @@ export namespace Packets {
             host_deleted_event?: ReturnType<typeof Event.HostDeletedEvent.prototype.toObject>;
         }) {
             const message = new Event({});
-            if (data.player_added_event != null) {
-                message.player_added_event = Event.PlayerAddedEvent.fromObject(data.player_added_event);
+            if (data.user_added_event != null) {
+                message.user_added_event = Event.UserAddedEvent.fromObject(data.user_added_event);
             }
-            if (data.player_updated_event != null) {
-                message.player_updated_event = Event.PlayerUpdatedEvent.fromObject(data.player_updated_event);
+            if (data.user_updated_event != null) {
+                message.user_updated_event = Event.UserUpdatedEvent.fromObject(data.user_updated_event);
             }
-            if (data.player_left_event != null) {
-                message.player_left_event = Event.PlayerLeftEvent.fromObject(data.player_left_event);
-            }
-            if (data.coordinator_added_event != null) {
-                message.coordinator_added_event = Event.CoordinatorAddedEvent.fromObject(data.coordinator_added_event);
-            }
-            if (data.coordinator_left_event != null) {
-                message.coordinator_left_event = Event.CoordinatorLeftEvent.fromObject(data.coordinator_left_event);
+            if (data.user_left_event != null) {
+                message.user_left_event = Event.UserLeftEvent.fromObject(data.user_left_event);
             }
             if (data.match_created_event != null) {
                 message.match_created_event = Event.MatchCreatedEvent.fromObject(data.match_created_event);
@@ -1166,11 +1081,9 @@ export namespace Packets {
         }
         toObject() {
             const data: {
-                player_added_event?: ReturnType<typeof Event.PlayerAddedEvent.prototype.toObject>;
-                player_updated_event?: ReturnType<typeof Event.PlayerUpdatedEvent.prototype.toObject>;
-                player_left_event?: ReturnType<typeof Event.PlayerLeftEvent.prototype.toObject>;
-                coordinator_added_event?: ReturnType<typeof Event.CoordinatorAddedEvent.prototype.toObject>;
-                coordinator_left_event?: ReturnType<typeof Event.CoordinatorLeftEvent.prototype.toObject>;
+                user_added_event?: ReturnType<typeof Event.UserAddedEvent.prototype.toObject>;
+                user_updated_event?: ReturnType<typeof Event.UserUpdatedEvent.prototype.toObject>;
+                user_left_event?: ReturnType<typeof Event.UserLeftEvent.prototype.toObject>;
                 match_created_event?: ReturnType<typeof Event.MatchCreatedEvent.prototype.toObject>;
                 match_updated_event?: ReturnType<typeof Event.MatchUpdatedEvent.prototype.toObject>;
                 match_deleted_event?: ReturnType<typeof Event.MatchDeletedEvent.prototype.toObject>;
@@ -1180,20 +1093,14 @@ export namespace Packets {
                 host_added_event?: ReturnType<typeof Event.HostAddedEvent.prototype.toObject>;
                 host_deleted_event?: ReturnType<typeof Event.HostDeletedEvent.prototype.toObject>;
             } = {};
-            if (this.player_added_event != null) {
-                data.player_added_event = this.player_added_event.toObject();
+            if (this.user_added_event != null) {
+                data.user_added_event = this.user_added_event.toObject();
             }
-            if (this.player_updated_event != null) {
-                data.player_updated_event = this.player_updated_event.toObject();
+            if (this.user_updated_event != null) {
+                data.user_updated_event = this.user_updated_event.toObject();
             }
-            if (this.player_left_event != null) {
-                data.player_left_event = this.player_left_event.toObject();
-            }
-            if (this.coordinator_added_event != null) {
-                data.coordinator_added_event = this.coordinator_added_event.toObject();
-            }
-            if (this.coordinator_left_event != null) {
-                data.coordinator_left_event = this.coordinator_left_event.toObject();
+            if (this.user_left_event != null) {
+                data.user_left_event = this.user_left_event.toObject();
             }
             if (this.match_created_event != null) {
                 data.match_created_event = this.match_created_event.toObject();
@@ -1225,16 +1132,12 @@ export namespace Packets {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.player_added_event !== undefined)
-                writer.writeMessage(1, this.player_added_event, () => this.player_added_event.serialize(writer));
-            if (this.player_updated_event !== undefined)
-                writer.writeMessage(2, this.player_updated_event, () => this.player_updated_event.serialize(writer));
-            if (this.player_left_event !== undefined)
-                writer.writeMessage(3, this.player_left_event, () => this.player_left_event.serialize(writer));
-            if (this.coordinator_added_event !== undefined)
-                writer.writeMessage(4, this.coordinator_added_event, () => this.coordinator_added_event.serialize(writer));
-            if (this.coordinator_left_event !== undefined)
-                writer.writeMessage(5, this.coordinator_left_event, () => this.coordinator_left_event.serialize(writer));
+            if (this.user_added_event !== undefined)
+                writer.writeMessage(1, this.user_added_event, () => this.user_added_event.serialize(writer));
+            if (this.user_updated_event !== undefined)
+                writer.writeMessage(2, this.user_updated_event, () => this.user_updated_event.serialize(writer));
+            if (this.user_left_event !== undefined)
+                writer.writeMessage(3, this.user_left_event, () => this.user_left_event.serialize(writer));
             if (this.match_created_event !== undefined)
                 writer.writeMessage(6, this.match_created_event, () => this.match_created_event.serialize(writer));
             if (this.match_updated_event !== undefined)
@@ -1261,19 +1164,13 @@ export namespace Packets {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.player_added_event, () => message.player_added_event = Event.PlayerAddedEvent.deserialize(reader));
+                        reader.readMessage(message.user_added_event, () => message.user_added_event = Event.UserAddedEvent.deserialize(reader));
                         break;
                     case 2:
-                        reader.readMessage(message.player_updated_event, () => message.player_updated_event = Event.PlayerUpdatedEvent.deserialize(reader));
+                        reader.readMessage(message.user_updated_event, () => message.user_updated_event = Event.UserUpdatedEvent.deserialize(reader));
                         break;
                     case 3:
-                        reader.readMessage(message.player_left_event, () => message.player_left_event = Event.PlayerLeftEvent.deserialize(reader));
-                        break;
-                    case 4:
-                        reader.readMessage(message.coordinator_added_event, () => message.coordinator_added_event = Event.CoordinatorAddedEvent.deserialize(reader));
-                        break;
-                    case 5:
-                        reader.readMessage(message.coordinator_left_event, () => message.coordinator_left_event = Event.CoordinatorLeftEvent.deserialize(reader));
+                        reader.readMessage(message.user_left_event, () => message.user_left_event = Event.UserLeftEvent.deserialize(reader));
                         break;
                     case 6:
                         reader.readMessage(message.match_created_event, () => message.match_created_event = Event.MatchCreatedEvent.deserialize(reader));
@@ -1312,39 +1209,39 @@ export namespace Packets {
         }
     }
     export namespace Event {
-        export class PlayerAddedEvent extends pb_1.Message {
+        export class UserAddedEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                player?: dependency_2.Models.Player;
+                user?: dependency_2.Models.User;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
                 if (!Array.isArray(data) && typeof data == "object") {
-                    if ("player" in data && data.player != undefined) {
-                        this.player = data.player;
+                    if ("user" in data && data.user != undefined) {
+                        this.user = data.user;
                     }
                 }
             }
-            get player() {
-                return pb_1.Message.getWrapperField(this, dependency_2.Models.Player, 1) as dependency_2.Models.Player;
+            get user() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.User, 1) as dependency_2.Models.User;
             }
-            set player(value: dependency_2.Models.Player) {
+            set user(value: dependency_2.Models.User) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
+                user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
             }) {
-                const message = new PlayerAddedEvent({});
-                if (data.player != null) {
-                    message.player = dependency_2.Models.Player.fromObject(data.player);
+                const message = new UserAddedEvent({});
+                if (data.user != null) {
+                    message.user = dependency_2.Models.User.fromObject(data.user);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
+                    user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
                 } = {};
-                if (this.player != null) {
-                    data.player = this.player.toObject();
+                if (this.user != null) {
+                    data.user = this.user.toObject();
                 }
                 return data;
             }
@@ -1352,19 +1249,19 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.player !== undefined)
-                    writer.writeMessage(1, this.player, () => this.player.serialize(writer));
+                if (this.user !== undefined)
+                    writer.writeMessage(1, this.user, () => this.user.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
             }
-            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PlayerAddedEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PlayerAddedEvent();
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UserAddedEvent {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new UserAddedEvent();
                 while (reader.nextField()) {
                     if (reader.isEndGroup())
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.player, () => message.player = dependency_2.Models.Player.deserialize(reader));
+                            reader.readMessage(message.user, () => message.user = dependency_2.Models.User.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -1374,43 +1271,43 @@ export namespace Packets {
             serializeBinary(): Uint8Array {
                 return this.serialize();
             }
-            static deserializeBinary(bytes: Uint8Array): PlayerAddedEvent {
-                return PlayerAddedEvent.deserialize(bytes);
+            static deserializeBinary(bytes: Uint8Array): UserAddedEvent {
+                return UserAddedEvent.deserialize(bytes);
             }
         }
-        export class PlayerUpdatedEvent extends pb_1.Message {
+        export class UserUpdatedEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                player?: dependency_2.Models.Player;
+                user?: dependency_2.Models.User;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
                 if (!Array.isArray(data) && typeof data == "object") {
-                    if ("player" in data && data.player != undefined) {
-                        this.player = data.player;
+                    if ("user" in data && data.user != undefined) {
+                        this.user = data.user;
                     }
                 }
             }
-            get player() {
-                return pb_1.Message.getWrapperField(this, dependency_2.Models.Player, 1) as dependency_2.Models.Player;
+            get user() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.User, 1) as dependency_2.Models.User;
             }
-            set player(value: dependency_2.Models.Player) {
+            set user(value: dependency_2.Models.User) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
+                user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
             }) {
-                const message = new PlayerUpdatedEvent({});
-                if (data.player != null) {
-                    message.player = dependency_2.Models.Player.fromObject(data.player);
+                const message = new UserUpdatedEvent({});
+                if (data.user != null) {
+                    message.user = dependency_2.Models.User.fromObject(data.user);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
+                    user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
                 } = {};
-                if (this.player != null) {
-                    data.player = this.player.toObject();
+                if (this.user != null) {
+                    data.user = this.user.toObject();
                 }
                 return data;
             }
@@ -1418,19 +1315,19 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.player !== undefined)
-                    writer.writeMessage(1, this.player, () => this.player.serialize(writer));
+                if (this.user !== undefined)
+                    writer.writeMessage(1, this.user, () => this.user.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
             }
-            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PlayerUpdatedEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PlayerUpdatedEvent();
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UserUpdatedEvent {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new UserUpdatedEvent();
                 while (reader.nextField()) {
                     if (reader.isEndGroup())
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.player, () => message.player = dependency_2.Models.Player.deserialize(reader));
+                            reader.readMessage(message.user, () => message.user = dependency_2.Models.User.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -1440,43 +1337,43 @@ export namespace Packets {
             serializeBinary(): Uint8Array {
                 return this.serialize();
             }
-            static deserializeBinary(bytes: Uint8Array): PlayerUpdatedEvent {
-                return PlayerUpdatedEvent.deserialize(bytes);
+            static deserializeBinary(bytes: Uint8Array): UserUpdatedEvent {
+                return UserUpdatedEvent.deserialize(bytes);
             }
         }
-        export class PlayerLeftEvent extends pb_1.Message {
+        export class UserLeftEvent extends pb_1.Message {
             constructor(data?: any[] | {
-                player?: dependency_2.Models.Player;
+                user?: dependency_2.Models.User;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
                 if (!Array.isArray(data) && typeof data == "object") {
-                    if ("player" in data && data.player != undefined) {
-                        this.player = data.player;
+                    if ("user" in data && data.user != undefined) {
+                        this.user = data.user;
                     }
                 }
             }
-            get player() {
-                return pb_1.Message.getWrapperField(this, dependency_2.Models.Player, 1) as dependency_2.Models.Player;
+            get user() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.User, 1) as dependency_2.Models.User;
             }
-            set player(value: dependency_2.Models.Player) {
+            set user(value: dependency_2.Models.User) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
             static fromObject(data: {
-                player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
+                user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
             }) {
-                const message = new PlayerLeftEvent({});
-                if (data.player != null) {
-                    message.player = dependency_2.Models.Player.fromObject(data.player);
+                const message = new UserLeftEvent({});
+                if (data.user != null) {
+                    message.user = dependency_2.Models.User.fromObject(data.user);
                 }
                 return message;
             }
             toObject() {
                 const data: {
-                    player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
+                    user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
                 } = {};
-                if (this.player != null) {
-                    data.player = this.player.toObject();
+                if (this.user != null) {
+                    data.user = this.user.toObject();
                 }
                 return data;
             }
@@ -1484,19 +1381,19 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.player !== undefined)
-                    writer.writeMessage(1, this.player, () => this.player.serialize(writer));
+                if (this.user !== undefined)
+                    writer.writeMessage(1, this.user, () => this.user.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
             }
-            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PlayerLeftEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PlayerLeftEvent();
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UserLeftEvent {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new UserLeftEvent();
                 while (reader.nextField()) {
                     if (reader.isEndGroup())
                         break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.player, () => message.player = dependency_2.Models.Player.deserialize(reader));
+                            reader.readMessage(message.user, () => message.user = dependency_2.Models.User.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }
@@ -1506,140 +1403,8 @@ export namespace Packets {
             serializeBinary(): Uint8Array {
                 return this.serialize();
             }
-            static deserializeBinary(bytes: Uint8Array): PlayerLeftEvent {
-                return PlayerLeftEvent.deserialize(bytes);
-            }
-        }
-        export class CoordinatorAddedEvent extends pb_1.Message {
-            constructor(data?: any[] | {
-                coordinator?: dependency_2.Models.Coordinator;
-            }) {
-                super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-                if (!Array.isArray(data) && typeof data == "object") {
-                    if ("coordinator" in data && data.coordinator != undefined) {
-                        this.coordinator = data.coordinator;
-                    }
-                }
-            }
-            get coordinator() {
-                return pb_1.Message.getWrapperField(this, dependency_2.Models.Coordinator, 1) as dependency_2.Models.Coordinator;
-            }
-            set coordinator(value: dependency_2.Models.Coordinator) {
-                pb_1.Message.setWrapperField(this, 1, value);
-            }
-            static fromObject(data: {
-                coordinator?: ReturnType<typeof dependency_2.Models.Coordinator.prototype.toObject>;
-            }) {
-                const message = new CoordinatorAddedEvent({});
-                if (data.coordinator != null) {
-                    message.coordinator = dependency_2.Models.Coordinator.fromObject(data.coordinator);
-                }
-                return message;
-            }
-            toObject() {
-                const data: {
-                    coordinator?: ReturnType<typeof dependency_2.Models.Coordinator.prototype.toObject>;
-                } = {};
-                if (this.coordinator != null) {
-                    data.coordinator = this.coordinator.toObject();
-                }
-                return data;
-            }
-            serialize(): Uint8Array;
-            serialize(w: pb_1.BinaryWriter): void;
-            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-                const writer = w || new pb_1.BinaryWriter();
-                if (this.coordinator !== undefined)
-                    writer.writeMessage(1, this.coordinator, () => this.coordinator.serialize(writer));
-                if (!w)
-                    return writer.getResultBuffer();
-            }
-            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CoordinatorAddedEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CoordinatorAddedEvent();
-                while (reader.nextField()) {
-                    if (reader.isEndGroup())
-                        break;
-                    switch (reader.getFieldNumber()) {
-                        case 1:
-                            reader.readMessage(message.coordinator, () => message.coordinator = dependency_2.Models.Coordinator.deserialize(reader));
-                            break;
-                        default: reader.skipField();
-                    }
-                }
-                return message;
-            }
-            serializeBinary(): Uint8Array {
-                return this.serialize();
-            }
-            static deserializeBinary(bytes: Uint8Array): CoordinatorAddedEvent {
-                return CoordinatorAddedEvent.deserialize(bytes);
-            }
-        }
-        export class CoordinatorLeftEvent extends pb_1.Message {
-            constructor(data?: any[] | {
-                coordinator?: dependency_2.Models.Coordinator;
-            }) {
-                super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-                if (!Array.isArray(data) && typeof data == "object") {
-                    if ("coordinator" in data && data.coordinator != undefined) {
-                        this.coordinator = data.coordinator;
-                    }
-                }
-            }
-            get coordinator() {
-                return pb_1.Message.getWrapperField(this, dependency_2.Models.Coordinator, 1) as dependency_2.Models.Coordinator;
-            }
-            set coordinator(value: dependency_2.Models.Coordinator) {
-                pb_1.Message.setWrapperField(this, 1, value);
-            }
-            static fromObject(data: {
-                coordinator?: ReturnType<typeof dependency_2.Models.Coordinator.prototype.toObject>;
-            }) {
-                const message = new CoordinatorLeftEvent({});
-                if (data.coordinator != null) {
-                    message.coordinator = dependency_2.Models.Coordinator.fromObject(data.coordinator);
-                }
-                return message;
-            }
-            toObject() {
-                const data: {
-                    coordinator?: ReturnType<typeof dependency_2.Models.Coordinator.prototype.toObject>;
-                } = {};
-                if (this.coordinator != null) {
-                    data.coordinator = this.coordinator.toObject();
-                }
-                return data;
-            }
-            serialize(): Uint8Array;
-            serialize(w: pb_1.BinaryWriter): void;
-            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-                const writer = w || new pb_1.BinaryWriter();
-                if (this.coordinator !== undefined)
-                    writer.writeMessage(1, this.coordinator, () => this.coordinator.serialize(writer));
-                if (!w)
-                    return writer.getResultBuffer();
-            }
-            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CoordinatorLeftEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CoordinatorLeftEvent();
-                while (reader.nextField()) {
-                    if (reader.isEndGroup())
-                        break;
-                    switch (reader.getFieldNumber()) {
-                        case 1:
-                            reader.readMessage(message.coordinator, () => message.coordinator = dependency_2.Models.Coordinator.deserialize(reader));
-                            break;
-                        default: reader.skipField();
-                    }
-                }
-                return message;
-            }
-            serializeBinary(): Uint8Array {
-                return this.serialize();
-            }
-            static deserializeBinary(bytes: Uint8Array): CoordinatorLeftEvent {
-                return CoordinatorLeftEvent.deserialize(bytes);
+            static deserializeBinary(bytes: Uint8Array): UserLeftEvent {
+                return UserLeftEvent.deserialize(bytes);
             }
         }
         export class MatchCreatedEvent extends pb_1.Message {
@@ -2188,13 +1953,13 @@ export namespace Packets {
             }
         }
         get level_id() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set level_id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get custom_host_url() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set custom_host_url(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -2303,37 +2068,37 @@ export namespace Packets {
             pb_1.Message.setWrapperField(this, 1, value);
         }
         get floating_scoreboard() {
-            return pb_1.Message.getField(this, 3) as boolean;
+            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
         }
         set floating_scoreboard(value: boolean) {
             pb_1.Message.setField(this, 3, value);
         }
         get stream_sync() {
-            return pb_1.Message.getField(this, 4) as boolean;
+            return pb_1.Message.getFieldWithDefault(this, 4, false) as boolean;
         }
         set stream_sync(value: boolean) {
             pb_1.Message.setField(this, 4, value);
         }
         get disable_fail() {
-            return pb_1.Message.getField(this, 5) as boolean;
+            return pb_1.Message.getFieldWithDefault(this, 5, false) as boolean;
         }
         set disable_fail(value: boolean) {
             pb_1.Message.setField(this, 5, value);
         }
         get disable_pause() {
-            return pb_1.Message.getField(this, 6) as boolean;
+            return pb_1.Message.getFieldWithDefault(this, 6, false) as boolean;
         }
         set disable_pause(value: boolean) {
             pb_1.Message.setField(this, 6, value);
         }
         get disable_scoresaber_submission() {
-            return pb_1.Message.getField(this, 7) as boolean;
+            return pb_1.Message.getFieldWithDefault(this, 7, false) as boolean;
         }
         set disable_scoresaber_submission(value: boolean) {
             pb_1.Message.setField(this, 7, value);
         }
         get show_normal_notes_on_stream() {
-            return pb_1.Message.getField(this, 8) as boolean;
+            return pb_1.Message.getFieldWithDefault(this, 8, false) as boolean;
         }
         set show_normal_notes_on_stream(value: boolean) {
             pb_1.Message.setField(this, 8, value);
@@ -2532,7 +2297,7 @@ export namespace Packets {
     }
     export class SongFinished extends pb_1.Message {
         constructor(data?: any[] | {
-            player?: dependency_2.Models.Player;
+            player?: dependency_2.Models.User;
             beatmap?: dependency_2.Models.Beatmap;
             type?: SongFinished.CompletionType;
             score?: number;
@@ -2555,9 +2320,9 @@ export namespace Packets {
             }
         }
         get player() {
-            return pb_1.Message.getWrapperField(this, dependency_2.Models.Player, 1) as dependency_2.Models.Player;
+            return pb_1.Message.getWrapperField(this, dependency_2.Models.User, 1) as dependency_2.Models.User;
         }
-        set player(value: dependency_2.Models.Player) {
+        set player(value: dependency_2.Models.User) {
             pb_1.Message.setWrapperField(this, 1, value);
         }
         get beatmap() {
@@ -2567,26 +2332,26 @@ export namespace Packets {
             pb_1.Message.setWrapperField(this, 2, value);
         }
         get type() {
-            return pb_1.Message.getField(this, 3) as SongFinished.CompletionType;
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as SongFinished.CompletionType;
         }
         set type(value: SongFinished.CompletionType) {
             pb_1.Message.setField(this, 3, value);
         }
         get score() {
-            return pb_1.Message.getField(this, 4) as number;
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
         }
         set score(value: number) {
             pb_1.Message.setField(this, 4, value);
         }
         static fromObject(data: {
-            player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
+            player?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
             beatmap?: ReturnType<typeof dependency_2.Models.Beatmap.prototype.toObject>;
             type?: SongFinished.CompletionType;
             score?: number;
         }) {
             const message = new SongFinished({});
             if (data.player != null) {
-                message.player = dependency_2.Models.Player.fromObject(data.player);
+                message.player = dependency_2.Models.User.fromObject(data.player);
             }
             if (data.beatmap != null) {
                 message.beatmap = dependency_2.Models.Beatmap.fromObject(data.beatmap);
@@ -2601,7 +2366,7 @@ export namespace Packets {
         }
         toObject() {
             const data: {
-                player?: ReturnType<typeof dependency_2.Models.Player.prototype.toObject>;
+                player?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
                 beatmap?: ReturnType<typeof dependency_2.Models.Beatmap.prototype.toObject>;
                 type?: SongFinished.CompletionType;
                 score?: number;
@@ -2642,7 +2407,7 @@ export namespace Packets {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.player, () => message.player = dependency_2.Models.Player.deserialize(reader));
+                        reader.readMessage(message.player, () => message.player = dependency_2.Models.User.deserialize(reader));
                         break;
                     case 2:
                         reader.readMessage(message.beatmap, () => message.beatmap = dependency_2.Models.Beatmap.deserialize(reader));
@@ -2695,7 +2460,7 @@ export namespace Packets {
             pb_1.Message.setWrapperField(this, 1, value);
         }
         get message() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set message(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -2844,7 +2609,7 @@ export namespace Packets {
             }
         }
         get event_id() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set event_id(value: string) {
             pb_1.Message.setField(this, 1, value);
@@ -3329,13 +3094,13 @@ export namespace Packets {
             }
         }
         get id() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get from() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set from(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -3786,7 +3551,7 @@ export namespace Packets {
             }
         }
         get forward_to() {
-            return pb_1.Message.getField(this, 1) as string[];
+            return pb_1.Message.getFieldWithDefault(this, 1, []) as string[];
         }
         set forward_to(value: string[]) {
             pb_1.Message.setField(this, 1, value);
@@ -3891,25 +3656,25 @@ export namespace Packets {
             }
         }
         get id() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get message_title() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set message_title(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         get message_text() {
-            return pb_1.Message.getField(this, 3) as string;
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
         set message_text(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
         get can_close() {
-            return pb_1.Message.getField(this, 4) as boolean;
+            return pb_1.Message.getFieldWithDefault(this, 4, false) as boolean;
         }
         set can_close(value: boolean) {
             pb_1.Message.setField(this, 4, value);
@@ -4056,13 +3821,13 @@ export namespace Packets {
             }
         }
         get packet_id() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set packet_id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get value() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set value(value: string) {
             pb_1.Message.setField(this, 2, value);

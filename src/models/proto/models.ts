@@ -23,13 +23,13 @@ export namespace Models {
             }
         }
         get serialized_name() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set serialized_name(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get difficulties() {
-            return pb_1.Message.getField(this, 2) as number[];
+            return pb_1.Message.getFieldWithDefault(this, 2, []) as number[];
         }
         set difficulties(value: number[]) {
             pb_1.Message.setField(this, 2, value);
@@ -67,7 +67,7 @@ export namespace Models {
             if (typeof this.serialized_name === "string" && this.serialized_name.length)
                 writer.writeString(1, this.serialized_name);
             if (this.difficulties !== undefined)
-                writer.writeRepeatedInt32(2, this.difficulties);
+                writer.writePackedInt32(2, this.difficulties);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -81,7 +81,11 @@ export namespace Models {
                         message.serialized_name = reader.readString();
                         break;
                     case 2:
-                        pb_1.Message.addToRepeatedField(message, 2, reader.readInt32());
+                        // pb_1.Message.addToRepeatedField(message, 2, reader.readInt32());
+                        var values = (reader.isDelimited() ? reader.readPackedInt32() : [reader.readInt32()]);
+                        for (var i = 0; i < values.length; i++) {
+                            message.difficulties.push(values[i]);
+                        }
                         break;
                     default: reader.skipField();
                 }
@@ -120,13 +124,13 @@ export namespace Models {
             }
         }
         get name() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set name(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get level_id() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set level_id(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -138,7 +142,7 @@ export namespace Models {
             pb_1.Message.setWrapperField(this, 3, value);
         }
         get difficulty() {
-            return pb_1.Message.getField(this, 4) as number;
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
         }
         set difficulty(value: number) {
             pb_1.Message.setField(this, 4, value);
@@ -255,13 +259,13 @@ export namespace Models {
             }
         }
         get level_id() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set level_id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get name() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set name(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -273,7 +277,7 @@ export namespace Models {
             pb_1.Message.setRepeatedWrapperField(this, 3, value);
         }
         get loaded() {
-            return pb_1.Message.getField(this, 4) as boolean;
+            return pb_1.Message.getFieldWithDefault(this, 4, false) as boolean;
         }
         set loaded(value: boolean) {
             pb_1.Message.setField(this, 4, value);
@@ -365,161 +369,6 @@ export namespace Models {
             return PreviewBeatmapLevel.deserialize(bytes);
         }
     }
-    export class User extends pb_1.Message {
-        constructor(data?: any[] | {
-            id?: string;
-            name?: string;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("id" in data && data.id != undefined) {
-                    this.id = data.id;
-                }
-                if ("name" in data && data.name != undefined) {
-                    this.name = data.name;
-                }
-            }
-        }
-        get id() {
-            return pb_1.Message.getField(this, 2) as string;
-        }
-        set id(value: string) {
-            pb_1.Message.setField(this, 2, value);
-        }
-        get name() {
-            return pb_1.Message.getField(this, 3) as string;
-        }
-        set name(value: string) {
-            pb_1.Message.setField(this, 3, value);
-        }
-        static fromObject(data: {
-            id?: string;
-            name?: string;
-        }) {
-            const message = new User({});
-            if (data.id != null) {
-                message.id = data.id;
-            }
-            if (data.name != null) {
-                message.name = data.name;
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                id?: string;
-                name?: string;
-            } = {};
-            if (this.id != null) {
-                data.id = this.id;
-            }
-            if (this.name != null) {
-                data.name = this.name;
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.id === "string" && this.id.length)
-                writer.writeString(2, this.id);
-            if (typeof this.name === "string" && this.name.length)
-                writer.writeString(3, this.name);
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): User {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new User();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 2:
-                        message.id = reader.readString();
-                        break;
-                    case 3:
-                        message.name = reader.readString();
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): User {
-            return User.deserialize(bytes);
-        }
-    }
-    export class Coordinator extends pb_1.Message {
-        constructor(data?: any[] | {
-            user?: User;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("user" in data && data.user != undefined) {
-                    this.user = data.user;
-                }
-            }
-        }
-        get user() {
-            return pb_1.Message.getWrapperField(this, User, 1) as User;
-        }
-        set user(value: User) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        static fromObject(data: {
-            user?: ReturnType<typeof User.prototype.toObject>;
-        }) {
-            const message = new Coordinator({});
-            if (data.user != null) {
-                message.user = User.fromObject(data.user);
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                user?: ReturnType<typeof User.prototype.toObject>;
-            } = {};
-            if (this.user != null) {
-                data.user = this.user.toObject();
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.user !== undefined)
-                writer.writeMessage(1, this.user, () => this.user.serialize(writer));
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Coordinator {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Coordinator();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.user, () => message.user = User.deserialize(reader));
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): Coordinator {
-            return Coordinator.deserialize(bytes);
-        }
-    }
     export class GameplayModifiers extends pb_1.Message {
         constructor(data?: any[] | {
             options?: GameplayModifiers.GameOptions;
@@ -533,7 +382,7 @@ export namespace Models {
             }
         }
         get options() {
-            return pb_1.Message.getField(this, 1) as GameplayModifiers.GameOptions;
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as GameplayModifiers.GameOptions;
         }
         set options(value: GameplayModifiers.GameOptions) {
             pb_1.Message.setField(this, 1, value);
@@ -647,43 +496,43 @@ export namespace Models {
             }
         }
         get player_height() {
-            return pb_1.Message.getField(this, 1) as number;
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
         set player_height(value: number) {
             pb_1.Message.setField(this, 1, value);
         }
         get sfx_volume() {
-            return pb_1.Message.getField(this, 2) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
         }
         set sfx_volume(value: number) {
             pb_1.Message.setField(this, 2, value);
         }
         get saber_trail_intensity() {
-            return pb_1.Message.getField(this, 3) as number;
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
         }
         set saber_trail_intensity(value: number) {
             pb_1.Message.setField(this, 3, value);
         }
         get note_jump_start_beat_offset() {
-            return pb_1.Message.getField(this, 4) as number;
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
         }
         set note_jump_start_beat_offset(value: number) {
             pb_1.Message.setField(this, 4, value);
         }
         get note_jump_fixed_duration() {
-            return pb_1.Message.getField(this, 5) as number;
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
         }
         set note_jump_fixed_duration(value: number) {
             pb_1.Message.setField(this, 5, value);
         }
         get options() {
-            return pb_1.Message.getField(this, 6) as PlayerSpecificSettings.PlayerOptions;
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as PlayerSpecificSettings.PlayerOptions;
         }
         set options(value: PlayerSpecificSettings.PlayerOptions) {
             pb_1.Message.setField(this, 6, value);
         }
         get note_jump_duration_type_settings() {
-            return pb_1.Message.getField(this, 7) as PlayerSpecificSettings.NoteJumpDurationTypeSettings;
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as PlayerSpecificSettings.NoteJumpDurationTypeSettings;
         }
         set note_jump_duration_type_settings(value: PlayerSpecificSettings.NoteJumpDurationTypeSettings) {
             pb_1.Message.setField(this, 7, value);
@@ -962,13 +811,13 @@ export namespace Models {
             }
         }
         get id() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get name() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set name(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -1067,19 +916,19 @@ export namespace Models {
             }
         }
         get server_name() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set server_name(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get password() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set password(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         get enable_teams() {
-            return pb_1.Message.getField(this, 3) as boolean;
+            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
         }
         set enable_teams(value: boolean) {
             pb_1.Message.setField(this, 3, value);
@@ -1091,13 +940,13 @@ export namespace Models {
             pb_1.Message.setRepeatedWrapperField(this, 4, value);
         }
         get score_update_frequency() {
-            return pb_1.Message.getField(this, 5) as number;
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
         }
         set score_update_frequency(value: number) {
             pb_1.Message.setField(this, 5, value);
         }
         get banned_mods() {
-            return pb_1.Message.getField(this, 6) as string[];
+            return pb_1.Message.getFieldWithDefault(this, 6, []) as string[];
         }
         set banned_mods(value: string[]) {
             pb_1.Message.setField(this, 6, value);
@@ -1281,13 +1130,14 @@ export namespace Models {
             return SongList.deserialize(bytes);
         }
     }
-    export class Player extends pb_1.Message {
+    export class User extends pb_1.Message {
         constructor(data?: any[] | {
-            user?: User;
+            id?: string;
+            name?: string;
             user_id?: string;
             team?: Team;
-            play_state?: Player.PlayStates;
-            download_state?: Player.DownloadStates;
+            play_state?: User.PlayStates;
+            download_state?: User.DownloadStates;
             score?: number;
             combo?: number;
             misses?: number;
@@ -1295,15 +1145,19 @@ export namespace Models {
             song_position?: number;
             song_list?: SongList;
             mod_list?: string[];
-            stream_screen_coordinates?: Player.Point;
+            stream_screen_coordinates?: User.Point;
             stream_delay_ms?: number;
             stream_sync_start_ms?: number;
+            client_type?: User.ClientTypes;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [12], []);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("user" in data && data.user != undefined) {
-                    this.user = data.user;
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
                 }
                 if ("user_id" in data && data.user_id != undefined) {
                     this.user_id = data.user_id;
@@ -1347,16 +1201,25 @@ export namespace Models {
                 if ("stream_sync_start_ms" in data && data.stream_sync_start_ms != undefined) {
                     this.stream_sync_start_ms = data.stream_sync_start_ms;
                 }
+                if ("client_type" in data && data.client_type != undefined) {
+                    this.client_type = data.client_type;
+                }
             }
         }
-        get user() {
-            return pb_1.Message.getWrapperField(this, User, 1) as User;
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 17, "") as string;
         }
-        set user(value: User) {
-            pb_1.Message.setWrapperField(this, 1, value);
+        set id(value: string) {
+            pb_1.Message.setField(this, 17, value);
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 18, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 18, value);
         }
         get user_id() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set user_id(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -1368,43 +1231,43 @@ export namespace Models {
             pb_1.Message.setWrapperField(this, 3, value);
         }
         get play_state() {
-            return pb_1.Message.getField(this, 4) as Player.PlayStates;
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as User.PlayStates;
         }
-        set play_state(value: Player.PlayStates) {
+        set play_state(value: User.PlayStates) {
             pb_1.Message.setField(this, 4, value);
         }
         get download_state() {
-            return pb_1.Message.getField(this, 5) as Player.DownloadStates;
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as User.DownloadStates;
         }
-        set download_state(value: Player.DownloadStates) {
+        set download_state(value: User.DownloadStates) {
             pb_1.Message.setField(this, 5, value);
         }
         get score() {
-            return pb_1.Message.getField(this, 6) as number;
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
         }
         set score(value: number) {
             pb_1.Message.setField(this, 6, value);
         }
         get combo() {
-            return pb_1.Message.getField(this, 7) as number;
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
         }
         set combo(value: number) {
             pb_1.Message.setField(this, 7, value);
         }
         get misses() {
-            return pb_1.Message.getField(this, 8) as number;
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
         }
         set misses(value: number) {
             pb_1.Message.setField(this, 8, value);
         }
         get accuracy() {
-            return pb_1.Message.getField(this, 9) as number;
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
         }
         set accuracy(value: number) {
             pb_1.Message.setField(this, 9, value);
         }
         get song_position() {
-            return pb_1.Message.getField(this, 10) as number;
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
         }
         set song_position(value: number) {
             pb_1.Message.setField(this, 10, value);
@@ -1416,35 +1279,42 @@ export namespace Models {
             pb_1.Message.setWrapperField(this, 11, value);
         }
         get mod_list() {
-            return pb_1.Message.getField(this, 12) as string[];
+            return pb_1.Message.getFieldWithDefault(this, 12, []) as string[];
         }
         set mod_list(value: string[]) {
             pb_1.Message.setField(this, 12, value);
         }
         get stream_screen_coordinates() {
-            return pb_1.Message.getWrapperField(this, Player.Point, 13) as Player.Point;
+            return pb_1.Message.getWrapperField(this, User.Point, 13) as User.Point;
         }
-        set stream_screen_coordinates(value: Player.Point) {
+        set stream_screen_coordinates(value: User.Point) {
             pb_1.Message.setWrapperField(this, 13, value);
         }
         get stream_delay_ms() {
-            return pb_1.Message.getField(this, 14) as number;
+            return pb_1.Message.getFieldWithDefault(this, 14, 0) as number;
         }
         set stream_delay_ms(value: number) {
             pb_1.Message.setField(this, 14, value);
         }
         get stream_sync_start_ms() {
-            return pb_1.Message.getField(this, 15) as number;
+            return pb_1.Message.getFieldWithDefault(this, 15, 0) as number;
         }
         set stream_sync_start_ms(value: number) {
             pb_1.Message.setField(this, 15, value);
         }
+        get client_type() {
+            return pb_1.Message.getFieldWithDefault(this, 16, 0) as User.ClientTypes;
+        }
+        set client_type(value: User.ClientTypes) {
+            pb_1.Message.setField(this, 16, value);
+        }
         static fromObject(data: {
-            user?: ReturnType<typeof User.prototype.toObject>;
+            id?: string;
+            name?: string;
             user_id?: string;
             team?: ReturnType<typeof Team.prototype.toObject>;
-            play_state?: Player.PlayStates;
-            download_state?: Player.DownloadStates;
+            play_state?: User.PlayStates;
+            download_state?: User.DownloadStates;
             score?: number;
             combo?: number;
             misses?: number;
@@ -1452,13 +1322,17 @@ export namespace Models {
             song_position?: number;
             song_list?: ReturnType<typeof SongList.prototype.toObject>;
             mod_list?: string[];
-            stream_screen_coordinates?: ReturnType<typeof Player.Point.prototype.toObject>;
+            stream_screen_coordinates?: ReturnType<typeof User.Point.prototype.toObject>;
             stream_delay_ms?: number;
             stream_sync_start_ms?: number;
+            client_type?: User.ClientTypes;
         }) {
-            const message = new Player({});
-            if (data.user != null) {
-                message.user = User.fromObject(data.user);
+            const message = new User({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.name != null) {
+                message.name = data.name;
             }
             if (data.user_id != null) {
                 message.user_id = data.user_id;
@@ -1494,7 +1368,7 @@ export namespace Models {
                 message.mod_list = data.mod_list;
             }
             if (data.stream_screen_coordinates != null) {
-                message.stream_screen_coordinates = Player.Point.fromObject(data.stream_screen_coordinates);
+                message.stream_screen_coordinates = User.Point.fromObject(data.stream_screen_coordinates);
             }
             if (data.stream_delay_ms != null) {
                 message.stream_delay_ms = data.stream_delay_ms;
@@ -1502,15 +1376,19 @@ export namespace Models {
             if (data.stream_sync_start_ms != null) {
                 message.stream_sync_start_ms = data.stream_sync_start_ms;
             }
+            if (data.client_type != null) {
+                message.client_type = data.client_type;
+            }
             return message;
         }
         toObject() {
             const data: {
-                user?: ReturnType<typeof User.prototype.toObject>;
+                id?: string;
+                name?: string;
                 user_id?: string;
                 team?: ReturnType<typeof Team.prototype.toObject>;
-                play_state?: Player.PlayStates;
-                download_state?: Player.DownloadStates;
+                play_state?: User.PlayStates;
+                download_state?: User.DownloadStates;
                 score?: number;
                 combo?: number;
                 misses?: number;
@@ -1518,12 +1396,16 @@ export namespace Models {
                 song_position?: number;
                 song_list?: ReturnType<typeof SongList.prototype.toObject>;
                 mod_list?: string[];
-                stream_screen_coordinates?: ReturnType<typeof Player.Point.prototype.toObject>;
+                stream_screen_coordinates?: ReturnType<typeof User.Point.prototype.toObject>;
                 stream_delay_ms?: number;
                 stream_sync_start_ms?: number;
+                client_type?: User.ClientTypes;
             } = {};
-            if (this.user != null) {
-                data.user = this.user.toObject();
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.name != null) {
+                data.name = this.name;
             }
             if (this.user_id != null) {
                 data.user_id = this.user_id;
@@ -1567,14 +1449,19 @@ export namespace Models {
             if (this.stream_sync_start_ms != null) {
                 data.stream_sync_start_ms = this.stream_sync_start_ms;
             }
+            if (this.client_type != null) {
+                data.client_type = this.client_type;
+            }
             return data;
         }
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.user !== undefined)
-                writer.writeMessage(1, this.user, () => this.user.serialize(writer));
+            if (typeof this.id === "string" && this.id.length)
+                writer.writeString(17, this.id);
+            if (typeof this.name === "string" && this.name.length)
+                writer.writeString(18, this.name);
             if (typeof this.user_id === "string" && this.user_id.length)
                 writer.writeString(2, this.user_id);
             if (this.team !== undefined)
@@ -1603,17 +1490,22 @@ export namespace Models {
                 writer.writeInt64(14, this.stream_delay_ms);
             if (this.stream_sync_start_ms !== undefined)
                 writer.writeInt64(15, this.stream_sync_start_ms);
+            if (this.client_type !== undefined)
+                writer.writeEnum(16, this.client_type);
             if (!w)
                 return writer.getResultBuffer();
         }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Player {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Player();
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): User {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new User();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.user, () => message.user = User.deserialize(reader));
+                    case 17:
+                        message.id = reader.readString();
+                        break;
+                    case 18:
+                        message.name = reader.readString();
                         break;
                     case 2:
                         message.user_id = reader.readString();
@@ -1649,13 +1541,16 @@ export namespace Models {
                         pb_1.Message.addToRepeatedField(message, 12, reader.readString());
                         break;
                     case 13:
-                        reader.readMessage(message.stream_screen_coordinates, () => message.stream_screen_coordinates = Player.Point.deserialize(reader));
+                        reader.readMessage(message.stream_screen_coordinates, () => message.stream_screen_coordinates = User.Point.deserialize(reader));
                         break;
                     case 14:
                         message.stream_delay_ms = reader.readInt64();
                         break;
                     case 15:
                         message.stream_sync_start_ms = reader.readInt64();
+                        break;
+                    case 16:
+                        message.client_type = reader.readEnum();
                         break;
                     default: reader.skipField();
                 }
@@ -1665,11 +1560,11 @@ export namespace Models {
         serializeBinary(): Uint8Array {
             return this.serialize();
         }
-        static deserializeBinary(bytes: Uint8Array): Player {
-            return Player.deserialize(bytes);
+        static deserializeBinary(bytes: Uint8Array): User {
+            return User.deserialize(bytes);
         }
     }
-    export namespace Player {
+    export namespace User {
         export enum PlayStates {
             Waiting = 0,
             InGame = 1
@@ -1679,6 +1574,12 @@ export namespace Models {
             Downloading = 1,
             Downloaded = 2,
             DownloadError = 3
+        }
+        export enum ClientTypes {
+            Player = 0,
+            Coordinator = 1,
+            TemporaryConnection = 2,
+            WebsocketConnection = 3
         }
         export class Point extends pb_1.Message {
             constructor(data?: any[] | {
@@ -1697,13 +1598,13 @@ export namespace Models {
                 }
             }
             get x() {
-                return pb_1.Message.getField(this, 1) as number;
+                return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
             }
             set x(value: number) {
                 pb_1.Message.setField(this, 1, value);
             }
             get y() {
-                return pb_1.Message.getField(this, 2) as number;
+                return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
             }
             set y(value: number) {
                 pb_1.Message.setField(this, 2, value);
@@ -1773,7 +1674,7 @@ export namespace Models {
     export class Match extends pb_1.Message {
         constructor(data?: any[] | {
             guid?: string;
-            players?: Player[];
+            associated_users?: User[];
             leader?: User;
             selected_level?: PreviewBeatmapLevel;
             selected_characteristic?: Characteristic;
@@ -1786,8 +1687,8 @@ export namespace Models {
                 if ("guid" in data && data.guid != undefined) {
                     this.guid = data.guid;
                 }
-                if ("players" in data && data.players != undefined) {
-                    this.players = data.players;
+                if ("associated_users" in data && data.associated_users != undefined) {
+                    this.associated_users = data.associated_users;
                 }
                 if ("leader" in data && data.leader != undefined) {
                     this.leader = data.leader;
@@ -1807,15 +1708,15 @@ export namespace Models {
             }
         }
         get guid() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set guid(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
-        get players() {
-            return pb_1.Message.getRepeatedWrapperField(this, Player, 2) as Player[];
+        get associated_users() {
+            return pb_1.Message.getRepeatedWrapperField(this, User, 2) as User[];
         }
-        set players(value: Player[]) {
+        set associated_users(value: User[]) {
             pb_1.Message.setRepeatedWrapperField(this, 2, value);
         }
         get leader() {
@@ -1837,20 +1738,20 @@ export namespace Models {
             pb_1.Message.setWrapperField(this, 6, value);
         }
         get selected_difficulty() {
-            return pb_1.Message.getField(this, 7) as number;
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
         }
         set selected_difficulty(value: number) {
             pb_1.Message.setField(this, 7, value);
         }
         get start_time() {
-            return pb_1.Message.getField(this, 8) as string;
+            return pb_1.Message.getFieldWithDefault(this, 8, "") as string;
         }
         set start_time(value: string) {
             pb_1.Message.setField(this, 8, value);
         }
         static fromObject(data: {
             guid?: string;
-            players?: ReturnType<typeof Player.prototype.toObject>[];
+            associated_users?: ReturnType<typeof User.prototype.toObject>[];
             leader?: ReturnType<typeof User.prototype.toObject>;
             selected_level?: ReturnType<typeof PreviewBeatmapLevel.prototype.toObject>;
             selected_characteristic?: ReturnType<typeof Characteristic.prototype.toObject>;
@@ -1861,8 +1762,8 @@ export namespace Models {
             if (data.guid != null) {
                 message.guid = data.guid;
             }
-            if (data.players != null) {
-                message.players = data.players.map(item => Player.fromObject(item));
+            if (data.associated_users != null) {
+                message.associated_users = data.associated_users.map(item => User.fromObject(item));
             }
             if (data.leader != null) {
                 message.leader = User.fromObject(data.leader);
@@ -1884,7 +1785,7 @@ export namespace Models {
         toObject() {
             const data: {
                 guid?: string;
-                players?: ReturnType<typeof Player.prototype.toObject>[];
+                associated_users?: ReturnType<typeof User.prototype.toObject>[];
                 leader?: ReturnType<typeof User.prototype.toObject>;
                 selected_level?: ReturnType<typeof PreviewBeatmapLevel.prototype.toObject>;
                 selected_characteristic?: ReturnType<typeof Characteristic.prototype.toObject>;
@@ -1894,8 +1795,8 @@ export namespace Models {
             if (this.guid != null) {
                 data.guid = this.guid;
             }
-            if (this.players != null) {
-                data.players = this.players.map((item: Player) => item.toObject());
+            if (this.associated_users != null) {
+                data.associated_users = this.associated_users.map((item: User) => item.toObject());
             }
             if (this.leader != null) {
                 data.leader = this.leader.toObject();
@@ -1920,8 +1821,8 @@ export namespace Models {
             const writer = w || new pb_1.BinaryWriter();
             if (typeof this.guid === "string" && this.guid.length)
                 writer.writeString(1, this.guid);
-            if (this.players !== undefined)
-                writer.writeRepeatedMessage(2, this.players, (item: Player) => item.serialize(writer));
+            if (this.associated_users !== undefined)
+                writer.writeRepeatedMessage(2, this.associated_users, (item: User) => item.serialize(writer));
             if (this.leader !== undefined)
                 writer.writeMessage(3, this.leader, () => this.leader.serialize(writer));
             if (this.selected_level !== undefined)
@@ -1945,7 +1846,7 @@ export namespace Models {
                         message.guid = reader.readString();
                         break;
                     case 2:
-                        reader.readMessage(message.players, () => pb_1.Message.addToRepeatedWrapperField(message, 2, Player.deserialize(reader), Player));
+                        reader.readMessage(message.associated_users, () => pb_1.Message.addToRepeatedWrapperField(message, 2, User.deserialize(reader), User));
                         break;
                     case 3:
                         reader.readMessage(message.leader, () => message.leader = User.deserialize(reader));
@@ -2011,13 +1912,13 @@ export namespace Models {
             }
         }
         get event_id() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set event_id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get name() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set name(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -2041,13 +1942,13 @@ export namespace Models {
             pb_1.Message.setRepeatedWrapperField(this, 5, value);
         }
         get send_scores_to_info_channel() {
-            return pb_1.Message.getField(this, 6) as boolean;
+            return pb_1.Message.getFieldWithDefault(this, 6, false) as boolean;
         }
         set send_scores_to_info_channel(value: boolean) {
             pb_1.Message.setField(this, 6, value);
         }
         get flags() {
-            return pb_1.Message.getField(this, 7) as number;
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
         }
         set flags(value: number) {
             pb_1.Message.setField(this, 7, value);
@@ -2207,19 +2108,19 @@ export namespace Models {
             }
         }
         get name() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set name(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get address() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set address(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         get port() {
-            return pb_1.Message.getField(this, 3) as number;
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
         }
         set port(value: number) {
             pb_1.Message.setField(this, 3, value);
@@ -2301,23 +2202,19 @@ export namespace Models {
     export class State extends pb_1.Message {
         constructor(data?: any[] | {
             server_settings?: ServerSettings;
-            players?: Player[];
-            coordinators?: Coordinator[];
+            users?: User[];
             matches?: Match[];
             events?: QualifierEvent[];
             known_hosts?: CoreServer[];
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2, 3, 4, 5, 6], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2, 4, 5, 6], []);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("server_settings" in data && data.server_settings != undefined) {
                     this.server_settings = data.server_settings;
                 }
-                if ("players" in data && data.players != undefined) {
-                    this.players = data.players;
-                }
-                if ("coordinators" in data && data.coordinators != undefined) {
-                    this.coordinators = data.coordinators;
+                if ("users" in data && data.users != undefined) {
+                    this.users = data.users;
                 }
                 if ("matches" in data && data.matches != undefined) {
                     this.matches = data.matches;
@@ -2336,17 +2233,11 @@ export namespace Models {
         set server_settings(value: ServerSettings) {
             pb_1.Message.setWrapperField(this, 1, value);
         }
-        get players() {
-            return pb_1.Message.getRepeatedWrapperField(this, Player, 2) as Player[];
+        get users() {
+            return pb_1.Message.getRepeatedWrapperField(this, User, 2) as User[];
         }
-        set players(value: Player[]) {
+        set users(value: User[]) {
             pb_1.Message.setRepeatedWrapperField(this, 2, value);
-        }
-        get coordinators() {
-            return pb_1.Message.getRepeatedWrapperField(this, Coordinator, 3) as Coordinator[];
-        }
-        set coordinators(value: Coordinator[]) {
-            pb_1.Message.setRepeatedWrapperField(this, 3, value);
         }
         get matches() {
             return pb_1.Message.getRepeatedWrapperField(this, Match, 4) as Match[];
@@ -2368,8 +2259,7 @@ export namespace Models {
         }
         static fromObject(data: {
             server_settings?: ReturnType<typeof ServerSettings.prototype.toObject>;
-            players?: ReturnType<typeof Player.prototype.toObject>[];
-            coordinators?: ReturnType<typeof Coordinator.prototype.toObject>[];
+            users?: ReturnType<typeof User.prototype.toObject>[];
             matches?: ReturnType<typeof Match.prototype.toObject>[];
             events?: ReturnType<typeof QualifierEvent.prototype.toObject>[];
             known_hosts?: ReturnType<typeof CoreServer.prototype.toObject>[];
@@ -2378,11 +2268,8 @@ export namespace Models {
             if (data.server_settings != null) {
                 message.server_settings = ServerSettings.fromObject(data.server_settings);
             }
-            if (data.players != null) {
-                message.players = data.players.map(item => Player.fromObject(item));
-            }
-            if (data.coordinators != null) {
-                message.coordinators = data.coordinators.map(item => Coordinator.fromObject(item));
+            if (data.users != null) {
+                message.users = data.users.map(item => User.fromObject(item));
             }
             if (data.matches != null) {
                 message.matches = data.matches.map(item => Match.fromObject(item));
@@ -2398,8 +2285,7 @@ export namespace Models {
         toObject() {
             const data: {
                 server_settings?: ReturnType<typeof ServerSettings.prototype.toObject>;
-                players?: ReturnType<typeof Player.prototype.toObject>[];
-                coordinators?: ReturnType<typeof Coordinator.prototype.toObject>[];
+                users?: ReturnType<typeof User.prototype.toObject>[];
                 matches?: ReturnType<typeof Match.prototype.toObject>[];
                 events?: ReturnType<typeof QualifierEvent.prototype.toObject>[];
                 known_hosts?: ReturnType<typeof CoreServer.prototype.toObject>[];
@@ -2407,11 +2293,8 @@ export namespace Models {
             if (this.server_settings != null) {
                 data.server_settings = this.server_settings.toObject();
             }
-            if (this.players != null) {
-                data.players = this.players.map((item: Player) => item.toObject());
-            }
-            if (this.coordinators != null) {
-                data.coordinators = this.coordinators.map((item: Coordinator) => item.toObject());
+            if (this.users != null) {
+                data.users = this.users.map((item: User) => item.toObject());
             }
             if (this.matches != null) {
                 data.matches = this.matches.map((item: Match) => item.toObject());
@@ -2430,10 +2313,8 @@ export namespace Models {
             const writer = w || new pb_1.BinaryWriter();
             if (this.server_settings !== undefined)
                 writer.writeMessage(1, this.server_settings, () => this.server_settings.serialize(writer));
-            if (this.players !== undefined)
-                writer.writeRepeatedMessage(2, this.players, (item: Player) => item.serialize(writer));
-            if (this.coordinators !== undefined)
-                writer.writeRepeatedMessage(3, this.coordinators, (item: Coordinator) => item.serialize(writer));
+            if (this.users !== undefined)
+                writer.writeRepeatedMessage(2, this.users, (item: User) => item.serialize(writer));
             if (this.matches !== undefined)
                 writer.writeRepeatedMessage(4, this.matches, (item: Match) => item.serialize(writer));
             if (this.events !== undefined)
@@ -2453,10 +2334,7 @@ export namespace Models {
                         reader.readMessage(message.server_settings, () => message.server_settings = ServerSettings.deserialize(reader));
                         break;
                     case 2:
-                        reader.readMessage(message.players, () => pb_1.Message.addToRepeatedWrapperField(message, 2, Player.deserialize(reader), Player));
-                        break;
-                    case 3:
-                        reader.readMessage(message.coordinators, () => pb_1.Message.addToRepeatedWrapperField(message, 3, Coordinator.deserialize(reader), Coordinator));
+                        reader.readMessage(message.users, () => pb_1.Message.addToRepeatedWrapperField(message, 2, User.deserialize(reader), User));
                         break;
                     case 4:
                         reader.readMessage(message.matches, () => pb_1.Message.addToRepeatedWrapperField(message, 4, Match.deserialize(reader), Match));
@@ -2516,7 +2394,7 @@ export namespace Models {
             }
         }
         get event_id() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set event_id(value: string) {
             pb_1.Message.setField(this, 1, value);
@@ -2528,31 +2406,31 @@ export namespace Models {
             pb_1.Message.setWrapperField(this, 2, value);
         }
         get user_id() {
-            return pb_1.Message.getField(this, 3) as string;
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
         set user_id(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
         get username() {
-            return pb_1.Message.getField(this, 4) as string;
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
         }
         set username(value: string) {
             pb_1.Message.setField(this, 4, value);
         }
         get score() {
-            return pb_1.Message.getField(this, 5) as number;
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
         }
         set score(value: number) {
             pb_1.Message.setField(this, 5, value);
         }
         get full_combo() {
-            return pb_1.Message.getField(this, 6) as boolean;
+            return pb_1.Message.getFieldWithDefault(this, 6, false) as boolean;
         }
         set full_combo(value: boolean) {
             pb_1.Message.setField(this, 6, value);
         }
         get color() {
-            return pb_1.Message.getField(this, 7) as string;
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
         }
         set color(value: string) {
             pb_1.Message.setField(this, 7, value);
@@ -2700,13 +2578,13 @@ export namespace Models {
             }
         }
         get label() {
-            return pb_1.Message.getField(this, 1) as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
         set label(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get value() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set value(value: string) {
             pb_1.Message.setField(this, 2, value);
