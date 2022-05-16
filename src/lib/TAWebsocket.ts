@@ -52,6 +52,7 @@ export class TAWebsocket {
 
     private init() {
         this.ws = new webSock(`${this.url}`);
+        this.ws.binaryType = "arraybuffer";
         if (!this.ws) return;
         const connectTimeout = setTimeout(() => {
             if (this.ws?.readyState !== webSock.OPEN && this.config.handshakeTimeout > 0) {
