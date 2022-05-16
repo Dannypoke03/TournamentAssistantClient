@@ -188,8 +188,8 @@ export class TAWebsocket {
         });
         taMatch.selected_difficulty = +difficulty;
 
-        const playerIds = this.getPlayers(taMatch)?.map((x) => x.id);
-        if (!playerIds) return;
+        const playerIds = this.getPlayers(taMatch).map((x) => x.id);
+
         this.forwardPacket(playerIds, new Packets.Packet({
             load_song: new Packets.LoadSong({
                 level_id: taMatch.selected_level.level_id
@@ -225,8 +225,8 @@ export class TAWebsocket {
             disable_pause: disable_pause,
             disable_fail: disable_fail,
         });
-        const playerIds = this.getPlayers(match)?.map((x) => x.id);
-        if (!playerIds) return;
+        const playerIds = this.getPlayers(match).map((x) => x.id);
+
         const curTime = new Date();
         curTime.setSeconds(curTime.getSeconds() + 2);
         match.start_time = curTime.toISOString();
@@ -259,15 +259,15 @@ export class TAWebsocket {
     }
 
     getPlayers(match?: Models.Match) {
-        return match?.associated_users.filter(x => x.client_type === Models.User.ClientTypes.Player);
+        return match?.associated_users.filter(x => x.client_type === Models.User.ClientTypes.Player) ?? [];
     }
 
     getCoordinators(match?: Models.Match) {
-        return match?.associated_users.filter(x => x.client_type === Models.User.ClientTypes.Coordinator);
+        return match?.associated_users.filter(x => x.client_type === Models.User.ClientTypes.Coordinator) ?? [];
     }
 
     getWebsockets(match?: Models.Match) {
-        return match?.associated_users.filter(x => x.client_type === Models.User.ClientTypes.WebsocketConnection);
+        return match?.associated_users.filter(x => x.client_type === Models.User.ClientTypes.WebsocketConnection) ?? [];
     }
 
 }
