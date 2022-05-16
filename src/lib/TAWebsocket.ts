@@ -71,8 +71,10 @@ export class TAWebsocket {
                     const packet = Packets.Packet.deserializeBinary(new Uint8Array(event.data));
                     this.handlePacket(packet);
                 } catch (error) {
-                    if (this.config.logging) console.error(error);
+                    console.error(error);
                 }
+            } else {
+                if (this.config.logging) console.warn("Received non-binary message:", event.data);
             }
         };
         this.ws.onclose = () => {
@@ -86,7 +88,7 @@ export class TAWebsocket {
             }
         };
         this.ws.onerror = (error) => {
-            if (this.config.logging) console.error(error);
+            console.error(error);
         };
     }
 
