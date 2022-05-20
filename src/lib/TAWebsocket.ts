@@ -96,7 +96,7 @@ export class TAWebsocket {
         const packetData = new Packets.Connect({
             client_type: Models.User.ClientTypes.Coordinator,
             name: this.name,
-            client_version: 64,
+            client_version: 65,
             password: this.password ?? undefined,
             user_id: this.userId ?? "",
         });
