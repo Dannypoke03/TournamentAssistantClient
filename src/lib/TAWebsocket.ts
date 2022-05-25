@@ -2,7 +2,6 @@ import { Client } from "./client";
 import { Config } from "../models/Config";
 import { Packets } from "../models/proto/packets";
 import { Models } from "../models/proto/models";
-import { BeatmapDifficulty } from "../models/old/match";
 import { v4 as uuidv4 } from "uuid";
 
 import { w3cwebsocket as webSock } from "websocket";
@@ -96,7 +95,7 @@ export class TAWebsocket {
         const packetData = new Packets.Connect({
             client_type: Models.User.ClientTypes.Coordinator,
             name: this.name,
-            client_version: 65,
+            client_version: 66,
             password: this.password ?? undefined,
             user_id: this.userId ?? "",
         });
@@ -166,7 +165,7 @@ export class TAWebsocket {
         this.forwardPacket(ids, new Packets.Packet({ message: msg }));
     }
 
-    async loadSong(songName: string, hash: string, difficulty: BeatmapDifficulty, taMatch: Models.Match) {
+    async loadSong(songName: string, hash: string, difficulty: number, taMatch: Models.Match) {
         const matchMap = new Models.PreviewBeatmapLevel({
             level_id: `custom_level_${hash}`,
             name: songName,
