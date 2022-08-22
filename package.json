@@ -6,6 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "npx tsc",
+        "dev": "nodemon --exec npm run build --ignore dist/",
         "lint": "eslint \"./src/**\"",
         "lint:fix": "eslint \"./src/**\" --fix",
         "publish:patch": "npm version patch && npm publish --access public",
@@ -37,7 +38,7 @@
     "homepage": "https://github.com/Dannypoke03/TournamentAssistantClient#readme",
     "dependencies": {
         "events": "^3.3.0",
-        "google-protobuf": "^3.20.1",
+        "google-protobuf": "3.21",
         "uuid": "^8.3.2",
         "websocket": "^1.0.34"
     }
