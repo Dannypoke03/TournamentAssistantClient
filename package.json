@@ -2,9 +2,9 @@
     "name": "tournament-assistant-client",
     "version": "0.7.4",
     "description": "A typescript based client for Tournament Assistant a Beat Saber tournament mod",
-    "main": "dist/index.js",
+    "main": "./dist/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "npm run lint",
         "build": "npx tsc",
         "dev": "nodemon --exec npm run build --ignore dist/",
         "lint": "eslint \"./src/**\"",
@@ -41,5 +41,11 @@
         "google-protobuf": "3.21",
         "uuid": "^8.3.2",
         "websocket": "^1.0.34"
-    }
+    },
+    "files": [
+        "LICENSE",
+        "README.md",
+        "dist"
+    ],
+    "exports": "./dist/index.js"
 }
