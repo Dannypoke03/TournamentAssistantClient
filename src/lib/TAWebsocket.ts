@@ -45,6 +45,7 @@ export class TAWebsocket {
             handshakeTimeout: 0,
             autoInit: true,
             sendToSocket: null,
+            connectionMode: Models.User.ClientTypes.WebsocketConnection,
             ...config
         };
     }
@@ -93,7 +94,7 @@ export class TAWebsocket {
 
     coordinatorConnect() {
         const packetData = new Packets.Connect({
-            client_type: Models.User.ClientTypes.Coordinator,
+            client_type: this.config.connectionMode,
             name: this.name,
             client_version: 66,
             password: this.password ?? undefined,
