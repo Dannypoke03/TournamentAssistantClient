@@ -72,14 +72,12 @@ taWebsocket.taClient.on("EVENT_NAME", (e) => {
 
 #### Supported Events
 
-- `coordinatorAdded`
-- `coordinatorLeft`
 - `matchCreated`
 - `matchUpdated`
 - `matchDeleted`
-- `playerAdded`
-- `playerUpdated`
-- `playerLeft`
+- `userAdded`
+- `userUpdated`
+- `userLeft`
 - `qualifierEventCreated`
 - `qualifierEventUpdated`
 - `qualifierEventDeleted`
