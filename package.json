@@ -2,10 +2,13 @@
     "name": "tournament-assistant-client",
     "version": "0.7.5",
     "description": "A typescript based client for Tournament Assistant a Beat Saber tournament mod",
-    "main": "./dist/index.js",
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/esm5/index.js",
+    "es2015": "./dist/esm/index.js",
+    "types": "./dist/types/index.d.ts",
     "scripts": {
         "test": "npm run lint",
-        "compile": "tsc -b ./src/tsconfig.cjs.json ./src/tsconfig.esm.json ./src/tsconfig.esm5.json",
+        "compile": "tsc -b ./src/tsconfig.cjs.json ./src/tsconfig.esm.json ./src/tsconfig.esm5.json ./src/tsconfig.types.json",
         "dev": "nodemon --exec npm run build --ignore dist/",
         "lint": "eslint \"./src/**\"",
         "lint:fix": "eslint \"./src/**\" --fix",
@@ -50,10 +53,12 @@
     ],
     "exports": {
         ".": {
+            "types": "./dist/types/index.d.ts",
             "node": "./dist/cjs/index.js",
             "require": "./dist/cjs/index.js",
             "es2015": "./dist/esm/index.js",
             "default": "./dist/esm5/index.js"
-        }
+        },
+        "./package.json": "./package.json"
     }
 }
