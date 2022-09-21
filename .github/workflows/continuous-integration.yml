@@ -35,4 +35,4 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build code
-        run: npm run build
+        run: npm run compile
