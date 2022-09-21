@@ -49,7 +49,11 @@
     "files": [
         "LICENSE",
         "README.md",
-        "dist"
+        "dist/cjs/**/!(*.tsbuildinfo)",
+        "dist/esm/**/!(*.tsbuildinfo)",
+        "dist/esm5/**/!(*.tsbuildinfo)",
+        "dist/types/**/!(*.tsbuildinfo)",
+        "package.json"
     ],
     "exports": {
         ".": {
