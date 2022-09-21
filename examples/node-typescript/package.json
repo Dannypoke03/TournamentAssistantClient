@@ -1,0 +1,10 @@
+{
+  "name": "ta-client-example-node-ts",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "tsc index.ts && node index.js"
+  },
+  "dependencies": {
+    "tournament-assistant-client": "file:../.."
+  }
+}

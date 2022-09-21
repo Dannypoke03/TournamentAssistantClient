@@ -1,0 +1,10 @@
+{
+  "name": "ta-client-example-node-commonjs",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "dependencies": {
+    "tournament-assistant-client": "file:../.."
+  }
+}

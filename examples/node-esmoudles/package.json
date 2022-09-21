@@ -1,0 +1,10 @@
+{
+  "name": "ta-client-example-node-esmodules",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node index.mjs"
+  },
+  "dependencies": {
+    "tournament-assistant-client": "file:../.."
+  }
+}
