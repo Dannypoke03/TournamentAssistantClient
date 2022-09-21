@@ -1,4 +1,5 @@
-export * from "./lib/client";
-export * from "./lib/TAWebsocket";
-export * from "./models/proto/packets";
-export * from "./models/proto/models";
+export { Client } from "./lib/client";
+export { TAWebsocket } from "./lib/TAWebsocket";
+export { Packets } from "./models/proto/packets";
+export { Models } from "./models/proto/models";
+export { proto } from "./models/proto/discord";
