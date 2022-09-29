@@ -9,7 +9,7 @@
     "scripts": {
         "test": "npm run lint",
         "compile": "tsc -b ./src/tsconfig.cjs.json ./src/tsconfig.esm.json ./src/tsconfig.esm5.json ./src/tsconfig.types.json",
-        "dev": "nodemon --exec npm run build --ignore dist/",
+        "dev": "nodemon --exec npm run compile --ignore dist/",
         "lint": "eslint \"./src/**\"",
         "lint:fix": "eslint \"./src/**\" --fix",
         "publish:patch": "npm version patch && npm publish --access public",
