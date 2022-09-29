@@ -1,7 +1,7 @@
 import { TAWebsocket } from "tournament-assistant-client";
 
 const taWS = new TAWebsocket({
-    url: "ws://ta.beatsaberleague.com:2053",
+    url: "ws://localhost:2053",
     name: "Danny",
 });
 
@@ -11,9 +11,9 @@ setTimeout(() => {
 }, 10000);
 
 taWS.taClient.on("packet", p => {
-    if (p.connect_response) {
-        if (p.connect_response.response.type === 1) {
-            console.log(p.connect_response.response.message);
+    if (p.response.connect) {
+        if (p.response.type === 1) {
+            console.log(p.response.connect.message);
             taWS.close();
             process.exit(0);
         } else {

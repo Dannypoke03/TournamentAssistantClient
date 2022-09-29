@@ -15,41 +15,72 @@ export namespace TAEventEmitter {
     }
 
     export type Events = {
-
+        /* USER EVENTS */
         "userAdded": PacketEvent<Models.User>;
         "userUpdated": PacketEvent<Models.User>;
         "userLeft": PacketEvent<Models.User>;
+        
+        /* MATCH EVENTS */
         "matchCreated": PacketEvent<Models.Match>;
         "matchUpdated": PacketEvent<Models.Match>;
         "matchDeleted": PacketEvent<Models.Match>;
+
+        /* QUALIFIER EVENTS */
         "qualifierEventCreated": PacketEvent<Models.QualifierEvent>;
         "qualifierEventUpdated": PacketEvent<Models.QualifierEvent>;
         "qualifierEventDeleted": PacketEvent<Models.QualifierEvent>;
 
+        /* COMMANDS */
+        "loadSong": PacketEvent<Packets.Command.LoadSong>;
+        "playSong": PacketEvent<Packets.Command.PlaySong>;
+        "sendBotMessage": PacketEvent<Packets.Command.SendBotMessage>;
+        "showModal": PacketEvent<Packets.Command.ShowModal>;
+
+        /* PUSH EVENTS */
+        "pushLeaderboardScore": PacketEvent<Packets.Push.LeaderboardScore>;
+        "songFinished": PacketEvent<Packets.Push.SongFinished>;
+        "realtimeScore": PacketEvent<Packets.Push.RealtimeScore>;
+
+        /* REQUESTS */
+        "connectRequest": PacketEvent<Packets.Request.Connect>;
+        "leaderboardScoreRequest": PacketEvent<Packets.Request.LeaderboardScore>;
+        "preloadImageForStreamSync": PacketEvent<Packets.Request.PreloadImageForStreamSync>;
+
+        /* RESPONSES */
+        "connectResponse": PacketEvent<ResponsePacketData<Packets.Response.Connect>>;
+        "leaderboardScoreResponse": PacketEvent<ResponsePacketData<Packets.Response.LeaderboardScores>>;
+        "loadedSong": PacketEvent<ResponsePacketData<Packets.Response.LoadedSong>>;
+        "modalResponse": PacketEvent<ResponsePacketData<Packets.Response.Modal>>;
+        "imagePreloaded": PacketEvent<ResponsePacketData<Packets.Response.ImagePreloaded>>;
+
         "acknowledgement": PacketEvent<Packets.Acknowledgement>;
-        "command": PacketEvent<Packets.Command>;
-        "connect": PacketEvent<Packets.Connect>;
-        "connectResponse": PacketEvent<Packets.ConnectResponse>;
-        "event": PacketEvent<Packets.Event>;
-        "file": PacketEvent<Packets.File>;
         "forwardingPacket": PacketEvent<Packets.ForwardingPacket>;
-        "loadedSong": PacketEvent<Packets.LoadedSong>;
-        "loadSong": PacketEvent<Packets.LoadSong>;
-        "message": PacketEvent<Packets.Message>;
-        "messageResponse": PacketEvent<Packets.MessageResponse>;
-        "playSong": PacketEvent<Packets.PlaySong>;
-        "scoreRequest": PacketEvent<Packets.ScoreRequest>;
-        "scoreRequestResponse": PacketEvent<Packets.ScoreRequestResponse>;
-        "songFinished": PacketEvent<Packets.SongFinished>;
-        // "songList": PacketEvent<Packet.SongList>;
-        "submitScore": PacketEvent<Packets.SubmitScore>;
-        "response": PacketEvent<Packets.Response>;
+
+
+        // // "command": PacketEvent<Packets.Command>;
+        // "event": PacketEvent<Packets.Event>;
+        // // "file": PacketEvent<Packets.File>;
+        // // "message": PacketEvent<Packets.Command.ShowModal>;
+        // // "messageResponse": PacketEvent<Packets.Response.Modal>;
+        // "scoreRequest": PacketEvent<Packets.Request.LeaderboardScore>;
+        // "scoreRequestResponse": PacketEvent<Packets.Response.LeaderboardScores>;
+        // // "songList": PacketEvent<Packet.SongList>;
+        // "submitScore": PacketEvent<Packets.Push.LeaderboardScore>;
+        // "response": PacketEvent<Packets.Response>;
         "packet": Packets.Packet;
     }
 
     type PacketEvent<T> = {
         from: string;
         data: T;
+    }
+
+    type ResponsePacketData<T> = {
+        response: T;
+        info: {
+            type: Packets.Response.ResponseType;
+            inResponseTo: string;
+        }
     }
 
 }

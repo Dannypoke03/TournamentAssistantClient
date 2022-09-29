@@ -7,12 +7,13 @@ import * as dependency_1 from "./discord";
 import * as pb_1 from "google-protobuf";
 export namespace Models {
     export class Characteristic extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             serialized_name?: string;
             difficulties?: number[];
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("serialized_name" in data && data.serialized_name != undefined) {
                     this.serialized_name = data.serialized_name;
@@ -37,7 +38,7 @@ export namespace Models {
         static fromObject(data: {
             serialized_name?: string;
             difficulties?: number[];
-        }) {
+        }): Characteristic {
             const message = new Characteristic({});
             if (data.serialized_name != null) {
                 message.serialized_name = data.serialized_name;
@@ -64,9 +65,9 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.serialized_name === "string" && this.serialized_name.length)
+            if (this.serialized_name.length)
                 writer.writeString(1, this.serialized_name);
-            if (this.difficulties !== undefined)
+            if (this.difficulties.length)
                 writer.writePackedInt32(2, this.difficulties);
             if (!w)
                 return writer.getResultBuffer();
@@ -81,11 +82,7 @@ export namespace Models {
                         message.serialized_name = reader.readString();
                         break;
                     case 2:
-                        // pb_1.Message.addToRepeatedField(message, 2, reader.readInt32());
-                        var values = (reader.isDelimited() ? reader.readPackedInt32() : [reader.readInt32()]);
-                        for (var i = 0; i < values.length; i++) {
-                            message.difficulties.push(values[i]);
-                        }
+                        message.difficulties = reader.readPackedInt32();
                         break;
                     default: reader.skipField();
                 }
@@ -100,6 +97,7 @@ export namespace Models {
         }
     }
     export class Beatmap extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             name?: string;
             level_id?: string;
@@ -107,7 +105,7 @@ export namespace Models {
             difficulty?: number;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("name" in data && data.name != undefined) {
                     this.name = data.name;
@@ -141,6 +139,9 @@ export namespace Models {
         set characteristic(value: Characteristic) {
             pb_1.Message.setWrapperField(this, 3, value);
         }
+        get has_characteristic() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
         get difficulty() {
             return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
         }
@@ -152,7 +153,7 @@ export namespace Models {
             level_id?: string;
             characteristic?: ReturnType<typeof Characteristic.prototype.toObject>;
             difficulty?: number;
-        }) {
+        }): Beatmap {
             const message = new Beatmap({});
             if (data.name != null) {
                 message.name = data.name;
@@ -193,13 +194,13 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.name === "string" && this.name.length)
+            if (this.name.length)
                 writer.writeString(1, this.name);
-            if (typeof this.level_id === "string" && this.level_id.length)
+            if (this.level_id.length)
                 writer.writeString(2, this.level_id);
-            if (this.characteristic !== undefined)
+            if (this.has_characteristic)
                 writer.writeMessage(3, this.characteristic, () => this.characteristic.serialize(writer));
-            if (this.difficulty !== undefined)
+            if (this.difficulty != 0)
                 writer.writeInt32(4, this.difficulty);
             if (!w)
                 return writer.getResultBuffer();
@@ -235,6 +236,7 @@ export namespace Models {
         }
     }
     export class PreviewBeatmapLevel extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             level_id?: string;
             name?: string;
@@ -242,7 +244,7 @@ export namespace Models {
             loaded?: boolean;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [3], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [3], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("level_id" in data && data.level_id != undefined) {
                     this.level_id = data.level_id;
@@ -287,7 +289,7 @@ export namespace Models {
             name?: string;
             characteristics?: ReturnType<typeof Characteristic.prototype.toObject>[];
             loaded?: boolean;
-        }) {
+        }): PreviewBeatmapLevel {
             const message = new PreviewBeatmapLevel({});
             if (data.level_id != null) {
                 message.level_id = data.level_id;
@@ -328,13 +330,13 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.level_id === "string" && this.level_id.length)
+            if (this.level_id.length)
                 writer.writeString(1, this.level_id);
-            if (typeof this.name === "string" && this.name.length)
+            if (this.name.length)
                 writer.writeString(2, this.name);
-            if (this.characteristics !== undefined)
+            if (this.characteristics.length)
                 writer.writeRepeatedMessage(3, this.characteristics, (item: Characteristic) => item.serialize(writer));
-            if (this.loaded !== undefined)
+            if (this.loaded != false)
                 writer.writeBool(4, this.loaded);
             if (!w)
                 return writer.getResultBuffer();
@@ -370,11 +372,12 @@ export namespace Models {
         }
     }
     export class GameplayModifiers extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             options?: GameplayModifiers.GameOptions;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("options" in data && data.options != undefined) {
                     this.options = data.options;
@@ -382,14 +385,14 @@ export namespace Models {
             }
         }
         get options() {
-            return pb_1.Message.getFieldWithDefault(this, 1, 0) as GameplayModifiers.GameOptions;
+            return pb_1.Message.getFieldWithDefault(this, 1, GameplayModifiers.GameOptions.None) as GameplayModifiers.GameOptions;
         }
         set options(value: GameplayModifiers.GameOptions) {
             pb_1.Message.setField(this, 1, value);
         }
         static fromObject(data: {
             options?: GameplayModifiers.GameOptions;
-        }) {
+        }): GameplayModifiers {
             const message = new GameplayModifiers({});
             if (data.options != null) {
                 message.options = data.options;
@@ -409,7 +412,7 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.options !== undefined)
+            if (this.options != GameplayModifiers.GameOptions.None)
                 writer.writeEnum(1, this.options);
             if (!w)
                 return writer.getResultBuffer();
@@ -460,6 +463,7 @@ export namespace Models {
         }
     }
     export class PlayerSpecificSettings extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             player_height?: number;
             sfx_volume?: number;
@@ -470,7 +474,7 @@ export namespace Models {
             note_jump_duration_type_settings?: PlayerSpecificSettings.NoteJumpDurationTypeSettings;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("player_height" in data && data.player_height != undefined) {
                     this.player_height = data.player_height;
@@ -526,13 +530,13 @@ export namespace Models {
             pb_1.Message.setField(this, 5, value);
         }
         get options() {
-            return pb_1.Message.getFieldWithDefault(this, 6, 0) as PlayerSpecificSettings.PlayerOptions;
+            return pb_1.Message.getFieldWithDefault(this, 6, PlayerSpecificSettings.PlayerOptions.None) as PlayerSpecificSettings.PlayerOptions;
         }
         set options(value: PlayerSpecificSettings.PlayerOptions) {
             pb_1.Message.setField(this, 6, value);
         }
         get note_jump_duration_type_settings() {
-            return pb_1.Message.getFieldWithDefault(this, 7, 0) as PlayerSpecificSettings.NoteJumpDurationTypeSettings;
+            return pb_1.Message.getFieldWithDefault(this, 7, PlayerSpecificSettings.NoteJumpDurationTypeSettings.Dynamic) as PlayerSpecificSettings.NoteJumpDurationTypeSettings;
         }
         set note_jump_duration_type_settings(value: PlayerSpecificSettings.NoteJumpDurationTypeSettings) {
             pb_1.Message.setField(this, 7, value);
@@ -545,7 +549,7 @@ export namespace Models {
             note_jump_fixed_duration?: number;
             options?: PlayerSpecificSettings.PlayerOptions;
             note_jump_duration_type_settings?: PlayerSpecificSettings.NoteJumpDurationTypeSettings;
-        }) {
+        }): PlayerSpecificSettings {
             const message = new PlayerSpecificSettings({});
             if (data.player_height != null) {
                 message.player_height = data.player_height;
@@ -607,19 +611,19 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.player_height !== undefined)
+            if (this.player_height != 0)
                 writer.writeFloat(1, this.player_height);
-            if (this.sfx_volume !== undefined)
+            if (this.sfx_volume != 0)
                 writer.writeFloat(2, this.sfx_volume);
-            if (this.saber_trail_intensity !== undefined)
+            if (this.saber_trail_intensity != 0)
                 writer.writeFloat(3, this.saber_trail_intensity);
-            if (this.note_jump_start_beat_offset !== undefined)
+            if (this.note_jump_start_beat_offset != 0)
                 writer.writeFloat(4, this.note_jump_start_beat_offset);
-            if (this.note_jump_fixed_duration !== undefined)
+            if (this.note_jump_fixed_duration != 0)
                 writer.writeFloat(5, this.note_jump_fixed_duration);
-            if (this.options !== undefined)
+            if (this.options != PlayerSpecificSettings.PlayerOptions.None)
                 writer.writeEnum(6, this.options);
-            if (this.note_jump_duration_type_settings !== undefined)
+            if (this.note_jump_duration_type_settings != PlayerSpecificSettings.NoteJumpDurationTypeSettings.Dynamic)
                 writer.writeEnum(7, this.note_jump_duration_type_settings);
             if (!w)
                 return writer.getResultBuffer();
@@ -683,13 +687,14 @@ export namespace Models {
         }
     }
     export class GameplayParameters extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             beatmap?: Beatmap;
             player_settings?: PlayerSpecificSettings;
             gameplay_modifiers?: GameplayModifiers;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("beatmap" in data && data.beatmap != undefined) {
                     this.beatmap = data.beatmap;
@@ -708,11 +713,17 @@ export namespace Models {
         set beatmap(value: Beatmap) {
             pb_1.Message.setWrapperField(this, 1, value);
         }
+        get has_beatmap() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
         get player_settings() {
             return pb_1.Message.getWrapperField(this, PlayerSpecificSettings, 2) as PlayerSpecificSettings;
         }
         set player_settings(value: PlayerSpecificSettings) {
             pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_player_settings() {
+            return pb_1.Message.getField(this, 2) != null;
         }
         get gameplay_modifiers() {
             return pb_1.Message.getWrapperField(this, GameplayModifiers, 3) as GameplayModifiers;
@@ -720,11 +731,14 @@ export namespace Models {
         set gameplay_modifiers(value: GameplayModifiers) {
             pb_1.Message.setWrapperField(this, 3, value);
         }
+        get has_gameplay_modifiers() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
         static fromObject(data: {
             beatmap?: ReturnType<typeof Beatmap.prototype.toObject>;
             player_settings?: ReturnType<typeof PlayerSpecificSettings.prototype.toObject>;
             gameplay_modifiers?: ReturnType<typeof GameplayModifiers.prototype.toObject>;
-        }) {
+        }): GameplayParameters {
             const message = new GameplayParameters({});
             if (data.beatmap != null) {
                 message.beatmap = Beatmap.fromObject(data.beatmap);
@@ -758,11 +772,11 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.beatmap !== undefined)
+            if (this.has_beatmap)
                 writer.writeMessage(1, this.beatmap, () => this.beatmap.serialize(writer));
-            if (this.player_settings !== undefined)
+            if (this.has_player_settings)
                 writer.writeMessage(2, this.player_settings, () => this.player_settings.serialize(writer));
-            if (this.gameplay_modifiers !== undefined)
+            if (this.has_gameplay_modifiers)
                 writer.writeMessage(3, this.gameplay_modifiers, () => this.gameplay_modifiers.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
@@ -795,12 +809,13 @@ export namespace Models {
         }
     }
     export class Team extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             id?: string;
             name?: string;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("id" in data && data.id != undefined) {
                     this.id = data.id;
@@ -825,7 +840,7 @@ export namespace Models {
         static fromObject(data: {
             id?: string;
             name?: string;
-        }) {
+        }): Team {
             const message = new Team({});
             if (data.id != null) {
                 message.id = data.id;
@@ -852,9 +867,9 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.id === "string" && this.id.length)
+            if (this.id.length)
                 writer.writeString(1, this.id);
-            if (typeof this.name === "string" && this.name.length)
+            if (this.name.length)
                 writer.writeString(2, this.name);
             if (!w)
                 return writer.getResultBuffer();
@@ -884,6 +899,7 @@ export namespace Models {
         }
     }
     export class ServerSettings extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             server_name?: string;
             password?: string;
@@ -893,7 +909,7 @@ export namespace Models {
             banned_mods?: string[];
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [4, 6], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [4, 6], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("server_name" in data && data.server_name != undefined) {
                     this.server_name = data.server_name;
@@ -958,7 +974,7 @@ export namespace Models {
             teams?: ReturnType<typeof Team.prototype.toObject>[];
             score_update_frequency?: number;
             banned_mods?: string[];
-        }) {
+        }): ServerSettings {
             const message = new ServerSettings({});
             if (data.server_name != null) {
                 message.server_name = data.server_name;
@@ -1013,17 +1029,17 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.server_name === "string" && this.server_name.length)
+            if (this.server_name.length)
                 writer.writeString(1, this.server_name);
-            if (typeof this.password === "string" && this.password.length)
+            if (this.password.length)
                 writer.writeString(2, this.password);
-            if (this.enable_teams !== undefined)
+            if (this.enable_teams != false)
                 writer.writeBool(3, this.enable_teams);
-            if (this.teams !== undefined)
+            if (this.teams.length)
                 writer.writeRepeatedMessage(4, this.teams, (item: Team) => item.serialize(writer));
-            if (this.score_update_frequency !== undefined)
+            if (this.score_update_frequency != 0)
                 writer.writeInt32(5, this.score_update_frequency);
-            if (this.banned_mods !== undefined)
+            if (this.banned_mods.length)
                 writer.writeRepeatedString(6, this.banned_mods);
             if (!w)
                 return writer.getResultBuffer();
@@ -1065,11 +1081,12 @@ export namespace Models {
         }
     }
     export class SongList extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             levels?: PreviewBeatmapLevel[];
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("levels" in data && data.levels != undefined) {
                     this.levels = data.levels;
@@ -1084,7 +1101,7 @@ export namespace Models {
         }
         static fromObject(data: {
             levels?: ReturnType<typeof PreviewBeatmapLevel.prototype.toObject>[];
-        }) {
+        }): SongList {
             const message = new SongList({});
             if (data.levels != null) {
                 message.levels = data.levels.map(item => PreviewBeatmapLevel.fromObject(item));
@@ -1104,7 +1121,7 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.levels !== undefined)
+            if (this.levels.length)
                 writer.writeRepeatedMessage(1, this.levels, (item: PreviewBeatmapLevel) => item.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
@@ -1131,36 +1148,34 @@ export namespace Models {
         }
     }
     export class User extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            id?: string;
+            guid?: string;
             name?: string;
             user_id?: string;
+            client_type?: User.ClientTypes;
             team?: Team;
             play_state?: User.PlayStates;
             download_state?: User.DownloadStates;
-            score?: number;
-            combo?: number;
-            misses?: number;
-            accuracy?: number;
-            song_position?: number;
-            song_list?: SongList;
             mod_list?: string[];
             stream_screen_coordinates?: User.Point;
             stream_delay_ms?: number;
             stream_sync_start_ms?: number;
-            client_type?: User.ClientTypes;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [12], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [8], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("id" in data && data.id != undefined) {
-                    this.id = data.id;
+                if ("guid" in data && data.guid != undefined) {
+                    this.guid = data.guid;
                 }
                 if ("name" in data && data.name != undefined) {
                     this.name = data.name;
                 }
                 if ("user_id" in data && data.user_id != undefined) {
                     this.user_id = data.user_id;
+                }
+                if ("client_type" in data && data.client_type != undefined) {
+                    this.client_type = data.client_type;
                 }
                 if ("team" in data && data.team != undefined) {
                     this.team = data.team;
@@ -1170,24 +1185,6 @@ export namespace Models {
                 }
                 if ("download_state" in data && data.download_state != undefined) {
                     this.download_state = data.download_state;
-                }
-                if ("score" in data && data.score != undefined) {
-                    this.score = data.score;
-                }
-                if ("combo" in data && data.combo != undefined) {
-                    this.combo = data.combo;
-                }
-                if ("misses" in data && data.misses != undefined) {
-                    this.misses = data.misses;
-                }
-                if ("accuracy" in data && data.accuracy != undefined) {
-                    this.accuracy = data.accuracy;
-                }
-                if ("song_position" in data && data.song_position != undefined) {
-                    this.song_position = data.song_position;
-                }
-                if ("song_list" in data && data.song_list != undefined) {
-                    this.song_list = data.song_list;
                 }
                 if ("mod_list" in data && data.mod_list != undefined) {
                     this.mod_list = data.mod_list;
@@ -1201,141 +1198,105 @@ export namespace Models {
                 if ("stream_sync_start_ms" in data && data.stream_sync_start_ms != undefined) {
                     this.stream_sync_start_ms = data.stream_sync_start_ms;
                 }
-                if ("client_type" in data && data.client_type != undefined) {
-                    this.client_type = data.client_type;
-                }
             }
         }
-        get id() {
-            return pb_1.Message.getFieldWithDefault(this, 17, "") as string;
+        get guid() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
-        set id(value: string) {
-            pb_1.Message.setField(this, 17, value);
+        set guid(value: string) {
+            pb_1.Message.setField(this, 1, value);
         }
         get name() {
-            return pb_1.Message.getFieldWithDefault(this, 18, "") as string;
-        }
-        set name(value: string) {
-            pb_1.Message.setField(this, 18, value);
-        }
-        get user_id() {
             return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set user_id(value: string) {
+        set name(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
-        get team() {
-            return pb_1.Message.getWrapperField(this, Team, 3) as Team;
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set team(value: Team) {
-            pb_1.Message.setWrapperField(this, 3, value);
-        }
-        get play_state() {
-            return pb_1.Message.getFieldWithDefault(this, 4, 0) as User.PlayStates;
-        }
-        set play_state(value: User.PlayStates) {
-            pb_1.Message.setField(this, 4, value);
-        }
-        get download_state() {
-            return pb_1.Message.getFieldWithDefault(this, 5, 0) as User.DownloadStates;
-        }
-        set download_state(value: User.DownloadStates) {
-            pb_1.Message.setField(this, 5, value);
-        }
-        get score() {
-            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
-        }
-        set score(value: number) {
-            pb_1.Message.setField(this, 6, value);
-        }
-        get combo() {
-            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
-        }
-        set combo(value: number) {
-            pb_1.Message.setField(this, 7, value);
-        }
-        get misses() {
-            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
-        }
-        set misses(value: number) {
-            pb_1.Message.setField(this, 8, value);
-        }
-        get accuracy() {
-            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
-        }
-        set accuracy(value: number) {
-            pb_1.Message.setField(this, 9, value);
-        }
-        get song_position() {
-            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
-        }
-        set song_position(value: number) {
-            pb_1.Message.setField(this, 10, value);
-        }
-        get song_list() {
-            return pb_1.Message.getWrapperField(this, SongList, 11) as SongList;
-        }
-        set song_list(value: SongList) {
-            pb_1.Message.setWrapperField(this, 11, value);
-        }
-        get mod_list() {
-            return pb_1.Message.getFieldWithDefault(this, 12, []) as string[];
-        }
-        set mod_list(value: string[]) {
-            pb_1.Message.setField(this, 12, value);
-        }
-        get stream_screen_coordinates() {
-            return pb_1.Message.getWrapperField(this, User.Point, 13) as User.Point;
-        }
-        set stream_screen_coordinates(value: User.Point) {
-            pb_1.Message.setWrapperField(this, 13, value);
-        }
-        get stream_delay_ms() {
-            return pb_1.Message.getFieldWithDefault(this, 14, 0) as number;
-        }
-        set stream_delay_ms(value: number) {
-            pb_1.Message.setField(this, 14, value);
-        }
-        get stream_sync_start_ms() {
-            return pb_1.Message.getFieldWithDefault(this, 15, 0) as number;
-        }
-        set stream_sync_start_ms(value: number) {
-            pb_1.Message.setField(this, 15, value);
+        set user_id(value: string) {
+            pb_1.Message.setField(this, 3, value);
         }
         get client_type() {
-            return pb_1.Message.getFieldWithDefault(this, 16, 0) as User.ClientTypes;
+            return pb_1.Message.getFieldWithDefault(this, 4, User.ClientTypes.Player) as User.ClientTypes;
         }
         set client_type(value: User.ClientTypes) {
-            pb_1.Message.setField(this, 16, value);
+            pb_1.Message.setField(this, 4, value);
+        }
+        get team() {
+            return pb_1.Message.getWrapperField(this, Team, 5) as Team;
+        }
+        set team(value: Team) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_team() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get play_state() {
+            return pb_1.Message.getFieldWithDefault(this, 6, User.PlayStates.Waiting) as User.PlayStates;
+        }
+        set play_state(value: User.PlayStates) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get download_state() {
+            return pb_1.Message.getFieldWithDefault(this, 7, User.DownloadStates.None) as User.DownloadStates;
+        }
+        set download_state(value: User.DownloadStates) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get mod_list() {
+            return pb_1.Message.getFieldWithDefault(this, 8, []) as string[];
+        }
+        set mod_list(value: string[]) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get stream_screen_coordinates() {
+            return pb_1.Message.getWrapperField(this, User.Point, 9) as User.Point;
+        }
+        set stream_screen_coordinates(value: User.Point) {
+            pb_1.Message.setWrapperField(this, 9, value);
+        }
+        get has_stream_screen_coordinates() {
+            return pb_1.Message.getField(this, 9) != null;
+        }
+        get stream_delay_ms() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set stream_delay_ms(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get stream_sync_start_ms() {
+            return pb_1.Message.getFieldWithDefault(this, 11, 0) as number;
+        }
+        set stream_sync_start_ms(value: number) {
+            pb_1.Message.setField(this, 11, value);
         }
         static fromObject(data: {
-            id?: string;
+            guid?: string;
             name?: string;
             user_id?: string;
+            client_type?: User.ClientTypes;
             team?: ReturnType<typeof Team.prototype.toObject>;
             play_state?: User.PlayStates;
             download_state?: User.DownloadStates;
-            score?: number;
-            combo?: number;
-            misses?: number;
-            accuracy?: number;
-            song_position?: number;
-            song_list?: ReturnType<typeof SongList.prototype.toObject>;
             mod_list?: string[];
             stream_screen_coordinates?: ReturnType<typeof User.Point.prototype.toObject>;
             stream_delay_ms?: number;
             stream_sync_start_ms?: number;
-            client_type?: User.ClientTypes;
-        }) {
+        }): User {
             const message = new User({});
-            if (data.id != null) {
-                message.id = data.id;
+            if (data.guid != null) {
+                message.guid = data.guid;
             }
             if (data.name != null) {
                 message.name = data.name;
             }
             if (data.user_id != null) {
                 message.user_id = data.user_id;
+            }
+            if (data.client_type != null) {
+                message.client_type = data.client_type;
             }
             if (data.team != null) {
                 message.team = Team.fromObject(data.team);
@@ -1345,24 +1306,6 @@ export namespace Models {
             }
             if (data.download_state != null) {
                 message.download_state = data.download_state;
-            }
-            if (data.score != null) {
-                message.score = data.score;
-            }
-            if (data.combo != null) {
-                message.combo = data.combo;
-            }
-            if (data.misses != null) {
-                message.misses = data.misses;
-            }
-            if (data.accuracy != null) {
-                message.accuracy = data.accuracy;
-            }
-            if (data.song_position != null) {
-                message.song_position = data.song_position;
-            }
-            if (data.song_list != null) {
-                message.song_list = SongList.fromObject(data.song_list);
             }
             if (data.mod_list != null) {
                 message.mod_list = data.mod_list;
@@ -1376,39 +1319,33 @@ export namespace Models {
             if (data.stream_sync_start_ms != null) {
                 message.stream_sync_start_ms = data.stream_sync_start_ms;
             }
-            if (data.client_type != null) {
-                message.client_type = data.client_type;
-            }
             return message;
         }
         toObject() {
             const data: {
-                id?: string;
+                guid?: string;
                 name?: string;
                 user_id?: string;
+                client_type?: User.ClientTypes;
                 team?: ReturnType<typeof Team.prototype.toObject>;
                 play_state?: User.PlayStates;
                 download_state?: User.DownloadStates;
-                score?: number;
-                combo?: number;
-                misses?: number;
-                accuracy?: number;
-                song_position?: number;
-                song_list?: ReturnType<typeof SongList.prototype.toObject>;
                 mod_list?: string[];
                 stream_screen_coordinates?: ReturnType<typeof User.Point.prototype.toObject>;
                 stream_delay_ms?: number;
                 stream_sync_start_ms?: number;
-                client_type?: User.ClientTypes;
             } = {};
-            if (this.id != null) {
-                data.id = this.id;
+            if (this.guid != null) {
+                data.guid = this.guid;
             }
             if (this.name != null) {
                 data.name = this.name;
             }
             if (this.user_id != null) {
                 data.user_id = this.user_id;
+            }
+            if (this.client_type != null) {
+                data.client_type = this.client_type;
             }
             if (this.team != null) {
                 data.team = this.team.toObject();
@@ -1418,24 +1355,6 @@ export namespace Models {
             }
             if (this.download_state != null) {
                 data.download_state = this.download_state;
-            }
-            if (this.score != null) {
-                data.score = this.score;
-            }
-            if (this.combo != null) {
-                data.combo = this.combo;
-            }
-            if (this.misses != null) {
-                data.misses = this.misses;
-            }
-            if (this.accuracy != null) {
-                data.accuracy = this.accuracy;
-            }
-            if (this.song_position != null) {
-                data.song_position = this.song_position;
-            }
-            if (this.song_list != null) {
-                data.song_list = this.song_list.toObject();
             }
             if (this.mod_list != null) {
                 data.mod_list = this.mod_list;
@@ -1449,49 +1368,34 @@ export namespace Models {
             if (this.stream_sync_start_ms != null) {
                 data.stream_sync_start_ms = this.stream_sync_start_ms;
             }
-            if (this.client_type != null) {
-                data.client_type = this.client_type;
-            }
             return data;
         }
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.id === "string" && this.id.length)
-                writer.writeString(17, this.id);
-            if (typeof this.name === "string" && this.name.length)
-                writer.writeString(18, this.name);
-            if (typeof this.user_id === "string" && this.user_id.length)
-                writer.writeString(2, this.user_id);
-            if (this.team !== undefined)
-                writer.writeMessage(3, this.team, () => this.team.serialize(writer));
-            if (this.play_state !== undefined)
-                writer.writeEnum(4, this.play_state);
-            if (this.download_state !== undefined)
-                writer.writeEnum(5, this.download_state);
-            if (this.score !== undefined)
-                writer.writeInt32(6, this.score);
-            if (this.combo !== undefined)
-                writer.writeInt32(7, this.combo);
-            if (this.misses !== undefined)
-                writer.writeInt32(8, this.misses);
-            if (this.accuracy !== undefined)
-                writer.writeDouble(9, this.accuracy);
-            if (this.song_position !== undefined)
-                writer.writeDouble(10, this.song_position);
-            if (this.song_list !== undefined)
-                writer.writeMessage(11, this.song_list, () => this.song_list.serialize(writer));
-            if (this.mod_list !== undefined)
-                writer.writeRepeatedString(12, this.mod_list);
-            if (this.stream_screen_coordinates !== undefined)
-                writer.writeMessage(13, this.stream_screen_coordinates, () => this.stream_screen_coordinates.serialize(writer));
-            if (this.stream_delay_ms !== undefined)
-                writer.writeInt64(14, this.stream_delay_ms);
-            if (this.stream_sync_start_ms !== undefined)
-                writer.writeInt64(15, this.stream_sync_start_ms);
-            if (this.client_type !== undefined)
-                writer.writeEnum(16, this.client_type);
+            if (this.guid.length)
+                writer.writeString(1, this.guid);
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (this.user_id.length)
+                writer.writeString(3, this.user_id);
+            if (this.client_type != User.ClientTypes.Player)
+                writer.writeEnum(4, this.client_type);
+            if (this.has_team)
+                writer.writeMessage(5, this.team, () => this.team.serialize(writer));
+            if (this.play_state != User.PlayStates.Waiting)
+                writer.writeEnum(6, this.play_state);
+            if (this.download_state != User.DownloadStates.None)
+                writer.writeEnum(7, this.download_state);
+            if (this.mod_list.length)
+                writer.writeRepeatedString(8, this.mod_list);
+            if (this.has_stream_screen_coordinates)
+                writer.writeMessage(9, this.stream_screen_coordinates, () => this.stream_screen_coordinates.serialize(writer));
+            if (this.stream_delay_ms != 0)
+                writer.writeInt64(10, this.stream_delay_ms);
+            if (this.stream_sync_start_ms != 0)
+                writer.writeInt64(11, this.stream_sync_start_ms);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1501,56 +1405,38 @@ export namespace Models {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
-                    case 17:
-                        message.id = reader.readString();
-                        break;
-                    case 18:
-                        message.name = reader.readString();
+                    case 1:
+                        message.guid = reader.readString();
                         break;
                     case 2:
-                        message.user_id = reader.readString();
+                        message.name = reader.readString();
                         break;
                     case 3:
-                        reader.readMessage(message.team, () => message.team = Team.deserialize(reader));
+                        message.user_id = reader.readString();
                         break;
                     case 4:
-                        message.play_state = reader.readEnum();
+                        message.client_type = reader.readEnum();
                         break;
                     case 5:
-                        message.download_state = reader.readEnum();
+                        reader.readMessage(message.team, () => message.team = Team.deserialize(reader));
                         break;
                     case 6:
-                        message.score = reader.readInt32();
+                        message.play_state = reader.readEnum();
                         break;
                     case 7:
-                        message.combo = reader.readInt32();
+                        message.download_state = reader.readEnum();
                         break;
                     case 8:
-                        message.misses = reader.readInt32();
+                        pb_1.Message.addToRepeatedField(message, 8, reader.readString());
                         break;
                     case 9:
-                        message.accuracy = reader.readDouble();
-                        break;
-                    case 10:
-                        message.song_position = reader.readDouble();
-                        break;
-                    case 11:
-                        reader.readMessage(message.song_list, () => message.song_list = SongList.deserialize(reader));
-                        break;
-                    case 12:
-                        pb_1.Message.addToRepeatedField(message, 12, reader.readString());
-                        break;
-                    case 13:
                         reader.readMessage(message.stream_screen_coordinates, () => message.stream_screen_coordinates = User.Point.deserialize(reader));
                         break;
-                    case 14:
+                    case 10:
                         message.stream_delay_ms = reader.readInt64();
                         break;
-                    case 15:
+                    case 11:
                         message.stream_sync_start_ms = reader.readInt64();
-                        break;
-                    case 16:
-                        message.client_type = reader.readEnum();
                         break;
                     default: reader.skipField();
                 }
@@ -1582,12 +1468,13 @@ export namespace Models {
             WebsocketConnection = 3
         }
         export class Point extends pb_1.Message {
+            private one_of_decls: number[][] = [];
             constructor(data?: any[] | {
                 x?: number;
                 y?: number;
             }) {
                 super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
                     if ("x" in data && data.x != undefined) {
                         this.x = data.x;
@@ -1612,7 +1499,7 @@ export namespace Models {
             static fromObject(data: {
                 x?: number;
                 y?: number;
-            }) {
+            }): Point {
                 const message = new Point({});
                 if (data.x != null) {
                     message.x = data.x;
@@ -1639,9 +1526,9 @@ export namespace Models {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.x !== undefined)
+                if (this.x != 0)
                     writer.writeInt32(1, this.x);
-                if (this.y !== undefined)
+                if (this.y != 0)
                     writer.writeInt32(2, this.y);
                 if (!w)
                     return writer.getResultBuffer();
@@ -1672,17 +1559,18 @@ export namespace Models {
         }
     }
     export class Match extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             guid?: string;
-            associated_users?: User[];
-            leader?: User;
+            associated_users?: string[];
+            leader?: string;
             selected_level?: PreviewBeatmapLevel;
             selected_characteristic?: Characteristic;
             selected_difficulty?: number;
             start_time?: string;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("guid" in data && data.guid != undefined) {
                     this.guid = data.guid;
@@ -1714,16 +1602,16 @@ export namespace Models {
             pb_1.Message.setField(this, 1, value);
         }
         get associated_users() {
-            return pb_1.Message.getRepeatedWrapperField(this, User, 2) as User[];
+            return pb_1.Message.getFieldWithDefault(this, 2, []) as string[];
         }
-        set associated_users(value: User[]) {
-            pb_1.Message.setRepeatedWrapperField(this, 2, value);
+        set associated_users(value: string[]) {
+            pb_1.Message.setField(this, 2, value);
         }
         get leader() {
-            return pb_1.Message.getWrapperField(this, User, 3) as User;
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set leader(value: User) {
-            pb_1.Message.setWrapperField(this, 3, value);
+        set leader(value: string) {
+            pb_1.Message.setField(this, 3, value);
         }
         get selected_level() {
             return pb_1.Message.getWrapperField(this, PreviewBeatmapLevel, 5) as PreviewBeatmapLevel;
@@ -1731,11 +1619,17 @@ export namespace Models {
         set selected_level(value: PreviewBeatmapLevel) {
             pb_1.Message.setWrapperField(this, 5, value);
         }
+        get has_selected_level() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
         get selected_characteristic() {
             return pb_1.Message.getWrapperField(this, Characteristic, 6) as Characteristic;
         }
         set selected_characteristic(value: Characteristic) {
             pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_selected_characteristic() {
+            return pb_1.Message.getField(this, 6) != null;
         }
         get selected_difficulty() {
             return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
@@ -1751,22 +1645,22 @@ export namespace Models {
         }
         static fromObject(data: {
             guid?: string;
-            associated_users?: ReturnType<typeof User.prototype.toObject>[];
-            leader?: ReturnType<typeof User.prototype.toObject>;
+            associated_users?: string[];
+            leader?: string;
             selected_level?: ReturnType<typeof PreviewBeatmapLevel.prototype.toObject>;
             selected_characteristic?: ReturnType<typeof Characteristic.prototype.toObject>;
             selected_difficulty?: number;
             start_time?: string;
-        }) {
+        }): Match {
             const message = new Match({});
             if (data.guid != null) {
                 message.guid = data.guid;
             }
             if (data.associated_users != null) {
-                message.associated_users = data.associated_users.map(item => User.fromObject(item));
+                message.associated_users = data.associated_users;
             }
             if (data.leader != null) {
-                message.leader = User.fromObject(data.leader);
+                message.leader = data.leader;
             }
             if (data.selected_level != null) {
                 message.selected_level = PreviewBeatmapLevel.fromObject(data.selected_level);
@@ -1785,8 +1679,8 @@ export namespace Models {
         toObject() {
             const data: {
                 guid?: string;
-                associated_users?: ReturnType<typeof User.prototype.toObject>[];
-                leader?: ReturnType<typeof User.prototype.toObject>;
+                associated_users?: string[];
+                leader?: string;
                 selected_level?: ReturnType<typeof PreviewBeatmapLevel.prototype.toObject>;
                 selected_characteristic?: ReturnType<typeof Characteristic.prototype.toObject>;
                 selected_difficulty?: number;
@@ -1796,10 +1690,10 @@ export namespace Models {
                 data.guid = this.guid;
             }
             if (this.associated_users != null) {
-                data.associated_users = this.associated_users.map((item: User) => item.toObject());
+                data.associated_users = this.associated_users;
             }
             if (this.leader != null) {
-                data.leader = this.leader.toObject();
+                data.leader = this.leader;
             }
             if (this.selected_level != null) {
                 data.selected_level = this.selected_level.toObject();
@@ -1819,19 +1713,19 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.guid === "string" && this.guid.length)
+            if (this.guid.length)
                 writer.writeString(1, this.guid);
-            if (this.associated_users !== undefined)
-                writer.writeRepeatedMessage(2, this.associated_users, (item: User) => item.serialize(writer));
-            if (this.leader !== undefined)
-                writer.writeMessage(3, this.leader, () => this.leader.serialize(writer));
-            if (this.selected_level !== undefined)
+            if (this.associated_users.length)
+                writer.writeRepeatedString(2, this.associated_users);
+            if (this.leader.length)
+                writer.writeString(3, this.leader);
+            if (this.has_selected_level)
                 writer.writeMessage(5, this.selected_level, () => this.selected_level.serialize(writer));
-            if (this.selected_characteristic !== undefined)
+            if (this.has_selected_characteristic)
                 writer.writeMessage(6, this.selected_characteristic, () => this.selected_characteristic.serialize(writer));
-            if (this.selected_difficulty !== undefined)
+            if (this.selected_difficulty != 0)
                 writer.writeInt32(7, this.selected_difficulty);
-            if (typeof this.start_time === "string" && this.start_time.length)
+            if (this.start_time.length)
                 writer.writeString(8, this.start_time);
             if (!w)
                 return writer.getResultBuffer();
@@ -1846,10 +1740,10 @@ export namespace Models {
                         message.guid = reader.readString();
                         break;
                     case 2:
-                        reader.readMessage(message.associated_users, () => pb_1.Message.addToRepeatedWrapperField(message, 2, User.deserialize(reader), User));
+                        pb_1.Message.addToRepeatedField(message, 2, reader.readString());
                         break;
                     case 3:
-                        reader.readMessage(message.leader, () => message.leader = User.deserialize(reader));
+                        message.leader = reader.readString();
                         break;
                     case 5:
                         reader.readMessage(message.selected_level, () => message.selected_level = PreviewBeatmapLevel.deserialize(reader));
@@ -1876,8 +1770,9 @@ export namespace Models {
         }
     }
     export class QualifierEvent extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            event_id?: string;
+            guid?: string;
             name?: string;
             guild?: dependency_1.proto.discord.Guild;
             info_channel?: dependency_1.proto.discord.Channel;
@@ -1886,10 +1781,10 @@ export namespace Models {
             flags?: number;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [5], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [5], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("event_id" in data && data.event_id != undefined) {
-                    this.event_id = data.event_id;
+                if ("guid" in data && data.guid != undefined) {
+                    this.guid = data.guid;
                 }
                 if ("name" in data && data.name != undefined) {
                     this.name = data.name;
@@ -1911,10 +1806,10 @@ export namespace Models {
                 }
             }
         }
-        get event_id() {
+        get guid() {
             return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
-        set event_id(value: string) {
+        set guid(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         get name() {
@@ -1929,11 +1824,17 @@ export namespace Models {
         set guild(value: dependency_1.proto.discord.Guild) {
             pb_1.Message.setWrapperField(this, 3, value);
         }
+        get has_guild() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
         get info_channel() {
             return pb_1.Message.getWrapperField(this, dependency_1.proto.discord.Channel, 4) as dependency_1.proto.discord.Channel;
         }
         set info_channel(value: dependency_1.proto.discord.Channel) {
             pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_info_channel() {
+            return pb_1.Message.getField(this, 4) != null;
         }
         get qualifier_maps() {
             return pb_1.Message.getRepeatedWrapperField(this, GameplayParameters, 5) as GameplayParameters[];
@@ -1954,17 +1855,17 @@ export namespace Models {
             pb_1.Message.setField(this, 7, value);
         }
         static fromObject(data: {
-            event_id?: string;
+            guid?: string;
             name?: string;
             guild?: ReturnType<typeof dependency_1.proto.discord.Guild.prototype.toObject>;
             info_channel?: ReturnType<typeof dependency_1.proto.discord.Channel.prototype.toObject>;
             qualifier_maps?: ReturnType<typeof GameplayParameters.prototype.toObject>[];
             send_scores_to_info_channel?: boolean;
             flags?: number;
-        }) {
+        }): QualifierEvent {
             const message = new QualifierEvent({});
-            if (data.event_id != null) {
-                message.event_id = data.event_id;
+            if (data.guid != null) {
+                message.guid = data.guid;
             }
             if (data.name != null) {
                 message.name = data.name;
@@ -1988,7 +1889,7 @@ export namespace Models {
         }
         toObject() {
             const data: {
-                event_id?: string;
+                guid?: string;
                 name?: string;
                 guild?: ReturnType<typeof dependency_1.proto.discord.Guild.prototype.toObject>;
                 info_channel?: ReturnType<typeof dependency_1.proto.discord.Channel.prototype.toObject>;
@@ -1996,8 +1897,8 @@ export namespace Models {
                 send_scores_to_info_channel?: boolean;
                 flags?: number;
             } = {};
-            if (this.event_id != null) {
-                data.event_id = this.event_id;
+            if (this.guid != null) {
+                data.guid = this.guid;
             }
             if (this.name != null) {
                 data.name = this.name;
@@ -2023,19 +1924,19 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.event_id === "string" && this.event_id.length)
-                writer.writeString(1, this.event_id);
-            if (typeof this.name === "string" && this.name.length)
+            if (this.guid.length)
+                writer.writeString(1, this.guid);
+            if (this.name.length)
                 writer.writeString(2, this.name);
-            if (this.guild !== undefined)
+            if (this.has_guild)
                 writer.writeMessage(3, this.guild, () => this.guild.serialize(writer));
-            if (this.info_channel !== undefined)
+            if (this.has_info_channel)
                 writer.writeMessage(4, this.info_channel, () => this.info_channel.serialize(writer));
-            if (this.qualifier_maps !== undefined)
+            if (this.qualifier_maps.length)
                 writer.writeRepeatedMessage(5, this.qualifier_maps, (item: GameplayParameters) => item.serialize(writer));
-            if (this.send_scores_to_info_channel !== undefined)
+            if (this.send_scores_to_info_channel != false)
                 writer.writeBool(6, this.send_scores_to_info_channel);
-            if (this.flags !== undefined)
+            if (this.flags != 0)
                 writer.writeInt32(7, this.flags);
             if (!w)
                 return writer.getResultBuffer();
@@ -2047,7 +1948,7 @@ export namespace Models {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.event_id = reader.readString();
+                        message.guid = reader.readString();
                         break;
                     case 2:
                         message.name = reader.readString();
@@ -2084,17 +1985,18 @@ export namespace Models {
             None = 0,
             HideScoresFromPlayers = 1,
             DisableScoresaberSubmission = 2,
-            EnableLeaderboardMessage = 3
+            EnableLeaderboardMessage = 4
         }
     }
     export class CoreServer extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             name?: string;
             address?: string;
             port?: number;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("name" in data && data.name != undefined) {
                     this.name = data.name;
@@ -2129,7 +2031,7 @@ export namespace Models {
             name?: string;
             address?: string;
             port?: number;
-        }) {
+        }): CoreServer {
             const message = new CoreServer({});
             if (data.name != null) {
                 message.name = data.name;
@@ -2163,11 +2065,11 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.name === "string" && this.name.length)
+            if (this.name.length)
                 writer.writeString(1, this.name);
-            if (typeof this.address === "string" && this.address.length)
+            if (this.address.length)
                 writer.writeString(2, this.address);
-            if (this.port !== undefined)
+            if (this.port != 0)
                 writer.writeInt32(3, this.port);
             if (!w)
                 return writer.getResultBuffer();
@@ -2200,6 +2102,7 @@ export namespace Models {
         }
     }
     export class State extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             server_settings?: ServerSettings;
             users?: User[];
@@ -2208,7 +2111,7 @@ export namespace Models {
             known_hosts?: CoreServer[];
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2, 4, 5, 6], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2, 4, 5, 6], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("server_settings" in data && data.server_settings != undefined) {
                     this.server_settings = data.server_settings;
@@ -2232,6 +2135,9 @@ export namespace Models {
         }
         set server_settings(value: ServerSettings) {
             pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_server_settings() {
+            return pb_1.Message.getField(this, 1) != null;
         }
         get users() {
             return pb_1.Message.getRepeatedWrapperField(this, User, 2) as User[];
@@ -2263,7 +2169,7 @@ export namespace Models {
             matches?: ReturnType<typeof Match.prototype.toObject>[];
             events?: ReturnType<typeof QualifierEvent.prototype.toObject>[];
             known_hosts?: ReturnType<typeof CoreServer.prototype.toObject>[];
-        }) {
+        }): State {
             const message = new State({});
             if (data.server_settings != null) {
                 message.server_settings = ServerSettings.fromObject(data.server_settings);
@@ -2311,15 +2217,15 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.server_settings !== undefined)
+            if (this.has_server_settings)
                 writer.writeMessage(1, this.server_settings, () => this.server_settings.serialize(writer));
-            if (this.users !== undefined)
+            if (this.users.length)
                 writer.writeRepeatedMessage(2, this.users, (item: User) => item.serialize(writer));
-            if (this.matches !== undefined)
+            if (this.matches.length)
                 writer.writeRepeatedMessage(4, this.matches, (item: Match) => item.serialize(writer));
-            if (this.events !== undefined)
+            if (this.events.length)
                 writer.writeRepeatedMessage(5, this.events, (item: QualifierEvent) => item.serialize(writer));
-            if (this.known_hosts !== undefined)
+            if (this.known_hosts.length)
                 writer.writeRepeatedMessage(6, this.known_hosts, (item: CoreServer) => item.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
@@ -2357,7 +2263,8 @@ export namespace Models {
             return State.deserialize(bytes);
         }
     }
-    export class Score extends pb_1.Message {
+    export class LeaderboardScore extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             event_id?: string;
             parameters?: GameplayParameters;
@@ -2368,7 +2275,7 @@ export namespace Models {
             color?: string;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("event_id" in data && data.event_id != undefined) {
                     this.event_id = data.event_id;
@@ -2404,6 +2311,9 @@ export namespace Models {
         }
         set parameters(value: GameplayParameters) {
             pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_parameters() {
+            return pb_1.Message.getField(this, 2) != null;
         }
         get user_id() {
             return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
@@ -2443,8 +2353,8 @@ export namespace Models {
             score?: number;
             full_combo?: boolean;
             color?: string;
-        }) {
-            const message = new Score({});
+        }): LeaderboardScore {
+            const message = new LeaderboardScore({});
             if (data.event_id != null) {
                 message.event_id = data.event_id;
             }
@@ -2505,25 +2415,25 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.event_id === "string" && this.event_id.length)
+            if (this.event_id.length)
                 writer.writeString(1, this.event_id);
-            if (this.parameters !== undefined)
+            if (this.has_parameters)
                 writer.writeMessage(2, this.parameters, () => this.parameters.serialize(writer));
-            if (typeof this.user_id === "string" && this.user_id.length)
+            if (this.user_id.length)
                 writer.writeString(3, this.user_id);
-            if (typeof this.username === "string" && this.username.length)
+            if (this.username.length)
                 writer.writeString(4, this.username);
-            if (this.score !== undefined)
+            if (this.score != 0)
                 writer.writeInt32(5, this.score);
-            if (this.full_combo !== undefined)
+            if (this.full_combo != false)
                 writer.writeBool(6, this.full_combo);
-            if (typeof this.color === "string" && this.color.length)
+            if (this.color.length)
                 writer.writeString(7, this.color);
             if (!w)
                 return writer.getResultBuffer();
         }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Score {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Score();
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LeaderboardScore {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LeaderboardScore();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
@@ -2557,17 +2467,18 @@ export namespace Models {
         serializeBinary(): Uint8Array {
             return this.serialize();
         }
-        static deserializeBinary(bytes: Uint8Array): Score {
-            return Score.deserialize(bytes);
+        static deserializeBinary(bytes: Uint8Array): LeaderboardScore {
+            return LeaderboardScore.deserialize(bytes);
         }
     }
-    export class MessageOption extends pb_1.Message {
+    export class ModalOption extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             label?: string;
             value?: string;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("label" in data && data.label != undefined) {
                     this.label = data.label;
@@ -2592,8 +2503,8 @@ export namespace Models {
         static fromObject(data: {
             label?: string;
             value?: string;
-        }) {
-            const message = new MessageOption({});
+        }): ModalOption {
+            const message = new ModalOption({});
             if (data.label != null) {
                 message.label = data.label;
             }
@@ -2619,15 +2530,15 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.label === "string" && this.label.length)
+            if (this.label.length)
                 writer.writeString(1, this.label);
-            if (typeof this.value === "string" && this.value.length)
+            if (this.value.length)
                 writer.writeString(2, this.value);
             if (!w)
                 return writer.getResultBuffer();
         }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): MessageOption {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new MessageOption();
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModalOption {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ModalOption();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
@@ -2646,8 +2557,8 @@ export namespace Models {
         serializeBinary(): Uint8Array {
             return this.serialize();
         }
-        static deserializeBinary(bytes: Uint8Array): MessageOption {
-            return MessageOption.deserialize(bytes);
+        static deserializeBinary(bytes: Uint8Array): ModalOption {
+            return ModalOption.deserialize(bytes);
         }
     }
 }

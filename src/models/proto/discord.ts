@@ -6,12 +6,13 @@
 import * as pb_1 from "google-protobuf";
 export namespace proto.discord {
     export class Channel extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             id?: number;
             name?: string;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("id" in data && data.id != undefined) {
                     this.id = data.id;
@@ -22,13 +23,13 @@ export namespace proto.discord {
             }
         }
         get id() {
-            return pb_1.Message.getField(this, 1) as number;
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
         set id(value: number) {
             pb_1.Message.setField(this, 1, value);
         }
         get name() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set name(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -36,7 +37,7 @@ export namespace proto.discord {
         static fromObject(data: {
             id?: number;
             name?: string;
-        }) {
+        }): Channel {
             const message = new Channel({});
             if (data.id != null) {
                 message.id = data.id;
@@ -63,9 +64,9 @@ export namespace proto.discord {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.id !== undefined)
+            if (this.id != 0)
                 writer.writeInt32(1, this.id);
-            if (typeof this.name === "string" && this.name.length)
+            if (this.name.length)
                 writer.writeString(2, this.name);
             if (!w)
                 return writer.getResultBuffer();
@@ -95,12 +96,13 @@ export namespace proto.discord {
         }
     }
     export class DiscordUser extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             id?: number;
             name?: string;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("id" in data && data.id != undefined) {
                     this.id = data.id;
@@ -111,13 +113,13 @@ export namespace proto.discord {
             }
         }
         get id() {
-            return pb_1.Message.getField(this, 1) as number;
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
         set id(value: number) {
             pb_1.Message.setField(this, 1, value);
         }
         get name() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set name(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -125,7 +127,7 @@ export namespace proto.discord {
         static fromObject(data: {
             id?: number;
             name?: string;
-        }) {
+        }): DiscordUser {
             const message = new DiscordUser({});
             if (data.id != null) {
                 message.id = data.id;
@@ -152,9 +154,9 @@ export namespace proto.discord {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.id !== undefined)
+            if (this.id != 0)
                 writer.writeInt32(1, this.id);
-            if (typeof this.name === "string" && this.name.length)
+            if (this.name.length)
                 writer.writeString(2, this.name);
             if (!w)
                 return writer.getResultBuffer();
@@ -184,12 +186,13 @@ export namespace proto.discord {
         }
     }
     export class Guild extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             id?: number;
             name?: string;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("id" in data && data.id != undefined) {
                     this.id = data.id;
@@ -200,13 +203,13 @@ export namespace proto.discord {
             }
         }
         get id() {
-            return pb_1.Message.getField(this, 1) as number;
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
         set id(value: number) {
             pb_1.Message.setField(this, 1, value);
         }
         get name() {
-            return pb_1.Message.getField(this, 2) as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
         set name(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -214,7 +217,7 @@ export namespace proto.discord {
         static fromObject(data: {
             id?: number;
             name?: string;
-        }) {
+        }): Guild {
             const message = new Guild({});
             if (data.id != null) {
                 message.id = data.id;
@@ -241,9 +244,9 @@ export namespace proto.discord {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.id !== undefined)
+            if (this.id != 0)
                 writer.writeInt32(1, this.id);
-            if (typeof this.name === "string" && this.name.length)
+            if (this.name.length)
                 writer.writeString(2, this.name);
             if (!w)
                 return writer.getResultBuffer();

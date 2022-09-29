@@ -7,13 +7,2875 @@ import * as dependency_1 from "./discord";
 import * as dependency_2 from "./models";
 import * as pb_1 from "google-protobuf";
 export namespace Packets {
+    export class Command extends pb_1.Message {
+        private one_of_decls: number[][] = [[1, 2, 3, 4, 5, 6, 7, 8]];
+        constructor(data?: any[] | ({} & (({
+            heartbeat?: boolean;
+            return_to_menu?: never;
+            delay_test_finish?: never;
+            stream_sync_show_image?: never;
+            load_song?: never;
+            play_song?: never;
+            send_bot_message?: never;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: boolean;
+            delay_test_finish?: never;
+            stream_sync_show_image?: never;
+            load_song?: never;
+            play_song?: never;
+            send_bot_message?: never;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: never;
+            delay_test_finish?: boolean;
+            stream_sync_show_image?: never;
+            load_song?: never;
+            play_song?: never;
+            send_bot_message?: never;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: never;
+            delay_test_finish?: never;
+            stream_sync_show_image?: boolean;
+            load_song?: never;
+            play_song?: never;
+            send_bot_message?: never;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: never;
+            delay_test_finish?: never;
+            stream_sync_show_image?: never;
+            load_song?: Command.LoadSong;
+            play_song?: never;
+            send_bot_message?: never;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: never;
+            delay_test_finish?: never;
+            stream_sync_show_image?: never;
+            load_song?: never;
+            play_song?: Command.PlaySong;
+            send_bot_message?: never;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: never;
+            delay_test_finish?: never;
+            stream_sync_show_image?: never;
+            load_song?: never;
+            play_song?: never;
+            send_bot_message?: Command.SendBotMessage;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: never;
+            delay_test_finish?: never;
+            stream_sync_show_image?: never;
+            load_song?: never;
+            play_song?: never;
+            send_bot_message?: never;
+            show_modal?: Command.ShowModal;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("heartbeat" in data && data.heartbeat != undefined) {
+                    this.heartbeat = data.heartbeat;
+                }
+                if ("return_to_menu" in data && data.return_to_menu != undefined) {
+                    this.return_to_menu = data.return_to_menu;
+                }
+                if ("delay_test_finish" in data && data.delay_test_finish != undefined) {
+                    this.delay_test_finish = data.delay_test_finish;
+                }
+                if ("stream_sync_show_image" in data && data.stream_sync_show_image != undefined) {
+                    this.stream_sync_show_image = data.stream_sync_show_image;
+                }
+                if ("load_song" in data && data.load_song != undefined) {
+                    this.load_song = data.load_song;
+                }
+                if ("play_song" in data && data.play_song != undefined) {
+                    this.play_song = data.play_song;
+                }
+                if ("send_bot_message" in data && data.send_bot_message != undefined) {
+                    this.send_bot_message = data.send_bot_message;
+                }
+                if ("show_modal" in data && data.show_modal != undefined) {
+                    this.show_modal = data.show_modal;
+                }
+            }
+        }
+        get heartbeat() {
+            return pb_1.Message.getFieldWithDefault(this, 1, false) as boolean;
+        }
+        set heartbeat(value: boolean) {
+            pb_1.Message.setOneofField(this, 1, this.one_of_decls[0], value);
+        }
+        get has_heartbeat() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get return_to_menu() {
+            return pb_1.Message.getFieldWithDefault(this, 2, false) as boolean;
+        }
+        set return_to_menu(value: boolean) {
+            pb_1.Message.setOneofField(this, 2, this.one_of_decls[0], value);
+        }
+        get has_return_to_menu() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        get delay_test_finish() {
+            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
+        }
+        set delay_test_finish(value: boolean) {
+            pb_1.Message.setOneofField(this, 3, this.one_of_decls[0], value);
+        }
+        get has_delay_test_finish() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get stream_sync_show_image() {
+            return pb_1.Message.getFieldWithDefault(this, 4, false) as boolean;
+        }
+        set stream_sync_show_image(value: boolean) {
+            pb_1.Message.setOneofField(this, 4, this.one_of_decls[0], value);
+        }
+        get has_stream_sync_show_image() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        get load_song() {
+            return pb_1.Message.getWrapperField(this, Command.LoadSong, 5) as Command.LoadSong;
+        }
+        set load_song(value: Command.LoadSong) {
+            pb_1.Message.setOneofWrapperField(this, 5, this.one_of_decls[0], value);
+        }
+        get has_load_song() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get play_song() {
+            return pb_1.Message.getWrapperField(this, Command.PlaySong, 6) as Command.PlaySong;
+        }
+        set play_song(value: Command.PlaySong) {
+            pb_1.Message.setOneofWrapperField(this, 6, this.one_of_decls[0], value);
+        }
+        get has_play_song() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get send_bot_message() {
+            return pb_1.Message.getWrapperField(this, Command.SendBotMessage, 7) as Command.SendBotMessage;
+        }
+        set send_bot_message(value: Command.SendBotMessage) {
+            pb_1.Message.setOneofWrapperField(this, 7, this.one_of_decls[0], value);
+        }
+        get has_send_bot_message() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        get show_modal() {
+            return pb_1.Message.getWrapperField(this, Command.ShowModal, 8) as Command.ShowModal;
+        }
+        set show_modal(value: Command.ShowModal) {
+            pb_1.Message.setOneofWrapperField(this, 8, this.one_of_decls[0], value);
+        }
+        get has_show_modal() {
+            return pb_1.Message.getField(this, 8) != null;
+        }
+        get type() {
+            const cases: {
+                [index: number]: "none" | "heartbeat" | "return_to_menu" | "delay_test_finish" | "stream_sync_show_image" | "load_song" | "play_song" | "send_bot_message" | "show_modal";
+            } = {
+                0: "none",
+                1: "heartbeat",
+                2: "return_to_menu",
+                3: "delay_test_finish",
+                4: "stream_sync_show_image",
+                5: "load_song",
+                6: "play_song",
+                7: "send_bot_message",
+                8: "show_modal"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [1, 2, 3, 4, 5, 6, 7, 8])];
+        }
+        static fromObject(data: {
+            heartbeat?: boolean;
+            return_to_menu?: boolean;
+            delay_test_finish?: boolean;
+            stream_sync_show_image?: boolean;
+            load_song?: ReturnType<typeof Command.LoadSong.prototype.toObject>;
+            play_song?: ReturnType<typeof Command.PlaySong.prototype.toObject>;
+            send_bot_message?: ReturnType<typeof Command.SendBotMessage.prototype.toObject>;
+            show_modal?: ReturnType<typeof Command.ShowModal.prototype.toObject>;
+        }): Command {
+            const message = new Command({});
+            if (data.heartbeat != null) {
+                message.heartbeat = data.heartbeat;
+            }
+            if (data.return_to_menu != null) {
+                message.return_to_menu = data.return_to_menu;
+            }
+            if (data.delay_test_finish != null) {
+                message.delay_test_finish = data.delay_test_finish;
+            }
+            if (data.stream_sync_show_image != null) {
+                message.stream_sync_show_image = data.stream_sync_show_image;
+            }
+            if (data.load_song != null) {
+                message.load_song = Command.LoadSong.fromObject(data.load_song);
+            }
+            if (data.play_song != null) {
+                message.play_song = Command.PlaySong.fromObject(data.play_song);
+            }
+            if (data.send_bot_message != null) {
+                message.send_bot_message = Command.SendBotMessage.fromObject(data.send_bot_message);
+            }
+            if (data.show_modal != null) {
+                message.show_modal = Command.ShowModal.fromObject(data.show_modal);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                heartbeat?: boolean;
+                return_to_menu?: boolean;
+                delay_test_finish?: boolean;
+                stream_sync_show_image?: boolean;
+                load_song?: ReturnType<typeof Command.LoadSong.prototype.toObject>;
+                play_song?: ReturnType<typeof Command.PlaySong.prototype.toObject>;
+                send_bot_message?: ReturnType<typeof Command.SendBotMessage.prototype.toObject>;
+                show_modal?: ReturnType<typeof Command.ShowModal.prototype.toObject>;
+            } = {};
+            if (this.heartbeat != null) {
+                data.heartbeat = this.heartbeat;
+            }
+            if (this.return_to_menu != null) {
+                data.return_to_menu = this.return_to_menu;
+            }
+            if (this.delay_test_finish != null) {
+                data.delay_test_finish = this.delay_test_finish;
+            }
+            if (this.stream_sync_show_image != null) {
+                data.stream_sync_show_image = this.stream_sync_show_image;
+            }
+            if (this.load_song != null) {
+                data.load_song = this.load_song.toObject();
+            }
+            if (this.play_song != null) {
+                data.play_song = this.play_song.toObject();
+            }
+            if (this.send_bot_message != null) {
+                data.send_bot_message = this.send_bot_message.toObject();
+            }
+            if (this.show_modal != null) {
+                data.show_modal = this.show_modal.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_heartbeat)
+                writer.writeBool(1, this.heartbeat);
+            if (this.has_return_to_menu)
+                writer.writeBool(2, this.return_to_menu);
+            if (this.has_delay_test_finish)
+                writer.writeBool(3, this.delay_test_finish);
+            if (this.has_stream_sync_show_image)
+                writer.writeBool(4, this.stream_sync_show_image);
+            if (this.has_load_song)
+                writer.writeMessage(5, this.load_song, () => this.load_song.serialize(writer));
+            if (this.has_play_song)
+                writer.writeMessage(6, this.play_song, () => this.play_song.serialize(writer));
+            if (this.has_send_bot_message)
+                writer.writeMessage(7, this.send_bot_message, () => this.send_bot_message.serialize(writer));
+            if (this.has_show_modal)
+                writer.writeMessage(8, this.show_modal, () => this.show_modal.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Command {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Command();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.heartbeat = reader.readBool();
+                        break;
+                    case 2:
+                        message.return_to_menu = reader.readBool();
+                        break;
+                    case 3:
+                        message.delay_test_finish = reader.readBool();
+                        break;
+                    case 4:
+                        message.stream_sync_show_image = reader.readBool();
+                        break;
+                    case 5:
+                        reader.readMessage(message.load_song, () => message.load_song = Command.LoadSong.deserialize(reader));
+                        break;
+                    case 6:
+                        reader.readMessage(message.play_song, () => message.play_song = Command.PlaySong.deserialize(reader));
+                        break;
+                    case 7:
+                        reader.readMessage(message.send_bot_message, () => message.send_bot_message = Command.SendBotMessage.deserialize(reader));
+                        break;
+                    case 8:
+                        reader.readMessage(message.show_modal, () => message.show_modal = Command.ShowModal.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Command {
+            return Command.deserialize(bytes);
+        }
+    }
+    export namespace Command {
+        export class LoadSong extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                level_id?: string;
+                custom_host_url?: string;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("level_id" in data && data.level_id != undefined) {
+                        this.level_id = data.level_id;
+                    }
+                    if ("custom_host_url" in data && data.custom_host_url != undefined) {
+                        this.custom_host_url = data.custom_host_url;
+                    }
+                }
+            }
+            get level_id() {
+                return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+            }
+            set level_id(value: string) {
+                pb_1.Message.setField(this, 1, value);
+            }
+            get custom_host_url() {
+                return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            }
+            set custom_host_url(value: string) {
+                pb_1.Message.setField(this, 2, value);
+            }
+            static fromObject(data: {
+                level_id?: string;
+                custom_host_url?: string;
+            }): LoadSong {
+                const message = new LoadSong({});
+                if (data.level_id != null) {
+                    message.level_id = data.level_id;
+                }
+                if (data.custom_host_url != null) {
+                    message.custom_host_url = data.custom_host_url;
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    level_id?: string;
+                    custom_host_url?: string;
+                } = {};
+                if (this.level_id != null) {
+                    data.level_id = this.level_id;
+                }
+                if (this.custom_host_url != null) {
+                    data.custom_host_url = this.custom_host_url;
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.level_id.length)
+                    writer.writeString(1, this.level_id);
+                if (this.custom_host_url.length)
+                    writer.writeString(2, this.custom_host_url);
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LoadSong {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LoadSong();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            message.level_id = reader.readString();
+                            break;
+                        case 2:
+                            message.custom_host_url = reader.readString();
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): LoadSong {
+                return LoadSong.deserialize(bytes);
+            }
+        }
+        export class PlaySong extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                gameplay_parameters?: dependency_2.Models.GameplayParameters;
+                floating_scoreboard?: boolean;
+                stream_sync?: boolean;
+                disable_fail?: boolean;
+                disable_pause?: boolean;
+                disable_scoresaber_submission?: boolean;
+                show_normal_notes_on_stream?: boolean;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("gameplay_parameters" in data && data.gameplay_parameters != undefined) {
+                        this.gameplay_parameters = data.gameplay_parameters;
+                    }
+                    if ("floating_scoreboard" in data && data.floating_scoreboard != undefined) {
+                        this.floating_scoreboard = data.floating_scoreboard;
+                    }
+                    if ("stream_sync" in data && data.stream_sync != undefined) {
+                        this.stream_sync = data.stream_sync;
+                    }
+                    if ("disable_fail" in data && data.disable_fail != undefined) {
+                        this.disable_fail = data.disable_fail;
+                    }
+                    if ("disable_pause" in data && data.disable_pause != undefined) {
+                        this.disable_pause = data.disable_pause;
+                    }
+                    if ("disable_scoresaber_submission" in data && data.disable_scoresaber_submission != undefined) {
+                        this.disable_scoresaber_submission = data.disable_scoresaber_submission;
+                    }
+                    if ("show_normal_notes_on_stream" in data && data.show_normal_notes_on_stream != undefined) {
+                        this.show_normal_notes_on_stream = data.show_normal_notes_on_stream;
+                    }
+                }
+            }
+            get gameplay_parameters() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.GameplayParameters, 1) as dependency_2.Models.GameplayParameters;
+            }
+            set gameplay_parameters(value: dependency_2.Models.GameplayParameters) {
+                pb_1.Message.setWrapperField(this, 1, value);
+            }
+            get has_gameplay_parameters() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
+            get floating_scoreboard() {
+                return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
+            }
+            set floating_scoreboard(value: boolean) {
+                pb_1.Message.setField(this, 3, value);
+            }
+            get stream_sync() {
+                return pb_1.Message.getFieldWithDefault(this, 4, false) as boolean;
+            }
+            set stream_sync(value: boolean) {
+                pb_1.Message.setField(this, 4, value);
+            }
+            get disable_fail() {
+                return pb_1.Message.getFieldWithDefault(this, 5, false) as boolean;
+            }
+            set disable_fail(value: boolean) {
+                pb_1.Message.setField(this, 5, value);
+            }
+            get disable_pause() {
+                return pb_1.Message.getFieldWithDefault(this, 6, false) as boolean;
+            }
+            set disable_pause(value: boolean) {
+                pb_1.Message.setField(this, 6, value);
+            }
+            get disable_scoresaber_submission() {
+                return pb_1.Message.getFieldWithDefault(this, 7, false) as boolean;
+            }
+            set disable_scoresaber_submission(value: boolean) {
+                pb_1.Message.setField(this, 7, value);
+            }
+            get show_normal_notes_on_stream() {
+                return pb_1.Message.getFieldWithDefault(this, 8, false) as boolean;
+            }
+            set show_normal_notes_on_stream(value: boolean) {
+                pb_1.Message.setField(this, 8, value);
+            }
+            static fromObject(data: {
+                gameplay_parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject>;
+                floating_scoreboard?: boolean;
+                stream_sync?: boolean;
+                disable_fail?: boolean;
+                disable_pause?: boolean;
+                disable_scoresaber_submission?: boolean;
+                show_normal_notes_on_stream?: boolean;
+            }): PlaySong {
+                const message = new PlaySong({});
+                if (data.gameplay_parameters != null) {
+                    message.gameplay_parameters = dependency_2.Models.GameplayParameters.fromObject(data.gameplay_parameters);
+                }
+                if (data.floating_scoreboard != null) {
+                    message.floating_scoreboard = data.floating_scoreboard;
+                }
+                if (data.stream_sync != null) {
+                    message.stream_sync = data.stream_sync;
+                }
+                if (data.disable_fail != null) {
+                    message.disable_fail = data.disable_fail;
+                }
+                if (data.disable_pause != null) {
+                    message.disable_pause = data.disable_pause;
+                }
+                if (data.disable_scoresaber_submission != null) {
+                    message.disable_scoresaber_submission = data.disable_scoresaber_submission;
+                }
+                if (data.show_normal_notes_on_stream != null) {
+                    message.show_normal_notes_on_stream = data.show_normal_notes_on_stream;
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    gameplay_parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject>;
+                    floating_scoreboard?: boolean;
+                    stream_sync?: boolean;
+                    disable_fail?: boolean;
+                    disable_pause?: boolean;
+                    disable_scoresaber_submission?: boolean;
+                    show_normal_notes_on_stream?: boolean;
+                } = {};
+                if (this.gameplay_parameters != null) {
+                    data.gameplay_parameters = this.gameplay_parameters.toObject();
+                }
+                if (this.floating_scoreboard != null) {
+                    data.floating_scoreboard = this.floating_scoreboard;
+                }
+                if (this.stream_sync != null) {
+                    data.stream_sync = this.stream_sync;
+                }
+                if (this.disable_fail != null) {
+                    data.disable_fail = this.disable_fail;
+                }
+                if (this.disable_pause != null) {
+                    data.disable_pause = this.disable_pause;
+                }
+                if (this.disable_scoresaber_submission != null) {
+                    data.disable_scoresaber_submission = this.disable_scoresaber_submission;
+                }
+                if (this.show_normal_notes_on_stream != null) {
+                    data.show_normal_notes_on_stream = this.show_normal_notes_on_stream;
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.has_gameplay_parameters)
+                    writer.writeMessage(1, this.gameplay_parameters, () => this.gameplay_parameters.serialize(writer));
+                if (this.floating_scoreboard != false)
+                    writer.writeBool(3, this.floating_scoreboard);
+                if (this.stream_sync != false)
+                    writer.writeBool(4, this.stream_sync);
+                if (this.disable_fail != false)
+                    writer.writeBool(5, this.disable_fail);
+                if (this.disable_pause != false)
+                    writer.writeBool(6, this.disable_pause);
+                if (this.disable_scoresaber_submission != false)
+                    writer.writeBool(7, this.disable_scoresaber_submission);
+                if (this.show_normal_notes_on_stream != false)
+                    writer.writeBool(8, this.show_normal_notes_on_stream);
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PlaySong {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PlaySong();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            reader.readMessage(message.gameplay_parameters, () => message.gameplay_parameters = dependency_2.Models.GameplayParameters.deserialize(reader));
+                            break;
+                        case 3:
+                            message.floating_scoreboard = reader.readBool();
+                            break;
+                        case 4:
+                            message.stream_sync = reader.readBool();
+                            break;
+                        case 5:
+                            message.disable_fail = reader.readBool();
+                            break;
+                        case 6:
+                            message.disable_pause = reader.readBool();
+                            break;
+                        case 7:
+                            message.disable_scoresaber_submission = reader.readBool();
+                            break;
+                        case 8:
+                            message.show_normal_notes_on_stream = reader.readBool();
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): PlaySong {
+                return PlaySong.deserialize(bytes);
+            }
+        }
+        export class SendBotMessage extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                channel?: dependency_1.proto.discord.Channel;
+                message?: string;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("channel" in data && data.channel != undefined) {
+                        this.channel = data.channel;
+                    }
+                    if ("message" in data && data.message != undefined) {
+                        this.message = data.message;
+                    }
+                }
+            }
+            get channel() {
+                return pb_1.Message.getWrapperField(this, dependency_1.proto.discord.Channel, 1) as dependency_1.proto.discord.Channel;
+            }
+            set channel(value: dependency_1.proto.discord.Channel) {
+                pb_1.Message.setWrapperField(this, 1, value);
+            }
+            get has_channel() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
+            get message() {
+                return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            }
+            set message(value: string) {
+                pb_1.Message.setField(this, 2, value);
+            }
+            static fromObject(data: {
+                channel?: ReturnType<typeof dependency_1.proto.discord.Channel.prototype.toObject>;
+                message?: string;
+            }): SendBotMessage {
+                const message = new SendBotMessage({});
+                if (data.channel != null) {
+                    message.channel = dependency_1.proto.discord.Channel.fromObject(data.channel);
+                }
+                if (data.message != null) {
+                    message.message = data.message;
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    channel?: ReturnType<typeof dependency_1.proto.discord.Channel.prototype.toObject>;
+                    message?: string;
+                } = {};
+                if (this.channel != null) {
+                    data.channel = this.channel.toObject();
+                }
+                if (this.message != null) {
+                    data.message = this.message;
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.has_channel)
+                    writer.writeMessage(1, this.channel, () => this.channel.serialize(writer));
+                if (this.message.length)
+                    writer.writeString(2, this.message);
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SendBotMessage {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SendBotMessage();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            reader.readMessage(message.channel, () => message.channel = dependency_1.proto.discord.Channel.deserialize(reader));
+                            break;
+                        case 2:
+                            message.message = reader.readString();
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): SendBotMessage {
+                return SendBotMessage.deserialize(bytes);
+            }
+        }
+        export class ShowModal extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                modal_id?: string;
+                message_title?: string;
+                message_text?: string;
+                can_close?: boolean;
+                option_1?: dependency_2.Models.ModalOption;
+                option_2?: dependency_2.Models.ModalOption;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("modal_id" in data && data.modal_id != undefined) {
+                        this.modal_id = data.modal_id;
+                    }
+                    if ("message_title" in data && data.message_title != undefined) {
+                        this.message_title = data.message_title;
+                    }
+                    if ("message_text" in data && data.message_text != undefined) {
+                        this.message_text = data.message_text;
+                    }
+                    if ("can_close" in data && data.can_close != undefined) {
+                        this.can_close = data.can_close;
+                    }
+                    if ("option_1" in data && data.option_1 != undefined) {
+                        this.option_1 = data.option_1;
+                    }
+                    if ("option_2" in data && data.option_2 != undefined) {
+                        this.option_2 = data.option_2;
+                    }
+                }
+            }
+            get modal_id() {
+                return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+            }
+            set modal_id(value: string) {
+                pb_1.Message.setField(this, 1, value);
+            }
+            get message_title() {
+                return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            }
+            set message_title(value: string) {
+                pb_1.Message.setField(this, 2, value);
+            }
+            get message_text() {
+                return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+            }
+            set message_text(value: string) {
+                pb_1.Message.setField(this, 3, value);
+            }
+            get can_close() {
+                return pb_1.Message.getFieldWithDefault(this, 4, false) as boolean;
+            }
+            set can_close(value: boolean) {
+                pb_1.Message.setField(this, 4, value);
+            }
+            get option_1() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.ModalOption, 5) as dependency_2.Models.ModalOption;
+            }
+            set option_1(value: dependency_2.Models.ModalOption) {
+                pb_1.Message.setWrapperField(this, 5, value);
+            }
+            get has_option_1() {
+                return pb_1.Message.getField(this, 5) != null;
+            }
+            get option_2() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.ModalOption, 6) as dependency_2.Models.ModalOption;
+            }
+            set option_2(value: dependency_2.Models.ModalOption) {
+                pb_1.Message.setWrapperField(this, 6, value);
+            }
+            get has_option_2() {
+                return pb_1.Message.getField(this, 6) != null;
+            }
+            static fromObject(data: {
+                modal_id?: string;
+                message_title?: string;
+                message_text?: string;
+                can_close?: boolean;
+                option_1?: ReturnType<typeof dependency_2.Models.ModalOption.prototype.toObject>;
+                option_2?: ReturnType<typeof dependency_2.Models.ModalOption.prototype.toObject>;
+            }): ShowModal {
+                const message = new ShowModal({});
+                if (data.modal_id != null) {
+                    message.modal_id = data.modal_id;
+                }
+                if (data.message_title != null) {
+                    message.message_title = data.message_title;
+                }
+                if (data.message_text != null) {
+                    message.message_text = data.message_text;
+                }
+                if (data.can_close != null) {
+                    message.can_close = data.can_close;
+                }
+                if (data.option_1 != null) {
+                    message.option_1 = dependency_2.Models.ModalOption.fromObject(data.option_1);
+                }
+                if (data.option_2 != null) {
+                    message.option_2 = dependency_2.Models.ModalOption.fromObject(data.option_2);
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    modal_id?: string;
+                    message_title?: string;
+                    message_text?: string;
+                    can_close?: boolean;
+                    option_1?: ReturnType<typeof dependency_2.Models.ModalOption.prototype.toObject>;
+                    option_2?: ReturnType<typeof dependency_2.Models.ModalOption.prototype.toObject>;
+                } = {};
+                if (this.modal_id != null) {
+                    data.modal_id = this.modal_id;
+                }
+                if (this.message_title != null) {
+                    data.message_title = this.message_title;
+                }
+                if (this.message_text != null) {
+                    data.message_text = this.message_text;
+                }
+                if (this.can_close != null) {
+                    data.can_close = this.can_close;
+                }
+                if (this.option_1 != null) {
+                    data.option_1 = this.option_1.toObject();
+                }
+                if (this.option_2 != null) {
+                    data.option_2 = this.option_2.toObject();
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.modal_id.length)
+                    writer.writeString(1, this.modal_id);
+                if (this.message_title.length)
+                    writer.writeString(2, this.message_title);
+                if (this.message_text.length)
+                    writer.writeString(3, this.message_text);
+                if (this.can_close != false)
+                    writer.writeBool(4, this.can_close);
+                if (this.has_option_1)
+                    writer.writeMessage(5, this.option_1, () => this.option_1.serialize(writer));
+                if (this.has_option_2)
+                    writer.writeMessage(6, this.option_2, () => this.option_2.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ShowModal {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ShowModal();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            message.modal_id = reader.readString();
+                            break;
+                        case 2:
+                            message.message_title = reader.readString();
+                            break;
+                        case 3:
+                            message.message_text = reader.readString();
+                            break;
+                        case 4:
+                            message.can_close = reader.readBool();
+                            break;
+                        case 5:
+                            reader.readMessage(message.option_1, () => message.option_1 = dependency_2.Models.ModalOption.deserialize(reader));
+                            break;
+                        case 6:
+                            reader.readMessage(message.option_2, () => message.option_2 = dependency_2.Models.ModalOption.deserialize(reader));
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): ShowModal {
+                return ShowModal.deserialize(bytes);
+            }
+        }
+    }
+    export class Push extends pb_1.Message {
+        private one_of_decls: number[][] = [[1, 2, 3]];
+        constructor(data?: any[] | ({} & (({
+            leaderboard_score?: Push.LeaderboardScore;
+            realtime_score?: never;
+            song_finished?: never;
+        } | {
+            leaderboard_score?: never;
+            realtime_score?: Push.RealtimeScore;
+            song_finished?: never;
+        } | {
+            leaderboard_score?: never;
+            realtime_score?: never;
+            song_finished?: Push.SongFinished;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("leaderboard_score" in data && data.leaderboard_score != undefined) {
+                    this.leaderboard_score = data.leaderboard_score;
+                }
+                if ("realtime_score" in data && data.realtime_score != undefined) {
+                    this.realtime_score = data.realtime_score;
+                }
+                if ("song_finished" in data && data.song_finished != undefined) {
+                    this.song_finished = data.song_finished;
+                }
+            }
+        }
+        get leaderboard_score() {
+            return pb_1.Message.getWrapperField(this, Push.LeaderboardScore, 1) as Push.LeaderboardScore;
+        }
+        set leaderboard_score(value: Push.LeaderboardScore) {
+            pb_1.Message.setOneofWrapperField(this, 1, this.one_of_decls[0], value);
+        }
+        get has_leaderboard_score() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get realtime_score() {
+            return pb_1.Message.getWrapperField(this, Push.RealtimeScore, 2) as Push.RealtimeScore;
+        }
+        set realtime_score(value: Push.RealtimeScore) {
+            pb_1.Message.setOneofWrapperField(this, 2, this.one_of_decls[0], value);
+        }
+        get has_realtime_score() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        get song_finished() {
+            return pb_1.Message.getWrapperField(this, Push.SongFinished, 3) as Push.SongFinished;
+        }
+        set song_finished(value: Push.SongFinished) {
+            pb_1.Message.setOneofWrapperField(this, 3, this.one_of_decls[0], value);
+        }
+        get has_song_finished() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get data() {
+            const cases: {
+                [index: number]: "none" | "leaderboard_score" | "realtime_score" | "song_finished";
+            } = {
+                0: "none",
+                1: "leaderboard_score",
+                2: "realtime_score",
+                3: "song_finished"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [1, 2, 3])];
+        }
+        static fromObject(data: {
+            leaderboard_score?: ReturnType<typeof Push.LeaderboardScore.prototype.toObject>;
+            realtime_score?: ReturnType<typeof Push.RealtimeScore.prototype.toObject>;
+            song_finished?: ReturnType<typeof Push.SongFinished.prototype.toObject>;
+        }): Push {
+            const message = new Push({});
+            if (data.leaderboard_score != null) {
+                message.leaderboard_score = Push.LeaderboardScore.fromObject(data.leaderboard_score);
+            }
+            if (data.realtime_score != null) {
+                message.realtime_score = Push.RealtimeScore.fromObject(data.realtime_score);
+            }
+            if (data.song_finished != null) {
+                message.song_finished = Push.SongFinished.fromObject(data.song_finished);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                leaderboard_score?: ReturnType<typeof Push.LeaderboardScore.prototype.toObject>;
+                realtime_score?: ReturnType<typeof Push.RealtimeScore.prototype.toObject>;
+                song_finished?: ReturnType<typeof Push.SongFinished.prototype.toObject>;
+            } = {};
+            if (this.leaderboard_score != null) {
+                data.leaderboard_score = this.leaderboard_score.toObject();
+            }
+            if (this.realtime_score != null) {
+                data.realtime_score = this.realtime_score.toObject();
+            }
+            if (this.song_finished != null) {
+                data.song_finished = this.song_finished.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_leaderboard_score)
+                writer.writeMessage(1, this.leaderboard_score, () => this.leaderboard_score.serialize(writer));
+            if (this.has_realtime_score)
+                writer.writeMessage(2, this.realtime_score, () => this.realtime_score.serialize(writer));
+            if (this.has_song_finished)
+                writer.writeMessage(3, this.song_finished, () => this.song_finished.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Push {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Push();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.leaderboard_score, () => message.leaderboard_score = Push.LeaderboardScore.deserialize(reader));
+                        break;
+                    case 2:
+                        reader.readMessage(message.realtime_score, () => message.realtime_score = Push.RealtimeScore.deserialize(reader));
+                        break;
+                    case 3:
+                        reader.readMessage(message.song_finished, () => message.song_finished = Push.SongFinished.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Push {
+            return Push.deserialize(bytes);
+        }
+    }
+    export namespace Push {
+        export class LeaderboardScore extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                score?: dependency_2.Models.LeaderboardScore;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("score" in data && data.score != undefined) {
+                        this.score = data.score;
+                    }
+                }
+            }
+            get score() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.LeaderboardScore, 1) as dependency_2.Models.LeaderboardScore;
+            }
+            set score(value: dependency_2.Models.LeaderboardScore) {
+                pb_1.Message.setWrapperField(this, 1, value);
+            }
+            get has_score() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
+            static fromObject(data: {
+                score?: ReturnType<typeof dependency_2.Models.LeaderboardScore.prototype.toObject>;
+            }): LeaderboardScore {
+                const message = new LeaderboardScore({});
+                if (data.score != null) {
+                    message.score = dependency_2.Models.LeaderboardScore.fromObject(data.score);
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    score?: ReturnType<typeof dependency_2.Models.LeaderboardScore.prototype.toObject>;
+                } = {};
+                if (this.score != null) {
+                    data.score = this.score.toObject();
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.has_score)
+                    writer.writeMessage(1, this.score, () => this.score.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LeaderboardScore {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LeaderboardScore();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            reader.readMessage(message.score, () => message.score = dependency_2.Models.LeaderboardScore.deserialize(reader));
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): LeaderboardScore {
+                return LeaderboardScore.deserialize(bytes);
+            }
+        }
+        export class RealtimeScore extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                user_guid?: string;
+                score?: number;
+                score_with_modifiers?: number;
+                max_score?: number;
+                max_score_with_modifiers?: number;
+                combo?: number;
+                misses?: number;
+                player_health?: number;
+                accuracy?: number;
+                is_miss?: boolean;
+                is_bad_hit?: boolean;
+                song_position?: number;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("user_guid" in data && data.user_guid != undefined) {
+                        this.user_guid = data.user_guid;
+                    }
+                    if ("score" in data && data.score != undefined) {
+                        this.score = data.score;
+                    }
+                    if ("score_with_modifiers" in data && data.score_with_modifiers != undefined) {
+                        this.score_with_modifiers = data.score_with_modifiers;
+                    }
+                    if ("max_score" in data && data.max_score != undefined) {
+                        this.max_score = data.max_score;
+                    }
+                    if ("max_score_with_modifiers" in data && data.max_score_with_modifiers != undefined) {
+                        this.max_score_with_modifiers = data.max_score_with_modifiers;
+                    }
+                    if ("combo" in data && data.combo != undefined) {
+                        this.combo = data.combo;
+                    }
+                    if ("misses" in data && data.misses != undefined) {
+                        this.misses = data.misses;
+                    }
+                    if ("player_health" in data && data.player_health != undefined) {
+                        this.player_health = data.player_health;
+                    }
+                    if ("accuracy" in data && data.accuracy != undefined) {
+                        this.accuracy = data.accuracy;
+                    }
+                    if ("is_miss" in data && data.is_miss != undefined) {
+                        this.is_miss = data.is_miss;
+                    }
+                    if ("is_bad_hit" in data && data.is_bad_hit != undefined) {
+                        this.is_bad_hit = data.is_bad_hit;
+                    }
+                    if ("song_position" in data && data.song_position != undefined) {
+                        this.song_position = data.song_position;
+                    }
+                }
+            }
+            get user_guid() {
+                return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+            }
+            set user_guid(value: string) {
+                pb_1.Message.setField(this, 1, value);
+            }
+            get score() {
+                return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            }
+            set score(value: number) {
+                pb_1.Message.setField(this, 2, value);
+            }
+            get score_with_modifiers() {
+                return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+            }
+            set score_with_modifiers(value: number) {
+                pb_1.Message.setField(this, 3, value);
+            }
+            get max_score() {
+                return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+            }
+            set max_score(value: number) {
+                pb_1.Message.setField(this, 4, value);
+            }
+            get max_score_with_modifiers() {
+                return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+            }
+            set max_score_with_modifiers(value: number) {
+                pb_1.Message.setField(this, 5, value);
+            }
+            get combo() {
+                return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+            }
+            set combo(value: number) {
+                pb_1.Message.setField(this, 6, value);
+            }
+            get misses() {
+                return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+            }
+            set misses(value: number) {
+                pb_1.Message.setField(this, 7, value);
+            }
+            get player_health() {
+                return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+            }
+            set player_health(value: number) {
+                pb_1.Message.setField(this, 8, value);
+            }
+            get accuracy() {
+                return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+            }
+            set accuracy(value: number) {
+                pb_1.Message.setField(this, 9, value);
+            }
+            get is_miss() {
+                return pb_1.Message.getFieldWithDefault(this, 10, false) as boolean;
+            }
+            set is_miss(value: boolean) {
+                pb_1.Message.setField(this, 10, value);
+            }
+            get is_bad_hit() {
+                return pb_1.Message.getFieldWithDefault(this, 11, false) as boolean;
+            }
+            set is_bad_hit(value: boolean) {
+                pb_1.Message.setField(this, 11, value);
+            }
+            get song_position() {
+                return pb_1.Message.getFieldWithDefault(this, 12, 0) as number;
+            }
+            set song_position(value: number) {
+                pb_1.Message.setField(this, 12, value);
+            }
+            static fromObject(data: {
+                user_guid?: string;
+                score?: number;
+                score_with_modifiers?: number;
+                max_score?: number;
+                max_score_with_modifiers?: number;
+                combo?: number;
+                misses?: number;
+                player_health?: number;
+                accuracy?: number;
+                is_miss?: boolean;
+                is_bad_hit?: boolean;
+                song_position?: number;
+            }): RealtimeScore {
+                const message = new RealtimeScore({});
+                if (data.user_guid != null) {
+                    message.user_guid = data.user_guid;
+                }
+                if (data.score != null) {
+                    message.score = data.score;
+                }
+                if (data.score_with_modifiers != null) {
+                    message.score_with_modifiers = data.score_with_modifiers;
+                }
+                if (data.max_score != null) {
+                    message.max_score = data.max_score;
+                }
+                if (data.max_score_with_modifiers != null) {
+                    message.max_score_with_modifiers = data.max_score_with_modifiers;
+                }
+                if (data.combo != null) {
+                    message.combo = data.combo;
+                }
+                if (data.misses != null) {
+                    message.misses = data.misses;
+                }
+                if (data.player_health != null) {
+                    message.player_health = data.player_health;
+                }
+                if (data.accuracy != null) {
+                    message.accuracy = data.accuracy;
+                }
+                if (data.is_miss != null) {
+                    message.is_miss = data.is_miss;
+                }
+                if (data.is_bad_hit != null) {
+                    message.is_bad_hit = data.is_bad_hit;
+                }
+                if (data.song_position != null) {
+                    message.song_position = data.song_position;
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    user_guid?: string;
+                    score?: number;
+                    score_with_modifiers?: number;
+                    max_score?: number;
+                    max_score_with_modifiers?: number;
+                    combo?: number;
+                    misses?: number;
+                    player_health?: number;
+                    accuracy?: number;
+                    is_miss?: boolean;
+                    is_bad_hit?: boolean;
+                    song_position?: number;
+                } = {};
+                if (this.user_guid != null) {
+                    data.user_guid = this.user_guid;
+                }
+                if (this.score != null) {
+                    data.score = this.score;
+                }
+                if (this.score_with_modifiers != null) {
+                    data.score_with_modifiers = this.score_with_modifiers;
+                }
+                if (this.max_score != null) {
+                    data.max_score = this.max_score;
+                }
+                if (this.max_score_with_modifiers != null) {
+                    data.max_score_with_modifiers = this.max_score_with_modifiers;
+                }
+                if (this.combo != null) {
+                    data.combo = this.combo;
+                }
+                if (this.misses != null) {
+                    data.misses = this.misses;
+                }
+                if (this.player_health != null) {
+                    data.player_health = this.player_health;
+                }
+                if (this.accuracy != null) {
+                    data.accuracy = this.accuracy;
+                }
+                if (this.is_miss != null) {
+                    data.is_miss = this.is_miss;
+                }
+                if (this.is_bad_hit != null) {
+                    data.is_bad_hit = this.is_bad_hit;
+                }
+                if (this.song_position != null) {
+                    data.song_position = this.song_position;
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.user_guid.length)
+                    writer.writeString(1, this.user_guid);
+                if (this.score != 0)
+                    writer.writeInt32(2, this.score);
+                if (this.score_with_modifiers != 0)
+                    writer.writeInt32(3, this.score_with_modifiers);
+                if (this.max_score != 0)
+                    writer.writeInt32(4, this.max_score);
+                if (this.max_score_with_modifiers != 0)
+                    writer.writeInt32(5, this.max_score_with_modifiers);
+                if (this.combo != 0)
+                    writer.writeInt32(6, this.combo);
+                if (this.misses != 0)
+                    writer.writeInt32(7, this.misses);
+                if (this.player_health != 0)
+                    writer.writeFloat(8, this.player_health);
+                if (this.accuracy != 0)
+                    writer.writeFloat(9, this.accuracy);
+                if (this.is_miss != false)
+                    writer.writeBool(10, this.is_miss);
+                if (this.is_bad_hit != false)
+                    writer.writeBool(11, this.is_bad_hit);
+                if (this.song_position != 0)
+                    writer.writeFloat(12, this.song_position);
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RealtimeScore {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new RealtimeScore();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            message.user_guid = reader.readString();
+                            break;
+                        case 2:
+                            message.score = reader.readInt32();
+                            break;
+                        case 3:
+                            message.score_with_modifiers = reader.readInt32();
+                            break;
+                        case 4:
+                            message.max_score = reader.readInt32();
+                            break;
+                        case 5:
+                            message.max_score_with_modifiers = reader.readInt32();
+                            break;
+                        case 6:
+                            message.combo = reader.readInt32();
+                            break;
+                        case 7:
+                            message.misses = reader.readInt32();
+                            break;
+                        case 8:
+                            message.player_health = reader.readFloat();
+                            break;
+                        case 9:
+                            message.accuracy = reader.readFloat();
+                            break;
+                        case 10:
+                            message.is_miss = reader.readBool();
+                            break;
+                        case 11:
+                            message.is_bad_hit = reader.readBool();
+                            break;
+                        case 12:
+                            message.song_position = reader.readFloat();
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): RealtimeScore {
+                return RealtimeScore.deserialize(bytes);
+            }
+        }
+        export class SongFinished extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                player?: dependency_2.Models.User;
+                beatmap?: dependency_2.Models.Beatmap;
+                type?: Push.SongFinished.CompletionType;
+                score?: number;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("player" in data && data.player != undefined) {
+                        this.player = data.player;
+                    }
+                    if ("beatmap" in data && data.beatmap != undefined) {
+                        this.beatmap = data.beatmap;
+                    }
+                    if ("type" in data && data.type != undefined) {
+                        this.type = data.type;
+                    }
+                    if ("score" in data && data.score != undefined) {
+                        this.score = data.score;
+                    }
+                }
+            }
+            get player() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.User, 1) as dependency_2.Models.User;
+            }
+            set player(value: dependency_2.Models.User) {
+                pb_1.Message.setWrapperField(this, 1, value);
+            }
+            get has_player() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
+            get beatmap() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.Beatmap, 2) as dependency_2.Models.Beatmap;
+            }
+            set beatmap(value: dependency_2.Models.Beatmap) {
+                pb_1.Message.setWrapperField(this, 2, value);
+            }
+            get has_beatmap() {
+                return pb_1.Message.getField(this, 2) != null;
+            }
+            get type() {
+                return pb_1.Message.getFieldWithDefault(this, 3, Push.SongFinished.CompletionType.Passed) as Push.SongFinished.CompletionType;
+            }
+            set type(value: Push.SongFinished.CompletionType) {
+                pb_1.Message.setField(this, 3, value);
+            }
+            get score() {
+                return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+            }
+            set score(value: number) {
+                pb_1.Message.setField(this, 4, value);
+            }
+            static fromObject(data: {
+                player?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
+                beatmap?: ReturnType<typeof dependency_2.Models.Beatmap.prototype.toObject>;
+                type?: Push.SongFinished.CompletionType;
+                score?: number;
+            }): SongFinished {
+                const message = new SongFinished({});
+                if (data.player != null) {
+                    message.player = dependency_2.Models.User.fromObject(data.player);
+                }
+                if (data.beatmap != null) {
+                    message.beatmap = dependency_2.Models.Beatmap.fromObject(data.beatmap);
+                }
+                if (data.type != null) {
+                    message.type = data.type;
+                }
+                if (data.score != null) {
+                    message.score = data.score;
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    player?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
+                    beatmap?: ReturnType<typeof dependency_2.Models.Beatmap.prototype.toObject>;
+                    type?: Push.SongFinished.CompletionType;
+                    score?: number;
+                } = {};
+                if (this.player != null) {
+                    data.player = this.player.toObject();
+                }
+                if (this.beatmap != null) {
+                    data.beatmap = this.beatmap.toObject();
+                }
+                if (this.type != null) {
+                    data.type = this.type;
+                }
+                if (this.score != null) {
+                    data.score = this.score;
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.has_player)
+                    writer.writeMessage(1, this.player, () => this.player.serialize(writer));
+                if (this.has_beatmap)
+                    writer.writeMessage(2, this.beatmap, () => this.beatmap.serialize(writer));
+                if (this.type != Push.SongFinished.CompletionType.Passed)
+                    writer.writeEnum(3, this.type);
+                if (this.score != 0)
+                    writer.writeInt32(4, this.score);
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SongFinished {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SongFinished();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            reader.readMessage(message.player, () => message.player = dependency_2.Models.User.deserialize(reader));
+                            break;
+                        case 2:
+                            reader.readMessage(message.beatmap, () => message.beatmap = dependency_2.Models.Beatmap.deserialize(reader));
+                            break;
+                        case 3:
+                            message.type = reader.readEnum();
+                            break;
+                        case 4:
+                            message.score = reader.readInt32();
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): SongFinished {
+                return SongFinished.deserialize(bytes);
+            }
+        }
+        export namespace SongFinished {
+            export enum CompletionType {
+                Passed = 0,
+                Failed = 1,
+                Quit = 2
+            }
+        }
+    }
+    export class Request extends pb_1.Message {
+        private one_of_decls: number[][] = [[1, 2, 3]];
+        constructor(data?: any[] | ({} & (({
+            connect?: Request.Connect;
+            leaderboard_score?: never;
+            preload_image_for_stream_sync?: never;
+        } | {
+            connect?: never;
+            leaderboard_score?: Request.LeaderboardScore;
+            preload_image_for_stream_sync?: never;
+        } | {
+            connect?: never;
+            leaderboard_score?: never;
+            preload_image_for_stream_sync?: Request.PreloadImageForStreamSync;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("connect" in data && data.connect != undefined) {
+                    this.connect = data.connect;
+                }
+                if ("leaderboard_score" in data && data.leaderboard_score != undefined) {
+                    this.leaderboard_score = data.leaderboard_score;
+                }
+                if ("preload_image_for_stream_sync" in data && data.preload_image_for_stream_sync != undefined) {
+                    this.preload_image_for_stream_sync = data.preload_image_for_stream_sync;
+                }
+            }
+        }
+        get connect() {
+            return pb_1.Message.getWrapperField(this, Request.Connect, 1) as Request.Connect;
+        }
+        set connect(value: Request.Connect) {
+            pb_1.Message.setOneofWrapperField(this, 1, this.one_of_decls[0], value);
+        }
+        get has_connect() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get leaderboard_score() {
+            return pb_1.Message.getWrapperField(this, Request.LeaderboardScore, 2) as Request.LeaderboardScore;
+        }
+        set leaderboard_score(value: Request.LeaderboardScore) {
+            pb_1.Message.setOneofWrapperField(this, 2, this.one_of_decls[0], value);
+        }
+        get has_leaderboard_score() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        get preload_image_for_stream_sync() {
+            return pb_1.Message.getWrapperField(this, Request.PreloadImageForStreamSync, 3) as Request.PreloadImageForStreamSync;
+        }
+        set preload_image_for_stream_sync(value: Request.PreloadImageForStreamSync) {
+            pb_1.Message.setOneofWrapperField(this, 3, this.one_of_decls[0], value);
+        }
+        get has_preload_image_for_stream_sync() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get type() {
+            const cases: {
+                [index: number]: "none" | "connect" | "leaderboard_score" | "preload_image_for_stream_sync";
+            } = {
+                0: "none",
+                1: "connect",
+                2: "leaderboard_score",
+                3: "preload_image_for_stream_sync"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [1, 2, 3])];
+        }
+        static fromObject(data: {
+            connect?: ReturnType<typeof Request.Connect.prototype.toObject>;
+            leaderboard_score?: ReturnType<typeof Request.LeaderboardScore.prototype.toObject>;
+            preload_image_for_stream_sync?: ReturnType<typeof Request.PreloadImageForStreamSync.prototype.toObject>;
+        }): Request {
+            const message = new Request({});
+            if (data.connect != null) {
+                message.connect = Request.Connect.fromObject(data.connect);
+            }
+            if (data.leaderboard_score != null) {
+                message.leaderboard_score = Request.LeaderboardScore.fromObject(data.leaderboard_score);
+            }
+            if (data.preload_image_for_stream_sync != null) {
+                message.preload_image_for_stream_sync = Request.PreloadImageForStreamSync.fromObject(data.preload_image_for_stream_sync);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                connect?: ReturnType<typeof Request.Connect.prototype.toObject>;
+                leaderboard_score?: ReturnType<typeof Request.LeaderboardScore.prototype.toObject>;
+                preload_image_for_stream_sync?: ReturnType<typeof Request.PreloadImageForStreamSync.prototype.toObject>;
+            } = {};
+            if (this.connect != null) {
+                data.connect = this.connect.toObject();
+            }
+            if (this.leaderboard_score != null) {
+                data.leaderboard_score = this.leaderboard_score.toObject();
+            }
+            if (this.preload_image_for_stream_sync != null) {
+                data.preload_image_for_stream_sync = this.preload_image_for_stream_sync.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_connect)
+                writer.writeMessage(1, this.connect, () => this.connect.serialize(writer));
+            if (this.has_leaderboard_score)
+                writer.writeMessage(2, this.leaderboard_score, () => this.leaderboard_score.serialize(writer));
+            if (this.has_preload_image_for_stream_sync)
+                writer.writeMessage(3, this.preload_image_for_stream_sync, () => this.preload_image_for_stream_sync.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Request {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Request();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.connect, () => message.connect = Request.Connect.deserialize(reader));
+                        break;
+                    case 2:
+                        reader.readMessage(message.leaderboard_score, () => message.leaderboard_score = Request.LeaderboardScore.deserialize(reader));
+                        break;
+                    case 3:
+                        reader.readMessage(message.preload_image_for_stream_sync, () => message.preload_image_for_stream_sync = Request.PreloadImageForStreamSync.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Request {
+            return Request.deserialize(bytes);
+        }
+    }
+    export namespace Request {
+        export class Connect extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                user?: dependency_2.Models.User;
+                password?: string;
+                client_version?: number;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("user" in data && data.user != undefined) {
+                        this.user = data.user;
+                    }
+                    if ("password" in data && data.password != undefined) {
+                        this.password = data.password;
+                    }
+                    if ("client_version" in data && data.client_version != undefined) {
+                        this.client_version = data.client_version;
+                    }
+                }
+            }
+            get user() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.User, 1) as dependency_2.Models.User;
+            }
+            set user(value: dependency_2.Models.User) {
+                pb_1.Message.setWrapperField(this, 1, value);
+            }
+            get has_user() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
+            get password() {
+                return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            }
+            set password(value: string) {
+                pb_1.Message.setField(this, 2, value);
+            }
+            get client_version() {
+                return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+            }
+            set client_version(value: number) {
+                pb_1.Message.setField(this, 3, value);
+            }
+            static fromObject(data: {
+                user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
+                password?: string;
+                client_version?: number;
+            }): Connect {
+                const message = new Connect({});
+                if (data.user != null) {
+                    message.user = dependency_2.Models.User.fromObject(data.user);
+                }
+                if (data.password != null) {
+                    message.password = data.password;
+                }
+                if (data.client_version != null) {
+                    message.client_version = data.client_version;
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
+                    password?: string;
+                    client_version?: number;
+                } = {};
+                if (this.user != null) {
+                    data.user = this.user.toObject();
+                }
+                if (this.password != null) {
+                    data.password = this.password;
+                }
+                if (this.client_version != null) {
+                    data.client_version = this.client_version;
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.has_user)
+                    writer.writeMessage(1, this.user, () => this.user.serialize(writer));
+                if (this.password.length)
+                    writer.writeString(2, this.password);
+                if (this.client_version != 0)
+                    writer.writeInt32(3, this.client_version);
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Connect {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Connect();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            reader.readMessage(message.user, () => message.user = dependency_2.Models.User.deserialize(reader));
+                            break;
+                        case 2:
+                            message.password = reader.readString();
+                            break;
+                        case 3:
+                            message.client_version = reader.readInt32();
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): Connect {
+                return Connect.deserialize(bytes);
+            }
+        }
+        export class LeaderboardScore extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                event_id?: string;
+                parameters?: dependency_2.Models.GameplayParameters;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("event_id" in data && data.event_id != undefined) {
+                        this.event_id = data.event_id;
+                    }
+                    if ("parameters" in data && data.parameters != undefined) {
+                        this.parameters = data.parameters;
+                    }
+                }
+            }
+            get event_id() {
+                return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+            }
+            set event_id(value: string) {
+                pb_1.Message.setField(this, 1, value);
+            }
+            get parameters() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.GameplayParameters, 2) as dependency_2.Models.GameplayParameters;
+            }
+            set parameters(value: dependency_2.Models.GameplayParameters) {
+                pb_1.Message.setWrapperField(this, 2, value);
+            }
+            get has_parameters() {
+                return pb_1.Message.getField(this, 2) != null;
+            }
+            static fromObject(data: {
+                event_id?: string;
+                parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject>;
+            }): LeaderboardScore {
+                const message = new LeaderboardScore({});
+                if (data.event_id != null) {
+                    message.event_id = data.event_id;
+                }
+                if (data.parameters != null) {
+                    message.parameters = dependency_2.Models.GameplayParameters.fromObject(data.parameters);
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    event_id?: string;
+                    parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject>;
+                } = {};
+                if (this.event_id != null) {
+                    data.event_id = this.event_id;
+                }
+                if (this.parameters != null) {
+                    data.parameters = this.parameters.toObject();
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.event_id.length)
+                    writer.writeString(1, this.event_id);
+                if (this.has_parameters)
+                    writer.writeMessage(2, this.parameters, () => this.parameters.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LeaderboardScore {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LeaderboardScore();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            message.event_id = reader.readString();
+                            break;
+                        case 2:
+                            reader.readMessage(message.parameters, () => message.parameters = dependency_2.Models.GameplayParameters.deserialize(reader));
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): LeaderboardScore {
+                return LeaderboardScore.deserialize(bytes);
+            }
+        }
+        export class PreloadImageForStreamSync extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                file_id?: string;
+                compressed?: boolean;
+                data?: Uint8Array;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("file_id" in data && data.file_id != undefined) {
+                        this.file_id = data.file_id;
+                    }
+                    if ("compressed" in data && data.compressed != undefined) {
+                        this.compressed = data.compressed;
+                    }
+                    if ("data" in data && data.data != undefined) {
+                        this.data = data.data;
+                    }
+                }
+            }
+            get file_id() {
+                return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+            }
+            set file_id(value: string) {
+                pb_1.Message.setField(this, 1, value);
+            }
+            get compressed() {
+                return pb_1.Message.getFieldWithDefault(this, 2, false) as boolean;
+            }
+            set compressed(value: boolean) {
+                pb_1.Message.setField(this, 2, value);
+            }
+            get data() {
+                return pb_1.Message.getFieldWithDefault(this, 3, new Uint8Array()) as Uint8Array;
+            }
+            set data(value: Uint8Array) {
+                pb_1.Message.setField(this, 3, value);
+            }
+            static fromObject(data: {
+                file_id?: string;
+                compressed?: boolean;
+                data?: Uint8Array;
+            }): PreloadImageForStreamSync {
+                const message = new PreloadImageForStreamSync({});
+                if (data.file_id != null) {
+                    message.file_id = data.file_id;
+                }
+                if (data.compressed != null) {
+                    message.compressed = data.compressed;
+                }
+                if (data.data != null) {
+                    message.data = data.data;
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    file_id?: string;
+                    compressed?: boolean;
+                    data?: Uint8Array;
+                } = {};
+                if (this.file_id != null) {
+                    data.file_id = this.file_id;
+                }
+                if (this.compressed != null) {
+                    data.compressed = this.compressed;
+                }
+                if (this.data != null) {
+                    data.data = this.data;
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.file_id.length)
+                    writer.writeString(1, this.file_id);
+                if (this.compressed != false)
+                    writer.writeBool(2, this.compressed);
+                if (this.data.length)
+                    writer.writeBytes(3, this.data);
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PreloadImageForStreamSync {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PreloadImageForStreamSync();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            message.file_id = reader.readString();
+                            break;
+                        case 2:
+                            message.compressed = reader.readBool();
+                            break;
+                        case 3:
+                            message.data = reader.readBytes();
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): PreloadImageForStreamSync {
+                return PreloadImageForStreamSync.deserialize(bytes);
+            }
+        }
+    }
+    export class Response extends pb_1.Message {
+        private one_of_decls: number[][] = [[3, 4, 5, 6, 7, 8]];
+        constructor(data?: any[] | ({
+            type?: Response.ResponseType;
+            responding_to_packet_id?: string;
+        } & (({
+            connect?: Response.Connect;
+            leaderboard_scores?: never;
+            loaded_song?: never;
+            modal?: never;
+            modify_qualifier?: never;
+            image_preloaded?: never;
+        } | {
+            connect?: never;
+            leaderboard_scores?: Response.LeaderboardScores;
+            loaded_song?: never;
+            modal?: never;
+            modify_qualifier?: never;
+            image_preloaded?: never;
+        } | {
+            connect?: never;
+            leaderboard_scores?: never;
+            loaded_song?: Response.LoadedSong;
+            modal?: never;
+            modify_qualifier?: never;
+            image_preloaded?: never;
+        } | {
+            connect?: never;
+            leaderboard_scores?: never;
+            loaded_song?: never;
+            modal?: Response.Modal;
+            modify_qualifier?: never;
+            image_preloaded?: never;
+        } | {
+            connect?: never;
+            leaderboard_scores?: never;
+            loaded_song?: never;
+            modal?: never;
+            modify_qualifier?: Response.ModifyQualifier;
+            image_preloaded?: never;
+        } | {
+            connect?: never;
+            leaderboard_scores?: never;
+            loaded_song?: never;
+            modal?: never;
+            modify_qualifier?: never;
+            image_preloaded?: Response.ImagePreloaded;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("type" in data && data.type != undefined) {
+                    this.type = data.type;
+                }
+                if ("responding_to_packet_id" in data && data.responding_to_packet_id != undefined) {
+                    this.responding_to_packet_id = data.responding_to_packet_id;
+                }
+                if ("connect" in data && data.connect != undefined) {
+                    this.connect = data.connect;
+                }
+                if ("leaderboard_scores" in data && data.leaderboard_scores != undefined) {
+                    this.leaderboard_scores = data.leaderboard_scores;
+                }
+                if ("loaded_song" in data && data.loaded_song != undefined) {
+                    this.loaded_song = data.loaded_song;
+                }
+                if ("modal" in data && data.modal != undefined) {
+                    this.modal = data.modal;
+                }
+                if ("modify_qualifier" in data && data.modify_qualifier != undefined) {
+                    this.modify_qualifier = data.modify_qualifier;
+                }
+                if ("image_preloaded" in data && data.image_preloaded != undefined) {
+                    this.image_preloaded = data.image_preloaded;
+                }
+            }
+        }
+        get type() {
+            return pb_1.Message.getFieldWithDefault(this, 1, Response.ResponseType.Fail) as Response.ResponseType;
+        }
+        set type(value: Response.ResponseType) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get responding_to_packet_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set responding_to_packet_id(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get connect() {
+            return pb_1.Message.getWrapperField(this, Response.Connect, 3) as Response.Connect;
+        }
+        set connect(value: Response.Connect) {
+            pb_1.Message.setOneofWrapperField(this, 3, this.one_of_decls[0], value);
+        }
+        get has_connect() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get leaderboard_scores() {
+            return pb_1.Message.getWrapperField(this, Response.LeaderboardScores, 4) as Response.LeaderboardScores;
+        }
+        set leaderboard_scores(value: Response.LeaderboardScores) {
+            pb_1.Message.setOneofWrapperField(this, 4, this.one_of_decls[0], value);
+        }
+        get has_leaderboard_scores() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        get loaded_song() {
+            return pb_1.Message.getWrapperField(this, Response.LoadedSong, 5) as Response.LoadedSong;
+        }
+        set loaded_song(value: Response.LoadedSong) {
+            pb_1.Message.setOneofWrapperField(this, 5, this.one_of_decls[0], value);
+        }
+        get has_loaded_song() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get modal() {
+            return pb_1.Message.getWrapperField(this, Response.Modal, 6) as Response.Modal;
+        }
+        set modal(value: Response.Modal) {
+            pb_1.Message.setOneofWrapperField(this, 6, this.one_of_decls[0], value);
+        }
+        get has_modal() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get modify_qualifier() {
+            return pb_1.Message.getWrapperField(this, Response.ModifyQualifier, 7) as Response.ModifyQualifier;
+        }
+        set modify_qualifier(value: Response.ModifyQualifier) {
+            pb_1.Message.setOneofWrapperField(this, 7, this.one_of_decls[0], value);
+        }
+        get has_modify_qualifier() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        get image_preloaded() {
+            return pb_1.Message.getWrapperField(this, Response.ImagePreloaded, 8) as Response.ImagePreloaded;
+        }
+        set image_preloaded(value: Response.ImagePreloaded) {
+            pb_1.Message.setOneofWrapperField(this, 8, this.one_of_decls[0], value);
+        }
+        get has_image_preloaded() {
+            return pb_1.Message.getField(this, 8) != null;
+        }
+        get details() {
+            const cases: {
+                [index: number]: "none" | "connect" | "leaderboard_scores" | "loaded_song" | "modal" | "modify_qualifier" | "image_preloaded";
+            } = {
+                0: "none",
+                3: "connect",
+                4: "leaderboard_scores",
+                5: "loaded_song",
+                6: "modal",
+                7: "modify_qualifier",
+                8: "image_preloaded"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [3, 4, 5, 6, 7, 8])];
+        }
+        static fromObject(data: {
+            type?: Response.ResponseType;
+            responding_to_packet_id?: string;
+            connect?: ReturnType<typeof Response.Connect.prototype.toObject>;
+            leaderboard_scores?: ReturnType<typeof Response.LeaderboardScores.prototype.toObject>;
+            loaded_song?: ReturnType<typeof Response.LoadedSong.prototype.toObject>;
+            modal?: ReturnType<typeof Response.Modal.prototype.toObject>;
+            modify_qualifier?: ReturnType<typeof Response.ModifyQualifier.prototype.toObject>;
+            image_preloaded?: ReturnType<typeof Response.ImagePreloaded.prototype.toObject>;
+        }): Response {
+            const message = new Response({});
+            if (data.type != null) {
+                message.type = data.type;
+            }
+            if (data.responding_to_packet_id != null) {
+                message.responding_to_packet_id = data.responding_to_packet_id;
+            }
+            if (data.connect != null) {
+                message.connect = Response.Connect.fromObject(data.connect);
+            }
+            if (data.leaderboard_scores != null) {
+                message.leaderboard_scores = Response.LeaderboardScores.fromObject(data.leaderboard_scores);
+            }
+            if (data.loaded_song != null) {
+                message.loaded_song = Response.LoadedSong.fromObject(data.loaded_song);
+            }
+            if (data.modal != null) {
+                message.modal = Response.Modal.fromObject(data.modal);
+            }
+            if (data.modify_qualifier != null) {
+                message.modify_qualifier = Response.ModifyQualifier.fromObject(data.modify_qualifier);
+            }
+            if (data.image_preloaded != null) {
+                message.image_preloaded = Response.ImagePreloaded.fromObject(data.image_preloaded);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                type?: Response.ResponseType;
+                responding_to_packet_id?: string;
+                connect?: ReturnType<typeof Response.Connect.prototype.toObject>;
+                leaderboard_scores?: ReturnType<typeof Response.LeaderboardScores.prototype.toObject>;
+                loaded_song?: ReturnType<typeof Response.LoadedSong.prototype.toObject>;
+                modal?: ReturnType<typeof Response.Modal.prototype.toObject>;
+                modify_qualifier?: ReturnType<typeof Response.ModifyQualifier.prototype.toObject>;
+                image_preloaded?: ReturnType<typeof Response.ImagePreloaded.prototype.toObject>;
+            } = {};
+            if (this.type != null) {
+                data.type = this.type;
+            }
+            if (this.responding_to_packet_id != null) {
+                data.responding_to_packet_id = this.responding_to_packet_id;
+            }
+            if (this.connect != null) {
+                data.connect = this.connect.toObject();
+            }
+            if (this.leaderboard_scores != null) {
+                data.leaderboard_scores = this.leaderboard_scores.toObject();
+            }
+            if (this.loaded_song != null) {
+                data.loaded_song = this.loaded_song.toObject();
+            }
+            if (this.modal != null) {
+                data.modal = this.modal.toObject();
+            }
+            if (this.modify_qualifier != null) {
+                data.modify_qualifier = this.modify_qualifier.toObject();
+            }
+            if (this.image_preloaded != null) {
+                data.image_preloaded = this.image_preloaded.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.type != Response.ResponseType.Fail)
+                writer.writeEnum(1, this.type);
+            if (this.responding_to_packet_id.length)
+                writer.writeString(2, this.responding_to_packet_id);
+            if (this.has_connect)
+                writer.writeMessage(3, this.connect, () => this.connect.serialize(writer));
+            if (this.has_leaderboard_scores)
+                writer.writeMessage(4, this.leaderboard_scores, () => this.leaderboard_scores.serialize(writer));
+            if (this.has_loaded_song)
+                writer.writeMessage(5, this.loaded_song, () => this.loaded_song.serialize(writer));
+            if (this.has_modal)
+                writer.writeMessage(6, this.modal, () => this.modal.serialize(writer));
+            if (this.has_modify_qualifier)
+                writer.writeMessage(7, this.modify_qualifier, () => this.modify_qualifier.serialize(writer));
+            if (this.has_image_preloaded)
+                writer.writeMessage(8, this.image_preloaded, () => this.image_preloaded.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Response {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Response();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.type = reader.readEnum();
+                        break;
+                    case 2:
+                        message.responding_to_packet_id = reader.readString();
+                        break;
+                    case 3:
+                        reader.readMessage(message.connect, () => message.connect = Response.Connect.deserialize(reader));
+                        break;
+                    case 4:
+                        reader.readMessage(message.leaderboard_scores, () => message.leaderboard_scores = Response.LeaderboardScores.deserialize(reader));
+                        break;
+                    case 5:
+                        reader.readMessage(message.loaded_song, () => message.loaded_song = Response.LoadedSong.deserialize(reader));
+                        break;
+                    case 6:
+                        reader.readMessage(message.modal, () => message.modal = Response.Modal.deserialize(reader));
+                        break;
+                    case 7:
+                        reader.readMessage(message.modify_qualifier, () => message.modify_qualifier = Response.ModifyQualifier.deserialize(reader));
+                        break;
+                    case 8:
+                        reader.readMessage(message.image_preloaded, () => message.image_preloaded = Response.ImagePreloaded.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Response {
+            return Response.deserialize(bytes);
+        }
+    }
+    export namespace Response {
+        export enum ResponseType {
+            Fail = 0,
+            Success = 1
+        }
+        export class Connect extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                state?: dependency_2.Models.State;
+                self_guid?: string;
+                server_version?: number;
+                message?: string;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("state" in data && data.state != undefined) {
+                        this.state = data.state;
+                    }
+                    if ("self_guid" in data && data.self_guid != undefined) {
+                        this.self_guid = data.self_guid;
+                    }
+                    if ("server_version" in data && data.server_version != undefined) {
+                        this.server_version = data.server_version;
+                    }
+                    if ("message" in data && data.message != undefined) {
+                        this.message = data.message;
+                    }
+                }
+            }
+            get state() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.State, 1) as dependency_2.Models.State;
+            }
+            set state(value: dependency_2.Models.State) {
+                pb_1.Message.setWrapperField(this, 1, value);
+            }
+            get has_state() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
+            get self_guid() {
+                return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            }
+            set self_guid(value: string) {
+                pb_1.Message.setField(this, 2, value);
+            }
+            get server_version() {
+                return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+            }
+            set server_version(value: number) {
+                pb_1.Message.setField(this, 3, value);
+            }
+            get message() {
+                return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+            }
+            set message(value: string) {
+                pb_1.Message.setField(this, 4, value);
+            }
+            static fromObject(data: {
+                state?: ReturnType<typeof dependency_2.Models.State.prototype.toObject>;
+                self_guid?: string;
+                server_version?: number;
+                message?: string;
+            }): Connect {
+                const message = new Connect({});
+                if (data.state != null) {
+                    message.state = dependency_2.Models.State.fromObject(data.state);
+                }
+                if (data.self_guid != null) {
+                    message.self_guid = data.self_guid;
+                }
+                if (data.server_version != null) {
+                    message.server_version = data.server_version;
+                }
+                if (data.message != null) {
+                    message.message = data.message;
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    state?: ReturnType<typeof dependency_2.Models.State.prototype.toObject>;
+                    self_guid?: string;
+                    server_version?: number;
+                    message?: string;
+                } = {};
+                if (this.state != null) {
+                    data.state = this.state.toObject();
+                }
+                if (this.self_guid != null) {
+                    data.self_guid = this.self_guid;
+                }
+                if (this.server_version != null) {
+                    data.server_version = this.server_version;
+                }
+                if (this.message != null) {
+                    data.message = this.message;
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.has_state)
+                    writer.writeMessage(1, this.state, () => this.state.serialize(writer));
+                if (this.self_guid.length)
+                    writer.writeString(2, this.self_guid);
+                if (this.server_version != 0)
+                    writer.writeInt32(3, this.server_version);
+                if (this.message.length)
+                    writer.writeString(4, this.message);
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Connect {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Connect();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            reader.readMessage(message.state, () => message.state = dependency_2.Models.State.deserialize(reader));
+                            break;
+                        case 2:
+                            message.self_guid = reader.readString();
+                            break;
+                        case 3:
+                            message.server_version = reader.readInt32();
+                            break;
+                        case 4:
+                            message.message = reader.readString();
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): Connect {
+                return Connect.deserialize(bytes);
+            }
+        }
+        export class LeaderboardScores extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                scores?: dependency_2.Models.LeaderboardScore[];
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("scores" in data && data.scores != undefined) {
+                        this.scores = data.scores;
+                    }
+                }
+            }
+            get scores() {
+                return pb_1.Message.getRepeatedWrapperField(this, dependency_2.Models.LeaderboardScore, 1) as dependency_2.Models.LeaderboardScore[];
+            }
+            set scores(value: dependency_2.Models.LeaderboardScore[]) {
+                pb_1.Message.setRepeatedWrapperField(this, 1, value);
+            }
+            static fromObject(data: {
+                scores?: ReturnType<typeof dependency_2.Models.LeaderboardScore.prototype.toObject>[];
+            }): LeaderboardScores {
+                const message = new LeaderboardScores({});
+                if (data.scores != null) {
+                    message.scores = data.scores.map(item => dependency_2.Models.LeaderboardScore.fromObject(item));
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    scores?: ReturnType<typeof dependency_2.Models.LeaderboardScore.prototype.toObject>[];
+                } = {};
+                if (this.scores != null) {
+                    data.scores = this.scores.map((item: dependency_2.Models.LeaderboardScore) => item.toObject());
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.scores.length)
+                    writer.writeRepeatedMessage(1, this.scores, (item: dependency_2.Models.LeaderboardScore) => item.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LeaderboardScores {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LeaderboardScores();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            reader.readMessage(message.scores, () => pb_1.Message.addToRepeatedWrapperField(message, 1, dependency_2.Models.LeaderboardScore.deserialize(reader), dependency_2.Models.LeaderboardScore));
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): LeaderboardScores {
+                return LeaderboardScores.deserialize(bytes);
+            }
+        }
+        export class LoadedSong extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                level?: dependency_2.Models.PreviewBeatmapLevel;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("level" in data && data.level != undefined) {
+                        this.level = data.level;
+                    }
+                }
+            }
+            get level() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.PreviewBeatmapLevel, 1) as dependency_2.Models.PreviewBeatmapLevel;
+            }
+            set level(value: dependency_2.Models.PreviewBeatmapLevel) {
+                pb_1.Message.setWrapperField(this, 1, value);
+            }
+            get has_level() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
+            static fromObject(data: {
+                level?: ReturnType<typeof dependency_2.Models.PreviewBeatmapLevel.prototype.toObject>;
+            }): LoadedSong {
+                const message = new LoadedSong({});
+                if (data.level != null) {
+                    message.level = dependency_2.Models.PreviewBeatmapLevel.fromObject(data.level);
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    level?: ReturnType<typeof dependency_2.Models.PreviewBeatmapLevel.prototype.toObject>;
+                } = {};
+                if (this.level != null) {
+                    data.level = this.level.toObject();
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.has_level)
+                    writer.writeMessage(1, this.level, () => this.level.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LoadedSong {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LoadedSong();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            reader.readMessage(message.level, () => message.level = dependency_2.Models.PreviewBeatmapLevel.deserialize(reader));
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): LoadedSong {
+                return LoadedSong.deserialize(bytes);
+            }
+        }
+        export class Modal extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                modal_id?: string;
+                value?: string;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("modal_id" in data && data.modal_id != undefined) {
+                        this.modal_id = data.modal_id;
+                    }
+                    if ("value" in data && data.value != undefined) {
+                        this.value = data.value;
+                    }
+                }
+            }
+            get modal_id() {
+                return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+            }
+            set modal_id(value: string) {
+                pb_1.Message.setField(this, 1, value);
+            }
+            get value() {
+                return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            }
+            set value(value: string) {
+                pb_1.Message.setField(this, 2, value);
+            }
+            static fromObject(data: {
+                modal_id?: string;
+                value?: string;
+            }): Modal {
+                const message = new Modal({});
+                if (data.modal_id != null) {
+                    message.modal_id = data.modal_id;
+                }
+                if (data.value != null) {
+                    message.value = data.value;
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    modal_id?: string;
+                    value?: string;
+                } = {};
+                if (this.modal_id != null) {
+                    data.modal_id = this.modal_id;
+                }
+                if (this.value != null) {
+                    data.value = this.value;
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.modal_id.length)
+                    writer.writeString(1, this.modal_id);
+                if (this.value.length)
+                    writer.writeString(2, this.value);
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Modal {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Modal();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            message.modal_id = reader.readString();
+                            break;
+                        case 2:
+                            message.value = reader.readString();
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): Modal {
+                return Modal.deserialize(bytes);
+            }
+        }
+        export class ModifyQualifier extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                message?: string;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("message" in data && data.message != undefined) {
+                        this.message = data.message;
+                    }
+                }
+            }
+            get message() {
+                return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+            }
+            set message(value: string) {
+                pb_1.Message.setField(this, 1, value);
+            }
+            static fromObject(data: {
+                message?: string;
+            }): ModifyQualifier {
+                const message = new ModifyQualifier({});
+                if (data.message != null) {
+                    message.message = data.message;
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    message?: string;
+                } = {};
+                if (this.message != null) {
+                    data.message = this.message;
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.message.length)
+                    writer.writeString(1, this.message);
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModifyQualifier {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ModifyQualifier();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            message.message = reader.readString();
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): ModifyQualifier {
+                return ModifyQualifier.deserialize(bytes);
+            }
+        }
+        export class ImagePreloaded extends pb_1.Message {
+            private one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                file_id?: string;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("file_id" in data && data.file_id != undefined) {
+                        this.file_id = data.file_id;
+                    }
+                }
+            }
+            get file_id() {
+                return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+            }
+            set file_id(value: string) {
+                pb_1.Message.setField(this, 1, value);
+            }
+            static fromObject(data: {
+                file_id?: string;
+            }): ImagePreloaded {
+                const message = new ImagePreloaded({});
+                if (data.file_id != null) {
+                    message.file_id = data.file_id;
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    file_id?: string;
+                } = {};
+                if (this.file_id != null) {
+                    data.file_id = this.file_id;
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.file_id.length)
+                    writer.writeString(1, this.file_id);
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ImagePreloaded {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ImagePreloaded();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            message.file_id = reader.readString();
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): ImagePreloaded {
+                return ImagePreloaded.deserialize(bytes);
+            }
+        }
+    }
     export class Acknowledgement extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             packet_id?: string;
             type?: Acknowledgement.AcknowledgementType;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("packet_id" in data && data.packet_id != undefined) {
                     this.packet_id = data.packet_id;
@@ -30,7 +2892,7 @@ export namespace Packets {
             pb_1.Message.setField(this, 1, value);
         }
         get type() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as Acknowledgement.AcknowledgementType;
+            return pb_1.Message.getFieldWithDefault(this, 2, Acknowledgement.AcknowledgementType.MessageReceived) as Acknowledgement.AcknowledgementType;
         }
         set type(value: Acknowledgement.AcknowledgementType) {
             pb_1.Message.setField(this, 2, value);
@@ -38,7 +2900,7 @@ export namespace Packets {
         static fromObject(data: {
             packet_id?: string;
             type?: Acknowledgement.AcknowledgementType;
-        }) {
+        }): Acknowledgement {
             const message = new Acknowledgement({});
             if (data.packet_id != null) {
                 message.packet_id = data.packet_id;
@@ -65,9 +2927,9 @@ export namespace Packets {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.packet_id === "string" && this.packet_id.length)
+            if (this.packet_id.length)
                 writer.writeString(1, this.packet_id);
-            if (this.type !== undefined)
+            if (this.type != Acknowledgement.AcknowledgementType.MessageReceived)
                 writer.writeEnum(2, this.type);
             if (!w)
                 return writer.getResultBuffer();
@@ -98,425 +2960,64 @@ export namespace Packets {
     }
     export namespace Acknowledgement {
         export enum AcknowledgementType {
-            MessageReceived = 0,
-            FileDownloaded = 1
+            MessageReceived = 0
         }
     }
-    export class Command extends pb_1.Message {
+    export class ForwardingPacket extends pb_1.Message {
+        private one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            command_type?: Command.CommandTypes;
+            forward_to?: string[];
+            packet?: Packet;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("command_type" in data && data.command_type != undefined) {
-                    this.command_type = data.command_type;
+                if ("forward_to" in data && data.forward_to != undefined) {
+                    this.forward_to = data.forward_to;
+                }
+                if ("packet" in data && data.packet != undefined) {
+                    this.packet = data.packet;
                 }
             }
         }
-        get command_type() {
-            return pb_1.Message.getFieldWithDefault(this, 1, 0) as Command.CommandTypes;
+        get forward_to() {
+            return pb_1.Message.getFieldWithDefault(this, 1, []) as string[];
         }
-        set command_type(value: Command.CommandTypes) {
+        set forward_to(value: string[]) {
             pb_1.Message.setField(this, 1, value);
         }
-        static fromObject(data: {
-            command_type?: Command.CommandTypes;
-        }) {
-            const message = new Command({});
-            if (data.command_type != null) {
-                message.command_type = data.command_type;
-            }
-            return message;
+        get packet() {
+            return pb_1.Message.getWrapperField(this, Packet, 2) as Packet;
         }
-        toObject() {
-            const data: {
-                command_type?: Command.CommandTypes;
-            } = {};
-            if (this.command_type != null) {
-                data.command_type = this.command_type;
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.command_type !== undefined)
-                writer.writeEnum(1, this.command_type);
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Command {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Command();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        message.command_type = reader.readEnum();
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): Command {
-            return Command.deserialize(bytes);
-        }
-    }
-    export namespace Command {
-        export enum CommandTypes {
-            Heartbeat = 0,
-            ReturnToMenu = 1,
-            ScreenOverlay_ShowPng = 2,
-            ScreenOverlay_ShowGreen = 3,
-            DelayTest_Finish = 4
-        }
-    }
-    export class Connect extends pb_1.Message {
-        constructor(data?: any[] | {
-            client_type?: dependency_2.Models.User.ClientTypes;
-            name?: string;
-            password?: string;
-            user_id?: string;
-            client_version?: number;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("client_type" in data && data.client_type != undefined) {
-                    this.client_type = data.client_type;
-                }
-                if ("name" in data && data.name != undefined) {
-                    this.name = data.name;
-                }
-                if ("password" in data && data.password != undefined) {
-                    this.password = data.password;
-                }
-                if ("user_id" in data && data.user_id != undefined) {
-                    this.user_id = data.user_id;
-                }
-                if ("client_version" in data && data.client_version != undefined) {
-                    this.client_version = data.client_version;
-                }
-            }
-        }
-        get client_type() {
-            return pb_1.Message.getFieldWithDefault(this, 1, 0) as dependency_2.Models.User.ClientTypes;
-        }
-        set client_type(value: dependency_2.Models.User.ClientTypes) {
-            pb_1.Message.setField(this, 1, value);
-        }
-        get name() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
-        }
-        set name(value: string) {
-            pb_1.Message.setField(this, 2, value);
-        }
-        get password() {
-            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
-        }
-        set password(value: string) {
-            pb_1.Message.setField(this, 3, value);
-        }
-        get user_id() {
-            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
-        }
-        set user_id(value: string) {
-            pb_1.Message.setField(this, 4, value);
-        }
-        get client_version() {
-            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
-        }
-        set client_version(value: number) {
-            pb_1.Message.setField(this, 5, value);
-        }
-        static fromObject(data: {
-            client_type?: dependency_2.Models.User.ClientTypes;
-            name?: string;
-            password?: string;
-            user_id?: string;
-            client_version?: number;
-        }) {
-            const message = new Connect({});
-            if (data.client_type != null) {
-                message.client_type = data.client_type;
-            }
-            if (data.name != null) {
-                message.name = data.name;
-            }
-            if (data.password != null) {
-                message.password = data.password;
-            }
-            if (data.user_id != null) {
-                message.user_id = data.user_id;
-            }
-            if (data.client_version != null) {
-                message.client_version = data.client_version;
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                client_type?: dependency_2.Models.User.ClientTypes;
-                name?: string;
-                password?: string;
-                user_id?: string;
-                client_version?: number;
-            } = {};
-            if (this.client_type != null) {
-                data.client_type = this.client_type;
-            }
-            if (this.name != null) {
-                data.name = this.name;
-            }
-            if (this.password != null) {
-                data.password = this.password;
-            }
-            if (this.user_id != null) {
-                data.user_id = this.user_id;
-            }
-            if (this.client_version != null) {
-                data.client_version = this.client_version;
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.client_type !== undefined)
-                writer.writeEnum(1, this.client_type);
-            if (typeof this.name === "string" && this.name.length)
-                writer.writeString(2, this.name);
-            if (typeof this.password === "string" && this.password.length)
-                writer.writeString(3, this.password);
-            if (typeof this.user_id === "string" && this.user_id.length)
-                writer.writeString(4, this.user_id);
-            if (this.client_version !== undefined)
-                writer.writeInt32(5, this.client_version);
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Connect {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Connect();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        message.client_type = reader.readEnum();
-                        break;
-                    case 2:
-                        message.name = reader.readString();
-                        break;
-                    case 3:
-                        message.password = reader.readString();
-                        break;
-                    case 4:
-                        message.user_id = reader.readString();
-                        break;
-                    case 5:
-                        message.client_version = reader.readInt32();
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): Connect {
-            return Connect.deserialize(bytes);
-        }
-    }
-    export class Response extends pb_1.Message {
-        constructor(data?: any[] | {
-            type?: Response.ResponseType;
-            message?: string;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("type" in data && data.type != undefined) {
-                    this.type = data.type;
-                }
-                if ("message" in data && data.message != undefined) {
-                    this.message = data.message;
-                }
-            }
-        }
-        get type() {
-            return pb_1.Message.getFieldWithDefault(this, 1, 0) as Response.ResponseType;
-        }
-        set type(value: Response.ResponseType) {
-            pb_1.Message.setField(this, 1, value);
-        }
-        get message() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
-        }
-        set message(value: string) {
-            pb_1.Message.setField(this, 2, value);
-        }
-        static fromObject(data: {
-            type?: Response.ResponseType;
-            message?: string;
-        }) {
-            const message = new Response({});
-            if (data.type != null) {
-                message.type = data.type;
-            }
-            if (data.message != null) {
-                message.message = data.message;
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                type?: Response.ResponseType;
-                message?: string;
-            } = {};
-            if (this.type != null) {
-                data.type = this.type;
-            }
-            if (this.message != null) {
-                data.message = this.message;
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.type !== undefined)
-                writer.writeEnum(1, this.type);
-            if (typeof this.message === "string" && this.message.length)
-                writer.writeString(2, this.message);
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Response {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Response();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        message.type = reader.readEnum();
-                        break;
-                    case 2:
-                        message.message = reader.readString();
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): Response {
-            return Response.deserialize(bytes);
-        }
-    }
-    export namespace Response {
-        export enum ResponseType {
-            Fail = 0,
-            Success = 1
-        }
-    }
-    export class ConnectResponse extends pb_1.Message {
-        constructor(data?: any[] | {
-            response?: Response;
-            self?: dependency_2.Models.User;
-            state?: dependency_2.Models.State;
-            server_version?: number;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("response" in data && data.response != undefined) {
-                    this.response = data.response;
-                }
-                if ("self" in data && data.self != undefined) {
-                    this.self = data.self;
-                }
-                if ("state" in data && data.state != undefined) {
-                    this.state = data.state;
-                }
-                if ("server_version" in data && data.server_version != undefined) {
-                    this.server_version = data.server_version;
-                }
-            }
-        }
-        get response() {
-            return pb_1.Message.getWrapperField(this, Response, 1) as Response;
-        }
-        set response(value: Response) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        get self() {
-            return pb_1.Message.getWrapperField(this, dependency_2.Models.User, 2) as dependency_2.Models.User;
-        }
-        set self(value: dependency_2.Models.User) {
+        set packet(value: Packet) {
             pb_1.Message.setWrapperField(this, 2, value);
         }
-        get state() {
-            return pb_1.Message.getWrapperField(this, dependency_2.Models.State, 3) as dependency_2.Models.State;
-        }
-        set state(value: dependency_2.Models.State) {
-            pb_1.Message.setWrapperField(this, 3, value);
-        }
-        get server_version() {
-            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
-        }
-        set server_version(value: number) {
-            pb_1.Message.setField(this, 4, value);
+        get has_packet() {
+            return pb_1.Message.getField(this, 2) != null;
         }
         static fromObject(data: {
-            response?: ReturnType<typeof Response.prototype.toObject>;
-            self?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
-            state?: ReturnType<typeof dependency_2.Models.State.prototype.toObject>;
-            server_version?: number;
-        }) {
-            const message = new ConnectResponse({});
-            if (data.response != null) {
-                message.response = Response.fromObject(data.response);
+            forward_to?: string[];
+            packet?: ReturnType<typeof Packet.prototype.toObject>;
+        }): ForwardingPacket {
+            const message = new ForwardingPacket({});
+            if (data.forward_to != null) {
+                message.forward_to = data.forward_to;
             }
-            if (data.self != null) {
-                message.self = dependency_2.Models.User.fromObject(data.self);
-            }
-            if (data.state != null) {
-                message.state = dependency_2.Models.State.fromObject(data.state);
-            }
-            if (data.server_version != null) {
-                message.server_version = data.server_version;
+            if (data.packet != null) {
+                message.packet = Packet.fromObject(data.packet);
             }
             return message;
         }
         toObject() {
             const data: {
-                response?: ReturnType<typeof Response.prototype.toObject>;
-                self?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
-                state?: ReturnType<typeof dependency_2.Models.State.prototype.toObject>;
-                server_version?: number;
+                forward_to?: string[];
+                packet?: ReturnType<typeof Packet.prototype.toObject>;
             } = {};
-            if (this.response != null) {
-                data.response = this.response.toObject();
+            if (this.forward_to != null) {
+                data.forward_to = this.forward_to;
             }
-            if (this.self != null) {
-                data.self = this.self.toObject();
-            }
-            if (this.state != null) {
-                data.state = this.state.toObject();
-            }
-            if (this.server_version != null) {
-                data.server_version = this.server_version;
+            if (this.packet != null) {
+                data.packet = this.packet.toObject();
             }
             return data;
         }
@@ -524,34 +3025,24 @@ export namespace Packets {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.response !== undefined)
-                writer.writeMessage(1, this.response, () => this.response.serialize(writer));
-            if (this.self !== undefined)
-                writer.writeMessage(2, this.self, () => this.self.serialize(writer));
-            if (this.state !== undefined)
-                writer.writeMessage(3, this.state, () => this.state.serialize(writer));
-            if (this.server_version !== undefined)
-                writer.writeInt32(4, this.server_version);
+            if (this.forward_to.length)
+                writer.writeRepeatedString(1, this.forward_to);
+            if (this.has_packet)
+                writer.writeMessage(2, this.packet, () => this.packet.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ConnectResponse {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ConnectResponse();
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ForwardingPacket {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ForwardingPacket();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.response, () => message.response = Response.deserialize(reader));
+                        pb_1.Message.addToRepeatedField(message, 1, reader.readString());
                         break;
                     case 2:
-                        reader.readMessage(message.self, () => message.self = dependency_2.Models.User.deserialize(reader));
-                        break;
-                    case 3:
-                        reader.readMessage(message.state, () => message.state = dependency_2.Models.State.deserialize(reader));
-                        break;
-                    case 4:
-                        message.server_version = reader.readInt32();
+                        reader.readMessage(message.packet, () => message.packet = Packet.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -561,219 +3052,12 @@ export namespace Packets {
         serializeBinary(): Uint8Array {
             return this.serialize();
         }
-        static deserializeBinary(bytes: Uint8Array): ConnectResponse {
-            return ConnectResponse.deserialize(bytes);
-        }
-    }
-    export class File extends pb_1.Message {
-        constructor(data?: any[] | {
-            file_id?: string;
-            intent?: File.Intentions;
-            compressed?: boolean;
-            data?: Uint8Array;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("file_id" in data && data.file_id != undefined) {
-                    this.file_id = data.file_id;
-                }
-                if ("intent" in data && data.intent != undefined) {
-                    this.intent = data.intent;
-                }
-                if ("compressed" in data && data.compressed != undefined) {
-                    this.compressed = data.compressed;
-                }
-                if ("data" in data && data.data != undefined) {
-                    this.data = data.data;
-                }
-            }
-        }
-        get file_id() {
-            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
-        }
-        set file_id(value: string) {
-            pb_1.Message.setField(this, 1, value);
-        }
-        get intent() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as File.Intentions;
-        }
-        set intent(value: File.Intentions) {
-            pb_1.Message.setField(this, 2, value);
-        }
-        get compressed() {
-            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
-        }
-        set compressed(value: boolean) {
-            pb_1.Message.setField(this, 3, value);
-        }
-        get data() {
-            return pb_1.Message.getFieldWithDefault(this, 4, new Uint8Array()) as Uint8Array;
-        }
-        set data(value: Uint8Array) {
-            pb_1.Message.setField(this, 4, value);
-        }
-        static fromObject(data: {
-            file_id?: string;
-            intent?: File.Intentions;
-            compressed?: boolean;
-            data?: Uint8Array;
-        }) {
-            const message = new File({});
-            if (data.file_id != null) {
-                message.file_id = data.file_id;
-            }
-            if (data.intent != null) {
-                message.intent = data.intent;
-            }
-            if (data.compressed != null) {
-                message.compressed = data.compressed;
-            }
-            if (data.data != null) {
-                message.data = data.data;
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                file_id?: string;
-                intent?: File.Intentions;
-                compressed?: boolean;
-                data?: Uint8Array;
-            } = {};
-            if (this.file_id != null) {
-                data.file_id = this.file_id;
-            }
-            if (this.intent != null) {
-                data.intent = this.intent;
-            }
-            if (this.compressed != null) {
-                data.compressed = this.compressed;
-            }
-            if (this.data != null) {
-                data.data = this.data;
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.file_id === "string" && this.file_id.length)
-                writer.writeString(1, this.file_id);
-            if (this.intent !== undefined)
-                writer.writeEnum(2, this.intent);
-            if (this.compressed !== undefined)
-                writer.writeBool(3, this.compressed);
-            if (this.data !== undefined)
-                writer.writeBytes(4, this.data);
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): File {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new File();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        message.file_id = reader.readString();
-                        break;
-                    case 2:
-                        message.intent = reader.readEnum();
-                        break;
-                    case 3:
-                        message.compressed = reader.readBool();
-                        break;
-                    case 4:
-                        message.data = reader.readBytes();
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): File {
-            return File.deserialize(bytes);
-        }
-    }
-    export namespace File {
-        export enum Intentions {
-            None = 0,
-            SetPngToShowWhenTriggered = 1,
-            ShowPngImmediately = 2
-        }
-    }
-    export class LoadedSong extends pb_1.Message {
-        constructor(data?: any[] | {
-            level?: dependency_2.Models.PreviewBeatmapLevel;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("level" in data && data.level != undefined) {
-                    this.level = data.level;
-                }
-            }
-        }
-        get level() {
-            return pb_1.Message.getWrapperField(this, dependency_2.Models.PreviewBeatmapLevel, 1) as dependency_2.Models.PreviewBeatmapLevel;
-        }
-        set level(value: dependency_2.Models.PreviewBeatmapLevel) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        static fromObject(data: {
-            level?: ReturnType<typeof dependency_2.Models.PreviewBeatmapLevel.prototype.toObject>;
-        }) {
-            const message = new LoadedSong({});
-            if (data.level != null) {
-                message.level = dependency_2.Models.PreviewBeatmapLevel.fromObject(data.level);
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                level?: ReturnType<typeof dependency_2.Models.PreviewBeatmapLevel.prototype.toObject>;
-            } = {};
-            if (this.level != null) {
-                data.level = this.level.toObject();
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.level !== undefined)
-                writer.writeMessage(1, this.level, () => this.level.serialize(writer));
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LoadedSong {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LoadedSong();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.level, () => message.level = dependency_2.Models.PreviewBeatmapLevel.deserialize(reader));
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): LoadedSong {
-            return LoadedSong.deserialize(bytes);
+        static deserializeBinary(bytes: Uint8Array): ForwardingPacket {
+            return ForwardingPacket.deserialize(bytes);
         }
     }
     export class Event extends pb_1.Message {
+        private one_of_decls: number[][] = [[1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13]];
         constructor(data?: any[] | ({} & (({
             user_added_event?: Event.UserAddedEvent;
             user_updated_event?: never;
@@ -908,7 +3192,7 @@ export namespace Packets {
             host_deleted_event?: Event.HostDeletedEvent;
         })))) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], [[1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13]]);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("user_added_event" in data && data.user_added_event != undefined) {
                     this.user_added_event = data.user_added_event;
@@ -949,67 +3233,100 @@ export namespace Packets {
             return pb_1.Message.getWrapperField(this, Event.UserAddedEvent, 1) as Event.UserAddedEvent;
         }
         set user_added_event(value: Event.UserAddedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 1, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 1, this.one_of_decls[0], value);
+        }
+        get has_user_added_event() {
+            return pb_1.Message.getField(this, 1) != null;
         }
         get user_updated_event() {
             return pb_1.Message.getWrapperField(this, Event.UserUpdatedEvent, 2) as Event.UserUpdatedEvent;
         }
         set user_updated_event(value: Event.UserUpdatedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 2, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 2, this.one_of_decls[0], value);
+        }
+        get has_user_updated_event() {
+            return pb_1.Message.getField(this, 2) != null;
         }
         get user_left_event() {
             return pb_1.Message.getWrapperField(this, Event.UserLeftEvent, 3) as Event.UserLeftEvent;
         }
         set user_left_event(value: Event.UserLeftEvent) {
-            pb_1.Message.setOneofWrapperField(this, 3, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 3, this.one_of_decls[0], value);
+        }
+        get has_user_left_event() {
+            return pb_1.Message.getField(this, 3) != null;
         }
         get match_created_event() {
             return pb_1.Message.getWrapperField(this, Event.MatchCreatedEvent, 6) as Event.MatchCreatedEvent;
         }
         set match_created_event(value: Event.MatchCreatedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 6, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 6, this.one_of_decls[0], value);
+        }
+        get has_match_created_event() {
+            return pb_1.Message.getField(this, 6) != null;
         }
         get match_updated_event() {
             return pb_1.Message.getWrapperField(this, Event.MatchUpdatedEvent, 7) as Event.MatchUpdatedEvent;
         }
         set match_updated_event(value: Event.MatchUpdatedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 7, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 7, this.one_of_decls[0], value);
+        }
+        get has_match_updated_event() {
+            return pb_1.Message.getField(this, 7) != null;
         }
         get match_deleted_event() {
             return pb_1.Message.getWrapperField(this, Event.MatchDeletedEvent, 8) as Event.MatchDeletedEvent;
         }
         set match_deleted_event(value: Event.MatchDeletedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 8, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 8, this.one_of_decls[0], value);
+        }
+        get has_match_deleted_event() {
+            return pb_1.Message.getField(this, 8) != null;
         }
         get qualifier_created_event() {
             return pb_1.Message.getWrapperField(this, Event.QualifierCreatedEvent, 9) as Event.QualifierCreatedEvent;
         }
         set qualifier_created_event(value: Event.QualifierCreatedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 9, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 9, this.one_of_decls[0], value);
+        }
+        get has_qualifier_created_event() {
+            return pb_1.Message.getField(this, 9) != null;
         }
         get qualifier_updated_event() {
             return pb_1.Message.getWrapperField(this, Event.QualifierUpdatedEvent, 10) as Event.QualifierUpdatedEvent;
         }
         set qualifier_updated_event(value: Event.QualifierUpdatedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 10, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 10, this.one_of_decls[0], value);
+        }
+        get has_qualifier_updated_event() {
+            return pb_1.Message.getField(this, 10) != null;
         }
         get qualifier_deleted_event() {
             return pb_1.Message.getWrapperField(this, Event.QualifierDeletedEvent, 11) as Event.QualifierDeletedEvent;
         }
         set qualifier_deleted_event(value: Event.QualifierDeletedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 11, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 11, this.one_of_decls[0], value);
+        }
+        get has_qualifier_deleted_event() {
+            return pb_1.Message.getField(this, 11) != null;
         }
         get host_added_event() {
             return pb_1.Message.getWrapperField(this, Event.HostAddedEvent, 12) as Event.HostAddedEvent;
         }
         set host_added_event(value: Event.HostAddedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 12, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 12, this.one_of_decls[0], value);
+        }
+        get has_host_added_event() {
+            return pb_1.Message.getField(this, 12) != null;
         }
         get host_deleted_event() {
             return pb_1.Message.getWrapperField(this, Event.HostDeletedEvent, 13) as Event.HostDeletedEvent;
         }
         set host_deleted_event(value: Event.HostDeletedEvent) {
-            pb_1.Message.setOneofWrapperField(this, 13, [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13], value);
+            pb_1.Message.setOneofWrapperField(this, 13, this.one_of_decls[0], value);
+        }
+        get has_host_deleted_event() {
+            return pb_1.Message.getField(this, 13) != null;
         }
         get changed_object() {
             const cases: {
@@ -1042,7 +3359,7 @@ export namespace Packets {
             qualifier_deleted_event?: ReturnType<typeof Event.QualifierDeletedEvent.prototype.toObject>;
             host_added_event?: ReturnType<typeof Event.HostAddedEvent.prototype.toObject>;
             host_deleted_event?: ReturnType<typeof Event.HostDeletedEvent.prototype.toObject>;
-        }) {
+        }): Event {
             const message = new Event({});
             if (data.user_added_event != null) {
                 message.user_added_event = Event.UserAddedEvent.fromObject(data.user_added_event);
@@ -1132,27 +3449,27 @@ export namespace Packets {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.user_added_event !== undefined)
+            if (this.has_user_added_event)
                 writer.writeMessage(1, this.user_added_event, () => this.user_added_event.serialize(writer));
-            if (this.user_updated_event !== undefined)
+            if (this.has_user_updated_event)
                 writer.writeMessage(2, this.user_updated_event, () => this.user_updated_event.serialize(writer));
-            if (this.user_left_event !== undefined)
+            if (this.has_user_left_event)
                 writer.writeMessage(3, this.user_left_event, () => this.user_left_event.serialize(writer));
-            if (this.match_created_event !== undefined)
+            if (this.has_match_created_event)
                 writer.writeMessage(6, this.match_created_event, () => this.match_created_event.serialize(writer));
-            if (this.match_updated_event !== undefined)
+            if (this.has_match_updated_event)
                 writer.writeMessage(7, this.match_updated_event, () => this.match_updated_event.serialize(writer));
-            if (this.match_deleted_event !== undefined)
+            if (this.has_match_deleted_event)
                 writer.writeMessage(8, this.match_deleted_event, () => this.match_deleted_event.serialize(writer));
-            if (this.qualifier_created_event !== undefined)
+            if (this.has_qualifier_created_event)
                 writer.writeMessage(9, this.qualifier_created_event, () => this.qualifier_created_event.serialize(writer));
-            if (this.qualifier_updated_event !== undefined)
+            if (this.has_qualifier_updated_event)
                 writer.writeMessage(10, this.qualifier_updated_event, () => this.qualifier_updated_event.serialize(writer));
-            if (this.qualifier_deleted_event !== undefined)
+            if (this.has_qualifier_deleted_event)
                 writer.writeMessage(11, this.qualifier_deleted_event, () => this.qualifier_deleted_event.serialize(writer));
-            if (this.host_added_event !== undefined)
+            if (this.has_host_added_event)
                 writer.writeMessage(12, this.host_added_event, () => this.host_added_event.serialize(writer));
-            if (this.host_deleted_event !== undefined)
+            if (this.has_host_deleted_event)
                 writer.writeMessage(13, this.host_deleted_event, () => this.host_deleted_event.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
@@ -1210,11 +3527,12 @@ export namespace Packets {
     }
     export namespace Event {
         export class UserAddedEvent extends pb_1.Message {
+            private one_of_decls: number[][] = [];
             constructor(data?: any[] | {
                 user?: dependency_2.Models.User;
             }) {
                 super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
                     if ("user" in data && data.user != undefined) {
                         this.user = data.user;
@@ -1227,9 +3545,12 @@ export namespace Packets {
             set user(value: dependency_2.Models.User) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
+            get has_user() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
             static fromObject(data: {
                 user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
-            }) {
+            }): UserAddedEvent {
                 const message = new UserAddedEvent({});
                 if (data.user != null) {
                     message.user = dependency_2.Models.User.fromObject(data.user);
@@ -1249,7 +3570,7 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.user !== undefined)
+                if (this.has_user)
                     writer.writeMessage(1, this.user, () => this.user.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
@@ -1276,11 +3597,12 @@ export namespace Packets {
             }
         }
         export class UserUpdatedEvent extends pb_1.Message {
+            private one_of_decls: number[][] = [];
             constructor(data?: any[] | {
                 user?: dependency_2.Models.User;
             }) {
                 super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
                     if ("user" in data && data.user != undefined) {
                         this.user = data.user;
@@ -1293,9 +3615,12 @@ export namespace Packets {
             set user(value: dependency_2.Models.User) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
+            get has_user() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
             static fromObject(data: {
                 user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
-            }) {
+            }): UserUpdatedEvent {
                 const message = new UserUpdatedEvent({});
                 if (data.user != null) {
                     message.user = dependency_2.Models.User.fromObject(data.user);
@@ -1315,7 +3640,7 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.user !== undefined)
+                if (this.has_user)
                     writer.writeMessage(1, this.user, () => this.user.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
@@ -1342,11 +3667,12 @@ export namespace Packets {
             }
         }
         export class UserLeftEvent extends pb_1.Message {
+            private one_of_decls: number[][] = [];
             constructor(data?: any[] | {
                 user?: dependency_2.Models.User;
             }) {
                 super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
                     if ("user" in data && data.user != undefined) {
                         this.user = data.user;
@@ -1359,9 +3685,12 @@ export namespace Packets {
             set user(value: dependency_2.Models.User) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
+            get has_user() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
             static fromObject(data: {
                 user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
-            }) {
+            }): UserLeftEvent {
                 const message = new UserLeftEvent({});
                 if (data.user != null) {
                     message.user = dependency_2.Models.User.fromObject(data.user);
@@ -1381,7 +3710,7 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.user !== undefined)
+                if (this.has_user)
                     writer.writeMessage(1, this.user, () => this.user.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
@@ -1408,11 +3737,12 @@ export namespace Packets {
             }
         }
         export class MatchCreatedEvent extends pb_1.Message {
+            private one_of_decls: number[][] = [];
             constructor(data?: any[] | {
                 match?: dependency_2.Models.Match;
             }) {
                 super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
                     if ("match" in data && data.match != undefined) {
                         this.match = data.match;
@@ -1425,9 +3755,12 @@ export namespace Packets {
             set match(value: dependency_2.Models.Match) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
+            get has_match() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
             static fromObject(data: {
                 match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject>;
-            }) {
+            }): MatchCreatedEvent {
                 const message = new MatchCreatedEvent({});
                 if (data.match != null) {
                     message.match = dependency_2.Models.Match.fromObject(data.match);
@@ -1447,7 +3780,7 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.match !== undefined)
+                if (this.has_match)
                     writer.writeMessage(1, this.match, () => this.match.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
@@ -1474,11 +3807,12 @@ export namespace Packets {
             }
         }
         export class MatchUpdatedEvent extends pb_1.Message {
+            private one_of_decls: number[][] = [];
             constructor(data?: any[] | {
                 match?: dependency_2.Models.Match;
             }) {
                 super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
                     if ("match" in data && data.match != undefined) {
                         this.match = data.match;
@@ -1491,9 +3825,12 @@ export namespace Packets {
             set match(value: dependency_2.Models.Match) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
+            get has_match() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
             static fromObject(data: {
                 match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject>;
-            }) {
+            }): MatchUpdatedEvent {
                 const message = new MatchUpdatedEvent({});
                 if (data.match != null) {
                     message.match = dependency_2.Models.Match.fromObject(data.match);
@@ -1513,7 +3850,7 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.match !== undefined)
+                if (this.has_match)
                     writer.writeMessage(1, this.match, () => this.match.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
@@ -1540,11 +3877,12 @@ export namespace Packets {
             }
         }
         export class MatchDeletedEvent extends pb_1.Message {
+            private one_of_decls: number[][] = [];
             constructor(data?: any[] | {
                 match?: dependency_2.Models.Match;
             }) {
                 super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
                     if ("match" in data && data.match != undefined) {
                         this.match = data.match;
@@ -1557,9 +3895,12 @@ export namespace Packets {
             set match(value: dependency_2.Models.Match) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
+            get has_match() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
             static fromObject(data: {
                 match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject>;
-            }) {
+            }): MatchDeletedEvent {
                 const message = new MatchDeletedEvent({});
                 if (data.match != null) {
                     message.match = dependency_2.Models.Match.fromObject(data.match);
@@ -1579,7 +3920,7 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.match !== undefined)
+                if (this.has_match)
                     writer.writeMessage(1, this.match, () => this.match.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
@@ -1606,11 +3947,12 @@ export namespace Packets {
             }
         }
         export class QualifierCreatedEvent extends pb_1.Message {
+            private one_of_decls: number[][] = [];
             constructor(data?: any[] | {
                 event?: dependency_2.Models.QualifierEvent;
             }) {
                 super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
                     if ("event" in data && data.event != undefined) {
                         this.event = data.event;
@@ -1623,9 +3965,12 @@ export namespace Packets {
             set event(value: dependency_2.Models.QualifierEvent) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
+            get has_event() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
             static fromObject(data: {
                 event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject>;
-            }) {
+            }): QualifierCreatedEvent {
                 const message = new QualifierCreatedEvent({});
                 if (data.event != null) {
                     message.event = dependency_2.Models.QualifierEvent.fromObject(data.event);
@@ -1645,7 +3990,7 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.event !== undefined)
+                if (this.has_event)
                     writer.writeMessage(1, this.event, () => this.event.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
@@ -1672,11 +4017,12 @@ export namespace Packets {
             }
         }
         export class QualifierUpdatedEvent extends pb_1.Message {
+            private one_of_decls: number[][] = [];
             constructor(data?: any[] | {
                 event?: dependency_2.Models.QualifierEvent;
             }) {
                 super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
                     if ("event" in data && data.event != undefined) {
                         this.event = data.event;
@@ -1689,9 +4035,12 @@ export namespace Packets {
             set event(value: dependency_2.Models.QualifierEvent) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
+            get has_event() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
             static fromObject(data: {
                 event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject>;
-            }) {
+            }): QualifierUpdatedEvent {
                 const message = new QualifierUpdatedEvent({});
                 if (data.event != null) {
                     message.event = dependency_2.Models.QualifierEvent.fromObject(data.event);
@@ -1711,7 +4060,7 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.event !== undefined)
+                if (this.has_event)
                     writer.writeMessage(1, this.event, () => this.event.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
@@ -1738,11 +4087,12 @@ export namespace Packets {
             }
         }
         export class QualifierDeletedEvent extends pb_1.Message {
+            private one_of_decls: number[][] = [];
             constructor(data?: any[] | {
                 event?: dependency_2.Models.QualifierEvent;
             }) {
                 super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
                     if ("event" in data && data.event != undefined) {
                         this.event = data.event;
@@ -1755,9 +4105,12 @@ export namespace Packets {
             set event(value: dependency_2.Models.QualifierEvent) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
+            get has_event() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
             static fromObject(data: {
                 event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject>;
-            }) {
+            }): QualifierDeletedEvent {
                 const message = new QualifierDeletedEvent({});
                 if (data.event != null) {
                     message.event = dependency_2.Models.QualifierEvent.fromObject(data.event);
@@ -1777,7 +4130,7 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.event !== undefined)
+                if (this.has_event)
                     writer.writeMessage(1, this.event, () => this.event.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
@@ -1804,11 +4157,12 @@ export namespace Packets {
             }
         }
         export class HostAddedEvent extends pb_1.Message {
+            private one_of_decls: number[][] = [];
             constructor(data?: any[] | {
                 server?: dependency_2.Models.CoreServer;
             }) {
                 super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
                     if ("server" in data && data.server != undefined) {
                         this.server = data.server;
@@ -1821,9 +4175,12 @@ export namespace Packets {
             set server(value: dependency_2.Models.CoreServer) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
+            get has_server() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
             static fromObject(data: {
                 server?: ReturnType<typeof dependency_2.Models.CoreServer.prototype.toObject>;
-            }) {
+            }): HostAddedEvent {
                 const message = new HostAddedEvent({});
                 if (data.server != null) {
                     message.server = dependency_2.Models.CoreServer.fromObject(data.server);
@@ -1843,7 +4200,7 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.server !== undefined)
+                if (this.has_server)
                     writer.writeMessage(1, this.server, () => this.server.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
@@ -1870,11 +4227,12 @@ export namespace Packets {
             }
         }
         export class HostDeletedEvent extends pb_1.Message {
+            private one_of_decls: number[][] = [];
             constructor(data?: any[] | {
                 server?: dependency_2.Models.CoreServer;
             }) {
                 super();
-                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
                     if ("server" in data && data.server != undefined) {
                         this.server = data.server;
@@ -1887,9 +4245,12 @@ export namespace Packets {
             set server(value: dependency_2.Models.CoreServer) {
                 pb_1.Message.setWrapperField(this, 1, value);
             }
+            get has_server() {
+                return pb_1.Message.getField(this, 1) != null;
+            }
             static fromObject(data: {
                 server?: ReturnType<typeof dependency_2.Models.CoreServer.prototype.toObject>;
-            }) {
+            }): HostDeletedEvent {
                 const message = new HostDeletedEvent({});
                 if (data.server != null) {
                     message.server = dependency_2.Models.CoreServer.fromObject(data.server);
@@ -1909,7 +4270,7 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.server !== undefined)
+                if (this.has_server)
                     writer.writeMessage(1, this.server, () => this.server.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
@@ -1936,1100 +4297,70 @@ export namespace Packets {
             }
         }
     }
-    export class LoadSong extends pb_1.Message {
-        constructor(data?: any[] | {
-            level_id?: string;
-            custom_host_url?: string;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("level_id" in data && data.level_id != undefined) {
-                    this.level_id = data.level_id;
-                }
-                if ("custom_host_url" in data && data.custom_host_url != undefined) {
-                    this.custom_host_url = data.custom_host_url;
-                }
-            }
-        }
-        get level_id() {
-            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
-        }
-        set level_id(value: string) {
-            pb_1.Message.setField(this, 1, value);
-        }
-        get custom_host_url() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
-        }
-        set custom_host_url(value: string) {
-            pb_1.Message.setField(this, 2, value);
-        }
-        static fromObject(data: {
-            level_id?: string;
-            custom_host_url?: string;
-        }) {
-            const message = new LoadSong({});
-            if (data.level_id != null) {
-                message.level_id = data.level_id;
-            }
-            if (data.custom_host_url != null) {
-                message.custom_host_url = data.custom_host_url;
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                level_id?: string;
-                custom_host_url?: string;
-            } = {};
-            if (this.level_id != null) {
-                data.level_id = this.level_id;
-            }
-            if (this.custom_host_url != null) {
-                data.custom_host_url = this.custom_host_url;
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.level_id === "string" && this.level_id.length)
-                writer.writeString(1, this.level_id);
-            if (typeof this.custom_host_url === "string" && this.custom_host_url.length)
-                writer.writeString(2, this.custom_host_url);
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LoadSong {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LoadSong();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        message.level_id = reader.readString();
-                        break;
-                    case 2:
-                        message.custom_host_url = reader.readString();
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): LoadSong {
-            return LoadSong.deserialize(bytes);
-        }
-    }
-    export class PlaySong extends pb_1.Message {
-        constructor(data?: any[] | {
-            gameplay_parameters?: dependency_2.Models.GameplayParameters;
-            floating_scoreboard?: boolean;
-            stream_sync?: boolean;
-            disable_fail?: boolean;
-            disable_pause?: boolean;
-            disable_scoresaber_submission?: boolean;
-            show_normal_notes_on_stream?: boolean;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("gameplay_parameters" in data && data.gameplay_parameters != undefined) {
-                    this.gameplay_parameters = data.gameplay_parameters;
-                }
-                if ("floating_scoreboard" in data && data.floating_scoreboard != undefined) {
-                    this.floating_scoreboard = data.floating_scoreboard;
-                }
-                if ("stream_sync" in data && data.stream_sync != undefined) {
-                    this.stream_sync = data.stream_sync;
-                }
-                if ("disable_fail" in data && data.disable_fail != undefined) {
-                    this.disable_fail = data.disable_fail;
-                }
-                if ("disable_pause" in data && data.disable_pause != undefined) {
-                    this.disable_pause = data.disable_pause;
-                }
-                if ("disable_scoresaber_submission" in data && data.disable_scoresaber_submission != undefined) {
-                    this.disable_scoresaber_submission = data.disable_scoresaber_submission;
-                }
-                if ("show_normal_notes_on_stream" in data && data.show_normal_notes_on_stream != undefined) {
-                    this.show_normal_notes_on_stream = data.show_normal_notes_on_stream;
-                }
-            }
-        }
-        get gameplay_parameters() {
-            return pb_1.Message.getWrapperField(this, dependency_2.Models.GameplayParameters, 1) as dependency_2.Models.GameplayParameters;
-        }
-        set gameplay_parameters(value: dependency_2.Models.GameplayParameters) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        get floating_scoreboard() {
-            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
-        }
-        set floating_scoreboard(value: boolean) {
-            pb_1.Message.setField(this, 3, value);
-        }
-        get stream_sync() {
-            return pb_1.Message.getFieldWithDefault(this, 4, false) as boolean;
-        }
-        set stream_sync(value: boolean) {
-            pb_1.Message.setField(this, 4, value);
-        }
-        get disable_fail() {
-            return pb_1.Message.getFieldWithDefault(this, 5, false) as boolean;
-        }
-        set disable_fail(value: boolean) {
-            pb_1.Message.setField(this, 5, value);
-        }
-        get disable_pause() {
-            return pb_1.Message.getFieldWithDefault(this, 6, false) as boolean;
-        }
-        set disable_pause(value: boolean) {
-            pb_1.Message.setField(this, 6, value);
-        }
-        get disable_scoresaber_submission() {
-            return pb_1.Message.getFieldWithDefault(this, 7, false) as boolean;
-        }
-        set disable_scoresaber_submission(value: boolean) {
-            pb_1.Message.setField(this, 7, value);
-        }
-        get show_normal_notes_on_stream() {
-            return pb_1.Message.getFieldWithDefault(this, 8, false) as boolean;
-        }
-        set show_normal_notes_on_stream(value: boolean) {
-            pb_1.Message.setField(this, 8, value);
-        }
-        static fromObject(data: {
-            gameplay_parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject>;
-            floating_scoreboard?: boolean;
-            stream_sync?: boolean;
-            disable_fail?: boolean;
-            disable_pause?: boolean;
-            disable_scoresaber_submission?: boolean;
-            show_normal_notes_on_stream?: boolean;
-        }) {
-            const message = new PlaySong({});
-            if (data.gameplay_parameters != null) {
-                message.gameplay_parameters = dependency_2.Models.GameplayParameters.fromObject(data.gameplay_parameters);
-            }
-            if (data.floating_scoreboard != null) {
-                message.floating_scoreboard = data.floating_scoreboard;
-            }
-            if (data.stream_sync != null) {
-                message.stream_sync = data.stream_sync;
-            }
-            if (data.disable_fail != null) {
-                message.disable_fail = data.disable_fail;
-            }
-            if (data.disable_pause != null) {
-                message.disable_pause = data.disable_pause;
-            }
-            if (data.disable_scoresaber_submission != null) {
-                message.disable_scoresaber_submission = data.disable_scoresaber_submission;
-            }
-            if (data.show_normal_notes_on_stream != null) {
-                message.show_normal_notes_on_stream = data.show_normal_notes_on_stream;
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                gameplay_parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject>;
-                floating_scoreboard?: boolean;
-                stream_sync?: boolean;
-                disable_fail?: boolean;
-                disable_pause?: boolean;
-                disable_scoresaber_submission?: boolean;
-                show_normal_notes_on_stream?: boolean;
-            } = {};
-            if (this.gameplay_parameters != null) {
-                data.gameplay_parameters = this.gameplay_parameters.toObject();
-            }
-            if (this.floating_scoreboard != null) {
-                data.floating_scoreboard = this.floating_scoreboard;
-            }
-            if (this.stream_sync != null) {
-                data.stream_sync = this.stream_sync;
-            }
-            if (this.disable_fail != null) {
-                data.disable_fail = this.disable_fail;
-            }
-            if (this.disable_pause != null) {
-                data.disable_pause = this.disable_pause;
-            }
-            if (this.disable_scoresaber_submission != null) {
-                data.disable_scoresaber_submission = this.disable_scoresaber_submission;
-            }
-            if (this.show_normal_notes_on_stream != null) {
-                data.show_normal_notes_on_stream = this.show_normal_notes_on_stream;
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.gameplay_parameters !== undefined)
-                writer.writeMessage(1, this.gameplay_parameters, () => this.gameplay_parameters.serialize(writer));
-            if (this.floating_scoreboard !== undefined)
-                writer.writeBool(3, this.floating_scoreboard);
-            if (this.stream_sync !== undefined)
-                writer.writeBool(4, this.stream_sync);
-            if (this.disable_fail !== undefined)
-                writer.writeBool(5, this.disable_fail);
-            if (this.disable_pause !== undefined)
-                writer.writeBool(6, this.disable_pause);
-            if (this.disable_scoresaber_submission !== undefined)
-                writer.writeBool(7, this.disable_scoresaber_submission);
-            if (this.show_normal_notes_on_stream !== undefined)
-                writer.writeBool(8, this.show_normal_notes_on_stream);
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PlaySong {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PlaySong();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.gameplay_parameters, () => message.gameplay_parameters = dependency_2.Models.GameplayParameters.deserialize(reader));
-                        break;
-                    case 3:
-                        message.floating_scoreboard = reader.readBool();
-                        break;
-                    case 4:
-                        message.stream_sync = reader.readBool();
-                        break;
-                    case 5:
-                        message.disable_fail = reader.readBool();
-                        break;
-                    case 6:
-                        message.disable_pause = reader.readBool();
-                        break;
-                    case 7:
-                        message.disable_scoresaber_submission = reader.readBool();
-                        break;
-                    case 8:
-                        message.show_normal_notes_on_stream = reader.readBool();
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): PlaySong {
-            return PlaySong.deserialize(bytes);
-        }
-    }
-    export class SubmitScore extends pb_1.Message {
-        constructor(data?: any[] | {
-            score?: dependency_2.Models.Score;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("score" in data && data.score != undefined) {
-                    this.score = data.score;
-                }
-            }
-        }
-        get score() {
-            return pb_1.Message.getWrapperField(this, dependency_2.Models.Score, 1) as dependency_2.Models.Score;
-        }
-        set score(value: dependency_2.Models.Score) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        static fromObject(data: {
-            score?: ReturnType<typeof dependency_2.Models.Score.prototype.toObject>;
-        }) {
-            const message = new SubmitScore({});
-            if (data.score != null) {
-                message.score = dependency_2.Models.Score.fromObject(data.score);
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                score?: ReturnType<typeof dependency_2.Models.Score.prototype.toObject>;
-            } = {};
-            if (this.score != null) {
-                data.score = this.score.toObject();
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.score !== undefined)
-                writer.writeMessage(1, this.score, () => this.score.serialize(writer));
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SubmitScore {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SubmitScore();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.score, () => message.score = dependency_2.Models.Score.deserialize(reader));
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): SubmitScore {
-            return SubmitScore.deserialize(bytes);
-        }
-    }
-    export class SongFinished extends pb_1.Message {
-        constructor(data?: any[] | {
-            player?: dependency_2.Models.User;
-            beatmap?: dependency_2.Models.Beatmap;
-            type?: SongFinished.CompletionType;
-            score?: number;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("player" in data && data.player != undefined) {
-                    this.player = data.player;
-                }
-                if ("beatmap" in data && data.beatmap != undefined) {
-                    this.beatmap = data.beatmap;
-                }
-                if ("type" in data && data.type != undefined) {
-                    this.type = data.type;
-                }
-                if ("score" in data && data.score != undefined) {
-                    this.score = data.score;
-                }
-            }
-        }
-        get player() {
-            return pb_1.Message.getWrapperField(this, dependency_2.Models.User, 1) as dependency_2.Models.User;
-        }
-        set player(value: dependency_2.Models.User) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        get beatmap() {
-            return pb_1.Message.getWrapperField(this, dependency_2.Models.Beatmap, 2) as dependency_2.Models.Beatmap;
-        }
-        set beatmap(value: dependency_2.Models.Beatmap) {
-            pb_1.Message.setWrapperField(this, 2, value);
-        }
-        get type() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as SongFinished.CompletionType;
-        }
-        set type(value: SongFinished.CompletionType) {
-            pb_1.Message.setField(this, 3, value);
-        }
-        get score() {
-            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
-        }
-        set score(value: number) {
-            pb_1.Message.setField(this, 4, value);
-        }
-        static fromObject(data: {
-            player?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
-            beatmap?: ReturnType<typeof dependency_2.Models.Beatmap.prototype.toObject>;
-            type?: SongFinished.CompletionType;
-            score?: number;
-        }) {
-            const message = new SongFinished({});
-            if (data.player != null) {
-                message.player = dependency_2.Models.User.fromObject(data.player);
-            }
-            if (data.beatmap != null) {
-                message.beatmap = dependency_2.Models.Beatmap.fromObject(data.beatmap);
-            }
-            if (data.type != null) {
-                message.type = data.type;
-            }
-            if (data.score != null) {
-                message.score = data.score;
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                player?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
-                beatmap?: ReturnType<typeof dependency_2.Models.Beatmap.prototype.toObject>;
-                type?: SongFinished.CompletionType;
-                score?: number;
-            } = {};
-            if (this.player != null) {
-                data.player = this.player.toObject();
-            }
-            if (this.beatmap != null) {
-                data.beatmap = this.beatmap.toObject();
-            }
-            if (this.type != null) {
-                data.type = this.type;
-            }
-            if (this.score != null) {
-                data.score = this.score;
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.player !== undefined)
-                writer.writeMessage(1, this.player, () => this.player.serialize(writer));
-            if (this.beatmap !== undefined)
-                writer.writeMessage(2, this.beatmap, () => this.beatmap.serialize(writer));
-            if (this.type !== undefined)
-                writer.writeEnum(3, this.type);
-            if (this.score !== undefined)
-                writer.writeInt32(4, this.score);
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SongFinished {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SongFinished();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.player, () => message.player = dependency_2.Models.User.deserialize(reader));
-                        break;
-                    case 2:
-                        reader.readMessage(message.beatmap, () => message.beatmap = dependency_2.Models.Beatmap.deserialize(reader));
-                        break;
-                    case 3:
-                        message.type = reader.readEnum();
-                        break;
-                    case 4:
-                        message.score = reader.readInt32();
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): SongFinished {
-            return SongFinished.deserialize(bytes);
-        }
-    }
-    export namespace SongFinished {
-        export enum CompletionType {
-            Passed = 0,
-            Failed = 1,
-            Quit = 2
-        }
-    }
-    export class SendBotMessage extends pb_1.Message {
-        constructor(data?: any[] | {
-            channel?: dependency_1.proto.discord.Channel;
-            message?: string;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("channel" in data && data.channel != undefined) {
-                    this.channel = data.channel;
-                }
-                if ("message" in data && data.message != undefined) {
-                    this.message = data.message;
-                }
-            }
-        }
-        get channel() {
-            return pb_1.Message.getWrapperField(this, dependency_1.proto.discord.Channel, 1) as dependency_1.proto.discord.Channel;
-        }
-        set channel(value: dependency_1.proto.discord.Channel) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        get message() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
-        }
-        set message(value: string) {
-            pb_1.Message.setField(this, 2, value);
-        }
-        static fromObject(data: {
-            channel?: ReturnType<typeof dependency_1.proto.discord.Channel.prototype.toObject>;
-            message?: string;
-        }) {
-            const message = new SendBotMessage({});
-            if (data.channel != null) {
-                message.channel = dependency_1.proto.discord.Channel.fromObject(data.channel);
-            }
-            if (data.message != null) {
-                message.message = data.message;
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                channel?: ReturnType<typeof dependency_1.proto.discord.Channel.prototype.toObject>;
-                message?: string;
-            } = {};
-            if (this.channel != null) {
-                data.channel = this.channel.toObject();
-            }
-            if (this.message != null) {
-                data.message = this.message;
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.channel !== undefined)
-                writer.writeMessage(1, this.channel, () => this.channel.serialize(writer));
-            if (typeof this.message === "string" && this.message.length)
-                writer.writeString(2, this.message);
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SendBotMessage {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SendBotMessage();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.channel, () => message.channel = dependency_1.proto.discord.Channel.deserialize(reader));
-                        break;
-                    case 2:
-                        message.message = reader.readString();
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): SendBotMessage {
-            return SendBotMessage.deserialize(bytes);
-        }
-    }
-    export class ScoreRequestResponse extends pb_1.Message {
-        constructor(data?: any[] | {
-            scores?: dependency_2.Models.Score[];
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("scores" in data && data.scores != undefined) {
-                    this.scores = data.scores;
-                }
-            }
-        }
-        get scores() {
-            return pb_1.Message.getRepeatedWrapperField(this, dependency_2.Models.Score, 1) as dependency_2.Models.Score[];
-        }
-        set scores(value: dependency_2.Models.Score[]) {
-            pb_1.Message.setRepeatedWrapperField(this, 1, value);
-        }
-        static fromObject(data: {
-            scores?: ReturnType<typeof dependency_2.Models.Score.prototype.toObject>[];
-        }) {
-            const message = new ScoreRequestResponse({});
-            if (data.scores != null) {
-                message.scores = data.scores.map(item => dependency_2.Models.Score.fromObject(item));
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                scores?: ReturnType<typeof dependency_2.Models.Score.prototype.toObject>[];
-            } = {};
-            if (this.scores != null) {
-                data.scores = this.scores.map((item: dependency_2.Models.Score) => item.toObject());
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.scores !== undefined)
-                writer.writeRepeatedMessage(1, this.scores, (item: dependency_2.Models.Score) => item.serialize(writer));
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ScoreRequestResponse {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ScoreRequestResponse();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.scores, () => pb_1.Message.addToRepeatedWrapperField(message, 1, dependency_2.Models.Score.deserialize(reader), dependency_2.Models.Score));
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): ScoreRequestResponse {
-            return ScoreRequestResponse.deserialize(bytes);
-        }
-    }
-    export class ScoreRequest extends pb_1.Message {
-        constructor(data?: any[] | {
-            event_id?: string;
-            parameters?: dependency_2.Models.GameplayParameters;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("event_id" in data && data.event_id != undefined) {
-                    this.event_id = data.event_id;
-                }
-                if ("parameters" in data && data.parameters != undefined) {
-                    this.parameters = data.parameters;
-                }
-            }
-        }
-        get event_id() {
-            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
-        }
-        set event_id(value: string) {
-            pb_1.Message.setField(this, 1, value);
-        }
-        get parameters() {
-            return pb_1.Message.getWrapperField(this, dependency_2.Models.GameplayParameters, 2) as dependency_2.Models.GameplayParameters;
-        }
-        set parameters(value: dependency_2.Models.GameplayParameters) {
-            pb_1.Message.setWrapperField(this, 2, value);
-        }
-        static fromObject(data: {
-            event_id?: string;
-            parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject>;
-        }) {
-            const message = new ScoreRequest({});
-            if (data.event_id != null) {
-                message.event_id = data.event_id;
-            }
-            if (data.parameters != null) {
-                message.parameters = dependency_2.Models.GameplayParameters.fromObject(data.parameters);
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                event_id?: string;
-                parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject>;
-            } = {};
-            if (this.event_id != null) {
-                data.event_id = this.event_id;
-            }
-            if (this.parameters != null) {
-                data.parameters = this.parameters.toObject();
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.event_id === "string" && this.event_id.length)
-                writer.writeString(1, this.event_id);
-            if (this.parameters !== undefined)
-                writer.writeMessage(2, this.parameters, () => this.parameters.serialize(writer));
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ScoreRequest {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ScoreRequest();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        message.event_id = reader.readString();
-                        break;
-                    case 2:
-                        reader.readMessage(message.parameters, () => message.parameters = dependency_2.Models.GameplayParameters.deserialize(reader));
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): ScoreRequest {
-            return ScoreRequest.deserialize(bytes);
-        }
-    }
     export class Packet extends pb_1.Message {
+        private one_of_decls: number[][] = [[3, 4, 5, 6, 7, 8, 9]];
         constructor(data?: any[] | ({
             id?: string;
             from?: string;
         } & (({
             acknowledgement?: Acknowledgement;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
             forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
+            command?: never;
+            push?: never;
+            request?: never;
+            response?: never;
+            event?: never;
         } | {
             acknowledgement?: never;
-            command?: Command;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: Connect;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: Response;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: ConnectResponse;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: File;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: LoadedSong;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: Event;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: LoadSong;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: PlaySong;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: SubmitScore;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: SongFinished;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: SendBotMessage;
-            score_request_response?: never;
-            score_request?: never;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: ScoreRequestResponse;
-            score_request?: never;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: ScoreRequest;
-            forwarding_packet?: never;
-            message?: never;
-            message_response?: never;
-        } | {
-            acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
             forwarding_packet?: ForwardingPacket;
-            message?: never;
-            message_response?: never;
+            command?: never;
+            push?: never;
+            request?: never;
+            response?: never;
+            event?: never;
         } | {
             acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
             forwarding_packet?: never;
-            message?: Message;
-            message_response?: never;
+            command?: Command;
+            push?: never;
+            request?: never;
+            response?: never;
+            event?: never;
         } | {
             acknowledgement?: never;
-            command?: never;
-            connect?: never;
-            response?: never;
-            connect_response?: never;
-            file?: never;
-            loaded_song?: never;
-            event?: never;
-            load_song?: never;
-            play_song?: never;
-            submit_score?: never;
-            song_finished?: never;
-            send_bot_message?: never;
-            score_request_response?: never;
-            score_request?: never;
             forwarding_packet?: never;
-            message?: never;
-            message_response?: MessageResponse;
+            command?: never;
+            push?: Push;
+            request?: never;
+            response?: never;
+            event?: never;
+        } | {
+            acknowledgement?: never;
+            forwarding_packet?: never;
+            command?: never;
+            push?: never;
+            request?: Request;
+            response?: never;
+            event?: never;
+        } | {
+            acknowledgement?: never;
+            forwarding_packet?: never;
+            command?: never;
+            push?: never;
+            request?: never;
+            response?: Response;
+            event?: never;
+        } | {
+            acknowledgement?: never;
+            forwarding_packet?: never;
+            command?: never;
+            push?: never;
+            request?: never;
+            response?: never;
+            event?: Event;
         })))) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], [[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]]);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("id" in data && data.id != undefined) {
                     this.id = data.id;
@@ -3040,56 +4371,23 @@ export namespace Packets {
                 if ("acknowledgement" in data && data.acknowledgement != undefined) {
                     this.acknowledgement = data.acknowledgement;
                 }
+                if ("forwarding_packet" in data && data.forwarding_packet != undefined) {
+                    this.forwarding_packet = data.forwarding_packet;
+                }
                 if ("command" in data && data.command != undefined) {
                     this.command = data.command;
                 }
-                if ("connect" in data && data.connect != undefined) {
-                    this.connect = data.connect;
+                if ("push" in data && data.push != undefined) {
+                    this.push = data.push;
+                }
+                if ("request" in data && data.request != undefined) {
+                    this.request = data.request;
                 }
                 if ("response" in data && data.response != undefined) {
                     this.response = data.response;
                 }
-                if ("connect_response" in data && data.connect_response != undefined) {
-                    this.connect_response = data.connect_response;
-                }
-                if ("file" in data && data.file != undefined) {
-                    this.file = data.file;
-                }
-                if ("loaded_song" in data && data.loaded_song != undefined) {
-                    this.loaded_song = data.loaded_song;
-                }
                 if ("event" in data && data.event != undefined) {
                     this.event = data.event;
-                }
-                if ("load_song" in data && data.load_song != undefined) {
-                    this.load_song = data.load_song;
-                }
-                if ("play_song" in data && data.play_song != undefined) {
-                    this.play_song = data.play_song;
-                }
-                if ("submit_score" in data && data.submit_score != undefined) {
-                    this.submit_score = data.submit_score;
-                }
-                if ("song_finished" in data && data.song_finished != undefined) {
-                    this.song_finished = data.song_finished;
-                }
-                if ("send_bot_message" in data && data.send_bot_message != undefined) {
-                    this.send_bot_message = data.send_bot_message;
-                }
-                if ("score_request_response" in data && data.score_request_response != undefined) {
-                    this.score_request_response = data.score_request_response;
-                }
-                if ("score_request" in data && data.score_request != undefined) {
-                    this.score_request = data.score_request;
-                }
-                if ("forwarding_packet" in data && data.forwarding_packet != undefined) {
-                    this.forwarding_packet = data.forwarding_packet;
-                }
-                if ("message" in data && data.message != undefined) {
-                    this.message = data.message;
-                }
-                if ("message_response" in data && data.message_response != undefined) {
-                    this.message_response = data.message_response;
                 }
             }
         }
@@ -3109,158 +4407,91 @@ export namespace Packets {
             return pb_1.Message.getWrapperField(this, Acknowledgement, 3) as Acknowledgement;
         }
         set acknowledgement(value: Acknowledgement) {
-            pb_1.Message.setOneofWrapperField(this, 3, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
+            pb_1.Message.setOneofWrapperField(this, 3, this.one_of_decls[0], value);
         }
-        get command() {
-            return pb_1.Message.getWrapperField(this, Command, 4) as Command;
-        }
-        set command(value: Command) {
-            pb_1.Message.setOneofWrapperField(this, 4, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
-        }
-        get connect() {
-            return pb_1.Message.getWrapperField(this, Connect, 5) as Connect;
-        }
-        set connect(value: Connect) {
-            pb_1.Message.setOneofWrapperField(this, 5, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
-        }
-        get response() {
-            return pb_1.Message.getWrapperField(this, Response, 6) as Response;
-        }
-        set response(value: Response) {
-            pb_1.Message.setOneofWrapperField(this, 6, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
-        }
-        get connect_response() {
-            return pb_1.Message.getWrapperField(this, ConnectResponse, 7) as ConnectResponse;
-        }
-        set connect_response(value: ConnectResponse) {
-            pb_1.Message.setOneofWrapperField(this, 7, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
-        }
-        get file() {
-            return pb_1.Message.getWrapperField(this, File, 8) as File;
-        }
-        set file(value: File) {
-            pb_1.Message.setOneofWrapperField(this, 8, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
-        }
-        get loaded_song() {
-            return pb_1.Message.getWrapperField(this, LoadedSong, 9) as LoadedSong;
-        }
-        set loaded_song(value: LoadedSong) {
-            pb_1.Message.setOneofWrapperField(this, 9, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
-        }
-        get event() {
-            return pb_1.Message.getWrapperField(this, Event, 10) as Event;
-        }
-        set event(value: Event) {
-            pb_1.Message.setOneofWrapperField(this, 10, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
-        }
-        get load_song() {
-            return pb_1.Message.getWrapperField(this, LoadSong, 11) as LoadSong;
-        }
-        set load_song(value: LoadSong) {
-            pb_1.Message.setOneofWrapperField(this, 11, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
-        }
-        get play_song() {
-            return pb_1.Message.getWrapperField(this, PlaySong, 12) as PlaySong;
-        }
-        set play_song(value: PlaySong) {
-            pb_1.Message.setOneofWrapperField(this, 12, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
-        }
-        get submit_score() {
-            return pb_1.Message.getWrapperField(this, SubmitScore, 13) as SubmitScore;
-        }
-        set submit_score(value: SubmitScore) {
-            pb_1.Message.setOneofWrapperField(this, 13, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
-        }
-        get song_finished() {
-            return pb_1.Message.getWrapperField(this, SongFinished, 14) as SongFinished;
-        }
-        set song_finished(value: SongFinished) {
-            pb_1.Message.setOneofWrapperField(this, 14, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
-        }
-        get send_bot_message() {
-            return pb_1.Message.getWrapperField(this, SendBotMessage, 15) as SendBotMessage;
-        }
-        set send_bot_message(value: SendBotMessage) {
-            pb_1.Message.setOneofWrapperField(this, 15, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
-        }
-        get score_request_response() {
-            return pb_1.Message.getWrapperField(this, ScoreRequestResponse, 16) as ScoreRequestResponse;
-        }
-        set score_request_response(value: ScoreRequestResponse) {
-            pb_1.Message.setOneofWrapperField(this, 16, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
-        }
-        get score_request() {
-            return pb_1.Message.getWrapperField(this, ScoreRequest, 17) as ScoreRequest;
-        }
-        set score_request(value: ScoreRequest) {
-            pb_1.Message.setOneofWrapperField(this, 17, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
+        get has_acknowledgement() {
+            return pb_1.Message.getField(this, 3) != null;
         }
         get forwarding_packet() {
-            return pb_1.Message.getWrapperField(this, ForwardingPacket, 18) as ForwardingPacket;
+            return pb_1.Message.getWrapperField(this, ForwardingPacket, 4) as ForwardingPacket;
         }
         set forwarding_packet(value: ForwardingPacket) {
-            pb_1.Message.setOneofWrapperField(this, 18, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
+            pb_1.Message.setOneofWrapperField(this, 4, this.one_of_decls[0], value);
         }
-        get message() {
-            return pb_1.Message.getWrapperField(this, Message, 19) as Message;
+        get has_forwarding_packet() {
+            return pb_1.Message.getField(this, 4) != null;
         }
-        set message(value: Message) {
-            pb_1.Message.setOneofWrapperField(this, 19, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
+        get command() {
+            return pb_1.Message.getWrapperField(this, Command, 5) as Command;
         }
-        get message_response() {
-            return pb_1.Message.getWrapperField(this, MessageResponse, 20) as MessageResponse;
+        set command(value: Command) {
+            pb_1.Message.setOneofWrapperField(this, 5, this.one_of_decls[0], value);
         }
-        set message_response(value: MessageResponse) {
-            pb_1.Message.setOneofWrapperField(this, 20, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], value);
+        get has_command() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get push() {
+            return pb_1.Message.getWrapperField(this, Push, 6) as Push;
+        }
+        set push(value: Push) {
+            pb_1.Message.setOneofWrapperField(this, 6, this.one_of_decls[0], value);
+        }
+        get has_push() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get request() {
+            return pb_1.Message.getWrapperField(this, Request, 7) as Request;
+        }
+        set request(value: Request) {
+            pb_1.Message.setOneofWrapperField(this, 7, this.one_of_decls[0], value);
+        }
+        get has_request() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        get response() {
+            return pb_1.Message.getWrapperField(this, Response, 8) as Response;
+        }
+        set response(value: Response) {
+            pb_1.Message.setOneofWrapperField(this, 8, this.one_of_decls[0], value);
+        }
+        get has_response() {
+            return pb_1.Message.getField(this, 8) != null;
+        }
+        get event() {
+            return pb_1.Message.getWrapperField(this, Event, 9) as Event;
+        }
+        set event(value: Event) {
+            pb_1.Message.setOneofWrapperField(this, 9, this.one_of_decls[0], value);
+        }
+        get has_event() {
+            return pb_1.Message.getField(this, 9) != null;
         }
         get packet() {
             const cases: {
-                [index: number]: "none" | "acknowledgement" | "command" | "connect" | "response" | "connect_response" | "file" | "loaded_song" | "event" | "load_song" | "play_song" | "submit_score" | "song_finished" | "send_bot_message" | "score_request_response" | "score_request" | "forwarding_packet" | "message" | "message_response";
+                [index: number]: "none" | "acknowledgement" | "forwarding_packet" | "command" | "push" | "request" | "response" | "event";
             } = {
                 0: "none",
                 3: "acknowledgement",
-                4: "command",
-                5: "connect",
-                6: "response",
-                7: "connect_response",
-                8: "file",
-                9: "loaded_song",
-                10: "event",
-                11: "load_song",
-                12: "play_song",
-                13: "submit_score",
-                14: "song_finished",
-                15: "send_bot_message",
-                16: "score_request_response",
-                17: "score_request",
-                18: "forwarding_packet",
-                19: "message",
-                20: "message_response"
+                4: "forwarding_packet",
+                5: "command",
+                6: "push",
+                7: "request",
+                8: "response",
+                9: "event"
             };
-            return cases[pb_1.Message.computeOneofCase(this, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20])];
+            return cases[pb_1.Message.computeOneofCase(this, [3, 4, 5, 6, 7, 8, 9])];
         }
         static fromObject(data: {
             id?: string;
             from?: string;
             acknowledgement?: ReturnType<typeof Acknowledgement.prototype.toObject>;
-            command?: ReturnType<typeof Command.prototype.toObject>;
-            connect?: ReturnType<typeof Connect.prototype.toObject>;
-            response?: ReturnType<typeof Response.prototype.toObject>;
-            connect_response?: ReturnType<typeof ConnectResponse.prototype.toObject>;
-            file?: ReturnType<typeof File.prototype.toObject>;
-            loaded_song?: ReturnType<typeof LoadedSong.prototype.toObject>;
-            event?: ReturnType<typeof Event.prototype.toObject>;
-            load_song?: ReturnType<typeof LoadSong.prototype.toObject>;
-            play_song?: ReturnType<typeof PlaySong.prototype.toObject>;
-            submit_score?: ReturnType<typeof SubmitScore.prototype.toObject>;
-            song_finished?: ReturnType<typeof SongFinished.prototype.toObject>;
-            send_bot_message?: ReturnType<typeof SendBotMessage.prototype.toObject>;
-            score_request_response?: ReturnType<typeof ScoreRequestResponse.prototype.toObject>;
-            score_request?: ReturnType<typeof ScoreRequest.prototype.toObject>;
             forwarding_packet?: ReturnType<typeof ForwardingPacket.prototype.toObject>;
-            message?: ReturnType<typeof Message.prototype.toObject>;
-            message_response?: ReturnType<typeof MessageResponse.prototype.toObject>;
-        }) {
+            command?: ReturnType<typeof Command.prototype.toObject>;
+            push?: ReturnType<typeof Push.prototype.toObject>;
+            request?: ReturnType<typeof Request.prototype.toObject>;
+            response?: ReturnType<typeof Response.prototype.toObject>;
+            event?: ReturnType<typeof Event.prototype.toObject>;
+        }): Packet {
             const message = new Packet({});
             if (data.id != null) {
                 message.id = data.id;
@@ -3271,56 +4502,23 @@ export namespace Packets {
             if (data.acknowledgement != null) {
                 message.acknowledgement = Acknowledgement.fromObject(data.acknowledgement);
             }
+            if (data.forwarding_packet != null) {
+                message.forwarding_packet = ForwardingPacket.fromObject(data.forwarding_packet);
+            }
             if (data.command != null) {
                 message.command = Command.fromObject(data.command);
             }
-            if (data.connect != null) {
-                message.connect = Connect.fromObject(data.connect);
+            if (data.push != null) {
+                message.push = Push.fromObject(data.push);
+            }
+            if (data.request != null) {
+                message.request = Request.fromObject(data.request);
             }
             if (data.response != null) {
                 message.response = Response.fromObject(data.response);
             }
-            if (data.connect_response != null) {
-                message.connect_response = ConnectResponse.fromObject(data.connect_response);
-            }
-            if (data.file != null) {
-                message.file = File.fromObject(data.file);
-            }
-            if (data.loaded_song != null) {
-                message.loaded_song = LoadedSong.fromObject(data.loaded_song);
-            }
             if (data.event != null) {
                 message.event = Event.fromObject(data.event);
-            }
-            if (data.load_song != null) {
-                message.load_song = LoadSong.fromObject(data.load_song);
-            }
-            if (data.play_song != null) {
-                message.play_song = PlaySong.fromObject(data.play_song);
-            }
-            if (data.submit_score != null) {
-                message.submit_score = SubmitScore.fromObject(data.submit_score);
-            }
-            if (data.song_finished != null) {
-                message.song_finished = SongFinished.fromObject(data.song_finished);
-            }
-            if (data.send_bot_message != null) {
-                message.send_bot_message = SendBotMessage.fromObject(data.send_bot_message);
-            }
-            if (data.score_request_response != null) {
-                message.score_request_response = ScoreRequestResponse.fromObject(data.score_request_response);
-            }
-            if (data.score_request != null) {
-                message.score_request = ScoreRequest.fromObject(data.score_request);
-            }
-            if (data.forwarding_packet != null) {
-                message.forwarding_packet = ForwardingPacket.fromObject(data.forwarding_packet);
-            }
-            if (data.message != null) {
-                message.message = Message.fromObject(data.message);
-            }
-            if (data.message_response != null) {
-                message.message_response = MessageResponse.fromObject(data.message_response);
             }
             return message;
         }
@@ -3329,23 +4527,12 @@ export namespace Packets {
                 id?: string;
                 from?: string;
                 acknowledgement?: ReturnType<typeof Acknowledgement.prototype.toObject>;
-                command?: ReturnType<typeof Command.prototype.toObject>;
-                connect?: ReturnType<typeof Connect.prototype.toObject>;
-                response?: ReturnType<typeof Response.prototype.toObject>;
-                connect_response?: ReturnType<typeof ConnectResponse.prototype.toObject>;
-                file?: ReturnType<typeof File.prototype.toObject>;
-                loaded_song?: ReturnType<typeof LoadedSong.prototype.toObject>;
-                event?: ReturnType<typeof Event.prototype.toObject>;
-                load_song?: ReturnType<typeof LoadSong.prototype.toObject>;
-                play_song?: ReturnType<typeof PlaySong.prototype.toObject>;
-                submit_score?: ReturnType<typeof SubmitScore.prototype.toObject>;
-                song_finished?: ReturnType<typeof SongFinished.prototype.toObject>;
-                send_bot_message?: ReturnType<typeof SendBotMessage.prototype.toObject>;
-                score_request_response?: ReturnType<typeof ScoreRequestResponse.prototype.toObject>;
-                score_request?: ReturnType<typeof ScoreRequest.prototype.toObject>;
                 forwarding_packet?: ReturnType<typeof ForwardingPacket.prototype.toObject>;
-                message?: ReturnType<typeof Message.prototype.toObject>;
-                message_response?: ReturnType<typeof MessageResponse.prototype.toObject>;
+                command?: ReturnType<typeof Command.prototype.toObject>;
+                push?: ReturnType<typeof Push.prototype.toObject>;
+                request?: ReturnType<typeof Request.prototype.toObject>;
+                response?: ReturnType<typeof Response.prototype.toObject>;
+                event?: ReturnType<typeof Event.prototype.toObject>;
             } = {};
             if (this.id != null) {
                 data.id = this.id;
@@ -3356,56 +4543,23 @@ export namespace Packets {
             if (this.acknowledgement != null) {
                 data.acknowledgement = this.acknowledgement.toObject();
             }
+            if (this.forwarding_packet != null) {
+                data.forwarding_packet = this.forwarding_packet.toObject();
+            }
             if (this.command != null) {
                 data.command = this.command.toObject();
             }
-            if (this.connect != null) {
-                data.connect = this.connect.toObject();
+            if (this.push != null) {
+                data.push = this.push.toObject();
+            }
+            if (this.request != null) {
+                data.request = this.request.toObject();
             }
             if (this.response != null) {
                 data.response = this.response.toObject();
             }
-            if (this.connect_response != null) {
-                data.connect_response = this.connect_response.toObject();
-            }
-            if (this.file != null) {
-                data.file = this.file.toObject();
-            }
-            if (this.loaded_song != null) {
-                data.loaded_song = this.loaded_song.toObject();
-            }
             if (this.event != null) {
                 data.event = this.event.toObject();
-            }
-            if (this.load_song != null) {
-                data.load_song = this.load_song.toObject();
-            }
-            if (this.play_song != null) {
-                data.play_song = this.play_song.toObject();
-            }
-            if (this.submit_score != null) {
-                data.submit_score = this.submit_score.toObject();
-            }
-            if (this.song_finished != null) {
-                data.song_finished = this.song_finished.toObject();
-            }
-            if (this.send_bot_message != null) {
-                data.send_bot_message = this.send_bot_message.toObject();
-            }
-            if (this.score_request_response != null) {
-                data.score_request_response = this.score_request_response.toObject();
-            }
-            if (this.score_request != null) {
-                data.score_request = this.score_request.toObject();
-            }
-            if (this.forwarding_packet != null) {
-                data.forwarding_packet = this.forwarding_packet.toObject();
-            }
-            if (this.message != null) {
-                data.message = this.message.toObject();
-            }
-            if (this.message_response != null) {
-                data.message_response = this.message_response.toObject();
             }
             return data;
         }
@@ -3413,46 +4567,24 @@ export namespace Packets {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.id === "string" && this.id.length)
+            if (this.id.length)
                 writer.writeString(1, this.id);
-            if (typeof this.from === "string" && this.from.length)
+            if (this.from.length)
                 writer.writeString(2, this.from);
-            if (this.acknowledgement !== undefined)
+            if (this.has_acknowledgement)
                 writer.writeMessage(3, this.acknowledgement, () => this.acknowledgement.serialize(writer));
-            if (this.command !== undefined)
-                writer.writeMessage(4, this.command, () => this.command.serialize(writer));
-            if (this.connect !== undefined)
-                writer.writeMessage(5, this.connect, () => this.connect.serialize(writer));
-            if (this.response !== undefined)
-                writer.writeMessage(6, this.response, () => this.response.serialize(writer));
-            if (this.connect_response !== undefined)
-                writer.writeMessage(7, this.connect_response, () => this.connect_response.serialize(writer));
-            if (this.file !== undefined)
-                writer.writeMessage(8, this.file, () => this.file.serialize(writer));
-            if (this.loaded_song !== undefined)
-                writer.writeMessage(9, this.loaded_song, () => this.loaded_song.serialize(writer));
-            if (this.event !== undefined)
-                writer.writeMessage(10, this.event, () => this.event.serialize(writer));
-            if (this.load_song !== undefined)
-                writer.writeMessage(11, this.load_song, () => this.load_song.serialize(writer));
-            if (this.play_song !== undefined)
-                writer.writeMessage(12, this.play_song, () => this.play_song.serialize(writer));
-            if (this.submit_score !== undefined)
-                writer.writeMessage(13, this.submit_score, () => this.submit_score.serialize(writer));
-            if (this.song_finished !== undefined)
-                writer.writeMessage(14, this.song_finished, () => this.song_finished.serialize(writer));
-            if (this.send_bot_message !== undefined)
-                writer.writeMessage(15, this.send_bot_message, () => this.send_bot_message.serialize(writer));
-            if (this.score_request_response !== undefined)
-                writer.writeMessage(16, this.score_request_response, () => this.score_request_response.serialize(writer));
-            if (this.score_request !== undefined)
-                writer.writeMessage(17, this.score_request, () => this.score_request.serialize(writer));
-            if (this.forwarding_packet !== undefined)
-                writer.writeMessage(18, this.forwarding_packet, () => this.forwarding_packet.serialize(writer));
-            if (this.message !== undefined)
-                writer.writeMessage(19, this.message, () => this.message.serialize(writer));
-            if (this.message_response !== undefined)
-                writer.writeMessage(20, this.message_response, () => this.message_response.serialize(writer));
+            if (this.has_forwarding_packet)
+                writer.writeMessage(4, this.forwarding_packet, () => this.forwarding_packet.serialize(writer));
+            if (this.has_command)
+                writer.writeMessage(5, this.command, () => this.command.serialize(writer));
+            if (this.has_push)
+                writer.writeMessage(6, this.push, () => this.push.serialize(writer));
+            if (this.has_request)
+                writer.writeMessage(7, this.request, () => this.request.serialize(writer));
+            if (this.has_response)
+                writer.writeMessage(8, this.response, () => this.response.serialize(writer));
+            if (this.has_event)
+                writer.writeMessage(9, this.event, () => this.event.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -3472,55 +4604,22 @@ export namespace Packets {
                         reader.readMessage(message.acknowledgement, () => message.acknowledgement = Acknowledgement.deserialize(reader));
                         break;
                     case 4:
-                        reader.readMessage(message.command, () => message.command = Command.deserialize(reader));
-                        break;
-                    case 5:
-                        reader.readMessage(message.connect, () => message.connect = Connect.deserialize(reader));
-                        break;
-                    case 6:
-                        reader.readMessage(message.response, () => message.response = Response.deserialize(reader));
-                        break;
-                    case 7:
-                        reader.readMessage(message.connect_response, () => message.connect_response = ConnectResponse.deserialize(reader));
-                        break;
-                    case 8:
-                        reader.readMessage(message.file, () => message.file = File.deserialize(reader));
-                        break;
-                    case 9:
-                        reader.readMessage(message.loaded_song, () => message.loaded_song = LoadedSong.deserialize(reader));
-                        break;
-                    case 10:
-                        reader.readMessage(message.event, () => message.event = Event.deserialize(reader));
-                        break;
-                    case 11:
-                        reader.readMessage(message.load_song, () => message.load_song = LoadSong.deserialize(reader));
-                        break;
-                    case 12:
-                        reader.readMessage(message.play_song, () => message.play_song = PlaySong.deserialize(reader));
-                        break;
-                    case 13:
-                        reader.readMessage(message.submit_score, () => message.submit_score = SubmitScore.deserialize(reader));
-                        break;
-                    case 14:
-                        reader.readMessage(message.song_finished, () => message.song_finished = SongFinished.deserialize(reader));
-                        break;
-                    case 15:
-                        reader.readMessage(message.send_bot_message, () => message.send_bot_message = SendBotMessage.deserialize(reader));
-                        break;
-                    case 16:
-                        reader.readMessage(message.score_request_response, () => message.score_request_response = ScoreRequestResponse.deserialize(reader));
-                        break;
-                    case 17:
-                        reader.readMessage(message.score_request, () => message.score_request = ScoreRequest.deserialize(reader));
-                        break;
-                    case 18:
                         reader.readMessage(message.forwarding_packet, () => message.forwarding_packet = ForwardingPacket.deserialize(reader));
                         break;
-                    case 19:
-                        reader.readMessage(message.message, () => message.message = Message.deserialize(reader));
+                    case 5:
+                        reader.readMessage(message.command, () => message.command = Command.deserialize(reader));
                         break;
-                    case 20:
-                        reader.readMessage(message.message_response, () => message.message_response = MessageResponse.deserialize(reader));
+                    case 6:
+                        reader.readMessage(message.push, () => message.push = Push.deserialize(reader));
+                        break;
+                    case 7:
+                        reader.readMessage(message.request, () => message.request = Request.deserialize(reader));
+                        break;
+                    case 8:
+                        reader.readMessage(message.response, () => message.response = Response.deserialize(reader));
+                        break;
+                    case 9:
+                        reader.readMessage(message.event, () => message.event = Event.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -3532,365 +4631,6 @@ export namespace Packets {
         }
         static deserializeBinary(bytes: Uint8Array): Packet {
             return Packet.deserialize(bytes);
-        }
-    }
-    export class ForwardingPacket extends pb_1.Message {
-        constructor(data?: any[] | {
-            forward_to?: string[];
-            packet?: Packet;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("forward_to" in data && data.forward_to != undefined) {
-                    this.forward_to = data.forward_to;
-                }
-                if ("packet" in data && data.packet != undefined) {
-                    this.packet = data.packet;
-                }
-            }
-        }
-        get forward_to() {
-            return pb_1.Message.getFieldWithDefault(this, 1, []) as string[];
-        }
-        set forward_to(value: string[]) {
-            pb_1.Message.setField(this, 1, value);
-        }
-        get packet() {
-            return pb_1.Message.getWrapperField(this, Packet, 2) as Packet;
-        }
-        set packet(value: Packet) {
-            pb_1.Message.setWrapperField(this, 2, value);
-        }
-        static fromObject(data: {
-            forward_to?: string[];
-            packet?: ReturnType<typeof Packet.prototype.toObject>;
-        }) {
-            const message = new ForwardingPacket({});
-            if (data.forward_to != null) {
-                message.forward_to = data.forward_to;
-            }
-            if (data.packet != null) {
-                message.packet = Packet.fromObject(data.packet);
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                forward_to?: string[];
-                packet?: ReturnType<typeof Packet.prototype.toObject>;
-            } = {};
-            if (this.forward_to != null) {
-                data.forward_to = this.forward_to;
-            }
-            if (this.packet != null) {
-                data.packet = this.packet.toObject();
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.forward_to !== undefined)
-                writer.writeRepeatedString(1, this.forward_to);
-            if (this.packet !== undefined)
-                writer.writeMessage(2, this.packet, () => this.packet.serialize(writer));
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ForwardingPacket {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ForwardingPacket();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        pb_1.Message.addToRepeatedField(message, 1, reader.readString());
-                        break;
-                    case 2:
-                        reader.readMessage(message.packet, () => message.packet = Packet.deserialize(reader));
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): ForwardingPacket {
-            return ForwardingPacket.deserialize(bytes);
-        }
-    }
-    export class Message extends pb_1.Message {
-        constructor(data?: any[] | {
-            id?: string;
-            message_title?: string;
-            message_text?: string;
-            can_close?: boolean;
-            option_1?: dependency_2.Models.MessageOption;
-            option_2?: dependency_2.Models.MessageOption;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("id" in data && data.id != undefined) {
-                    this.id = data.id;
-                }
-                if ("message_title" in data && data.message_title != undefined) {
-                    this.message_title = data.message_title;
-                }
-                if ("message_text" in data && data.message_text != undefined) {
-                    this.message_text = data.message_text;
-                }
-                if ("can_close" in data && data.can_close != undefined) {
-                    this.can_close = data.can_close;
-                }
-                if ("option_1" in data && data.option_1 != undefined) {
-                    this.option_1 = data.option_1;
-                }
-                if ("option_2" in data && data.option_2 != undefined) {
-                    this.option_2 = data.option_2;
-                }
-            }
-        }
-        get id() {
-            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
-        }
-        set id(value: string) {
-            pb_1.Message.setField(this, 1, value);
-        }
-        get message_title() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
-        }
-        set message_title(value: string) {
-            pb_1.Message.setField(this, 2, value);
-        }
-        get message_text() {
-            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
-        }
-        set message_text(value: string) {
-            pb_1.Message.setField(this, 3, value);
-        }
-        get can_close() {
-            return pb_1.Message.getFieldWithDefault(this, 4, false) as boolean;
-        }
-        set can_close(value: boolean) {
-            pb_1.Message.setField(this, 4, value);
-        }
-        get option_1() {
-            return pb_1.Message.getWrapperField(this, dependency_2.Models.MessageOption, 5) as dependency_2.Models.MessageOption;
-        }
-        set option_1(value: dependency_2.Models.MessageOption) {
-            pb_1.Message.setWrapperField(this, 5, value);
-        }
-        get option_2() {
-            return pb_1.Message.getWrapperField(this, dependency_2.Models.MessageOption, 6) as dependency_2.Models.MessageOption;
-        }
-        set option_2(value: dependency_2.Models.MessageOption) {
-            pb_1.Message.setWrapperField(this, 6, value);
-        }
-        static fromObject(data: {
-            id?: string;
-            message_title?: string;
-            message_text?: string;
-            can_close?: boolean;
-            option_1?: ReturnType<typeof dependency_2.Models.MessageOption.prototype.toObject>;
-            option_2?: ReturnType<typeof dependency_2.Models.MessageOption.prototype.toObject>;
-        }) {
-            const message = new Message({});
-            if (data.id != null) {
-                message.id = data.id;
-            }
-            if (data.message_title != null) {
-                message.message_title = data.message_title;
-            }
-            if (data.message_text != null) {
-                message.message_text = data.message_text;
-            }
-            if (data.can_close != null) {
-                message.can_close = data.can_close;
-            }
-            if (data.option_1 != null) {
-                message.option_1 = dependency_2.Models.MessageOption.fromObject(data.option_1);
-            }
-            if (data.option_2 != null) {
-                message.option_2 = dependency_2.Models.MessageOption.fromObject(data.option_2);
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                id?: string;
-                message_title?: string;
-                message_text?: string;
-                can_close?: boolean;
-                option_1?: ReturnType<typeof dependency_2.Models.MessageOption.prototype.toObject>;
-                option_2?: ReturnType<typeof dependency_2.Models.MessageOption.prototype.toObject>;
-            } = {};
-            if (this.id != null) {
-                data.id = this.id;
-            }
-            if (this.message_title != null) {
-                data.message_title = this.message_title;
-            }
-            if (this.message_text != null) {
-                data.message_text = this.message_text;
-            }
-            if (this.can_close != null) {
-                data.can_close = this.can_close;
-            }
-            if (this.option_1 != null) {
-                data.option_1 = this.option_1.toObject();
-            }
-            if (this.option_2 != null) {
-                data.option_2 = this.option_2.toObject();
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.id === "string" && this.id.length)
-                writer.writeString(1, this.id);
-            if (typeof this.message_title === "string" && this.message_title.length)
-                writer.writeString(2, this.message_title);
-            if (typeof this.message_text === "string" && this.message_text.length)
-                writer.writeString(3, this.message_text);
-            if (this.can_close !== undefined)
-                writer.writeBool(4, this.can_close);
-            if (this.option_1 !== undefined)
-                writer.writeMessage(5, this.option_1, () => this.option_1.serialize(writer));
-            if (this.option_2 !== undefined)
-                writer.writeMessage(6, this.option_2, () => this.option_2.serialize(writer));
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Message {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Message();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        message.id = reader.readString();
-                        break;
-                    case 2:
-                        message.message_title = reader.readString();
-                        break;
-                    case 3:
-                        message.message_text = reader.readString();
-                        break;
-                    case 4:
-                        message.can_close = reader.readBool();
-                        break;
-                    case 5:
-                        reader.readMessage(message.option_1, () => message.option_1 = dependency_2.Models.MessageOption.deserialize(reader));
-                        break;
-                    case 6:
-                        reader.readMessage(message.option_2, () => message.option_2 = dependency_2.Models.MessageOption.deserialize(reader));
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): Message {
-            return Message.deserialize(bytes);
-        }
-    }
-    export class MessageResponse extends pb_1.Message {
-        constructor(data?: any[] | {
-            packet_id?: string;
-            value?: string;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("packet_id" in data && data.packet_id != undefined) {
-                    this.packet_id = data.packet_id;
-                }
-                if ("value" in data && data.value != undefined) {
-                    this.value = data.value;
-                }
-            }
-        }
-        get packet_id() {
-            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
-        }
-        set packet_id(value: string) {
-            pb_1.Message.setField(this, 1, value);
-        }
-        get value() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
-        }
-        set value(value: string) {
-            pb_1.Message.setField(this, 2, value);
-        }
-        static fromObject(data: {
-            packet_id?: string;
-            value?: string;
-        }) {
-            const message = new MessageResponse({});
-            if (data.packet_id != null) {
-                message.packet_id = data.packet_id;
-            }
-            if (data.value != null) {
-                message.value = data.value;
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                packet_id?: string;
-                value?: string;
-            } = {};
-            if (this.packet_id != null) {
-                data.packet_id = this.packet_id;
-            }
-            if (this.value != null) {
-                data.value = this.value;
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.packet_id === "string" && this.packet_id.length)
-                writer.writeString(1, this.packet_id);
-            if (typeof this.value === "string" && this.value.length)
-                writer.writeString(2, this.value);
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): MessageResponse {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new MessageResponse();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        message.packet_id = reader.readString();
-                        break;
-                    case 2:
-                        message.value = reader.readString();
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): MessageResponse {
-            return MessageResponse.deserialize(bytes);
         }
     }
 }

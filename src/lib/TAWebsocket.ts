@@ -11,7 +11,6 @@ export class TAWebsocket {
     private url: string;
     private password?: string;
     private name: string;
-    private userId?: string;
 
     private ws: webSock | null = null;
     public taClient: Client;
@@ -21,13 +20,18 @@ export class TAWebsocket {
 
     private sendToSocket: (data: any) => void = () => null;
 
-    constructor({ url, name, password, userId, options }: { url: string; name: string; password?: string; userId?: string; options?: Partial<Config>; }) {
+    constructor({ url, name, password, options }: { url: string; name: string; password?: string; options?: Partial<Config>; }) {
         this.config = this.loadConfig(options);
         this.url = url;
         this.password = password;
         this.name = name;
-        this.userId = userId;
-        this.taClient = new Client();
+        
+        this.taClient = new Client(new Models.User({ 
+            name: this.name, 
+            guid: uuidv4(), 
+            client_type: this.config.connectionMode 
+        }));
+        
         if (this.config.autoInit) this.init();
         if (!this.config.sendToSocket) {
             this.sendToSocket = (data) => this.ws?.send(data);
@@ -63,7 +67,7 @@ export class TAWebsocket {
         }, this.config.handshakeTimeout);
         this.ws.onopen = () => {
             clearTimeout(connectTimeout);
-            this.coordinatorConnect();
+            this.ClientConnect();
         };
         this.ws.onmessage = (event) => {
             if (event.data instanceof ArrayBuffer) {
@@ -92,26 +96,24 @@ export class TAWebsocket {
         };
     }
 
-    coordinatorConnect() {
-        const packetData = new Packets.Connect({
-            client_type: this.config.connectionMode,
-            name: this.name,
+    ClientConnect() {
+        const packetData = new Packets.Request.Connect({
+            user: this.taClient.Self,
             client_version: 66,
             password: this.password ?? undefined,
-            user_id: this.userId ?? "",
         });
         const packet = new Packets.Packet({
             id: uuidv4(),
-            from: this.taClient.Self?.id,
-            connect: packetData
+            from: this.taClient.Self?.guid,
+            request: new Packets.Request({ connect: packetData })
         });
         this.sendPacket(packet);
     }
 
     handlePacket(packet: Packets.Packet) {
-        if (packet.connect_response) {
-            const connectResponse = packet.connect_response;
-            if (!this.taClient.Self && connectResponse.self) {
+        if (packet.response?.connect && packet.response?.type === Packets.Response.ResponseType.Success) {
+            const connectResponse = packet.response.connect;
+            if (!this.taClient.isConnected && connectResponse.self_guid) {
                 this.taClient.init(connectResponse);
             }
         }
@@ -119,7 +121,7 @@ export class TAWebsocket {
     }
 
     sendPacket(packet: Packets.Packet) {
-        packet.from = this.taClient.Self?.id ?? uuidv4();
+        packet.from = this.taClient.Self?.guid;
         this.sendToSocket(packet.serializeBinary());
     }
 
@@ -141,8 +143,8 @@ export class TAWebsocket {
     createMatch(players: Models.User[]) {
         const match = new Models.Match({
             guid: uuidv4(),
-            associated_users: [...players, this.taClient.Self!],
-            leader: this.taClient.Self!
+            associated_users: [...players.map(x => x.guid), this.taClient.Self.guid],
+            leader: this.taClient.Self!.guid
         });
         this.sendEvent(new Packets.Event({
             match_created_event: new Packets.Event.MatchCreatedEvent({ match: match })
@@ -162,8 +164,8 @@ export class TAWebsocket {
         }));
     }
 
-    async sendMessage(ids: string[], msg: Packets.Message) {
-        this.forwardPacket(ids, new Packets.Packet({ message: msg }));
+    async sendMessage(ids: string[], msg: Packets.Command.ShowModal) {
+        this.forwardPacket(ids, new Packets.Packet({ command: new Packets.Command({ show_modal: msg }) }));
     }
 
     async loadSong(songName: string, hash: string, difficulty: number, taMatch: Models.Match) {
@@ -188,11 +190,13 @@ export class TAWebsocket {
         });
         taMatch.selected_difficulty = +difficulty;
 
-        const playerIds = this.getPlayers(taMatch).map((x) => x.id);
+        const playerIds = this.getPlayers(taMatch).map((x) => x.guid);
 
         this.forwardPacket(playerIds, new Packets.Packet({
-            load_song: new Packets.LoadSong({
-                level_id: taMatch.selected_level.level_id
+            command: new Packets.Command({
+                load_song: new Packets.Command.LoadSong({
+                    level_id: taMatch.selected_level.level_id
+                })
             })
         }));
         setTimeout(() => {
@@ -218,14 +222,14 @@ export class TAWebsocket {
             beatmap: beatMap
         });
 
-        const playSong = new Packets.PlaySong({
+        const playSong = new Packets.Command.PlaySong({
             gameplay_parameters: gameplayParameters,
             floating_scoreboard: floating_scoreboard,
             stream_sync: withSync,
             disable_pause: disable_pause,
             disable_fail: disable_fail,
         });
-        const playerIds = this.getPlayers(match).map((x) => x.id);
+        const playerIds = this.getPlayers(match).map((x) => x.guid);
 
         const curTime = new Date();
         curTime.setSeconds(curTime.getSeconds() + 2);
@@ -234,7 +238,9 @@ export class TAWebsocket {
 
         setTimeout(() => {
             this.forwardPacket(playerIds, new Packets.Packet({
-                play_song: playSong
+                command: new Packets.Command({
+                    play_song: playSong
+                })
             }));
         }, 500);
     }
@@ -242,7 +248,7 @@ export class TAWebsocket {
     returnToMenu(ids: string[]) {
         this.forwardPacket(ids, new Packets.Packet({
             command: new Packets.Command({
-                command_type: Packets.Command.CommandTypes.ReturnToMenu,
+                return_to_menu: true,
             })
         }));
     }
@@ -258,16 +264,16 @@ export class TAWebsocket {
         }
     }
 
-    getPlayers(match?: Models.Match) {
-        return match?.associated_users.filter(x => x.client_type === Models.User.ClientTypes.Player) ?? [];
+    getPlayers(match: Models.Match) {
+        return this.taClient.State?.users.filter(x => match.associated_users.includes(x.guid) && x.client_type === Models.User.ClientTypes.Player) ?? [];
     }
 
-    getCoordinators(match?: Models.Match) {
-        return match?.associated_users.filter(x => x.client_type === Models.User.ClientTypes.Coordinator) ?? [];
+    getCoordinators(match: Models.Match) {
+        return this.taClient.State?.users.filter(x => match.associated_users.includes(x.guid) && x.client_type === Models.User.ClientTypes.Coordinator) ?? [];
     }
 
-    getWebsockets(match?: Models.Match) {
-        return match?.associated_users.filter(x => x.client_type === Models.User.ClientTypes.WebsocketConnection) ?? [];
+    getWebsockets(match: Models.Match) {
+        return this.taClient.State?.users.filter(x => match.associated_users.includes(x.guid) && x.client_type === Models.User.ClientTypes.WebsocketConnection) ?? [];
     }
 
 }
