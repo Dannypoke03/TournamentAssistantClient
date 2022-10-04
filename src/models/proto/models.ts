@@ -82,7 +82,10 @@ export namespace Models {
                         message.serialized_name = reader.readString();
                         break;
                     case 2:
-                        message.difficulties = reader.readPackedInt32();
+                        var values = (reader.isDelimited() ? reader.readPackedInt32() : [reader.readInt32()]);
+                        for (var i = 0; i < values.length; i++) {
+                            message.difficulties.push(values[i]);
+                        }
                         break;
                     default: reader.skipField();
                 }
@@ -2559,6 +2562,353 @@ export namespace Models {
         }
         static deserializeBinary(bytes: Uint8Array): ModalOption {
             return ModalOption.deserialize(bytes);
+        }
+    }
+    export class ScoreTrackerHand extends pb_1.Message {
+        private one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            hit?: number;
+            miss?: number;
+            badCut?: number;
+            avgCut?: number[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [4], this.one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("hit" in data && data.hit != undefined) {
+                    this.hit = data.hit;
+                }
+                if ("miss" in data && data.miss != undefined) {
+                    this.miss = data.miss;
+                }
+                if ("badCut" in data && data.badCut != undefined) {
+                    this.badCut = data.badCut;
+                }
+                if ("avgCut" in data && data.avgCut != undefined) {
+                    this.avgCut = data.avgCut;
+                }
+            }
+        }
+        get hit() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set hit(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get miss() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set miss(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get badCut() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set badCut(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get avgCut() {
+            return pb_1.Message.getFieldWithDefault(this, 4, []) as number[];
+        }
+        set avgCut(value: number[]) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        static fromObject(data: {
+            hit?: number;
+            miss?: number;
+            badCut?: number;
+            avgCut?: number[];
+        }): ScoreTrackerHand {
+            const message = new ScoreTrackerHand({});
+            if (data.hit != null) {
+                message.hit = data.hit;
+            }
+            if (data.miss != null) {
+                message.miss = data.miss;
+            }
+            if (data.badCut != null) {
+                message.badCut = data.badCut;
+            }
+            if (data.avgCut != null) {
+                message.avgCut = data.avgCut;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                hit?: number;
+                miss?: number;
+                badCut?: number;
+                avgCut?: number[];
+            } = {};
+            if (this.hit != null) {
+                data.hit = this.hit;
+            }
+            if (this.miss != null) {
+                data.miss = this.miss;
+            }
+            if (this.badCut != null) {
+                data.badCut = this.badCut;
+            }
+            if (this.avgCut != null) {
+                data.avgCut = this.avgCut;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.hit != 0)
+                writer.writeInt32(1, this.hit);
+            if (this.miss != 0)
+                writer.writeInt32(2, this.miss);
+            if (this.badCut != 0)
+                writer.writeInt32(3, this.badCut);
+            if (this.avgCut.length)
+                writer.writePackedFloat(4, this.avgCut);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ScoreTrackerHand {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ScoreTrackerHand();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.hit = reader.readInt32();
+                        break;
+                    case 2:
+                        message.miss = reader.readInt32();
+                        break;
+                    case 3:
+                        message.badCut = reader.readInt32();
+                        break;
+                    case 4:
+                        message.avgCut = reader.readPackedFloat();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ScoreTrackerHand {
+            return ScoreTrackerHand.deserialize(bytes);
+        }
+    }
+    export class ScoreTracker extends pb_1.Message {
+        private one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            notesMissed?: number;
+            badCuts?: number;
+            bombHits?: number;
+            wallHits?: number;
+            maxCombo?: number;
+            leftHand?: ScoreTrackerHand;
+            rightHand?: ScoreTrackerHand;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("notesMissed" in data && data.notesMissed != undefined) {
+                    this.notesMissed = data.notesMissed;
+                }
+                if ("badCuts" in data && data.badCuts != undefined) {
+                    this.badCuts = data.badCuts;
+                }
+                if ("bombHits" in data && data.bombHits != undefined) {
+                    this.bombHits = data.bombHits;
+                }
+                if ("wallHits" in data && data.wallHits != undefined) {
+                    this.wallHits = data.wallHits;
+                }
+                if ("maxCombo" in data && data.maxCombo != undefined) {
+                    this.maxCombo = data.maxCombo;
+                }
+                if ("leftHand" in data && data.leftHand != undefined) {
+                    this.leftHand = data.leftHand;
+                }
+                if ("rightHand" in data && data.rightHand != undefined) {
+                    this.rightHand = data.rightHand;
+                }
+            }
+        }
+        get notesMissed() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set notesMissed(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get badCuts() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set badCuts(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get bombHits() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set bombHits(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get wallHits() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set wallHits(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get maxCombo() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set maxCombo(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get leftHand() {
+            return pb_1.Message.getWrapperField(this, ScoreTrackerHand, 6) as ScoreTrackerHand;
+        }
+        set leftHand(value: ScoreTrackerHand) {
+            pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_leftHand() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get rightHand() {
+            return pb_1.Message.getWrapperField(this, ScoreTrackerHand, 7) as ScoreTrackerHand;
+        }
+        set rightHand(value: ScoreTrackerHand) {
+            pb_1.Message.setWrapperField(this, 7, value);
+        }
+        get has_rightHand() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        static fromObject(data: {
+            notesMissed?: number;
+            badCuts?: number;
+            bombHits?: number;
+            wallHits?: number;
+            maxCombo?: number;
+            leftHand?: ReturnType<typeof ScoreTrackerHand.prototype.toObject>;
+            rightHand?: ReturnType<typeof ScoreTrackerHand.prototype.toObject>;
+        }): ScoreTracker {
+            const message = new ScoreTracker({});
+            if (data.notesMissed != null) {
+                message.notesMissed = data.notesMissed;
+            }
+            if (data.badCuts != null) {
+                message.badCuts = data.badCuts;
+            }
+            if (data.bombHits != null) {
+                message.bombHits = data.bombHits;
+            }
+            if (data.wallHits != null) {
+                message.wallHits = data.wallHits;
+            }
+            if (data.maxCombo != null) {
+                message.maxCombo = data.maxCombo;
+            }
+            if (data.leftHand != null) {
+                message.leftHand = ScoreTrackerHand.fromObject(data.leftHand);
+            }
+            if (data.rightHand != null) {
+                message.rightHand = ScoreTrackerHand.fromObject(data.rightHand);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                notesMissed?: number;
+                badCuts?: number;
+                bombHits?: number;
+                wallHits?: number;
+                maxCombo?: number;
+                leftHand?: ReturnType<typeof ScoreTrackerHand.prototype.toObject>;
+                rightHand?: ReturnType<typeof ScoreTrackerHand.prototype.toObject>;
+            } = {};
+            if (this.notesMissed != null) {
+                data.notesMissed = this.notesMissed;
+            }
+            if (this.badCuts != null) {
+                data.badCuts = this.badCuts;
+            }
+            if (this.bombHits != null) {
+                data.bombHits = this.bombHits;
+            }
+            if (this.wallHits != null) {
+                data.wallHits = this.wallHits;
+            }
+            if (this.maxCombo != null) {
+                data.maxCombo = this.maxCombo;
+            }
+            if (this.leftHand != null) {
+                data.leftHand = this.leftHand.toObject();
+            }
+            if (this.rightHand != null) {
+                data.rightHand = this.rightHand.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.notesMissed != 0)
+                writer.writeInt32(1, this.notesMissed);
+            if (this.badCuts != 0)
+                writer.writeInt32(2, this.badCuts);
+            if (this.bombHits != 0)
+                writer.writeInt32(3, this.bombHits);
+            if (this.wallHits != 0)
+                writer.writeInt32(4, this.wallHits);
+            if (this.maxCombo != 0)
+                writer.writeInt32(5, this.maxCombo);
+            if (this.has_leftHand)
+                writer.writeMessage(6, this.leftHand, () => this.leftHand.serialize(writer));
+            if (this.has_rightHand)
+                writer.writeMessage(7, this.rightHand, () => this.rightHand.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ScoreTracker {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ScoreTracker();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.notesMissed = reader.readInt32();
+                        break;
+                    case 2:
+                        message.badCuts = reader.readInt32();
+                        break;
+                    case 3:
+                        message.bombHits = reader.readInt32();
+                        break;
+                    case 4:
+                        message.wallHits = reader.readInt32();
+                        break;
+                    case 5:
+                        message.maxCombo = reader.readInt32();
+                        break;
+                    case 6:
+                        reader.readMessage(message.leftHand, () => message.leftHand = ScoreTrackerHand.deserialize(reader));
+                        break;
+                    case 7:
+                        reader.readMessage(message.rightHand, () => message.rightHand = ScoreTrackerHand.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ScoreTracker {
+            return ScoreTracker.deserialize(bytes);
         }
     }
 }

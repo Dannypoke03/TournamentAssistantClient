@@ -1140,12 +1140,10 @@ export namespace Packets {
                 max_score?: number;
                 max_score_with_modifiers?: number;
                 combo?: number;
-                misses?: number;
                 player_health?: number;
                 accuracy?: number;
-                is_miss?: boolean;
-                is_bad_hit?: boolean;
                 song_position?: number;
+                scoreTracker?: dependency_2.Models.ScoreTracker;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
@@ -1168,23 +1166,17 @@ export namespace Packets {
                     if ("combo" in data && data.combo != undefined) {
                         this.combo = data.combo;
                     }
-                    if ("misses" in data && data.misses != undefined) {
-                        this.misses = data.misses;
-                    }
                     if ("player_health" in data && data.player_health != undefined) {
                         this.player_health = data.player_health;
                     }
                     if ("accuracy" in data && data.accuracy != undefined) {
                         this.accuracy = data.accuracy;
                     }
-                    if ("is_miss" in data && data.is_miss != undefined) {
-                        this.is_miss = data.is_miss;
-                    }
-                    if ("is_bad_hit" in data && data.is_bad_hit != undefined) {
-                        this.is_bad_hit = data.is_bad_hit;
-                    }
                     if ("song_position" in data && data.song_position != undefined) {
                         this.song_position = data.song_position;
+                    }
+                    if ("scoreTracker" in data && data.scoreTracker != undefined) {
+                        this.scoreTracker = data.scoreTracker;
                     }
                 }
             }
@@ -1224,41 +1216,32 @@ export namespace Packets {
             set combo(value: number) {
                 pb_1.Message.setField(this, 6, value);
             }
-            get misses() {
+            get player_health() {
                 return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
             }
-            set misses(value: number) {
+            set player_health(value: number) {
                 pb_1.Message.setField(this, 7, value);
             }
-            get player_health() {
+            get accuracy() {
                 return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
             }
-            set player_health(value: number) {
+            set accuracy(value: number) {
                 pb_1.Message.setField(this, 8, value);
             }
-            get accuracy() {
+            get song_position() {
                 return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
             }
-            set accuracy(value: number) {
+            set song_position(value: number) {
                 pb_1.Message.setField(this, 9, value);
             }
-            get is_miss() {
-                return pb_1.Message.getFieldWithDefault(this, 10, false) as boolean;
+            get scoreTracker() {
+                return pb_1.Message.getWrapperField(this, dependency_2.Models.ScoreTracker, 10) as dependency_2.Models.ScoreTracker;
             }
-            set is_miss(value: boolean) {
-                pb_1.Message.setField(this, 10, value);
+            set scoreTracker(value: dependency_2.Models.ScoreTracker) {
+                pb_1.Message.setWrapperField(this, 10, value);
             }
-            get is_bad_hit() {
-                return pb_1.Message.getFieldWithDefault(this, 11, false) as boolean;
-            }
-            set is_bad_hit(value: boolean) {
-                pb_1.Message.setField(this, 11, value);
-            }
-            get song_position() {
-                return pb_1.Message.getFieldWithDefault(this, 12, 0) as number;
-            }
-            set song_position(value: number) {
-                pb_1.Message.setField(this, 12, value);
+            get has_scoreTracker() {
+                return pb_1.Message.getField(this, 10) != null;
             }
             static fromObject(data: {
                 user_guid?: string;
@@ -1267,12 +1250,10 @@ export namespace Packets {
                 max_score?: number;
                 max_score_with_modifiers?: number;
                 combo?: number;
-                misses?: number;
                 player_health?: number;
                 accuracy?: number;
-                is_miss?: boolean;
-                is_bad_hit?: boolean;
                 song_position?: number;
+                scoreTracker?: ReturnType<typeof dependency_2.Models.ScoreTracker.prototype.toObject>;
             }): RealtimeScore {
                 const message = new RealtimeScore({});
                 if (data.user_guid != null) {
@@ -1293,23 +1274,17 @@ export namespace Packets {
                 if (data.combo != null) {
                     message.combo = data.combo;
                 }
-                if (data.misses != null) {
-                    message.misses = data.misses;
-                }
                 if (data.player_health != null) {
                     message.player_health = data.player_health;
                 }
                 if (data.accuracy != null) {
                     message.accuracy = data.accuracy;
                 }
-                if (data.is_miss != null) {
-                    message.is_miss = data.is_miss;
-                }
-                if (data.is_bad_hit != null) {
-                    message.is_bad_hit = data.is_bad_hit;
-                }
                 if (data.song_position != null) {
                     message.song_position = data.song_position;
+                }
+                if (data.scoreTracker != null) {
+                    message.scoreTracker = dependency_2.Models.ScoreTracker.fromObject(data.scoreTracker);
                 }
                 return message;
             }
@@ -1321,12 +1296,10 @@ export namespace Packets {
                     max_score?: number;
                     max_score_with_modifiers?: number;
                     combo?: number;
-                    misses?: number;
                     player_health?: number;
                     accuracy?: number;
-                    is_miss?: boolean;
-                    is_bad_hit?: boolean;
                     song_position?: number;
+                    scoreTracker?: ReturnType<typeof dependency_2.Models.ScoreTracker.prototype.toObject>;
                 } = {};
                 if (this.user_guid != null) {
                     data.user_guid = this.user_guid;
@@ -1346,23 +1319,17 @@ export namespace Packets {
                 if (this.combo != null) {
                     data.combo = this.combo;
                 }
-                if (this.misses != null) {
-                    data.misses = this.misses;
-                }
                 if (this.player_health != null) {
                     data.player_health = this.player_health;
                 }
                 if (this.accuracy != null) {
                     data.accuracy = this.accuracy;
                 }
-                if (this.is_miss != null) {
-                    data.is_miss = this.is_miss;
-                }
-                if (this.is_bad_hit != null) {
-                    data.is_bad_hit = this.is_bad_hit;
-                }
                 if (this.song_position != null) {
                     data.song_position = this.song_position;
+                }
+                if (this.scoreTracker != null) {
+                    data.scoreTracker = this.scoreTracker.toObject();
                 }
                 return data;
             }
@@ -1382,18 +1349,14 @@ export namespace Packets {
                     writer.writeInt32(5, this.max_score_with_modifiers);
                 if (this.combo != 0)
                     writer.writeInt32(6, this.combo);
-                if (this.misses != 0)
-                    writer.writeInt32(7, this.misses);
                 if (this.player_health != 0)
-                    writer.writeFloat(8, this.player_health);
+                    writer.writeFloat(7, this.player_health);
                 if (this.accuracy != 0)
-                    writer.writeFloat(9, this.accuracy);
-                if (this.is_miss != false)
-                    writer.writeBool(10, this.is_miss);
-                if (this.is_bad_hit != false)
-                    writer.writeBool(11, this.is_bad_hit);
+                    writer.writeFloat(8, this.accuracy);
                 if (this.song_position != 0)
-                    writer.writeFloat(12, this.song_position);
+                    writer.writeFloat(9, this.song_position);
+                if (this.has_scoreTracker)
+                    writer.writeMessage(10, this.scoreTracker, () => this.scoreTracker.serialize(writer));
                 if (!w)
                     return writer.getResultBuffer();
             }
@@ -1422,22 +1385,16 @@ export namespace Packets {
                             message.combo = reader.readInt32();
                             break;
                         case 7:
-                            message.misses = reader.readInt32();
-                            break;
-                        case 8:
                             message.player_health = reader.readFloat();
                             break;
-                        case 9:
+                        case 8:
                             message.accuracy = reader.readFloat();
                             break;
-                        case 10:
-                            message.is_miss = reader.readBool();
-                            break;
-                        case 11:
-                            message.is_bad_hit = reader.readBool();
-                            break;
-                        case 12:
+                        case 9:
                             message.song_position = reader.readFloat();
+                            break;
+                        case 10:
+                            reader.readMessage(message.scoreTracker, () => message.scoreTracker = dependency_2.Models.ScoreTracker.deserialize(reader));
                             break;
                         default: reader.skipField();
                     }

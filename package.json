@@ -9,7 +9,7 @@
     "scripts": {
         "test": "npm run lint",
         "compile": "tsc -b ./src/tsconfig.cjs.json ./src/tsconfig.esm.json ./src/tsconfig.esm5.json ./src/tsconfig.types.json",
-        "dev": "nodemon --exec npm run compile --ignore dist/",
+        "dev": "npm run compile -- --watch",
         "lint": "eslint \"./src/**\"",
         "lint:fix": "eslint \"./src/**\" --fix",
         "publish:patch": "npm version patch && npm publish --access public",
@@ -24,7 +24,6 @@
         "@types/ws": "^8.5.3",
         "@typescript-eslint/eslint-plugin": "^5.21.0",
         "@typescript-eslint/parser": "^5.21.0",
-        "nodemon": "^2.0.16",
         "ts-node": "^10.5.0",
         "tslib": "^2.4.0",
         "tslint": "^6.1.3",
