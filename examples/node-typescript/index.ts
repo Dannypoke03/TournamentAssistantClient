@@ -1,8 +1,7 @@
-import { TAWebsocket } from "tournament-assistant-client";
+import { Client } from "tournament-assistant-client";
 
-const taWS = new TAWebsocket({
-    url: "ws://localhost:2053",
-    name: "Danny",
+const taWS = new Client("BSL", {
+    url: "ws://tournamentassistant.net:2053"
 });
 
 setTimeout(() => {
@@ -10,8 +9,8 @@ setTimeout(() => {
     throw new Error("Timeout Error");
 }, 10000);
 
-taWS.taClient.on("packet", p => {
-    if (p.response.connect) {
+taWS.on("packet", p => {
+    if (p.has_response && p.response.has_connect) {
         if (p.response.type === 1) {
             console.log(p.response.connect.message);
             taWS.close();
@@ -20,4 +19,8 @@ taWS.taClient.on("packet", p => {
             throw new Error("Connection was not successful");
         }
     }
+});
+
+taWS.on("error", e => {
+    throw e;
 });
