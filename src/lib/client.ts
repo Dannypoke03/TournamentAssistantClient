@@ -178,13 +178,32 @@ export class Client {
         return [...this.getMatchPlayers(match), ...this.getMatchCoordinators(match), ...this.getMatchWebsocketUsers(match)];
     }
 
+    sendMessage(ids: string[], msg: Packets.Command.ShowModal) {
+        this.forwardPacket(ids, new Packets.Packet({ command: new Packets.Command({ show_modal: msg }) }));
+    }
+
+    sendEvent(event: Packets.Event) {
+        this.sendPacket(new Packets.Packet({ event }));
+    }
+
+    forwardPacket(ids: string[], packet: Packets.Packet) {
+        this.sendPacket(
+            new Packets.Packet({
+                forwarding_packet: new Packets.ForwardingPacket({
+                    forward_to: ids,
+                    packet: packet
+                })
+            })
+        );
+    }
+
     createMatch(players: Models.User[]) {
         const match = new Models.Match({
             guid: uuidv4(),
             associated_users: [...players.map(x => x.guid), this.Self.guid],
             leader: this.Self!.guid
         });
-        this.transport.sendEvent(
+        this.sendEvent(
             new Packets.Event({
                 match_created_event: new Packets.Event.MatchCreatedEvent({ match: match })
             })
@@ -193,7 +212,7 @@ export class Client {
     }
 
     updateMatch(match: Models.Match) {
-        this.transport.sendEvent(
+        this.sendEvent(
             new Packets.Event({
                 match_updated_event: new Packets.Event.MatchUpdatedEvent({ match: match })
             })
@@ -201,7 +220,7 @@ export class Client {
     }
 
     closeMatch(match: Models.Match) {
-        this.transport.sendEvent(
+        this.sendEvent(
             new Packets.Event({
                 match_deleted_event: new Packets.Event.MatchDeletedEvent({ match: match })
             })
@@ -230,7 +249,7 @@ export class Client {
 
         const playerIds = this.getMatchPlayers(taMatch).map(x => x.guid);
 
-        this.transport.forwardPacket(
+        this.forwardPacket(
             playerIds,
             new Packets.Packet({
                 command: new Packets.Command({
@@ -278,7 +297,7 @@ export class Client {
         this.updateMatch(match);
 
         setTimeout(() => {
-            this.transport.forwardPacket(
+            this.forwardPacket(
                 playerIds,
                 new Packets.Packet({
                     command: new Packets.Command({
@@ -290,7 +309,7 @@ export class Client {
     }
 
     returnToMenu(ids: string[]) {
-        this.transport.forwardPacket(
+        this.forwardPacket(
             ids,
             new Packets.Packet({
                 command: new Packets.Command({
@@ -301,6 +320,13 @@ export class Client {
     }
 
     close() {
-        this.transport.close(this.Self);
+        this.sendEvent(
+            new Packets.Event({
+                user_left_event: new Packets.Event.UserLeftEvent({
+                    user: this.Self
+                })
+            })
+        );
+        this.transport.close();
     }
 }

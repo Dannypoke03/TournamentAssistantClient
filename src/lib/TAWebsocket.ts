@@ -102,32 +102,8 @@ export class TAWebsocket {
         this.sendToSocket(packet.serializeBinary());
     }
 
-    sendEvent(event: Packets.Event) {
-        this.sendPacket(new Packets.Packet({ event }));
-    }
-
-    forwardPacket(ids: string[], packet: Packets.Packet) {
-        this.sendPacket(
-            new Packets.Packet({
-                forwarding_packet: new Packets.ForwardingPacket({
-                    forward_to: ids,
-                    packet: packet
-                })
-            })
-        );
-    }
-
-    // TA Helper functions
-
-    close(self: Models.User) {
+    close() {
         if (this.ws?.readyState === webSock.OPEN) {
-            this.sendEvent(
-                new Packets.Event({
-                    user_left_event: new Packets.Event.UserLeftEvent({
-                        user: self
-                    })
-                })
-            );
             this.ws.close();
         }
     }
