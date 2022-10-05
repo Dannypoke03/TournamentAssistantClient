@@ -124,7 +124,7 @@ export class Client {
                     this.init(connectResponse);
                 }
             }
-            return;
+            if (!this.isConnected) return;
         }
         this.sm.handlePacket(packet);
     }
