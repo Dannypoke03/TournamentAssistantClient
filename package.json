@@ -1,6 +1,6 @@
 {
     "name": "tournament-assistant-client",
-    "version": "0.7.5",
+    "version": "0.8.0",
     "description": "A typescript based client for Tournament Assistant a Beat Saber tournament mod",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm5/index.js",
