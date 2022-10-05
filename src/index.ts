@@ -1,5 +1,11 @@
-export { Client } from "./lib/client";
-export { TAWebsocket } from "./lib/TAWebsocket";
-export { Packets } from "./models/proto/packets";
-export { Models } from "./models/proto/models";
-export { proto } from "./models/proto/discord";
+export * from "./lib/client";
+export * from "./lib/client/StateManager";
+export * from "./lib/client/User";
+export * from "./lib/TAWebsocket";
+export * from "./models/Config";
+export * from "./models/EventEmitter";
+export * from "./models/proto/discord";
+export * from "./models/proto/models";
+export * from "./models/proto/packets";
+export * from "./models/TAEvents";
+export * from "./models/Transport";
