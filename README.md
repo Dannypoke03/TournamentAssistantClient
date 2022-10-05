@@ -91,7 +91,7 @@ taClient.on("EVENT_NAME", e => {
 -   `response`
 -   `packet` - This will return any and all packets received
 
-### ~~Helper Functions~~ **Also Outdated see [here](./src/lib/client.ts#L132-311)**
+### ~~Helper Functions~~ **Also Outdated see [here](./src/lib/client.ts#L132-L311)**
 
 There are a handful of implemented helper functions to make some common tasks a little easier.
 
