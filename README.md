@@ -38,7 +38,6 @@ new Client("Danny", {
 | `autoReconnect`           | boolean | Determines if it the client will attempt to reconnect to the server whenever it loses connection.                    | true    |
 | `autoReconnectInterval`   | number  | The number of `ms` to wait after losing connection before attempting to reconnect.                                   | 10000   |
 | `autoReconnectMaxRetries` | number  | Maximum number of failed connection attempts to the server before it gives up. Setting to -1 will disable the option | -1      |
-
 | `handshakeTimeout` | number | Websocket handshake timeout | 0 |
 | `autoInit` | boolean | Whether or not to automatically initiate the connection when the constructor is called | true |
 | `sendToSocket` | function | An alternate function that the client can use to send packets to the TA server. This can be used in conjunction with the previous option if you'd like to integrate your own websocket implementation as opposed to using the built in one | null |
