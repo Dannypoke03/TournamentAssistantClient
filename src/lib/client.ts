@@ -71,7 +71,7 @@ export class Client {
     }
 
     public get off() {
-        return this.emitter.on.bind(this.emitter);
+        return this.emitter.off.bind(this.emitter);
     }
 
     public get once() {
