@@ -75,7 +75,7 @@ export class Client {
     }
 
     public get once() {
-        return this.emitter.on.bind(this.emitter);
+        return this.emitter.once.bind(this.emitter);
     }
 
     public get users() {
