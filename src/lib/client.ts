@@ -36,6 +36,9 @@ export class Client {
         this.transport.emitter.on("message", p => {
             this.handlePacket(p);
         });
+        this.transport.emitter.on("disconnected", () => {
+            this.emitter.emit("close");
+        });
         this.transport.emitter.on("error", e => {
             this.emitter.emit("error", e);
         });
@@ -169,9 +172,7 @@ export class Client {
     }
 
     getMatchWebsocketUsers(match: Models.Match) {
-        return this.WebsocketUsers.filter(
-            x => match.associated_users.includes(x.guid) && x.client_type === Models.User.ClientTypes.WebsocketConnection
-        );
+        return this.WebsocketUsers.filter(x => match.associated_users.includes(x.guid) && x.client_type === Models.User.ClientTypes.WebsocketConnection);
     }
 
     getMatchUsers(match: Models.Match) {
