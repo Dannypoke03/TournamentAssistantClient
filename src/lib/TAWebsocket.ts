@@ -1,10 +1,9 @@
+import EventEmitter from "events";
+import WebSocket from "isomorphic-ws";
 import { Config } from "../models/Config";
+import { Emitter } from "../models/EventEmitter";
 import { Models } from "../models/proto/models";
 import { Packets } from "../models/proto/packets";
-
-import EventEmitter from "events";
-import { w3cwebsocket as webSock } from "websocket";
-import { Emitter } from "../models/EventEmitter";
 import { ITransport } from "../models/Transport";
 
 export interface ConnectionOptions {
@@ -17,7 +16,7 @@ export class TAWebsocket {
     readonly url: string;
     readonly password?: string;
 
-    private ws: webSock | null = null;
+    private ws: WebSocket | null = null;
 
     private _config: Config;
 
@@ -58,11 +57,11 @@ export class TAWebsocket {
     }
 
     private init() {
-        this.ws = new webSock(`${this.url}`);
+        this.ws = new WebSocket(this.url);
         this.ws.binaryType = "arraybuffer";
         if (!this.ws) return;
         const connectTimeout = setTimeout(() => {
-            if (this.ws?.readyState !== webSock.OPEN && this.config.handshakeTimeout > 0) {
+            if (this.ws?.readyState !== WebSocket.OPEN && this.config.handshakeTimeout > 0) {
                 this.ws?.close();
                 this.ws = null;
                 this.init();
@@ -103,7 +102,7 @@ export class TAWebsocket {
     }
 
     close() {
-        if (this.ws?.readyState === webSock.OPEN) {
+        if (this.ws?.readyState === WebSocket.OPEN) {
             this.ws.close();
         }
     }
