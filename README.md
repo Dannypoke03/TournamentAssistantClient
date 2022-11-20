@@ -33,14 +33,14 @@ new Client("Danny", {
 
 ### Connection Options
 
-| option                    | type    | desc                                                                                                                 | Default |
-| ------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------- | ------- |
-| `autoReconnect`           | boolean | Determines if it the client will attempt to reconnect to the server whenever it loses connection.                    | true    |
-| `autoReconnectInterval`   | number  | The number of `ms` to wait after losing connection before attempting to reconnect.                                   | 10000   |
-| `autoReconnectMaxRetries` | number  | Maximum number of failed connection attempts to the server before it gives up. Setting to -1 will disable the option | -1      |
-| `handshakeTimeout` | number | Websocket handshake timeout | 0 |
-| `autoInit` | boolean | Whether or not to automatically initiate the connection when the constructor is called | true |
-| `sendToSocket` | function | An alternate function that the client can use to send packets to the TA server. This can be used in conjunction with the previous option if you'd like to integrate your own websocket implementation as opposed to using the built in one | null |
+| option                    | type     | desc                                                                                                                                                                                                                                       | Default |
+| ------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
+| `autoReconnect`           | boolean  | Determines if it the client will attempt to reconnect to the server whenever it loses connection.                                                                                                                                          | true    |
+| `autoReconnectInterval`   | number   | The number of `ms` to wait after losing connection before attempting to reconnect.                                                                                                                                                         | 10000   |
+| `autoReconnectMaxRetries` | number   | Maximum number of failed connection attempts to the server before it gives up. Setting to -1 will disable the option                                                                                                                       | -1      |
+| `handshakeTimeout`        | number   | Websocket handshake timeout                                                                                                                                                                                                                | 0       |
+| `autoInit`                | boolean  | Whether or not to automatically initiate the connection when the constructor is called                                                                                                                                                     | true    |
+| `sendToSocket`            | function | An alternate function that the client can use to send packets to the TA server. This can be used in conjunction with the previous option if you'd like to integrate your own websocket implementation as opposed to using the built in one | null    |
 
 #### Custom Transport
 
@@ -60,61 +60,65 @@ taClient.on("EVENT_NAME", e => {
 });
 ```
 
-#### ~~Supported Events~~ **Outdated see [here](./src/models/TAEvents.ts)**
+#### Supported Events
+
+##### User Events
+
+-   `userAdded`
+-   `userUpdated`
+-   `userLeft`
+
+##### Match Events
 
 -   `matchCreated`
 -   `matchUpdated`
 -   `matchDeleted`
--   `userAdded`
--   `userUpdated`
--   `userLeft`
+
+##### Qualifier Events
+
 -   `qualifierEventCreated`
 -   `qualifierEventUpdated`
 -   `qualifierEventDeleted`
--   `acknowledgement`
--   `command`
--   `connect`
--   `connectResponse`
--   `event`
--   `file`
--   `forwardingPacket`
--   `loadedSong`
+
+##### Commands
+
 -   `loadSong`
--   `message`
--   `messageResponse`
 -   `playSong`
--   `scoreRequest`
--   `scoreRequestResponse`
+-   `sendBotMessage`
+-   `showModal`
+
+##### Push Events
+
+-   `pushLeaderboardScore`
 -   `songFinished`
--   `submitScore`
--   `response`
--   `packet` - This will return any and all packets received
+-   `realtimeScore`
 
-### ~~Helper Functions~~ **Also Outdated see [here](./src/lib/client.ts#L132-L311)**
+##### Requests
 
-There are a handful of implemented helper functions to make some common tasks a little easier.
+-   `connectRequest`
+-   `leaderboardScoreRequest`
+-   `preloadImageForStreamSync`
 
-```ts
-sendPacket(packet: Packets.Packet)
+##### Responses
 
-sendEvent(event: Packets.Event)
+-   `connectResponse`
+-   `leaderboardScoreResponse`
+-   `loadedSong`
+-   `modalResponse`
+-   `imagePreloaded`
 
-forwardPacket(ids: string[], packet: Packets.Packet)
+##### Other
 
-createMatch(players: Models.Player[])
+-   `acknowledgement`
+-   `forwardingPacket`
+-   `packet`
 
-updateMatch(match: Models.Match)
+##### Non-TA related Events
 
-closeMatch(match: Models.Match)
-
-sendMessage(ids: string[], msg: Packets.Message)
-
-loadSong(songName: string, hash: string, difficulty: BeatmapDifficulty, taMatch: Models.Match)
-
-playSong(match: Models.Match, withSync = false, disable_pause = false, disable_fail = false, floating_scoreboard = false)
-
-returnToMenu(ids: string[])
-```
+-   `wsConnected`
+-   `taConnected`
+-   `close`
+-   `error`
 
 ## License
 
