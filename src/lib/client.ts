@@ -44,7 +44,7 @@ export class Client {
         });
     }
 
-    private ClientConnect() {
+    ClientConnect() {
         const packetData = new Packets.Request.Connect({
             user: this.Self,
             client_version: 67,

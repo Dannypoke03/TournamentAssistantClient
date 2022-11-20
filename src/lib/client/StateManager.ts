@@ -241,7 +241,7 @@ export class StateManager {
 
     private qualifierEventUpdated(event: Models.QualifierEvent, from: string) {
         const index = this.QualifierEvents.findIndex(x => x.guid == event.guid);
-        if (index && index > -1) {
+        if (index > -1) {
             this._QualifierEvents[index] = event;
             this.emitter.emit("qualifierEventUpdated", { from: from, data: event });
         }
@@ -249,7 +249,7 @@ export class StateManager {
 
     private qualifierEventDeleted(event: Models.QualifierEvent, from: string) {
         const index = this.QualifierEvents.findIndex(x => x.guid == event.guid);
-        if (index && index > -1) {
+        if (index > -1) {
             this._QualifierEvents.splice(index, 1);
             this.emitter.emit("qualifierEventDeleted", { from: from, data: event });
         }

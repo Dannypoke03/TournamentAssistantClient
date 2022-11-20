@@ -25,8 +25,9 @@ export class TAWebsocket {
     }
 
     private reconnectAttempts = -1;
+    private reconnectTimeout: NodeJS.Timeout | null = null;
 
-    private sendToSocket: (data: any) => void = () => null;
+    private sendToSocket: (data: any) => void = d => this.ws?.send(d);
 
     public emitter: Emitter<ITransport.Events> = new EventEmitter();
 
@@ -36,11 +37,10 @@ export class TAWebsocket {
         this.password = password;
 
         if (this.config.autoInit) this.init();
-        if (!this.config.sendToSocket) {
-            this.sendToSocket = data => this.ws?.send(data);
-        } else {
+        if (this.config.sendToSocket) {
             this.sendToSocket = this.config.sendToSocket;
         }
+        if (this.config.autoReconnectMaxRetries !== -1) this.reconnectAttempts = 1;
     }
 
     private loadConfig(config?: Partial<Config>): Config {
@@ -59,19 +59,17 @@ export class TAWebsocket {
     private init() {
         this.ws = new WebSocket(this.url);
         this.ws.binaryType = "arraybuffer";
-        if (!this.ws) return;
         const connectTimeout = setTimeout(() => {
             if (this.ws?.readyState !== WebSocket.OPEN && this.config.handshakeTimeout > 0) {
                 this.ws?.close();
                 this.ws = null;
-                this.init();
             }
         }, this.config.handshakeTimeout);
-        this.ws.onopen = () => {
+        this.ws.addEventListener("open", () => {
             clearTimeout(connectTimeout);
             this.emitter.emit("open");
-        };
-        this.ws.onmessage = event => {
+        });
+        this.ws.addEventListener("message", event => {
             if (event.data instanceof ArrayBuffer) {
                 try {
                     const packet = Packets.Packet.deserializeBinary(new Uint8Array(event.data));
@@ -82,19 +80,22 @@ export class TAWebsocket {
             } else {
                 this.emitter.emit("error", "Warn: Received non-binary message");
             }
-        };
-        this.ws.onclose = () => {
+        });
+        this.ws.addEventListener("close", () => {
             this.emitter.emit("disconnected");
-            if (this.config.autoReconnect && this.reconnectAttempts < this.config.autoReconnectMaxRetries) {
-                setTimeout(() => {
+            if (this.config.autoReconnect && !this.reconnectTimeout && this.reconnectAttempts <= this.config.autoReconnectMaxRetries) {
+                this.ws?.removeAllListeners();
+                this.ws = null;
+                this.reconnectTimeout = setTimeout(() => {
+                    this.reconnectTimeout = null;
                     this.init();
                 }, this.config.autoReconnectInterval);
-                if (this.reconnectAttempts !== -1) this.reconnectAttempts++;
+                if (this.config.autoReconnectMaxRetries !== -1) this.reconnectAttempts++;
             }
-        };
-        this.ws.onerror = error => {
-            this.emitter.emit("error", error);
-        };
+        });
+        this.ws.addEventListener("error", e => {
+            this.emitter.emit("error", e);
+        });
     }
 
     sendPacket(packet: Packets.Packet) {
