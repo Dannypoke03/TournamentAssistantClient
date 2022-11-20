@@ -123,6 +123,8 @@ export class Client {
                 if (connectResponse.self_guid) {
                     this.init(connectResponse);
                 }
+            } else if (packet.has_response && packet.response.has_connect && packet.response.type === Packets.Response.ResponseType.Fail) {
+                this.emitter.emit("error", new Error(packet.response.connect.message));
             }
             if (!this.isConnected) return;
         }
