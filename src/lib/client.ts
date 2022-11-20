@@ -44,7 +44,7 @@ export class Client {
     private ClientConnect() {
         const packetData = new Packets.Request.Connect({
             user: this.Self,
-            client_version: 67,
+            client_version: 69,
             password: this.transport.password ?? undefined
         });
         const packet = new Packets.Packet({
@@ -169,9 +169,7 @@ export class Client {
     }
 
     getMatchWebsocketUsers(match: Models.Match) {
-        return this.WebsocketUsers.filter(
-            x => match.associated_users.includes(x.guid) && x.client_type === Models.User.ClientTypes.WebsocketConnection
-        );
+        return this.WebsocketUsers.filter(x => match.associated_users.includes(x.guid) && x.client_type === Models.User.ClientTypes.WebsocketConnection);
     }
 
     getMatchUsers(match: Models.Match) {

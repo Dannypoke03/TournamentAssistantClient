@@ -7,10 +7,14 @@ import * as pb_1 from "google-protobuf";
 export namespace proto.discord {
     export class Channel extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
-            id?: number;
-            name?: string;
-        }) {
+        constructor(
+            data?:
+                | any[]
+                | {
+                      id?: number;
+                      name?: string;
+                  }
+        ) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -34,10 +38,7 @@ export namespace proto.discord {
         set name(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
-        static fromObject(data: {
-            id?: number;
-            name?: string;
-        }): Channel {
+        static fromObject(data: { id?: number; name?: string }): Channel {
             const message = new Channel({});
             if (data.id != null) {
                 message.id = data.id;
@@ -64,26 +65,24 @@ export namespace proto.discord {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.id != 0)
-                writer.writeInt32(1, this.id);
-            if (this.name.length)
-                writer.writeString(2, this.name);
-            if (!w)
-                return writer.getResultBuffer();
+            if (this.id != 0) writer.writeUint64(1, this.id);
+            if (this.name.length) writer.writeString(2, this.name);
+            if (!w) return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Channel {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Channel();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
+                message = new Channel();
             while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
+                if (reader.isEndGroup()) break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.id = reader.readInt32();
+                        message.id = reader.readUint64();
                         break;
                     case 2:
                         message.name = reader.readString();
                         break;
-                    default: reader.skipField();
+                    default:
+                        reader.skipField();
                 }
             }
             return message;
@@ -97,10 +96,14 @@ export namespace proto.discord {
     }
     export class DiscordUser extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
-            id?: number;
-            name?: string;
-        }) {
+        constructor(
+            data?:
+                | any[]
+                | {
+                      id?: number;
+                      name?: string;
+                  }
+        ) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -124,10 +127,7 @@ export namespace proto.discord {
         set name(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
-        static fromObject(data: {
-            id?: number;
-            name?: string;
-        }): DiscordUser {
+        static fromObject(data: { id?: number; name?: string }): DiscordUser {
             const message = new DiscordUser({});
             if (data.id != null) {
                 message.id = data.id;
@@ -154,26 +154,24 @@ export namespace proto.discord {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.id != 0)
-                writer.writeInt32(1, this.id);
-            if (this.name.length)
-                writer.writeString(2, this.name);
-            if (!w)
-                return writer.getResultBuffer();
+            if (this.id != 0) writer.writeUint64(1, this.id);
+            if (this.name.length) writer.writeString(2, this.name);
+            if (!w) return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): DiscordUser {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new DiscordUser();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
+                message = new DiscordUser();
             while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
+                if (reader.isEndGroup()) break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.id = reader.readInt32();
+                        message.id = reader.readUint64();
                         break;
                     case 2:
                         message.name = reader.readString();
                         break;
-                    default: reader.skipField();
+                    default:
+                        reader.skipField();
                 }
             }
             return message;
@@ -187,10 +185,14 @@ export namespace proto.discord {
     }
     export class Guild extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
-            id?: number;
-            name?: string;
-        }) {
+        constructor(
+            data?:
+                | any[]
+                | {
+                      id?: number;
+                      name?: string;
+                  }
+        ) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -214,10 +216,7 @@ export namespace proto.discord {
         set name(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
-        static fromObject(data: {
-            id?: number;
-            name?: string;
-        }): Guild {
+        static fromObject(data: { id?: number; name?: string }): Guild {
             const message = new Guild({});
             if (data.id != null) {
                 message.id = data.id;
@@ -244,26 +243,24 @@ export namespace proto.discord {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.id != 0)
-                writer.writeInt32(1, this.id);
-            if (this.name.length)
-                writer.writeString(2, this.name);
-            if (!w)
-                return writer.getResultBuffer();
+            if (this.id != 0) writer.writeUint64(1, this.id);
+            if (this.name.length) writer.writeString(2, this.name);
+            if (!w) return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Guild {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Guild();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
+                message = new Guild();
             while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
+                if (reader.isEndGroup()) break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.id = reader.readInt32();
+                        message.id = reader.readUint64();
                         break;
                     case 2:
                         message.name = reader.readString();
                         break;
-                    default: reader.skipField();
+                    default:
+                        reader.skipField();
                 }
             }
             return message;
