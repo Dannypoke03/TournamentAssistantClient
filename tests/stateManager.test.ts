@@ -219,23 +219,4 @@ describe("State Manager Tests", () => {
             );
         });
     });
-
-    describe("Push", () => {
-        test("Push - Leaderboard Score", done => {
-            emitter.once("leaderboardScore", () => {
-                done();
-            });
-            sm.handlePacket(
-                new Packets.Packet({
-                    push: new Packets.Push({
-                        leaderboard_score: new Packets.Push.LeaderboardScore({
-                            score: new Models.LeaderboardScore({
-                                score: 5
-                            })
-                        })
-                    })
-                })
-            );
-        });
-    });
 });
