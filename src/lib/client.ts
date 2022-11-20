@@ -1,10 +1,10 @@
 /*eslint-disable no-case-declarations */
 import EventEmitter from "events";
-import { v4 as uuidv4 } from "uuid";
 import { Emitter } from "../models/EventEmitter";
 import { Models } from "../models/proto/models";
 import { Packets } from "../models/proto/packets";
 import { TAEvents } from "../models/TAEvents";
+import { generateUUID } from "../utils/uuid";
 import { StateManager } from "./client/StateManager";
 import { PlayerWithScore } from "./client/User";
 import { ConnectionOptions, TAWebsocket } from "./TAWebsocket";
@@ -25,7 +25,7 @@ export class Client {
 
         this.Self = new Models.User({
             name: name,
-            guid: uuidv4(),
+            guid: generateUUID(),
             client_type: this.transport.config.connectionMode
         });
 
@@ -48,7 +48,7 @@ export class Client {
             password: this.transport.password ?? undefined
         });
         const packet = new Packets.Packet({
-            id: uuidv4(),
+            id: generateUUID(),
             from: this.Self?.guid,
             request: new Packets.Request({ connect: packetData })
         });
@@ -199,7 +199,7 @@ export class Client {
 
     createMatch(players: Models.User[]) {
         const match = new Models.Match({
-            guid: uuidv4(),
+            guid: generateUUID(),
             associated_users: [...players.map(x => x.guid), this.Self.guid],
             leader: this.Self!.guid
         });

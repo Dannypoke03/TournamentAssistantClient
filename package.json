@@ -43,7 +43,6 @@
         "events": "^3.3.0",
         "google-protobuf": "^3.21.2",
         "isomorphic-ws": "^5.0.0",
-        "uuid": "^9.0.0",
         "ws": "^8.10.0"
     },
     "files": [
