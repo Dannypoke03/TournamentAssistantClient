@@ -95,22 +95,64 @@ export class Client {
         });
     }
 
+    /**
+     *List of matches on the server
+     *
+     * @readonly
+     * @type {Models.Match[]}
+     * @memberof Client
+     */
     public get Matches(): Models.Match[] {
         return this.sm.Matches;
     }
+
+    /**
+     *List of Coordinators connected to the server
+     *
+     * @readonly
+     * @type {Models.User[]}
+     * @memberof Client
+     */
     public get Coordinators(): Models.User[] {
         return this.sm.Coordinators;
     }
+
+    /**
+     *List of players connected to the server
+     *
+     * @readonly
+     * @type {PlayerWithScore[]}
+     * @memberof Client
+     */
     public get Players(): PlayerWithScore[] {
         return this.sm.Players;
     }
+
+    /**
+     *List of websocket users connected to the server
+     *
+     * @readonly
+     * @type {Models.User[]}
+     * @memberof Client
+     */
     public get WebsocketUsers(): Models.User[] {
         return this.sm.WebsocketUsers;
     }
+
+    /**
+     *List of qualifier events on the server
+     *
+     * @readonly
+     * @type {Models.QualifierEvent[]}
+     * @memberof Client
+     */
     public get QualifierEvents(): Models.QualifierEvent[] {
         return this.sm.QualifierEvents;
     }
 
+    /**
+     * Resets the client to a disconnected state
+     */
     public reset() {
         this.sm.reset();
         this.ServerSettings = new Models.ServerSettings();
@@ -119,7 +161,14 @@ export class Client {
         this.isConnected = false;
     }
 
-    public handlePacket(packet: Packets.Packet) {
+    /**
+     *Processes a packet from the server and updates the client state accordingly
+     *
+     * @param {Packets.Packet} packet
+     * @return {void}
+     * @memberof Client
+     */
+    public handlePacket(packet: Packets.Packet): void {
         if (!this.isConnected) {
             if (packet.has_response && packet.response.has_connect && packet.response.type === Packets.Response.ResponseType.Success) {
                 const connectResponse = packet.response.connect;
@@ -134,62 +183,158 @@ export class Client {
         this.sm.handlePacket(packet);
     }
 
-    sendPacket(packet: Packets.Packet) {
+    /**
+     *Sends a packet to the server
+     *
+     * @param {Packets.Packet} packet
+     * @memberof Client
+     */
+    sendPacket(packet: Packets.Packet): void {
         if (this.isConnected) {
             packet.from = this.Self?.guid;
             this.transport.sendPacket(packet);
         }
     }
 
-    getUser(guid: string) {
+    /**
+     *Gets a user by their guid
+     *
+     * @param {string} guid
+     * @return {*}  {(Models.User | undefined)}
+     * @memberof Client
+     */
+    getUser(guid: string): Models.User | undefined {
         return this.users.find(x => x.guid === guid);
     }
 
-    getPlayer(guid: string) {
+    /**
+     *Gets a player by their guid
+     *
+     * @param {string} guid
+     * @return {*}  {(Models.User | undefined)}
+     * @memberof Client
+     */
+    getPlayer(guid: string): Models.User | undefined {
         return this.Players.find(x => x.guid === guid);
     }
 
-    getCoordinator(guid: string) {
+    /**
+     *Gets a coordinator by their guid
+     *
+     * @param {string} guid
+     * @return {*}  {(Models.User | undefined)}
+     * @memberof Client
+     */
+    getCoordinator(guid: string): Models.User | undefined {
         return this.Coordinators.find(x => x.guid === guid);
     }
 
-    getWebsocketUser(guid: string) {
+    /**
+     *Gets a websocket user by their guid
+     *
+     * @param {string} guid
+     * @return {*}  {(Models.User | undefined)}
+     * @memberof Client
+     */
+    getWebsocketUser(guid: string): Models.User | undefined {
         return this.WebsocketUsers.find(x => x.guid === guid);
     }
 
-    getMatch(guid: string) {
+    /**
+     *Gets a match by its guid
+     *
+     * @param {string} guid
+     * @return {*}  {(Models.Match | undefined)}
+     * @memberof Client
+     */
+    getMatch(guid: string): Models.Match | undefined {
         return this.Matches.find(x => x.guid === guid);
     }
 
-    getEvent(guid: string) {
+    /**
+     *Gets a qualifier event by its guid
+     *
+     * @param {string} guid
+     * @return {*}  {(Models.QualifierEvent | undefined)}
+     * @memberof Client
+     */
+    getEvent(guid: string): Models.QualifierEvent | undefined {
         return this.QualifierEvents.find(x => x.guid === guid);
     }
 
-    getMatchPlayers(match: Models.Match) {
+    /**
+     *Gets the players in a match
+     *
+     * @param {Models.Match} match
+     * @return {*}  {PlayerWithScore[]}
+     * @memberof Client
+     */
+    getMatchPlayers(match: Models.Match): PlayerWithScore[] {
         return this.Players.filter(x => match.associated_users.includes(x.guid) && x.client_type === Models.User.ClientTypes.Player);
     }
 
-    getMatchCoordinators(match: Models.Match) {
+    /**
+     *Gets the coordinators in a match
+     *
+     * @param {Models.Match} match
+     * @return {*}  {Models.User[]}
+     * @memberof Client
+     */
+    getMatchCoordinators(match: Models.Match): Models.User[] {
         return this.Coordinators.filter(x => match.associated_users.includes(x.guid) && x.client_type === Models.User.ClientTypes.Coordinator);
     }
 
-    getMatchWebsocketUsers(match: Models.Match) {
+    /**
+     *Gets the websocket users in a match
+     *
+     * @param {Models.Match} match
+     * @return {*}  {Models.User[]}
+     * @memberof Client
+     */
+    getMatchWebsocketUsers(match: Models.Match): Models.User[] {
         return this.WebsocketUsers.filter(x => match.associated_users.includes(x.guid) && x.client_type === Models.User.ClientTypes.WebsocketConnection);
     }
 
-    getMatchUsers(match: Models.Match) {
+    /**
+     *Gets all users in a match
+     *
+     * @param {Models.Match} match
+     * @return {*}  {Models.User[]}
+     * @memberof Client
+     */
+    getMatchUsers(match: Models.Match): Models.User[] {
         return [...this.getMatchPlayers(match), ...this.getMatchCoordinators(match), ...this.getMatchWebsocketUsers(match)];
     }
 
-    sendMessage(ids: string[], msg: Packets.Command.ShowModal) {
+    /**
+     *Sends a message to a list of users
+     *
+     * @param {string[]} ids
+     * @param {Packets.Command.ShowModal} msg
+     * @memberof Client
+     */
+    sendMessage(ids: string[], msg: Packets.Command.ShowModal): void {
         this.forwardPacket(ids, new Packets.Packet({ command: new Packets.Command({ show_modal: msg }) }));
     }
 
-    sendEvent(event: Packets.Event) {
+    /**
+     *Sends an event to the server
+     *
+     * @param {Packets.Event} event
+     * @memberof Client
+     */
+    sendEvent(event: Packets.Event): void {
         this.sendPacket(new Packets.Packet({ event }));
     }
 
-    forwardPacket(ids: string[], packet: Packets.Packet) {
+    /**
+     *Forwards a packet to a list of users
+     *
+     * @param {string[]} ids
+     * @param {Packets.Packet} packet
+     * @memberof Client
+     */
+    forwardPacket(ids: string[], packet: Packets.Packet): void {
         this.sendPacket(
             new Packets.Packet({
                 forwarding_packet: new Packets.ForwardingPacket({
@@ -200,7 +345,14 @@ export class Client {
         );
     }
 
-    createMatch(players: Models.User[]) {
+    /**
+     *Creates a match with the given list of users
+     *
+     * @param {Models.User[]} players
+     * @return {*}  {string}
+     * @memberof Client
+     */
+    createMatch(players: Models.User[]): string {
         const match = new Models.Match({
             guid: generateUUID(),
             associated_users: [...players.map(x => x.guid), this.Self.guid],
@@ -214,7 +366,13 @@ export class Client {
         return match.guid;
     }
 
-    updateMatch(match: Models.Match) {
+    /**
+     *Updates a match on the server
+     *
+     * @param {Models.Match} match
+     * @memberof Client
+     */
+    updateMatch(match: Models.Match): void {
         this.sendEvent(
             new Packets.Event({
                 match_updated_event: new Packets.Event.MatchUpdatedEvent({ match: match })
@@ -222,7 +380,13 @@ export class Client {
         );
     }
 
-    closeMatch(match: Models.Match) {
+    /**
+     *Closes a match room
+     *
+     * @param {Models.Match} match
+     * @memberof Client
+     */
+    closeMatch(match: Models.Match): void {
         this.sendEvent(
             new Packets.Event({
                 match_deleted_event: new Packets.Event.MatchDeletedEvent({ match: match })
@@ -230,7 +394,16 @@ export class Client {
         );
     }
 
-    async loadSong(songName: string, hash: string, difficulty: number, taMatch: Models.Match) {
+    /**
+     *Loads a song into a match room
+     *
+     * @param {string} songName
+     * @param {string} hash
+     * @param {number} difficulty
+     * @param {Models.Match} taMatch
+     * @memberof Client
+     */
+    loadSong(songName: string, hash: string, difficulty: number, taMatch: Models.Match): void {
         const matchMap = new Models.PreviewBeatmapLevel({
             level_id: `custom_level_${hash}`,
             name: songName,
@@ -267,7 +440,17 @@ export class Client {
         }, 500);
     }
 
-    playSong(match: Models.Match, withSync = false, disable_pause = false, disable_fail = false, floating_scoreboard = false) {
+    /**
+     *Starts the loaded song in a match room
+     *
+     * @param {Models.Match} match
+     * @param {boolean} [withSync=false]
+     * @param {boolean} [disable_pause=false]
+     * @param {boolean} [disable_fail=false]
+     * @param {boolean} [floating_scoreboard=false]
+     * @memberof Client
+     */
+    playSong(match: Models.Match, withSync: boolean = false, disable_pause: boolean = false, disable_fail: boolean = false, floating_scoreboard: boolean = false): void {
         const gm = new Models.GameplayModifiers({
             options: Models.GameplayModifiers.GameOptions.None
         });
@@ -311,7 +494,13 @@ export class Client {
         }, 500);
     }
 
-    returnToMenu(ids: string[]) {
+    /**
+     *Returns a list of players to the menu
+     *
+     * @param {string[]} ids
+     * @memberof Client
+     */
+    returnToMenu(ids: string[]): void {
         this.forwardPacket(
             ids,
             new Packets.Packet({
@@ -322,7 +511,7 @@ export class Client {
         );
     }
 
-    close() {
+    close(): void {
         this.sendEvent(
             new Packets.Event({
                 user_left_event: new Packets.Event.UserLeftEvent({
