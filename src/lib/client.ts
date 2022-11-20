@@ -1,9 +1,9 @@
-/*eslint-disable no-case-declarations */
 import EventEmitter from "events";
 import { Emitter } from "../models/EventEmitter";
 import { Models } from "../models/proto/models";
 import { Packets } from "../models/proto/packets";
 import { TAEvents } from "../models/TAEvents";
+import { TAClientVersion } from "../utils/constants";
 import { generateUUID } from "../utils/uuid";
 import { StateManager } from "./client/StateManager";
 import { PlayerWithScore } from "./client/User";
@@ -47,7 +47,7 @@ export class Client {
     ClientConnect() {
         const packetData = new Packets.Request.Connect({
             user: this.Self,
-            client_version: 69,
+            client_version: TAClientVersion,
             password: this.transport.password ?? undefined
         });
         const packet = new Packets.Packet({
