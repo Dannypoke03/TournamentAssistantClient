@@ -7,7 +7,7 @@
     "es2015": "./dist/esm/index.js",
     "types": "./dist/types/index.d.ts",
     "scripts": {
-        "test": "npm run lint",
+        "test": "npm run lint && jest",
         "compile": "tsc -b ./src/tsconfig.cjs.json ./src/tsconfig.esm.json ./src/tsconfig.esm5.json ./src/tsconfig.types.json",
         "dev": "npm run compile -- --watch",
         "lint": "eslint \"./src/**\"",
@@ -18,9 +18,12 @@
     },
     "devDependencies": {
         "@types/google-protobuf": "^3.15.6",
+        "@types/jest": "^29.2.1",
+        "@types/websocket": "^1.0.5",
+        "jest": "^29.2.2",
+        "ts-jest": "^29.0.3",
         "@types/node": "^18.11.9",
         "@types/uuid": "^8.3.4",
-        "@types/websocket": "^1.0.5",
         "@types/ws": "^8.5.3",
         "@typescript-eslint/eslint-plugin": "^5.42.0",
         "@typescript-eslint/parser": "^5.42.0",

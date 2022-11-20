@@ -36,12 +36,15 @@ export class Client {
         this.transport.emitter.on("message", p => {
             this.handlePacket(p);
         });
+        this.transport.emitter.on("disconnected", () => {
+            this.emitter.emit("close");
+        });
         this.transport.emitter.on("error", e => {
             this.emitter.emit("error", e);
         });
     }
 
-    private ClientConnect() {
+    ClientConnect() {
         const packetData = new Packets.Request.Connect({
             user: this.Self,
             client_version: 69,
