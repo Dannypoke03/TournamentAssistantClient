@@ -7,16 +7,16 @@ describe("Client Test", () => {
 
     beforeAll(() => {
         client = new Client("Test Client", {
-            url: "ws://tournamentassistant.net:2053"
+            url: "ws://ta.beatsaberleague.com:2053"
         });
         player = new Client("Test Player", {
-            url: "ws://tournamentassistant.net:2053",
+            url: "ws://ta.beatsaberleague.com:2053",
             options: {
                 connectionMode: Models.User.ClientTypes.Player
             }
         });
         coordinator = new Client("Test Coord", {
-            url: "ws://tournamentassistant.net:2053",
+            url: "ws://ta.beatsaberleague.com:2053",
             options: {
                 connectionMode: Models.User.ClientTypes.Coordinator
             }
