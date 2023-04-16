@@ -3,98 +3,85 @@
  * compiler version: 3.19.6
  * source: packets.proto
  * git: https://github.com/thesayyn/protoc-gen-ts */
-import * as pb_1 from "google-protobuf";
 import * as dependency_1 from "./discord";
 import * as dependency_2 from "./models";
+import * as pb_1 from "google-protobuf";
 export namespace Packets {
     export class Command extends pb_1.Message {
         private one_of_decls: number[][] = [[1, 2, 3, 4, 5, 6, 7, 8]];
-        constructor(
-            data?:
-                | any[]
-                | ({} & (
-                      | {
-                            heartbeat?: boolean;
-                            return_to_menu?: never;
-                            delay_test_finish?: never;
-                            stream_sync_show_image?: never;
-                            load_song?: never;
-                            play_song?: never;
-                            send_bot_message?: never;
-                            show_modal?: never;
-                        }
-                      | {
-                            heartbeat?: never;
-                            return_to_menu?: boolean;
-                            delay_test_finish?: never;
-                            stream_sync_show_image?: never;
-                            load_song?: never;
-                            play_song?: never;
-                            send_bot_message?: never;
-                            show_modal?: never;
-                        }
-                      | {
-                            heartbeat?: never;
-                            return_to_menu?: never;
-                            delay_test_finish?: boolean;
-                            stream_sync_show_image?: never;
-                            load_song?: never;
-                            play_song?: never;
-                            send_bot_message?: never;
-                            show_modal?: never;
-                        }
-                      | {
-                            heartbeat?: never;
-                            return_to_menu?: never;
-                            delay_test_finish?: never;
-                            stream_sync_show_image?: boolean;
-                            load_song?: never;
-                            play_song?: never;
-                            send_bot_message?: never;
-                            show_modal?: never;
-                        }
-                      | {
-                            heartbeat?: never;
-                            return_to_menu?: never;
-                            delay_test_finish?: never;
-                            stream_sync_show_image?: never;
-                            load_song?: Command.LoadSong;
-                            play_song?: never;
-                            send_bot_message?: never;
-                            show_modal?: never;
-                        }
-                      | {
-                            heartbeat?: never;
-                            return_to_menu?: never;
-                            delay_test_finish?: never;
-                            stream_sync_show_image?: never;
-                            load_song?: never;
-                            play_song?: Command.PlaySong;
-                            send_bot_message?: never;
-                            show_modal?: never;
-                        }
-                      | {
-                            heartbeat?: never;
-                            return_to_menu?: never;
-                            delay_test_finish?: never;
-                            stream_sync_show_image?: never;
-                            load_song?: never;
-                            play_song?: never;
-                            send_bot_message?: Command.SendBotMessage;
-                            show_modal?: never;
-                        }
-                      | {
-                            heartbeat?: never;
-                            return_to_menu?: never;
-                            delay_test_finish?: never;
-                            stream_sync_show_image?: never;
-                            load_song?: never;
-                            play_song?: never;
-                            send_bot_message?: never;
-                            show_modal?: Command.ShowModal;
-                        }
-                  ))
-        ) {
+        constructor(data?: any[] | ({} & (({
+            heartbeat?: boolean;
+            return_to_menu?: never;
+            delay_test_finish?: never;
+            stream_sync_show_image?: never;
+            load_song?: never;
+            play_song?: never;
+            send_bot_message?: never;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: boolean;
+            delay_test_finish?: never;
+            stream_sync_show_image?: never;
+            load_song?: never;
+            play_song?: never;
+            send_bot_message?: never;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: never;
+            delay_test_finish?: boolean;
+            stream_sync_show_image?: never;
+            load_song?: never;
+            play_song?: never;
+            send_bot_message?: never;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: never;
+            delay_test_finish?: never;
+            stream_sync_show_image?: boolean;
+            load_song?: never;
+            play_song?: never;
+            send_bot_message?: never;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: never;
+            delay_test_finish?: never;
+            stream_sync_show_image?: never;
+            load_song?: Command.LoadSong;
+            play_song?: never;
+            send_bot_message?: never;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: never;
+            delay_test_finish?: never;
+            stream_sync_show_image?: never;
+            load_song?: never;
+            play_song?: Command.PlaySong;
+            send_bot_message?: never;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: never;
+            delay_test_finish?: never;
+            stream_sync_show_image?: never;
+            load_song?: never;
+            play_song?: never;
+            send_bot_message?: Command.SendBotMessage;
+            show_modal?: never;
+        } | {
+            heartbeat?: never;
+            return_to_menu?: never;
+            delay_test_finish?: never;
+            stream_sync_show_image?: never;
+            load_song?: never;
+            play_song?: never;
+            send_bot_message?: never;
+            show_modal?: Command.ShowModal;
+        })))) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -290,21 +277,30 @@ export namespace Packets {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_heartbeat) writer.writeBool(1, this.heartbeat);
-            if (this.has_return_to_menu) writer.writeBool(2, this.return_to_menu);
-            if (this.has_delay_test_finish) writer.writeBool(3, this.delay_test_finish);
-            if (this.has_stream_sync_show_image) writer.writeBool(4, this.stream_sync_show_image);
-            if (this.has_load_song) writer.writeMessage(5, this.load_song, () => this.load_song.serialize(writer));
-            if (this.has_play_song) writer.writeMessage(6, this.play_song, () => this.play_song.serialize(writer));
-            if (this.has_send_bot_message) writer.writeMessage(7, this.send_bot_message, () => this.send_bot_message.serialize(writer));
-            if (this.has_show_modal) writer.writeMessage(8, this.show_modal, () => this.show_modal.serialize(writer));
-            if (!w) return writer.getResultBuffer();
+            if (this.has_heartbeat)
+                writer.writeBool(1, this.heartbeat);
+            if (this.has_return_to_menu)
+                writer.writeBool(2, this.return_to_menu);
+            if (this.has_delay_test_finish)
+                writer.writeBool(3, this.delay_test_finish);
+            if (this.has_stream_sync_show_image)
+                writer.writeBool(4, this.stream_sync_show_image);
+            if (this.has_load_song)
+                writer.writeMessage(5, this.load_song, () => this.load_song.serialize(writer));
+            if (this.has_play_song)
+                writer.writeMessage(6, this.play_song, () => this.play_song.serialize(writer));
+            if (this.has_send_bot_message)
+                writer.writeMessage(7, this.send_bot_message, () => this.send_bot_message.serialize(writer));
+            if (this.has_show_modal)
+                writer.writeMessage(8, this.show_modal, () => this.show_modal.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Command {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new Command();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Command();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.heartbeat = reader.readBool();
@@ -319,19 +315,18 @@ export namespace Packets {
                         message.stream_sync_show_image = reader.readBool();
                         break;
                     case 5:
-                        reader.readMessage(message.load_song, () => (message.load_song = Command.LoadSong.deserialize(reader)));
+                        reader.readMessage(message.load_song, () => message.load_song = Command.LoadSong.deserialize(reader));
                         break;
                     case 6:
-                        reader.readMessage(message.play_song, () => (message.play_song = Command.PlaySong.deserialize(reader)));
+                        reader.readMessage(message.play_song, () => message.play_song = Command.PlaySong.deserialize(reader));
                         break;
                     case 7:
-                        reader.readMessage(message.send_bot_message, () => (message.send_bot_message = Command.SendBotMessage.deserialize(reader)));
+                        reader.readMessage(message.send_bot_message, () => message.send_bot_message = Command.SendBotMessage.deserialize(reader));
                         break;
                     case 8:
-                        reader.readMessage(message.show_modal, () => (message.show_modal = Command.ShowModal.deserialize(reader)));
+                        reader.readMessage(message.show_modal, () => message.show_modal = Command.ShowModal.deserialize(reader));
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -346,14 +341,10 @@ export namespace Packets {
     export namespace Command {
         export class LoadSong extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          level_id?: string;
-                          custom_host_url?: string;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                level_id?: string;
+                custom_host_url?: string;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -377,7 +368,10 @@ export namespace Packets {
             set custom_host_url(value: string) {
                 pb_1.Message.setField(this, 2, value);
             }
-            static fromObject(data: { level_id?: string; custom_host_url?: string }): LoadSong {
+            static fromObject(data: {
+                level_id?: string;
+                custom_host_url?: string;
+            }): LoadSong {
                 const message = new LoadSong({});
                 if (data.level_id != null) {
                     message.level_id = data.level_id;
@@ -404,15 +398,18 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.level_id.length) writer.writeString(1, this.level_id);
-                if (this.custom_host_url.length) writer.writeString(2, this.custom_host_url);
-                if (!w) return writer.getResultBuffer();
+                if (this.level_id.length)
+                    writer.writeString(1, this.level_id);
+                if (this.custom_host_url.length)
+                    writer.writeString(2, this.custom_host_url);
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LoadSong {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new LoadSong();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LoadSong();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
                             message.level_id = reader.readString();
@@ -420,8 +417,7 @@ export namespace Packets {
                         case 2:
                             message.custom_host_url = reader.readString();
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -435,19 +431,15 @@ export namespace Packets {
         }
         export class PlaySong extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          gameplay_parameters?: dependency_2.Models.GameplayParameters;
-                          floating_scoreboard?: boolean;
-                          stream_sync?: boolean;
-                          disable_fail?: boolean;
-                          disable_pause?: boolean;
-                          disable_scoresaber_submission?: boolean;
-                          show_normal_notes_on_stream?: boolean;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                gameplay_parameters?: dependency_2.Models.GameplayParameters;
+                floating_scoreboard?: boolean;
+                stream_sync?: boolean;
+                disable_fail?: boolean;
+                disable_pause?: boolean;
+                disable_scoresaber_submission?: boolean;
+                show_normal_notes_on_stream?: boolean;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -589,23 +581,31 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_gameplay_parameters) writer.writeMessage(1, this.gameplay_parameters, () => this.gameplay_parameters.serialize(writer));
-                if (this.floating_scoreboard != false) writer.writeBool(3, this.floating_scoreboard);
-                if (this.stream_sync != false) writer.writeBool(4, this.stream_sync);
-                if (this.disable_fail != false) writer.writeBool(5, this.disable_fail);
-                if (this.disable_pause != false) writer.writeBool(6, this.disable_pause);
-                if (this.disable_scoresaber_submission != false) writer.writeBool(7, this.disable_scoresaber_submission);
-                if (this.show_normal_notes_on_stream != false) writer.writeBool(8, this.show_normal_notes_on_stream);
-                if (!w) return writer.getResultBuffer();
+                if (this.has_gameplay_parameters)
+                    writer.writeMessage(1, this.gameplay_parameters, () => this.gameplay_parameters.serialize(writer));
+                if (this.floating_scoreboard != false)
+                    writer.writeBool(3, this.floating_scoreboard);
+                if (this.stream_sync != false)
+                    writer.writeBool(4, this.stream_sync);
+                if (this.disable_fail != false)
+                    writer.writeBool(5, this.disable_fail);
+                if (this.disable_pause != false)
+                    writer.writeBool(6, this.disable_pause);
+                if (this.disable_scoresaber_submission != false)
+                    writer.writeBool(7, this.disable_scoresaber_submission);
+                if (this.show_normal_notes_on_stream != false)
+                    writer.writeBool(8, this.show_normal_notes_on_stream);
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PlaySong {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new PlaySong();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PlaySong();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.gameplay_parameters, () => (message.gameplay_parameters = dependency_2.Models.GameplayParameters.deserialize(reader)));
+                            reader.readMessage(message.gameplay_parameters, () => message.gameplay_parameters = dependency_2.Models.GameplayParameters.deserialize(reader));
                             break;
                         case 3:
                             message.floating_scoreboard = reader.readBool();
@@ -625,8 +625,7 @@ export namespace Packets {
                         case 8:
                             message.show_normal_notes_on_stream = reader.readBool();
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -640,14 +639,10 @@ export namespace Packets {
         }
         export class SendBotMessage extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          channel?: dependency_1.proto.discord.Channel;
-                          message?: string;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                channel?: dependency_1.proto.discord.Channel;
+                message?: string;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -674,7 +669,10 @@ export namespace Packets {
             set message(value: string) {
                 pb_1.Message.setField(this, 2, value);
             }
-            static fromObject(data: { channel?: ReturnType<typeof dependency_1.proto.discord.Channel.prototype.toObject>; message?: string }): SendBotMessage {
+            static fromObject(data: {
+                channel?: ReturnType<typeof dependency_1.proto.discord.Channel.prototype.toObject>;
+                message?: string;
+            }): SendBotMessage {
                 const message = new SendBotMessage({});
                 if (data.channel != null) {
                     message.channel = dependency_1.proto.discord.Channel.fromObject(data.channel);
@@ -701,24 +699,26 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_channel) writer.writeMessage(1, this.channel, () => this.channel.serialize(writer));
-                if (this.message.length) writer.writeString(2, this.message);
-                if (!w) return writer.getResultBuffer();
+                if (this.has_channel)
+                    writer.writeMessage(1, this.channel, () => this.channel.serialize(writer));
+                if (this.message.length)
+                    writer.writeString(2, this.message);
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SendBotMessage {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new SendBotMessage();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SendBotMessage();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.channel, () => (message.channel = dependency_1.proto.discord.Channel.deserialize(reader)));
+                            reader.readMessage(message.channel, () => message.channel = dependency_1.proto.discord.Channel.deserialize(reader));
                             break;
                         case 2:
                             message.message = reader.readString();
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -732,18 +732,14 @@ export namespace Packets {
         }
         export class ShowModal extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          modal_id?: string;
-                          message_title?: string;
-                          message_text?: string;
-                          can_close?: boolean;
-                          option_1?: dependency_2.Models.ModalOption;
-                          option_2?: dependency_2.Models.ModalOption;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                modal_id?: string;
+                message_title?: string;
+                message_text?: string;
+                can_close?: boolean;
+                option_1?: dependency_2.Models.ModalOption;
+                option_2?: dependency_2.Models.ModalOption;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -871,19 +867,26 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.modal_id.length) writer.writeString(1, this.modal_id);
-                if (this.message_title.length) writer.writeString(2, this.message_title);
-                if (this.message_text.length) writer.writeString(3, this.message_text);
-                if (this.can_close != false) writer.writeBool(4, this.can_close);
-                if (this.has_option_1) writer.writeMessage(5, this.option_1, () => this.option_1.serialize(writer));
-                if (this.has_option_2) writer.writeMessage(6, this.option_2, () => this.option_2.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.modal_id.length)
+                    writer.writeString(1, this.modal_id);
+                if (this.message_title.length)
+                    writer.writeString(2, this.message_title);
+                if (this.message_text.length)
+                    writer.writeString(3, this.message_text);
+                if (this.can_close != false)
+                    writer.writeBool(4, this.can_close);
+                if (this.has_option_1)
+                    writer.writeMessage(5, this.option_1, () => this.option_1.serialize(writer));
+                if (this.has_option_2)
+                    writer.writeMessage(6, this.option_2, () => this.option_2.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ShowModal {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new ShowModal();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ShowModal();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
                             message.modal_id = reader.readString();
@@ -898,13 +901,12 @@ export namespace Packets {
                             message.can_close = reader.readBool();
                             break;
                         case 5:
-                            reader.readMessage(message.option_1, () => (message.option_1 = dependency_2.Models.ModalOption.deserialize(reader)));
+                            reader.readMessage(message.option_1, () => message.option_1 = dependency_2.Models.ModalOption.deserialize(reader));
                             break;
                         case 6:
-                            reader.readMessage(message.option_2, () => (message.option_2 = dependency_2.Models.ModalOption.deserialize(reader)));
+                            reader.readMessage(message.option_2, () => message.option_2 = dependency_2.Models.ModalOption.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -919,27 +921,19 @@ export namespace Packets {
     }
     export class Push extends pb_1.Message {
         private one_of_decls: number[][] = [[1, 2, 3]];
-        constructor(
-            data?:
-                | any[]
-                | ({} & (
-                      | {
-                            leaderboard_score?: dependency_2.Models.LeaderboardScore;
-                            realtime_score?: never;
-                            song_finished?: never;
-                        }
-                      | {
-                            leaderboard_score?: never;
-                            realtime_score?: dependency_2.Models.RealtimeScore;
-                            song_finished?: never;
-                        }
-                      | {
-                            leaderboard_score?: never;
-                            realtime_score?: never;
-                            song_finished?: Push.SongFinished;
-                        }
-                  ))
-        ) {
+        constructor(data?: any[] | ({} & (({
+            leaderboard_score?: dependency_2.Models.LeaderboardScore;
+            realtime_score?: never;
+            song_finished?: never;
+        } | {
+            leaderboard_score?: never;
+            realtime_score?: dependency_2.Models.RealtimeScore;
+            song_finished?: never;
+        } | {
+            leaderboard_score?: never;
+            realtime_score?: never;
+            song_finished?: Push.SongFinished;
+        })))) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -1030,28 +1024,31 @@ export namespace Packets {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_leaderboard_score) writer.writeMessage(1, this.leaderboard_score, () => this.leaderboard_score.serialize(writer));
-            if (this.has_realtime_score) writer.writeMessage(2, this.realtime_score, () => this.realtime_score.serialize(writer));
-            if (this.has_song_finished) writer.writeMessage(3, this.song_finished, () => this.song_finished.serialize(writer));
-            if (!w) return writer.getResultBuffer();
+            if (this.has_leaderboard_score)
+                writer.writeMessage(1, this.leaderboard_score, () => this.leaderboard_score.serialize(writer));
+            if (this.has_realtime_score)
+                writer.writeMessage(2, this.realtime_score, () => this.realtime_score.serialize(writer));
+            if (this.has_song_finished)
+                writer.writeMessage(3, this.song_finished, () => this.song_finished.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Push {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new Push();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Push();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.leaderboard_score, () => (message.leaderboard_score = dependency_2.Models.LeaderboardScore.deserialize(reader)));
+                        reader.readMessage(message.leaderboard_score, () => message.leaderboard_score = dependency_2.Models.LeaderboardScore.deserialize(reader));
                         break;
                     case 2:
-                        reader.readMessage(message.realtime_score, () => (message.realtime_score = dependency_2.Models.RealtimeScore.deserialize(reader)));
+                        reader.readMessage(message.realtime_score, () => message.realtime_score = dependency_2.Models.RealtimeScore.deserialize(reader));
                         break;
                     case 3:
-                        reader.readMessage(message.song_finished, () => (message.song_finished = Push.SongFinished.deserialize(reader)));
+                        reader.readMessage(message.song_finished, () => message.song_finished = Push.SongFinished.deserialize(reader));
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -1066,16 +1063,12 @@ export namespace Packets {
     export namespace Push {
         export class SongFinished extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          player?: dependency_2.Models.User;
-                          beatmap?: dependency_2.Models.Beatmap;
-                          type?: Push.SongFinished.CompletionType;
-                          score?: number;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                player?: dependency_2.Models.User;
+                beatmap?: dependency_2.Models.Beatmap;
+                type?: Push.SongFinished.CompletionType;
+                score?: number;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -1123,7 +1116,12 @@ export namespace Packets {
             set score(value: number) {
                 pb_1.Message.setField(this, 4, value);
             }
-            static fromObject(data: { player?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>; beatmap?: ReturnType<typeof dependency_2.Models.Beatmap.prototype.toObject>; type?: Push.SongFinished.CompletionType; score?: number }): SongFinished {
+            static fromObject(data: {
+                player?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
+                beatmap?: ReturnType<typeof dependency_2.Models.Beatmap.prototype.toObject>;
+                type?: Push.SongFinished.CompletionType;
+                score?: number;
+            }): SongFinished {
                 const message = new SongFinished({});
                 if (data.player != null) {
                     message.player = dependency_2.Models.User.fromObject(data.player);
@@ -1164,23 +1162,28 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_player) writer.writeMessage(1, this.player, () => this.player.serialize(writer));
-                if (this.has_beatmap) writer.writeMessage(2, this.beatmap, () => this.beatmap.serialize(writer));
-                if (this.type != Push.SongFinished.CompletionType.Passed) writer.writeEnum(3, this.type);
-                if (this.score != 0) writer.writeInt32(4, this.score);
-                if (!w) return writer.getResultBuffer();
+                if (this.has_player)
+                    writer.writeMessage(1, this.player, () => this.player.serialize(writer));
+                if (this.has_beatmap)
+                    writer.writeMessage(2, this.beatmap, () => this.beatmap.serialize(writer));
+                if (this.type != Push.SongFinished.CompletionType.Passed)
+                    writer.writeEnum(3, this.type);
+                if (this.score != 0)
+                    writer.writeInt32(4, this.score);
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SongFinished {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new SongFinished();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SongFinished();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.player, () => (message.player = dependency_2.Models.User.deserialize(reader)));
+                            reader.readMessage(message.player, () => message.player = dependency_2.Models.User.deserialize(reader));
                             break;
                         case 2:
-                            reader.readMessage(message.beatmap, () => (message.beatmap = dependency_2.Models.Beatmap.deserialize(reader)));
+                            reader.readMessage(message.beatmap, () => message.beatmap = dependency_2.Models.Beatmap.deserialize(reader));
                             break;
                         case 3:
                             message.type = reader.readEnum();
@@ -1188,8 +1191,7 @@ export namespace Packets {
                         case 4:
                             message.score = reader.readInt32();
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -1211,27 +1213,19 @@ export namespace Packets {
     }
     export class Request extends pb_1.Message {
         private one_of_decls: number[][] = [[1, 2, 3]];
-        constructor(
-            data?:
-                | any[]
-                | ({} & (
-                      | {
-                            connect?: Request.Connect;
-                            leaderboard_score?: never;
-                            preload_image_for_stream_sync?: never;
-                        }
-                      | {
-                            connect?: never;
-                            leaderboard_score?: Request.LeaderboardScore;
-                            preload_image_for_stream_sync?: never;
-                        }
-                      | {
-                            connect?: never;
-                            leaderboard_score?: never;
-                            preload_image_for_stream_sync?: Request.PreloadImageForStreamSync;
-                        }
-                  ))
-        ) {
+        constructor(data?: any[] | ({} & (({
+            connect?: Request.Connect;
+            leaderboard_score?: never;
+            preload_image_for_stream_sync?: never;
+        } | {
+            connect?: never;
+            leaderboard_score?: Request.LeaderboardScore;
+            preload_image_for_stream_sync?: never;
+        } | {
+            connect?: never;
+            leaderboard_score?: never;
+            preload_image_for_stream_sync?: Request.PreloadImageForStreamSync;
+        })))) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -1284,7 +1278,11 @@ export namespace Packets {
             };
             return cases[pb_1.Message.computeOneofCase(this, [1, 2, 3])];
         }
-        static fromObject(data: { connect?: ReturnType<typeof Request.Connect.prototype.toObject>; leaderboard_score?: ReturnType<typeof Request.LeaderboardScore.prototype.toObject>; preload_image_for_stream_sync?: ReturnType<typeof Request.PreloadImageForStreamSync.prototype.toObject> }): Request {
+        static fromObject(data: {
+            connect?: ReturnType<typeof Request.Connect.prototype.toObject>;
+            leaderboard_score?: ReturnType<typeof Request.LeaderboardScore.prototype.toObject>;
+            preload_image_for_stream_sync?: ReturnType<typeof Request.PreloadImageForStreamSync.prototype.toObject>;
+        }): Request {
             const message = new Request({});
             if (data.connect != null) {
                 message.connect = Request.Connect.fromObject(data.connect);
@@ -1318,28 +1316,31 @@ export namespace Packets {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_connect) writer.writeMessage(1, this.connect, () => this.connect.serialize(writer));
-            if (this.has_leaderboard_score) writer.writeMessage(2, this.leaderboard_score, () => this.leaderboard_score.serialize(writer));
-            if (this.has_preload_image_for_stream_sync) writer.writeMessage(3, this.preload_image_for_stream_sync, () => this.preload_image_for_stream_sync.serialize(writer));
-            if (!w) return writer.getResultBuffer();
+            if (this.has_connect)
+                writer.writeMessage(1, this.connect, () => this.connect.serialize(writer));
+            if (this.has_leaderboard_score)
+                writer.writeMessage(2, this.leaderboard_score, () => this.leaderboard_score.serialize(writer));
+            if (this.has_preload_image_for_stream_sync)
+                writer.writeMessage(3, this.preload_image_for_stream_sync, () => this.preload_image_for_stream_sync.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Request {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new Request();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Request();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.connect, () => (message.connect = Request.Connect.deserialize(reader)));
+                        reader.readMessage(message.connect, () => message.connect = Request.Connect.deserialize(reader));
                         break;
                     case 2:
-                        reader.readMessage(message.leaderboard_score, () => (message.leaderboard_score = Request.LeaderboardScore.deserialize(reader)));
+                        reader.readMessage(message.leaderboard_score, () => message.leaderboard_score = Request.LeaderboardScore.deserialize(reader));
                         break;
                     case 3:
-                        reader.readMessage(message.preload_image_for_stream_sync, () => (message.preload_image_for_stream_sync = Request.PreloadImageForStreamSync.deserialize(reader)));
+                        reader.readMessage(message.preload_image_for_stream_sync, () => message.preload_image_for_stream_sync = Request.PreloadImageForStreamSync.deserialize(reader));
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -1354,15 +1355,11 @@ export namespace Packets {
     export namespace Request {
         export class Connect extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          user?: dependency_2.Models.User;
-                          password?: string;
-                          client_version?: number;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                user?: dependency_2.Models.User;
+                password?: string;
+                client_version?: number;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -1398,7 +1395,11 @@ export namespace Packets {
             set client_version(value: number) {
                 pb_1.Message.setField(this, 3, value);
             }
-            static fromObject(data: { user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>; password?: string; client_version?: number }): Connect {
+            static fromObject(data: {
+                user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
+                password?: string;
+                client_version?: number;
+            }): Connect {
                 const message = new Connect({});
                 if (data.user != null) {
                     message.user = dependency_2.Models.User.fromObject(data.user);
@@ -1432,19 +1433,23 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_user) writer.writeMessage(1, this.user, () => this.user.serialize(writer));
-                if (this.password.length) writer.writeString(2, this.password);
-                if (this.client_version != 0) writer.writeInt32(3, this.client_version);
-                if (!w) return writer.getResultBuffer();
+                if (this.has_user)
+                    writer.writeMessage(1, this.user, () => this.user.serialize(writer));
+                if (this.password.length)
+                    writer.writeString(2, this.password);
+                if (this.client_version != 0)
+                    writer.writeInt32(3, this.client_version);
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Connect {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new Connect();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Connect();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.user, () => (message.user = dependency_2.Models.User.deserialize(reader)));
+                            reader.readMessage(message.user, () => message.user = dependency_2.Models.User.deserialize(reader));
                             break;
                         case 2:
                             message.password = reader.readString();
@@ -1452,8 +1457,7 @@ export namespace Packets {
                         case 3:
                             message.client_version = reader.readInt32();
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -1467,14 +1471,10 @@ export namespace Packets {
         }
         export class LeaderboardScore extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          event_id?: string;
-                          parameters?: dependency_2.Models.GameplayParameters;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                event_id?: string;
+                parameters?: dependency_2.Models.GameplayParameters;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -1501,7 +1501,10 @@ export namespace Packets {
             get has_parameters() {
                 return pb_1.Message.getField(this, 2) != null;
             }
-            static fromObject(data: { event_id?: string; parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject> }): LeaderboardScore {
+            static fromObject(data: {
+                event_id?: string;
+                parameters?: ReturnType<typeof dependency_2.Models.GameplayParameters.prototype.toObject>;
+            }): LeaderboardScore {
                 const message = new LeaderboardScore({});
                 if (data.event_id != null) {
                     message.event_id = data.event_id;
@@ -1528,24 +1531,26 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.event_id.length) writer.writeString(1, this.event_id);
-                if (this.has_parameters) writer.writeMessage(2, this.parameters, () => this.parameters.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.event_id.length)
+                    writer.writeString(1, this.event_id);
+                if (this.has_parameters)
+                    writer.writeMessage(2, this.parameters, () => this.parameters.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LeaderboardScore {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new LeaderboardScore();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LeaderboardScore();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
                             message.event_id = reader.readString();
                             break;
                         case 2:
-                            reader.readMessage(message.parameters, () => (message.parameters = dependency_2.Models.GameplayParameters.deserialize(reader)));
+                            reader.readMessage(message.parameters, () => message.parameters = dependency_2.Models.GameplayParameters.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -1559,15 +1564,11 @@ export namespace Packets {
         }
         export class PreloadImageForStreamSync extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          file_id?: string;
-                          compressed?: boolean;
-                          data?: Uint8Array;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                file_id?: string;
+                compressed?: boolean;
+                data?: Uint8Array;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -1600,7 +1601,11 @@ export namespace Packets {
             set data(value: Uint8Array) {
                 pb_1.Message.setField(this, 3, value);
             }
-            static fromObject(data: { file_id?: string; compressed?: boolean; data?: Uint8Array }): PreloadImageForStreamSync {
+            static fromObject(data: {
+                file_id?: string;
+                compressed?: boolean;
+                data?: Uint8Array;
+            }): PreloadImageForStreamSync {
                 const message = new PreloadImageForStreamSync({});
                 if (data.file_id != null) {
                     message.file_id = data.file_id;
@@ -1634,16 +1639,20 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.file_id.length) writer.writeString(1, this.file_id);
-                if (this.compressed != false) writer.writeBool(2, this.compressed);
-                if (this.data.length) writer.writeBytes(3, this.data);
-                if (!w) return writer.getResultBuffer();
+                if (this.file_id.length)
+                    writer.writeString(1, this.file_id);
+                if (this.compressed != false)
+                    writer.writeBool(2, this.compressed);
+                if (this.data.length)
+                    writer.writeBytes(3, this.data);
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PreloadImageForStreamSync {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new PreloadImageForStreamSync();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PreloadImageForStreamSync();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
                             message.file_id = reader.readString();
@@ -1654,8 +1663,7 @@ export namespace Packets {
                         case 3:
                             message.data = reader.readBytes();
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -1670,63 +1678,52 @@ export namespace Packets {
     }
     export class Response extends pb_1.Message {
         private one_of_decls: number[][] = [[3, 4, 5, 6, 7, 8]];
-        constructor(
-            data?:
-                | any[]
-                | ({
-                      type?: Response.ResponseType;
-                      responding_to_packet_id?: string;
-                  } & (
-                      | {
-                            connect?: Response.Connect;
-                            leaderboard_scores?: never;
-                            loaded_song?: never;
-                            modal?: never;
-                            modify_qualifier?: never;
-                            image_preloaded?: never;
-                        }
-                      | {
-                            connect?: never;
-                            leaderboard_scores?: Response.LeaderboardScores;
-                            loaded_song?: never;
-                            modal?: never;
-                            modify_qualifier?: never;
-                            image_preloaded?: never;
-                        }
-                      | {
-                            connect?: never;
-                            leaderboard_scores?: never;
-                            loaded_song?: Response.LoadedSong;
-                            modal?: never;
-                            modify_qualifier?: never;
-                            image_preloaded?: never;
-                        }
-                      | {
-                            connect?: never;
-                            leaderboard_scores?: never;
-                            loaded_song?: never;
-                            modal?: Response.Modal;
-                            modify_qualifier?: never;
-                            image_preloaded?: never;
-                        }
-                      | {
-                            connect?: never;
-                            leaderboard_scores?: never;
-                            loaded_song?: never;
-                            modal?: never;
-                            modify_qualifier?: Response.ModifyQualifier;
-                            image_preloaded?: never;
-                        }
-                      | {
-                            connect?: never;
-                            leaderboard_scores?: never;
-                            loaded_song?: never;
-                            modal?: never;
-                            modify_qualifier?: never;
-                            image_preloaded?: Response.ImagePreloaded;
-                        }
-                  ))
-        ) {
+        constructor(data?: any[] | ({
+            type?: Response.ResponseType;
+            responding_to_packet_id?: string;
+        } & (({
+            connect?: Response.Connect;
+            leaderboard_scores?: never;
+            loaded_song?: never;
+            modal?: never;
+            modify_qualifier?: never;
+            image_preloaded?: never;
+        } | {
+            connect?: never;
+            leaderboard_scores?: Response.LeaderboardScores;
+            loaded_song?: never;
+            modal?: never;
+            modify_qualifier?: never;
+            image_preloaded?: never;
+        } | {
+            connect?: never;
+            leaderboard_scores?: never;
+            loaded_song?: Response.LoadedSong;
+            modal?: never;
+            modify_qualifier?: never;
+            image_preloaded?: never;
+        } | {
+            connect?: never;
+            leaderboard_scores?: never;
+            loaded_song?: never;
+            modal?: Response.Modal;
+            modify_qualifier?: never;
+            image_preloaded?: never;
+        } | {
+            connect?: never;
+            leaderboard_scores?: never;
+            loaded_song?: never;
+            modal?: never;
+            modify_qualifier?: Response.ModifyQualifier;
+            image_preloaded?: never;
+        } | {
+            connect?: never;
+            leaderboard_scores?: never;
+            loaded_song?: never;
+            modal?: never;
+            modify_qualifier?: never;
+            image_preloaded?: Response.ImagePreloaded;
+        })))) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -1914,21 +1911,30 @@ export namespace Packets {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.type != Response.ResponseType.Fail) writer.writeEnum(1, this.type);
-            if (this.responding_to_packet_id.length) writer.writeString(2, this.responding_to_packet_id);
-            if (this.has_connect) writer.writeMessage(3, this.connect, () => this.connect.serialize(writer));
-            if (this.has_leaderboard_scores) writer.writeMessage(4, this.leaderboard_scores, () => this.leaderboard_scores.serialize(writer));
-            if (this.has_loaded_song) writer.writeMessage(5, this.loaded_song, () => this.loaded_song.serialize(writer));
-            if (this.has_modal) writer.writeMessage(6, this.modal, () => this.modal.serialize(writer));
-            if (this.has_modify_qualifier) writer.writeMessage(7, this.modify_qualifier, () => this.modify_qualifier.serialize(writer));
-            if (this.has_image_preloaded) writer.writeMessage(8, this.image_preloaded, () => this.image_preloaded.serialize(writer));
-            if (!w) return writer.getResultBuffer();
+            if (this.type != Response.ResponseType.Fail)
+                writer.writeEnum(1, this.type);
+            if (this.responding_to_packet_id.length)
+                writer.writeString(2, this.responding_to_packet_id);
+            if (this.has_connect)
+                writer.writeMessage(3, this.connect, () => this.connect.serialize(writer));
+            if (this.has_leaderboard_scores)
+                writer.writeMessage(4, this.leaderboard_scores, () => this.leaderboard_scores.serialize(writer));
+            if (this.has_loaded_song)
+                writer.writeMessage(5, this.loaded_song, () => this.loaded_song.serialize(writer));
+            if (this.has_modal)
+                writer.writeMessage(6, this.modal, () => this.modal.serialize(writer));
+            if (this.has_modify_qualifier)
+                writer.writeMessage(7, this.modify_qualifier, () => this.modify_qualifier.serialize(writer));
+            if (this.has_image_preloaded)
+                writer.writeMessage(8, this.image_preloaded, () => this.image_preloaded.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Response {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new Response();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Response();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.type = reader.readEnum();
@@ -1937,25 +1943,24 @@ export namespace Packets {
                         message.responding_to_packet_id = reader.readString();
                         break;
                     case 3:
-                        reader.readMessage(message.connect, () => (message.connect = Response.Connect.deserialize(reader)));
+                        reader.readMessage(message.connect, () => message.connect = Response.Connect.deserialize(reader));
                         break;
                     case 4:
-                        reader.readMessage(message.leaderboard_scores, () => (message.leaderboard_scores = Response.LeaderboardScores.deserialize(reader)));
+                        reader.readMessage(message.leaderboard_scores, () => message.leaderboard_scores = Response.LeaderboardScores.deserialize(reader));
                         break;
                     case 5:
-                        reader.readMessage(message.loaded_song, () => (message.loaded_song = Response.LoadedSong.deserialize(reader)));
+                        reader.readMessage(message.loaded_song, () => message.loaded_song = Response.LoadedSong.deserialize(reader));
                         break;
                     case 6:
-                        reader.readMessage(message.modal, () => (message.modal = Response.Modal.deserialize(reader)));
+                        reader.readMessage(message.modal, () => message.modal = Response.Modal.deserialize(reader));
                         break;
                     case 7:
-                        reader.readMessage(message.modify_qualifier, () => (message.modify_qualifier = Response.ModifyQualifier.deserialize(reader)));
+                        reader.readMessage(message.modify_qualifier, () => message.modify_qualifier = Response.ModifyQualifier.deserialize(reader));
                         break;
                     case 8:
-                        reader.readMessage(message.image_preloaded, () => (message.image_preloaded = Response.ImagePreloaded.deserialize(reader)));
+                        reader.readMessage(message.image_preloaded, () => message.image_preloaded = Response.ImagePreloaded.deserialize(reader));
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -1978,17 +1983,13 @@ export namespace Packets {
         }
         export class Connect extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          state?: dependency_2.Models.State;
-                          self_guid?: string;
-                          server_version?: number;
-                          message?: string;
-                          reason?: Response.ConnectFailReason;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                state?: dependency_2.Models.State;
+                self_guid?: string;
+                server_version?: number;
+                message?: string;
+                reason?: Response.ConnectFailReason;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -2042,7 +2043,13 @@ export namespace Packets {
             set reason(value: Response.ConnectFailReason) {
                 pb_1.Message.setField(this, 5, value);
             }
-            static fromObject(data: { state?: ReturnType<typeof dependency_2.Models.State.prototype.toObject>; self_guid?: string; server_version?: number; message?: string; reason?: Response.ConnectFailReason }): Connect {
+            static fromObject(data: {
+                state?: ReturnType<typeof dependency_2.Models.State.prototype.toObject>;
+                self_guid?: string;
+                server_version?: number;
+                message?: string;
+                reason?: Response.ConnectFailReason;
+            }): Connect {
                 const message = new Connect({});
                 if (data.state != null) {
                     message.state = dependency_2.Models.State.fromObject(data.state);
@@ -2090,21 +2097,27 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_state) writer.writeMessage(1, this.state, () => this.state.serialize(writer));
-                if (this.self_guid.length) writer.writeString(2, this.self_guid);
-                if (this.server_version != 0) writer.writeInt32(3, this.server_version);
-                if (this.message.length) writer.writeString(4, this.message);
-                if (this.reason != Response.ConnectFailReason.IncorrectVersion) writer.writeEnum(5, this.reason);
-                if (!w) return writer.getResultBuffer();
+                if (this.has_state)
+                    writer.writeMessage(1, this.state, () => this.state.serialize(writer));
+                if (this.self_guid.length)
+                    writer.writeString(2, this.self_guid);
+                if (this.server_version != 0)
+                    writer.writeInt32(3, this.server_version);
+                if (this.message.length)
+                    writer.writeString(4, this.message);
+                if (this.reason != Response.ConnectFailReason.IncorrectVersion)
+                    writer.writeEnum(5, this.reason);
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Connect {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new Connect();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Connect();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.state, () => (message.state = dependency_2.Models.State.deserialize(reader)));
+                            reader.readMessage(message.state, () => message.state = dependency_2.Models.State.deserialize(reader));
                             break;
                         case 2:
                             message.self_guid = reader.readString();
@@ -2118,8 +2131,7 @@ export namespace Packets {
                         case 5:
                             message.reason = reader.readEnum();
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -2133,13 +2145,9 @@ export namespace Packets {
         }
         export class LeaderboardScores extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          scores?: dependency_2.Models.LeaderboardScore[];
-                      }
-            ) {
+            constructor(data?: any[] | {
+                scores?: dependency_2.Models.LeaderboardScore[];
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -2154,7 +2162,9 @@ export namespace Packets {
             set scores(value: dependency_2.Models.LeaderboardScore[]) {
                 pb_1.Message.setRepeatedWrapperField(this, 1, value);
             }
-            static fromObject(data: { scores?: ReturnType<typeof dependency_2.Models.LeaderboardScore.prototype.toObject>[] }): LeaderboardScores {
+            static fromObject(data: {
+                scores?: ReturnType<typeof dependency_2.Models.LeaderboardScore.prototype.toObject>[];
+            }): LeaderboardScores {
                 const message = new LeaderboardScores({});
                 if (data.scores != null) {
                     message.scores = data.scores.map(item => dependency_2.Models.LeaderboardScore.fromObject(item));
@@ -2174,20 +2184,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.scores.length) writer.writeRepeatedMessage(1, this.scores, (item: dependency_2.Models.LeaderboardScore) => item.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.scores.length)
+                    writer.writeRepeatedMessage(1, this.scores, (item: dependency_2.Models.LeaderboardScore) => item.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LeaderboardScores {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new LeaderboardScores();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LeaderboardScores();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
                             reader.readMessage(message.scores, () => pb_1.Message.addToRepeatedWrapperField(message, 1, dependency_2.Models.LeaderboardScore.deserialize(reader), dependency_2.Models.LeaderboardScore));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -2201,13 +2212,9 @@ export namespace Packets {
         }
         export class LoadedSong extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          level?: dependency_2.Models.PreviewBeatmapLevel;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                level?: dependency_2.Models.PreviewBeatmapLevel;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -2225,7 +2232,9 @@ export namespace Packets {
             get has_level() {
                 return pb_1.Message.getField(this, 1) != null;
             }
-            static fromObject(data: { level?: ReturnType<typeof dependency_2.Models.PreviewBeatmapLevel.prototype.toObject> }): LoadedSong {
+            static fromObject(data: {
+                level?: ReturnType<typeof dependency_2.Models.PreviewBeatmapLevel.prototype.toObject>;
+            }): LoadedSong {
                 const message = new LoadedSong({});
                 if (data.level != null) {
                     message.level = dependency_2.Models.PreviewBeatmapLevel.fromObject(data.level);
@@ -2245,20 +2254,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_level) writer.writeMessage(1, this.level, () => this.level.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.has_level)
+                    writer.writeMessage(1, this.level, () => this.level.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LoadedSong {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new LoadedSong();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LoadedSong();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.level, () => (message.level = dependency_2.Models.PreviewBeatmapLevel.deserialize(reader)));
+                            reader.readMessage(message.level, () => message.level = dependency_2.Models.PreviewBeatmapLevel.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -2272,14 +2282,10 @@ export namespace Packets {
         }
         export class Modal extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          modal_id?: string;
-                          value?: string;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                modal_id?: string;
+                value?: string;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -2303,7 +2309,10 @@ export namespace Packets {
             set value(value: string) {
                 pb_1.Message.setField(this, 2, value);
             }
-            static fromObject(data: { modal_id?: string; value?: string }): Modal {
+            static fromObject(data: {
+                modal_id?: string;
+                value?: string;
+            }): Modal {
                 const message = new Modal({});
                 if (data.modal_id != null) {
                     message.modal_id = data.modal_id;
@@ -2330,15 +2339,18 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.modal_id.length) writer.writeString(1, this.modal_id);
-                if (this.value.length) writer.writeString(2, this.value);
-                if (!w) return writer.getResultBuffer();
+                if (this.modal_id.length)
+                    writer.writeString(1, this.modal_id);
+                if (this.value.length)
+                    writer.writeString(2, this.value);
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Modal {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new Modal();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Modal();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
                             message.modal_id = reader.readString();
@@ -2346,8 +2358,7 @@ export namespace Packets {
                         case 2:
                             message.value = reader.readString();
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -2361,13 +2372,9 @@ export namespace Packets {
         }
         export class ModifyQualifier extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          message?: string;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                message?: string;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -2382,7 +2389,9 @@ export namespace Packets {
             set message(value: string) {
                 pb_1.Message.setField(this, 1, value);
             }
-            static fromObject(data: { message?: string }): ModifyQualifier {
+            static fromObject(data: {
+                message?: string;
+            }): ModifyQualifier {
                 const message = new ModifyQualifier({});
                 if (data.message != null) {
                     message.message = data.message;
@@ -2402,20 +2411,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.message.length) writer.writeString(1, this.message);
-                if (!w) return writer.getResultBuffer();
+                if (this.message.length)
+                    writer.writeString(1, this.message);
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModifyQualifier {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new ModifyQualifier();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ModifyQualifier();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
                             message.message = reader.readString();
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -2429,13 +2439,9 @@ export namespace Packets {
         }
         export class ImagePreloaded extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          file_id?: string;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                file_id?: string;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -2450,7 +2456,9 @@ export namespace Packets {
             set file_id(value: string) {
                 pb_1.Message.setField(this, 1, value);
             }
-            static fromObject(data: { file_id?: string }): ImagePreloaded {
+            static fromObject(data: {
+                file_id?: string;
+            }): ImagePreloaded {
                 const message = new ImagePreloaded({});
                 if (data.file_id != null) {
                     message.file_id = data.file_id;
@@ -2470,20 +2478,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.file_id.length) writer.writeString(1, this.file_id);
-                if (!w) return writer.getResultBuffer();
+                if (this.file_id.length)
+                    writer.writeString(1, this.file_id);
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ImagePreloaded {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new ImagePreloaded();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ImagePreloaded();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
                             message.file_id = reader.readString();
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -2498,14 +2507,10 @@ export namespace Packets {
     }
     export class Acknowledgement extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      packet_id?: string;
-                      type?: Acknowledgement.AcknowledgementType;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            packet_id?: string;
+            type?: Acknowledgement.AcknowledgementType;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -2529,7 +2534,10 @@ export namespace Packets {
         set type(value: Acknowledgement.AcknowledgementType) {
             pb_1.Message.setField(this, 2, value);
         }
-        static fromObject(data: { packet_id?: string; type?: Acknowledgement.AcknowledgementType }): Acknowledgement {
+        static fromObject(data: {
+            packet_id?: string;
+            type?: Acknowledgement.AcknowledgementType;
+        }): Acknowledgement {
             const message = new Acknowledgement({});
             if (data.packet_id != null) {
                 message.packet_id = data.packet_id;
@@ -2556,15 +2564,18 @@ export namespace Packets {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.packet_id.length) writer.writeString(1, this.packet_id);
-            if (this.type != Acknowledgement.AcknowledgementType.MessageReceived) writer.writeEnum(2, this.type);
-            if (!w) return writer.getResultBuffer();
+            if (this.packet_id.length)
+                writer.writeString(1, this.packet_id);
+            if (this.type != Acknowledgement.AcknowledgementType.MessageReceived)
+                writer.writeEnum(2, this.type);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Acknowledgement {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new Acknowledgement();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Acknowledgement();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.packet_id = reader.readString();
@@ -2572,8 +2583,7 @@ export namespace Packets {
                     case 2:
                         message.type = reader.readEnum();
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -2592,14 +2602,10 @@ export namespace Packets {
     }
     export class ForwardingPacket extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      forward_to?: string[];
-                      packet?: Packet;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            forward_to?: string[];
+            packet?: Packet;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -2626,7 +2632,10 @@ export namespace Packets {
         get has_packet() {
             return pb_1.Message.getField(this, 2) != null;
         }
-        static fromObject(data: { forward_to?: string[]; packet?: ReturnType<typeof Packet.prototype.toObject> }): ForwardingPacket {
+        static fromObject(data: {
+            forward_to?: string[];
+            packet?: ReturnType<typeof Packet.prototype.toObject>;
+        }): ForwardingPacket {
             const message = new ForwardingPacket({});
             if (data.forward_to != null) {
                 message.forward_to = data.forward_to;
@@ -2653,24 +2662,26 @@ export namespace Packets {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.forward_to.length) writer.writeRepeatedString(1, this.forward_to);
-            if (this.has_packet) writer.writeMessage(2, this.packet, () => this.packet.serialize(writer));
-            if (!w) return writer.getResultBuffer();
+            if (this.forward_to.length)
+                writer.writeRepeatedString(1, this.forward_to);
+            if (this.has_packet)
+                writer.writeMessage(2, this.packet, () => this.packet.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ForwardingPacket {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new ForwardingPacket();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ForwardingPacket();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         pb_1.Message.addToRepeatedField(message, 1, reader.readString());
                         break;
                     case 2:
-                        reader.readMessage(message.packet, () => (message.packet = Packet.deserialize(reader)));
+                        reader.readMessage(message.packet, () => message.packet = Packet.deserialize(reader));
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -2684,155 +2695,139 @@ export namespace Packets {
     }
     export class Event extends pb_1.Message {
         private one_of_decls: number[][] = [[1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13]];
-        constructor(
-            data?:
-                | any[]
-                | ({} & (
-                      | {
-                            user_added_event?: Event.UserAddedEvent;
-                            user_updated_event?: never;
-                            user_left_event?: never;
-                            match_created_event?: never;
-                            match_updated_event?: never;
-                            match_deleted_event?: never;
-                            qualifier_created_event?: never;
-                            qualifier_updated_event?: never;
-                            qualifier_deleted_event?: never;
-                            host_added_event?: never;
-                            host_deleted_event?: never;
-                        }
-                      | {
-                            user_added_event?: never;
-                            user_updated_event?: Event.UserUpdatedEvent;
-                            user_left_event?: never;
-                            match_created_event?: never;
-                            match_updated_event?: never;
-                            match_deleted_event?: never;
-                            qualifier_created_event?: never;
-                            qualifier_updated_event?: never;
-                            qualifier_deleted_event?: never;
-                            host_added_event?: never;
-                            host_deleted_event?: never;
-                        }
-                      | {
-                            user_added_event?: never;
-                            user_updated_event?: never;
-                            user_left_event?: Event.UserLeftEvent;
-                            match_created_event?: never;
-                            match_updated_event?: never;
-                            match_deleted_event?: never;
-                            qualifier_created_event?: never;
-                            qualifier_updated_event?: never;
-                            qualifier_deleted_event?: never;
-                            host_added_event?: never;
-                            host_deleted_event?: never;
-                        }
-                      | {
-                            user_added_event?: never;
-                            user_updated_event?: never;
-                            user_left_event?: never;
-                            match_created_event?: Event.MatchCreatedEvent;
-                            match_updated_event?: never;
-                            match_deleted_event?: never;
-                            qualifier_created_event?: never;
-                            qualifier_updated_event?: never;
-                            qualifier_deleted_event?: never;
-                            host_added_event?: never;
-                            host_deleted_event?: never;
-                        }
-                      | {
-                            user_added_event?: never;
-                            user_updated_event?: never;
-                            user_left_event?: never;
-                            match_created_event?: never;
-                            match_updated_event?: Event.MatchUpdatedEvent;
-                            match_deleted_event?: never;
-                            qualifier_created_event?: never;
-                            qualifier_updated_event?: never;
-                            qualifier_deleted_event?: never;
-                            host_added_event?: never;
-                            host_deleted_event?: never;
-                        }
-                      | {
-                            user_added_event?: never;
-                            user_updated_event?: never;
-                            user_left_event?: never;
-                            match_created_event?: never;
-                            match_updated_event?: never;
-                            match_deleted_event?: Event.MatchDeletedEvent;
-                            qualifier_created_event?: never;
-                            qualifier_updated_event?: never;
-                            qualifier_deleted_event?: never;
-                            host_added_event?: never;
-                            host_deleted_event?: never;
-                        }
-                      | {
-                            user_added_event?: never;
-                            user_updated_event?: never;
-                            user_left_event?: never;
-                            match_created_event?: never;
-                            match_updated_event?: never;
-                            match_deleted_event?: never;
-                            qualifier_created_event?: Event.QualifierCreatedEvent;
-                            qualifier_updated_event?: never;
-                            qualifier_deleted_event?: never;
-                            host_added_event?: never;
-                            host_deleted_event?: never;
-                        }
-                      | {
-                            user_added_event?: never;
-                            user_updated_event?: never;
-                            user_left_event?: never;
-                            match_created_event?: never;
-                            match_updated_event?: never;
-                            match_deleted_event?: never;
-                            qualifier_created_event?: never;
-                            qualifier_updated_event?: Event.QualifierUpdatedEvent;
-                            qualifier_deleted_event?: never;
-                            host_added_event?: never;
-                            host_deleted_event?: never;
-                        }
-                      | {
-                            user_added_event?: never;
-                            user_updated_event?: never;
-                            user_left_event?: never;
-                            match_created_event?: never;
-                            match_updated_event?: never;
-                            match_deleted_event?: never;
-                            qualifier_created_event?: never;
-                            qualifier_updated_event?: never;
-                            qualifier_deleted_event?: Event.QualifierDeletedEvent;
-                            host_added_event?: never;
-                            host_deleted_event?: never;
-                        }
-                      | {
-                            user_added_event?: never;
-                            user_updated_event?: never;
-                            user_left_event?: never;
-                            match_created_event?: never;
-                            match_updated_event?: never;
-                            match_deleted_event?: never;
-                            qualifier_created_event?: never;
-                            qualifier_updated_event?: never;
-                            qualifier_deleted_event?: never;
-                            host_added_event?: Event.HostAddedEvent;
-                            host_deleted_event?: never;
-                        }
-                      | {
-                            user_added_event?: never;
-                            user_updated_event?: never;
-                            user_left_event?: never;
-                            match_created_event?: never;
-                            match_updated_event?: never;
-                            match_deleted_event?: never;
-                            qualifier_created_event?: never;
-                            qualifier_updated_event?: never;
-                            qualifier_deleted_event?: never;
-                            host_added_event?: never;
-                            host_deleted_event?: Event.HostDeletedEvent;
-                        }
-                  ))
-        ) {
+        constructor(data?: any[] | ({} & (({
+            user_added_event?: Event.UserAddedEvent;
+            user_updated_event?: never;
+            user_left_event?: never;
+            match_created_event?: never;
+            match_updated_event?: never;
+            match_deleted_event?: never;
+            qualifier_created_event?: never;
+            qualifier_updated_event?: never;
+            qualifier_deleted_event?: never;
+            host_added_event?: never;
+            host_deleted_event?: never;
+        } | {
+            user_added_event?: never;
+            user_updated_event?: Event.UserUpdatedEvent;
+            user_left_event?: never;
+            match_created_event?: never;
+            match_updated_event?: never;
+            match_deleted_event?: never;
+            qualifier_created_event?: never;
+            qualifier_updated_event?: never;
+            qualifier_deleted_event?: never;
+            host_added_event?: never;
+            host_deleted_event?: never;
+        } | {
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: Event.UserLeftEvent;
+            match_created_event?: never;
+            match_updated_event?: never;
+            match_deleted_event?: never;
+            qualifier_created_event?: never;
+            qualifier_updated_event?: never;
+            qualifier_deleted_event?: never;
+            host_added_event?: never;
+            host_deleted_event?: never;
+        } | {
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
+            match_created_event?: Event.MatchCreatedEvent;
+            match_updated_event?: never;
+            match_deleted_event?: never;
+            qualifier_created_event?: never;
+            qualifier_updated_event?: never;
+            qualifier_deleted_event?: never;
+            host_added_event?: never;
+            host_deleted_event?: never;
+        } | {
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
+            match_created_event?: never;
+            match_updated_event?: Event.MatchUpdatedEvent;
+            match_deleted_event?: never;
+            qualifier_created_event?: never;
+            qualifier_updated_event?: never;
+            qualifier_deleted_event?: never;
+            host_added_event?: never;
+            host_deleted_event?: never;
+        } | {
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
+            match_created_event?: never;
+            match_updated_event?: never;
+            match_deleted_event?: Event.MatchDeletedEvent;
+            qualifier_created_event?: never;
+            qualifier_updated_event?: never;
+            qualifier_deleted_event?: never;
+            host_added_event?: never;
+            host_deleted_event?: never;
+        } | {
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
+            match_created_event?: never;
+            match_updated_event?: never;
+            match_deleted_event?: never;
+            qualifier_created_event?: Event.QualifierCreatedEvent;
+            qualifier_updated_event?: never;
+            qualifier_deleted_event?: never;
+            host_added_event?: never;
+            host_deleted_event?: never;
+        } | {
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
+            match_created_event?: never;
+            match_updated_event?: never;
+            match_deleted_event?: never;
+            qualifier_created_event?: never;
+            qualifier_updated_event?: Event.QualifierUpdatedEvent;
+            qualifier_deleted_event?: never;
+            host_added_event?: never;
+            host_deleted_event?: never;
+        } | {
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
+            match_created_event?: never;
+            match_updated_event?: never;
+            match_deleted_event?: never;
+            qualifier_created_event?: never;
+            qualifier_updated_event?: never;
+            qualifier_deleted_event?: Event.QualifierDeletedEvent;
+            host_added_event?: never;
+            host_deleted_event?: never;
+        } | {
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
+            match_created_event?: never;
+            match_updated_event?: never;
+            match_deleted_event?: never;
+            qualifier_created_event?: never;
+            qualifier_updated_event?: never;
+            qualifier_deleted_event?: never;
+            host_added_event?: Event.HostAddedEvent;
+            host_deleted_event?: never;
+        } | {
+            user_added_event?: never;
+            user_updated_event?: never;
+            user_left_event?: never;
+            match_created_event?: never;
+            match_updated_event?: never;
+            match_deleted_event?: never;
+            qualifier_created_event?: never;
+            qualifier_updated_event?: never;
+            qualifier_deleted_event?: never;
+            host_added_event?: never;
+            host_deleted_event?: Event.HostDeletedEvent;
+        })))) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -2972,19 +2967,7 @@ export namespace Packets {
         }
         get changed_object() {
             const cases: {
-                [index: number]:
-                    | "none"
-                    | "user_added_event"
-                    | "user_updated_event"
-                    | "user_left_event"
-                    | "match_created_event"
-                    | "match_updated_event"
-                    | "match_deleted_event"
-                    | "qualifier_created_event"
-                    | "qualifier_updated_event"
-                    | "qualifier_deleted_event"
-                    | "host_added_event"
-                    | "host_deleted_event";
+                [index: number]: "none" | "user_added_event" | "user_updated_event" | "user_left_event" | "match_created_event" | "match_updated_event" | "match_deleted_event" | "qualifier_created_event" | "qualifier_updated_event" | "qualifier_deleted_event" | "host_added_event" | "host_deleted_event";
             } = {
                 0: "none",
                 1: "user_added_event",
@@ -3103,60 +3086,71 @@ export namespace Packets {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_user_added_event) writer.writeMessage(1, this.user_added_event, () => this.user_added_event.serialize(writer));
-            if (this.has_user_updated_event) writer.writeMessage(2, this.user_updated_event, () => this.user_updated_event.serialize(writer));
-            if (this.has_user_left_event) writer.writeMessage(3, this.user_left_event, () => this.user_left_event.serialize(writer));
-            if (this.has_match_created_event) writer.writeMessage(6, this.match_created_event, () => this.match_created_event.serialize(writer));
-            if (this.has_match_updated_event) writer.writeMessage(7, this.match_updated_event, () => this.match_updated_event.serialize(writer));
-            if (this.has_match_deleted_event) writer.writeMessage(8, this.match_deleted_event, () => this.match_deleted_event.serialize(writer));
-            if (this.has_qualifier_created_event) writer.writeMessage(9, this.qualifier_created_event, () => this.qualifier_created_event.serialize(writer));
-            if (this.has_qualifier_updated_event) writer.writeMessage(10, this.qualifier_updated_event, () => this.qualifier_updated_event.serialize(writer));
-            if (this.has_qualifier_deleted_event) writer.writeMessage(11, this.qualifier_deleted_event, () => this.qualifier_deleted_event.serialize(writer));
-            if (this.has_host_added_event) writer.writeMessage(12, this.host_added_event, () => this.host_added_event.serialize(writer));
-            if (this.has_host_deleted_event) writer.writeMessage(13, this.host_deleted_event, () => this.host_deleted_event.serialize(writer));
-            if (!w) return writer.getResultBuffer();
+            if (this.has_user_added_event)
+                writer.writeMessage(1, this.user_added_event, () => this.user_added_event.serialize(writer));
+            if (this.has_user_updated_event)
+                writer.writeMessage(2, this.user_updated_event, () => this.user_updated_event.serialize(writer));
+            if (this.has_user_left_event)
+                writer.writeMessage(3, this.user_left_event, () => this.user_left_event.serialize(writer));
+            if (this.has_match_created_event)
+                writer.writeMessage(6, this.match_created_event, () => this.match_created_event.serialize(writer));
+            if (this.has_match_updated_event)
+                writer.writeMessage(7, this.match_updated_event, () => this.match_updated_event.serialize(writer));
+            if (this.has_match_deleted_event)
+                writer.writeMessage(8, this.match_deleted_event, () => this.match_deleted_event.serialize(writer));
+            if (this.has_qualifier_created_event)
+                writer.writeMessage(9, this.qualifier_created_event, () => this.qualifier_created_event.serialize(writer));
+            if (this.has_qualifier_updated_event)
+                writer.writeMessage(10, this.qualifier_updated_event, () => this.qualifier_updated_event.serialize(writer));
+            if (this.has_qualifier_deleted_event)
+                writer.writeMessage(11, this.qualifier_deleted_event, () => this.qualifier_deleted_event.serialize(writer));
+            if (this.has_host_added_event)
+                writer.writeMessage(12, this.host_added_event, () => this.host_added_event.serialize(writer));
+            if (this.has_host_deleted_event)
+                writer.writeMessage(13, this.host_deleted_event, () => this.host_deleted_event.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Event {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new Event();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Event();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.user_added_event, () => (message.user_added_event = Event.UserAddedEvent.deserialize(reader)));
+                        reader.readMessage(message.user_added_event, () => message.user_added_event = Event.UserAddedEvent.deserialize(reader));
                         break;
                     case 2:
-                        reader.readMessage(message.user_updated_event, () => (message.user_updated_event = Event.UserUpdatedEvent.deserialize(reader)));
+                        reader.readMessage(message.user_updated_event, () => message.user_updated_event = Event.UserUpdatedEvent.deserialize(reader));
                         break;
                     case 3:
-                        reader.readMessage(message.user_left_event, () => (message.user_left_event = Event.UserLeftEvent.deserialize(reader)));
+                        reader.readMessage(message.user_left_event, () => message.user_left_event = Event.UserLeftEvent.deserialize(reader));
                         break;
                     case 6:
-                        reader.readMessage(message.match_created_event, () => (message.match_created_event = Event.MatchCreatedEvent.deserialize(reader)));
+                        reader.readMessage(message.match_created_event, () => message.match_created_event = Event.MatchCreatedEvent.deserialize(reader));
                         break;
                     case 7:
-                        reader.readMessage(message.match_updated_event, () => (message.match_updated_event = Event.MatchUpdatedEvent.deserialize(reader)));
+                        reader.readMessage(message.match_updated_event, () => message.match_updated_event = Event.MatchUpdatedEvent.deserialize(reader));
                         break;
                     case 8:
-                        reader.readMessage(message.match_deleted_event, () => (message.match_deleted_event = Event.MatchDeletedEvent.deserialize(reader)));
+                        reader.readMessage(message.match_deleted_event, () => message.match_deleted_event = Event.MatchDeletedEvent.deserialize(reader));
                         break;
                     case 9:
-                        reader.readMessage(message.qualifier_created_event, () => (message.qualifier_created_event = Event.QualifierCreatedEvent.deserialize(reader)));
+                        reader.readMessage(message.qualifier_created_event, () => message.qualifier_created_event = Event.QualifierCreatedEvent.deserialize(reader));
                         break;
                     case 10:
-                        reader.readMessage(message.qualifier_updated_event, () => (message.qualifier_updated_event = Event.QualifierUpdatedEvent.deserialize(reader)));
+                        reader.readMessage(message.qualifier_updated_event, () => message.qualifier_updated_event = Event.QualifierUpdatedEvent.deserialize(reader));
                         break;
                     case 11:
-                        reader.readMessage(message.qualifier_deleted_event, () => (message.qualifier_deleted_event = Event.QualifierDeletedEvent.deserialize(reader)));
+                        reader.readMessage(message.qualifier_deleted_event, () => message.qualifier_deleted_event = Event.QualifierDeletedEvent.deserialize(reader));
                         break;
                     case 12:
-                        reader.readMessage(message.host_added_event, () => (message.host_added_event = Event.HostAddedEvent.deserialize(reader)));
+                        reader.readMessage(message.host_added_event, () => message.host_added_event = Event.HostAddedEvent.deserialize(reader));
                         break;
                     case 13:
-                        reader.readMessage(message.host_deleted_event, () => (message.host_deleted_event = Event.HostDeletedEvent.deserialize(reader)));
+                        reader.readMessage(message.host_deleted_event, () => message.host_deleted_event = Event.HostDeletedEvent.deserialize(reader));
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -3171,13 +3165,9 @@ export namespace Packets {
     export namespace Event {
         export class UserAddedEvent extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          user?: dependency_2.Models.User;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                user?: dependency_2.Models.User;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -3195,7 +3185,9 @@ export namespace Packets {
             get has_user() {
                 return pb_1.Message.getField(this, 1) != null;
             }
-            static fromObject(data: { user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject> }): UserAddedEvent {
+            static fromObject(data: {
+                user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
+            }): UserAddedEvent {
                 const message = new UserAddedEvent({});
                 if (data.user != null) {
                     message.user = dependency_2.Models.User.fromObject(data.user);
@@ -3215,20 +3207,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_user) writer.writeMessage(1, this.user, () => this.user.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.has_user)
+                    writer.writeMessage(1, this.user, () => this.user.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UserAddedEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new UserAddedEvent();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new UserAddedEvent();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.user, () => (message.user = dependency_2.Models.User.deserialize(reader)));
+                            reader.readMessage(message.user, () => message.user = dependency_2.Models.User.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -3242,13 +3235,9 @@ export namespace Packets {
         }
         export class UserUpdatedEvent extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          user?: dependency_2.Models.User;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                user?: dependency_2.Models.User;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -3266,7 +3255,9 @@ export namespace Packets {
             get has_user() {
                 return pb_1.Message.getField(this, 1) != null;
             }
-            static fromObject(data: { user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject> }): UserUpdatedEvent {
+            static fromObject(data: {
+                user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
+            }): UserUpdatedEvent {
                 const message = new UserUpdatedEvent({});
                 if (data.user != null) {
                     message.user = dependency_2.Models.User.fromObject(data.user);
@@ -3286,20 +3277,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_user) writer.writeMessage(1, this.user, () => this.user.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.has_user)
+                    writer.writeMessage(1, this.user, () => this.user.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UserUpdatedEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new UserUpdatedEvent();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new UserUpdatedEvent();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.user, () => (message.user = dependency_2.Models.User.deserialize(reader)));
+                            reader.readMessage(message.user, () => message.user = dependency_2.Models.User.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -3313,13 +3305,9 @@ export namespace Packets {
         }
         export class UserLeftEvent extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          user?: dependency_2.Models.User;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                user?: dependency_2.Models.User;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -3337,7 +3325,9 @@ export namespace Packets {
             get has_user() {
                 return pb_1.Message.getField(this, 1) != null;
             }
-            static fromObject(data: { user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject> }): UserLeftEvent {
+            static fromObject(data: {
+                user?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
+            }): UserLeftEvent {
                 const message = new UserLeftEvent({});
                 if (data.user != null) {
                     message.user = dependency_2.Models.User.fromObject(data.user);
@@ -3357,20 +3347,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_user) writer.writeMessage(1, this.user, () => this.user.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.has_user)
+                    writer.writeMessage(1, this.user, () => this.user.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UserLeftEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new UserLeftEvent();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new UserLeftEvent();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.user, () => (message.user = dependency_2.Models.User.deserialize(reader)));
+                            reader.readMessage(message.user, () => message.user = dependency_2.Models.User.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -3384,13 +3375,9 @@ export namespace Packets {
         }
         export class MatchCreatedEvent extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          match?: dependency_2.Models.Match;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                match?: dependency_2.Models.Match;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -3408,7 +3395,9 @@ export namespace Packets {
             get has_match() {
                 return pb_1.Message.getField(this, 1) != null;
             }
-            static fromObject(data: { match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject> }): MatchCreatedEvent {
+            static fromObject(data: {
+                match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject>;
+            }): MatchCreatedEvent {
                 const message = new MatchCreatedEvent({});
                 if (data.match != null) {
                     message.match = dependency_2.Models.Match.fromObject(data.match);
@@ -3428,20 +3417,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_match) writer.writeMessage(1, this.match, () => this.match.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.has_match)
+                    writer.writeMessage(1, this.match, () => this.match.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): MatchCreatedEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new MatchCreatedEvent();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new MatchCreatedEvent();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.match, () => (message.match = dependency_2.Models.Match.deserialize(reader)));
+                            reader.readMessage(message.match, () => message.match = dependency_2.Models.Match.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -3455,13 +3445,9 @@ export namespace Packets {
         }
         export class MatchUpdatedEvent extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          match?: dependency_2.Models.Match;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                match?: dependency_2.Models.Match;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -3479,7 +3465,9 @@ export namespace Packets {
             get has_match() {
                 return pb_1.Message.getField(this, 1) != null;
             }
-            static fromObject(data: { match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject> }): MatchUpdatedEvent {
+            static fromObject(data: {
+                match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject>;
+            }): MatchUpdatedEvent {
                 const message = new MatchUpdatedEvent({});
                 if (data.match != null) {
                     message.match = dependency_2.Models.Match.fromObject(data.match);
@@ -3499,20 +3487,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_match) writer.writeMessage(1, this.match, () => this.match.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.has_match)
+                    writer.writeMessage(1, this.match, () => this.match.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): MatchUpdatedEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new MatchUpdatedEvent();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new MatchUpdatedEvent();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.match, () => (message.match = dependency_2.Models.Match.deserialize(reader)));
+                            reader.readMessage(message.match, () => message.match = dependency_2.Models.Match.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -3526,13 +3515,9 @@ export namespace Packets {
         }
         export class MatchDeletedEvent extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          match?: dependency_2.Models.Match;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                match?: dependency_2.Models.Match;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -3550,7 +3535,9 @@ export namespace Packets {
             get has_match() {
                 return pb_1.Message.getField(this, 1) != null;
             }
-            static fromObject(data: { match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject> }): MatchDeletedEvent {
+            static fromObject(data: {
+                match?: ReturnType<typeof dependency_2.Models.Match.prototype.toObject>;
+            }): MatchDeletedEvent {
                 const message = new MatchDeletedEvent({});
                 if (data.match != null) {
                     message.match = dependency_2.Models.Match.fromObject(data.match);
@@ -3570,20 +3557,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_match) writer.writeMessage(1, this.match, () => this.match.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.has_match)
+                    writer.writeMessage(1, this.match, () => this.match.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): MatchDeletedEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new MatchDeletedEvent();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new MatchDeletedEvent();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.match, () => (message.match = dependency_2.Models.Match.deserialize(reader)));
+                            reader.readMessage(message.match, () => message.match = dependency_2.Models.Match.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -3597,13 +3585,9 @@ export namespace Packets {
         }
         export class QualifierCreatedEvent extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          event?: dependency_2.Models.QualifierEvent;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                event?: dependency_2.Models.QualifierEvent;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -3621,7 +3605,9 @@ export namespace Packets {
             get has_event() {
                 return pb_1.Message.getField(this, 1) != null;
             }
-            static fromObject(data: { event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject> }): QualifierCreatedEvent {
+            static fromObject(data: {
+                event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject>;
+            }): QualifierCreatedEvent {
                 const message = new QualifierCreatedEvent({});
                 if (data.event != null) {
                     message.event = dependency_2.Models.QualifierEvent.fromObject(data.event);
@@ -3641,20 +3627,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_event) writer.writeMessage(1, this.event, () => this.event.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.has_event)
+                    writer.writeMessage(1, this.event, () => this.event.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualifierCreatedEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new QualifierCreatedEvent();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualifierCreatedEvent();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.event, () => (message.event = dependency_2.Models.QualifierEvent.deserialize(reader)));
+                            reader.readMessage(message.event, () => message.event = dependency_2.Models.QualifierEvent.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -3668,13 +3655,9 @@ export namespace Packets {
         }
         export class QualifierUpdatedEvent extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          event?: dependency_2.Models.QualifierEvent;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                event?: dependency_2.Models.QualifierEvent;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -3692,7 +3675,9 @@ export namespace Packets {
             get has_event() {
                 return pb_1.Message.getField(this, 1) != null;
             }
-            static fromObject(data: { event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject> }): QualifierUpdatedEvent {
+            static fromObject(data: {
+                event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject>;
+            }): QualifierUpdatedEvent {
                 const message = new QualifierUpdatedEvent({});
                 if (data.event != null) {
                     message.event = dependency_2.Models.QualifierEvent.fromObject(data.event);
@@ -3712,20 +3697,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_event) writer.writeMessage(1, this.event, () => this.event.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.has_event)
+                    writer.writeMessage(1, this.event, () => this.event.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualifierUpdatedEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new QualifierUpdatedEvent();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualifierUpdatedEvent();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.event, () => (message.event = dependency_2.Models.QualifierEvent.deserialize(reader)));
+                            reader.readMessage(message.event, () => message.event = dependency_2.Models.QualifierEvent.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -3739,13 +3725,9 @@ export namespace Packets {
         }
         export class QualifierDeletedEvent extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          event?: dependency_2.Models.QualifierEvent;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                event?: dependency_2.Models.QualifierEvent;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -3763,7 +3745,9 @@ export namespace Packets {
             get has_event() {
                 return pb_1.Message.getField(this, 1) != null;
             }
-            static fromObject(data: { event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject> }): QualifierDeletedEvent {
+            static fromObject(data: {
+                event?: ReturnType<typeof dependency_2.Models.QualifierEvent.prototype.toObject>;
+            }): QualifierDeletedEvent {
                 const message = new QualifierDeletedEvent({});
                 if (data.event != null) {
                     message.event = dependency_2.Models.QualifierEvent.fromObject(data.event);
@@ -3783,20 +3767,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_event) writer.writeMessage(1, this.event, () => this.event.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.has_event)
+                    writer.writeMessage(1, this.event, () => this.event.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualifierDeletedEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new QualifierDeletedEvent();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualifierDeletedEvent();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.event, () => (message.event = dependency_2.Models.QualifierEvent.deserialize(reader)));
+                            reader.readMessage(message.event, () => message.event = dependency_2.Models.QualifierEvent.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -3810,13 +3795,9 @@ export namespace Packets {
         }
         export class HostAddedEvent extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          server?: dependency_2.Models.CoreServer;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                server?: dependency_2.Models.CoreServer;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -3834,7 +3815,9 @@ export namespace Packets {
             get has_server() {
                 return pb_1.Message.getField(this, 1) != null;
             }
-            static fromObject(data: { server?: ReturnType<typeof dependency_2.Models.CoreServer.prototype.toObject> }): HostAddedEvent {
+            static fromObject(data: {
+                server?: ReturnType<typeof dependency_2.Models.CoreServer.prototype.toObject>;
+            }): HostAddedEvent {
                 const message = new HostAddedEvent({});
                 if (data.server != null) {
                     message.server = dependency_2.Models.CoreServer.fromObject(data.server);
@@ -3854,20 +3837,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_server) writer.writeMessage(1, this.server, () => this.server.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.has_server)
+                    writer.writeMessage(1, this.server, () => this.server.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): HostAddedEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new HostAddedEvent();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new HostAddedEvent();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.server, () => (message.server = dependency_2.Models.CoreServer.deserialize(reader)));
+                            reader.readMessage(message.server, () => message.server = dependency_2.Models.CoreServer.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -3881,13 +3865,9 @@ export namespace Packets {
         }
         export class HostDeletedEvent extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          server?: dependency_2.Models.CoreServer;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                server?: dependency_2.Models.CoreServer;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -3905,7 +3885,9 @@ export namespace Packets {
             get has_server() {
                 return pb_1.Message.getField(this, 1) != null;
             }
-            static fromObject(data: { server?: ReturnType<typeof dependency_2.Models.CoreServer.prototype.toObject> }): HostDeletedEvent {
+            static fromObject(data: {
+                server?: ReturnType<typeof dependency_2.Models.CoreServer.prototype.toObject>;
+            }): HostDeletedEvent {
                 const message = new HostDeletedEvent({});
                 if (data.server != null) {
                     message.server = dependency_2.Models.CoreServer.fromObject(data.server);
@@ -3925,20 +3907,21 @@ export namespace Packets {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.has_server) writer.writeMessage(1, this.server, () => this.server.serialize(writer));
-                if (!w) return writer.getResultBuffer();
+                if (this.has_server)
+                    writer.writeMessage(1, this.server, () => this.server.serialize(writer));
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): HostDeletedEvent {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new HostDeletedEvent();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new HostDeletedEvent();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
-                            reader.readMessage(message.server, () => (message.server = dependency_2.Models.CoreServer.deserialize(reader)));
+                            reader.readMessage(message.server, () => message.server = dependency_2.Models.CoreServer.deserialize(reader));
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -3953,78 +3936,66 @@ export namespace Packets {
     }
     export class Packet extends pb_1.Message {
         private one_of_decls: number[][] = [[3, 4, 5, 6, 7, 8, 9]];
-        constructor(
-            data?:
-                | any[]
-                | ({
-                      id?: string;
-                      from?: string;
-                  } & (
-                      | {
-                            acknowledgement?: Acknowledgement;
-                            forwarding_packet?: never;
-                            command?: never;
-                            push?: never;
-                            request?: never;
-                            response?: never;
-                            event?: never;
-                        }
-                      | {
-                            acknowledgement?: never;
-                            forwarding_packet?: ForwardingPacket;
-                            command?: never;
-                            push?: never;
-                            request?: never;
-                            response?: never;
-                            event?: never;
-                        }
-                      | {
-                            acknowledgement?: never;
-                            forwarding_packet?: never;
-                            command?: Command;
-                            push?: never;
-                            request?: never;
-                            response?: never;
-                            event?: never;
-                        }
-                      | {
-                            acknowledgement?: never;
-                            forwarding_packet?: never;
-                            command?: never;
-                            push?: Push;
-                            request?: never;
-                            response?: never;
-                            event?: never;
-                        }
-                      | {
-                            acknowledgement?: never;
-                            forwarding_packet?: never;
-                            command?: never;
-                            push?: never;
-                            request?: Request;
-                            response?: never;
-                            event?: never;
-                        }
-                      | {
-                            acknowledgement?: never;
-                            forwarding_packet?: never;
-                            command?: never;
-                            push?: never;
-                            request?: never;
-                            response?: Response;
-                            event?: never;
-                        }
-                      | {
-                            acknowledgement?: never;
-                            forwarding_packet?: never;
-                            command?: never;
-                            push?: never;
-                            request?: never;
-                            response?: never;
-                            event?: Event;
-                        }
-                  ))
-        ) {
+        constructor(data?: any[] | ({
+            id?: string;
+            from?: string;
+        } & (({
+            acknowledgement?: Acknowledgement;
+            forwarding_packet?: never;
+            command?: never;
+            push?: never;
+            request?: never;
+            response?: never;
+            event?: never;
+        } | {
+            acknowledgement?: never;
+            forwarding_packet?: ForwardingPacket;
+            command?: never;
+            push?: never;
+            request?: never;
+            response?: never;
+            event?: never;
+        } | {
+            acknowledgement?: never;
+            forwarding_packet?: never;
+            command?: Command;
+            push?: never;
+            request?: never;
+            response?: never;
+            event?: never;
+        } | {
+            acknowledgement?: never;
+            forwarding_packet?: never;
+            command?: never;
+            push?: Push;
+            request?: never;
+            response?: never;
+            event?: never;
+        } | {
+            acknowledgement?: never;
+            forwarding_packet?: never;
+            command?: never;
+            push?: never;
+            request?: Request;
+            response?: never;
+            event?: never;
+        } | {
+            acknowledgement?: never;
+            forwarding_packet?: never;
+            command?: never;
+            push?: never;
+            request?: never;
+            response?: Response;
+            event?: never;
+        } | {
+            acknowledgement?: never;
+            forwarding_packet?: never;
+            command?: never;
+            push?: never;
+            request?: never;
+            response?: never;
+            event?: Event;
+        })))) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -4233,22 +4204,32 @@ export namespace Packets {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.id.length) writer.writeString(1, this.id);
-            if (this.from.length) writer.writeString(2, this.from);
-            if (this.has_acknowledgement) writer.writeMessage(3, this.acknowledgement, () => this.acknowledgement.serialize(writer));
-            if (this.has_forwarding_packet) writer.writeMessage(4, this.forwarding_packet, () => this.forwarding_packet.serialize(writer));
-            if (this.has_command) writer.writeMessage(5, this.command, () => this.command.serialize(writer));
-            if (this.has_push) writer.writeMessage(6, this.push, () => this.push.serialize(writer));
-            if (this.has_request) writer.writeMessage(7, this.request, () => this.request.serialize(writer));
-            if (this.has_response) writer.writeMessage(8, this.response, () => this.response.serialize(writer));
-            if (this.has_event) writer.writeMessage(9, this.event, () => this.event.serialize(writer));
-            if (!w) return writer.getResultBuffer();
+            if (this.id.length)
+                writer.writeString(1, this.id);
+            if (this.from.length)
+                writer.writeString(2, this.from);
+            if (this.has_acknowledgement)
+                writer.writeMessage(3, this.acknowledgement, () => this.acknowledgement.serialize(writer));
+            if (this.has_forwarding_packet)
+                writer.writeMessage(4, this.forwarding_packet, () => this.forwarding_packet.serialize(writer));
+            if (this.has_command)
+                writer.writeMessage(5, this.command, () => this.command.serialize(writer));
+            if (this.has_push)
+                writer.writeMessage(6, this.push, () => this.push.serialize(writer));
+            if (this.has_request)
+                writer.writeMessage(7, this.request, () => this.request.serialize(writer));
+            if (this.has_response)
+                writer.writeMessage(8, this.response, () => this.response.serialize(writer));
+            if (this.has_event)
+                writer.writeMessage(9, this.event, () => this.event.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Packet {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new Packet();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Packet();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.id = reader.readString();
@@ -4257,28 +4238,27 @@ export namespace Packets {
                         message.from = reader.readString();
                         break;
                     case 3:
-                        reader.readMessage(message.acknowledgement, () => (message.acknowledgement = Acknowledgement.deserialize(reader)));
+                        reader.readMessage(message.acknowledgement, () => message.acknowledgement = Acknowledgement.deserialize(reader));
                         break;
                     case 4:
-                        reader.readMessage(message.forwarding_packet, () => (message.forwarding_packet = ForwardingPacket.deserialize(reader)));
+                        reader.readMessage(message.forwarding_packet, () => message.forwarding_packet = ForwardingPacket.deserialize(reader));
                         break;
                     case 5:
-                        reader.readMessage(message.command, () => (message.command = Command.deserialize(reader)));
+                        reader.readMessage(message.command, () => message.command = Command.deserialize(reader));
                         break;
                     case 6:
-                        reader.readMessage(message.push, () => (message.push = Push.deserialize(reader)));
+                        reader.readMessage(message.push, () => message.push = Push.deserialize(reader));
                         break;
                     case 7:
-                        reader.readMessage(message.request, () => (message.request = Request.deserialize(reader)));
+                        reader.readMessage(message.request, () => message.request = Request.deserialize(reader));
                         break;
                     case 8:
-                        reader.readMessage(message.response, () => (message.response = Response.deserialize(reader)));
+                        reader.readMessage(message.response, () => message.response = Response.deserialize(reader));
                         break;
                     case 9:
-                        reader.readMessage(message.event, () => (message.event = Event.deserialize(reader)));
+                        reader.readMessage(message.event, () => message.event = Event.deserialize(reader));
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;

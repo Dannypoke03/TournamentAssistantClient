@@ -3,19 +3,15 @@
  * compiler version: 3.19.6
  * source: models.proto
  * git: https://github.com/thesayyn/protoc-gen-ts */
-import * as pb_1 from "google-protobuf";
 import * as dependency_1 from "./discord";
+import * as pb_1 from "google-protobuf";
 export namespace Models {
     export class Characteristic extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      serialized_name?: string;
-                      difficulties?: number[];
-                  }
-        ) {
+        constructor(data?: any[] | {
+            serialized_name?: string;
+            difficulties?: number[];
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -39,7 +35,10 @@ export namespace Models {
         set difficulties(value: number[]) {
             pb_1.Message.setField(this, 2, value);
         }
-        static fromObject(data: { serialized_name?: string; difficulties?: number[] }): Characteristic {
+        static fromObject(data: {
+            serialized_name?: string;
+            difficulties?: number[];
+        }): Characteristic {
             const message = new Characteristic({});
             if (data.serialized_name != null) {
                 message.serialized_name = data.serialized_name;
@@ -66,15 +65,18 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.serialized_name.length) writer.writeString(1, this.serialized_name);
-            if (this.difficulties.length) writer.writePackedInt32(2, this.difficulties);
-            if (!w) return writer.getResultBuffer();
+            if (this.serialized_name.length)
+                writer.writeString(1, this.serialized_name);
+            if (this.difficulties.length)
+                writer.writePackedInt32(2, this.difficulties);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Characteristic {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new Characteristic();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Characteristic();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.serialized_name = reader.readString();
@@ -85,8 +87,7 @@ export namespace Models {
                             message.difficulties.push(values[i]);
                         }
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -100,16 +101,12 @@ export namespace Models {
     }
     export class Beatmap extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      name?: string;
-                      level_id?: string;
-                      characteristic?: Characteristic;
-                      difficulty?: number;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            name?: string;
+            level_id?: string;
+            characteristic?: Characteristic;
+            difficulty?: number;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -154,7 +151,12 @@ export namespace Models {
         set difficulty(value: number) {
             pb_1.Message.setField(this, 4, value);
         }
-        static fromObject(data: { name?: string; level_id?: string; characteristic?: ReturnType<typeof Characteristic.prototype.toObject>; difficulty?: number }): Beatmap {
+        static fromObject(data: {
+            name?: string;
+            level_id?: string;
+            characteristic?: ReturnType<typeof Characteristic.prototype.toObject>;
+            difficulty?: number;
+        }): Beatmap {
             const message = new Beatmap({});
             if (data.name != null) {
                 message.name = data.name;
@@ -195,17 +197,22 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.name.length) writer.writeString(1, this.name);
-            if (this.level_id.length) writer.writeString(2, this.level_id);
-            if (this.has_characteristic) writer.writeMessage(3, this.characteristic, () => this.characteristic.serialize(writer));
-            if (this.difficulty != 0) writer.writeInt32(4, this.difficulty);
-            if (!w) return writer.getResultBuffer();
+            if (this.name.length)
+                writer.writeString(1, this.name);
+            if (this.level_id.length)
+                writer.writeString(2, this.level_id);
+            if (this.has_characteristic)
+                writer.writeMessage(3, this.characteristic, () => this.characteristic.serialize(writer));
+            if (this.difficulty != 0)
+                writer.writeInt32(4, this.difficulty);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Beatmap {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new Beatmap();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Beatmap();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.name = reader.readString();
@@ -214,13 +221,12 @@ export namespace Models {
                         message.level_id = reader.readString();
                         break;
                     case 3:
-                        reader.readMessage(message.characteristic, () => (message.characteristic = Characteristic.deserialize(reader)));
+                        reader.readMessage(message.characteristic, () => message.characteristic = Characteristic.deserialize(reader));
                         break;
                     case 4:
                         message.difficulty = reader.readInt32();
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -234,16 +240,12 @@ export namespace Models {
     }
     export class PreviewBeatmapLevel extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      level_id?: string;
-                      name?: string;
-                      characteristics?: Characteristic[];
-                      loaded?: boolean;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            level_id?: string;
+            name?: string;
+            characteristics?: Characteristic[];
+            loaded?: boolean;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [3], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -285,7 +287,12 @@ export namespace Models {
         set loaded(value: boolean) {
             pb_1.Message.setField(this, 4, value);
         }
-        static fromObject(data: { level_id?: string; name?: string; characteristics?: ReturnType<typeof Characteristic.prototype.toObject>[]; loaded?: boolean }): PreviewBeatmapLevel {
+        static fromObject(data: {
+            level_id?: string;
+            name?: string;
+            characteristics?: ReturnType<typeof Characteristic.prototype.toObject>[];
+            loaded?: boolean;
+        }): PreviewBeatmapLevel {
             const message = new PreviewBeatmapLevel({});
             if (data.level_id != null) {
                 message.level_id = data.level_id;
@@ -326,17 +333,22 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.level_id.length) writer.writeString(1, this.level_id);
-            if (this.name.length) writer.writeString(2, this.name);
-            if (this.characteristics.length) writer.writeRepeatedMessage(3, this.characteristics, (item: Characteristic) => item.serialize(writer));
-            if (this.loaded != false) writer.writeBool(4, this.loaded);
-            if (!w) return writer.getResultBuffer();
+            if (this.level_id.length)
+                writer.writeString(1, this.level_id);
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (this.characteristics.length)
+                writer.writeRepeatedMessage(3, this.characteristics, (item: Characteristic) => item.serialize(writer));
+            if (this.loaded != false)
+                writer.writeBool(4, this.loaded);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PreviewBeatmapLevel {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new PreviewBeatmapLevel();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PreviewBeatmapLevel();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.level_id = reader.readString();
@@ -350,8 +362,7 @@ export namespace Models {
                     case 4:
                         message.loaded = reader.readBool();
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -365,13 +376,9 @@ export namespace Models {
     }
     export class GameplayModifiers extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      options?: GameplayModifiers.GameOptions;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            options?: GameplayModifiers.GameOptions;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -386,7 +393,9 @@ export namespace Models {
         set options(value: GameplayModifiers.GameOptions) {
             pb_1.Message.setField(this, 1, value);
         }
-        static fromObject(data: { options?: GameplayModifiers.GameOptions }): GameplayModifiers {
+        static fromObject(data: {
+            options?: GameplayModifiers.GameOptions;
+        }): GameplayModifiers {
             const message = new GameplayModifiers({});
             if (data.options != null) {
                 message.options = data.options;
@@ -406,20 +415,21 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.options != GameplayModifiers.GameOptions.None) writer.writeEnum(1, this.options);
-            if (!w) return writer.getResultBuffer();
+            if (this.options != GameplayModifiers.GameOptions.None)
+                writer.writeEnum(1, this.options);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GameplayModifiers {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new GameplayModifiers();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GameplayModifiers();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.options = reader.readEnum();
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -457,20 +467,16 @@ export namespace Models {
     }
     export class PlayerSpecificSettings extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      player_height?: number;
-                      sfx_volume?: number;
-                      saber_trail_intensity?: number;
-                      note_jump_start_beat_offset?: number;
-                      note_jump_fixed_duration?: number;
-                      options?: PlayerSpecificSettings.PlayerOptions;
-                      note_jump_duration_type_settings?: PlayerSpecificSettings.NoteJumpDurationTypeSettings;
-                      arc_visibility_type?: PlayerSpecificSettings.ArcVisibilityType;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            player_height?: number;
+            sfx_volume?: number;
+            saber_trail_intensity?: number;
+            note_jump_start_beat_offset?: number;
+            note_jump_fixed_duration?: number;
+            options?: PlayerSpecificSettings.PlayerOptions;
+            note_jump_duration_type_settings?: PlayerSpecificSettings.NoteJumpDurationTypeSettings;
+            arc_visibility_type?: PlayerSpecificSettings.ArcVisibilityType;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -626,21 +632,30 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.player_height != 0) writer.writeFloat(1, this.player_height);
-            if (this.sfx_volume != 0) writer.writeFloat(2, this.sfx_volume);
-            if (this.saber_trail_intensity != 0) writer.writeFloat(3, this.saber_trail_intensity);
-            if (this.note_jump_start_beat_offset != 0) writer.writeFloat(4, this.note_jump_start_beat_offset);
-            if (this.note_jump_fixed_duration != 0) writer.writeFloat(5, this.note_jump_fixed_duration);
-            if (this.options != PlayerSpecificSettings.PlayerOptions.NoPlayerOptions) writer.writeEnum(6, this.options);
-            if (this.note_jump_duration_type_settings != PlayerSpecificSettings.NoteJumpDurationTypeSettings.Dynamic) writer.writeEnum(7, this.note_jump_duration_type_settings);
-            if (this.arc_visibility_type != PlayerSpecificSettings.ArcVisibilityType.None) writer.writeEnum(8, this.arc_visibility_type);
-            if (!w) return writer.getResultBuffer();
+            if (this.player_height != 0)
+                writer.writeFloat(1, this.player_height);
+            if (this.sfx_volume != 0)
+                writer.writeFloat(2, this.sfx_volume);
+            if (this.saber_trail_intensity != 0)
+                writer.writeFloat(3, this.saber_trail_intensity);
+            if (this.note_jump_start_beat_offset != 0)
+                writer.writeFloat(4, this.note_jump_start_beat_offset);
+            if (this.note_jump_fixed_duration != 0)
+                writer.writeFloat(5, this.note_jump_fixed_duration);
+            if (this.options != PlayerSpecificSettings.PlayerOptions.NoPlayerOptions)
+                writer.writeEnum(6, this.options);
+            if (this.note_jump_duration_type_settings != PlayerSpecificSettings.NoteJumpDurationTypeSettings.Dynamic)
+                writer.writeEnum(7, this.note_jump_duration_type_settings);
+            if (this.arc_visibility_type != PlayerSpecificSettings.ArcVisibilityType.None)
+                writer.writeEnum(8, this.arc_visibility_type);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PlayerSpecificSettings {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new PlayerSpecificSettings();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PlayerSpecificSettings();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.player_height = reader.readFloat();
@@ -666,8 +681,7 @@ export namespace Models {
                     case 8:
                         message.arc_visibility_type = reader.readEnum();
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -707,15 +721,11 @@ export namespace Models {
     }
     export class GameplayParameters extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      beatmap?: Beatmap;
-                      player_settings?: PlayerSpecificSettings;
-                      gameplay_modifiers?: GameplayModifiers;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            beatmap?: Beatmap;
+            player_settings?: PlayerSpecificSettings;
+            gameplay_modifiers?: GameplayModifiers;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -757,7 +767,11 @@ export namespace Models {
         get has_gameplay_modifiers() {
             return pb_1.Message.getField(this, 3) != null;
         }
-        static fromObject(data: { beatmap?: ReturnType<typeof Beatmap.prototype.toObject>; player_settings?: ReturnType<typeof PlayerSpecificSettings.prototype.toObject>; gameplay_modifiers?: ReturnType<typeof GameplayModifiers.prototype.toObject> }): GameplayParameters {
+        static fromObject(data: {
+            beatmap?: ReturnType<typeof Beatmap.prototype.toObject>;
+            player_settings?: ReturnType<typeof PlayerSpecificSettings.prototype.toObject>;
+            gameplay_modifiers?: ReturnType<typeof GameplayModifiers.prototype.toObject>;
+        }): GameplayParameters {
             const message = new GameplayParameters({});
             if (data.beatmap != null) {
                 message.beatmap = Beatmap.fromObject(data.beatmap);
@@ -791,28 +805,31 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_beatmap) writer.writeMessage(1, this.beatmap, () => this.beatmap.serialize(writer));
-            if (this.has_player_settings) writer.writeMessage(2, this.player_settings, () => this.player_settings.serialize(writer));
-            if (this.has_gameplay_modifiers) writer.writeMessage(3, this.gameplay_modifiers, () => this.gameplay_modifiers.serialize(writer));
-            if (!w) return writer.getResultBuffer();
+            if (this.has_beatmap)
+                writer.writeMessage(1, this.beatmap, () => this.beatmap.serialize(writer));
+            if (this.has_player_settings)
+                writer.writeMessage(2, this.player_settings, () => this.player_settings.serialize(writer));
+            if (this.has_gameplay_modifiers)
+                writer.writeMessage(3, this.gameplay_modifiers, () => this.gameplay_modifiers.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GameplayParameters {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new GameplayParameters();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GameplayParameters();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.beatmap, () => (message.beatmap = Beatmap.deserialize(reader)));
+                        reader.readMessage(message.beatmap, () => message.beatmap = Beatmap.deserialize(reader));
                         break;
                     case 2:
-                        reader.readMessage(message.player_settings, () => (message.player_settings = PlayerSpecificSettings.deserialize(reader)));
+                        reader.readMessage(message.player_settings, () => message.player_settings = PlayerSpecificSettings.deserialize(reader));
                         break;
                     case 3:
-                        reader.readMessage(message.gameplay_modifiers, () => (message.gameplay_modifiers = GameplayModifiers.deserialize(reader)));
+                        reader.readMessage(message.gameplay_modifiers, () => message.gameplay_modifiers = GameplayModifiers.deserialize(reader));
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -826,14 +843,10 @@ export namespace Models {
     }
     export class Team extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      id?: string;
-                      name?: string;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            id?: string;
+            name?: string;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -857,7 +870,10 @@ export namespace Models {
         set name(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
-        static fromObject(data: { id?: string; name?: string }): Team {
+        static fromObject(data: {
+            id?: string;
+            name?: string;
+        }): Team {
             const message = new Team({});
             if (data.id != null) {
                 message.id = data.id;
@@ -884,15 +900,18 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.id.length) writer.writeString(1, this.id);
-            if (this.name.length) writer.writeString(2, this.name);
-            if (!w) return writer.getResultBuffer();
+            if (this.id.length)
+                writer.writeString(1, this.id);
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Team {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new Team();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Team();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.id = reader.readString();
@@ -900,8 +919,7 @@ export namespace Models {
                     case 2:
                         message.name = reader.readString();
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -915,18 +933,14 @@ export namespace Models {
     }
     export class ServerSettings extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      server_name?: string;
-                      password?: string;
-                      enable_teams?: boolean;
-                      teams?: Team[];
-                      score_update_frequency?: number;
-                      banned_mods?: string[];
-                  }
-        ) {
+        constructor(data?: any[] | {
+            server_name?: string;
+            password?: string;
+            enable_teams?: boolean;
+            teams?: Team[];
+            score_update_frequency?: number;
+            banned_mods?: string[];
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [4, 6], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -986,7 +1000,14 @@ export namespace Models {
         set banned_mods(value: string[]) {
             pb_1.Message.setField(this, 6, value);
         }
-        static fromObject(data: { server_name?: string; password?: string; enable_teams?: boolean; teams?: ReturnType<typeof Team.prototype.toObject>[]; score_update_frequency?: number; banned_mods?: string[] }): ServerSettings {
+        static fromObject(data: {
+            server_name?: string;
+            password?: string;
+            enable_teams?: boolean;
+            teams?: ReturnType<typeof Team.prototype.toObject>[];
+            score_update_frequency?: number;
+            banned_mods?: string[];
+        }): ServerSettings {
             const message = new ServerSettings({});
             if (data.server_name != null) {
                 message.server_name = data.server_name;
@@ -1041,19 +1062,26 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.server_name.length) writer.writeString(1, this.server_name);
-            if (this.password.length) writer.writeString(2, this.password);
-            if (this.enable_teams != false) writer.writeBool(3, this.enable_teams);
-            if (this.teams.length) writer.writeRepeatedMessage(4, this.teams, (item: Team) => item.serialize(writer));
-            if (this.score_update_frequency != 0) writer.writeInt32(5, this.score_update_frequency);
-            if (this.banned_mods.length) writer.writeRepeatedString(6, this.banned_mods);
-            if (!w) return writer.getResultBuffer();
+            if (this.server_name.length)
+                writer.writeString(1, this.server_name);
+            if (this.password.length)
+                writer.writeString(2, this.password);
+            if (this.enable_teams != false)
+                writer.writeBool(3, this.enable_teams);
+            if (this.teams.length)
+                writer.writeRepeatedMessage(4, this.teams, (item: Team) => item.serialize(writer));
+            if (this.score_update_frequency != 0)
+                writer.writeInt32(5, this.score_update_frequency);
+            if (this.banned_mods.length)
+                writer.writeRepeatedString(6, this.banned_mods);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ServerSettings {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new ServerSettings();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ServerSettings();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.server_name = reader.readString();
@@ -1073,8 +1101,7 @@ export namespace Models {
                     case 6:
                         pb_1.Message.addToRepeatedField(message, 6, reader.readString());
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -1088,13 +1115,9 @@ export namespace Models {
     }
     export class SongList extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      levels?: PreviewBeatmapLevel[];
-                  }
-        ) {
+        constructor(data?: any[] | {
+            levels?: PreviewBeatmapLevel[];
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -1109,7 +1132,9 @@ export namespace Models {
         set levels(value: PreviewBeatmapLevel[]) {
             pb_1.Message.setRepeatedWrapperField(this, 1, value);
         }
-        static fromObject(data: { levels?: ReturnType<typeof PreviewBeatmapLevel.prototype.toObject>[] }): SongList {
+        static fromObject(data: {
+            levels?: ReturnType<typeof PreviewBeatmapLevel.prototype.toObject>[];
+        }): SongList {
             const message = new SongList({});
             if (data.levels != null) {
                 message.levels = data.levels.map(item => PreviewBeatmapLevel.fromObject(item));
@@ -1129,20 +1154,21 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.levels.length) writer.writeRepeatedMessage(1, this.levels, (item: PreviewBeatmapLevel) => item.serialize(writer));
-            if (!w) return writer.getResultBuffer();
+            if (this.levels.length)
+                writer.writeRepeatedMessage(1, this.levels, (item: PreviewBeatmapLevel) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SongList {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new SongList();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SongList();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         reader.readMessage(message.levels, () => pb_1.Message.addToRepeatedWrapperField(message, 1, PreviewBeatmapLevel.deserialize(reader), PreviewBeatmapLevel));
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -1156,23 +1182,19 @@ export namespace Models {
     }
     export class User extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      guid?: string;
-                      name?: string;
-                      user_id?: string;
-                      client_type?: User.ClientTypes;
-                      team?: Team;
-                      play_state?: User.PlayStates;
-                      download_state?: User.DownloadStates;
-                      mod_list?: string[];
-                      stream_screen_coordinates?: User.Point;
-                      stream_delay_ms?: number;
-                      stream_sync_start_ms?: number;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            guid?: string;
+            name?: string;
+            user_id?: string;
+            client_type?: User.ClientTypes;
+            team?: Team;
+            play_state?: User.PlayStates;
+            download_state?: User.DownloadStates;
+            mod_list?: string[];
+            stream_screen_coordinates?: User.Point;
+            stream_delay_ms?: number;
+            stream_sync_start_ms?: number;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [8], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -1385,24 +1407,36 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.guid.length) writer.writeString(1, this.guid);
-            if (this.name.length) writer.writeString(2, this.name);
-            if (this.user_id.length) writer.writeString(3, this.user_id);
-            if (this.client_type != User.ClientTypes.Player) writer.writeEnum(4, this.client_type);
-            if (this.has_team) writer.writeMessage(5, this.team, () => this.team.serialize(writer));
-            if (this.play_state != User.PlayStates.Waiting) writer.writeEnum(6, this.play_state);
-            if (this.download_state != User.DownloadStates.None) writer.writeEnum(7, this.download_state);
-            if (this.mod_list.length) writer.writeRepeatedString(8, this.mod_list);
-            if (this.has_stream_screen_coordinates) writer.writeMessage(9, this.stream_screen_coordinates, () => this.stream_screen_coordinates.serialize(writer));
-            if (this.stream_delay_ms != 0) writer.writeInt64(10, this.stream_delay_ms);
-            if (this.stream_sync_start_ms != 0) writer.writeInt64(11, this.stream_sync_start_ms);
-            if (!w) return writer.getResultBuffer();
+            if (this.guid.length)
+                writer.writeString(1, this.guid);
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (this.user_id.length)
+                writer.writeString(3, this.user_id);
+            if (this.client_type != User.ClientTypes.Player)
+                writer.writeEnum(4, this.client_type);
+            if (this.has_team)
+                writer.writeMessage(5, this.team, () => this.team.serialize(writer));
+            if (this.play_state != User.PlayStates.Waiting)
+                writer.writeEnum(6, this.play_state);
+            if (this.download_state != User.DownloadStates.None)
+                writer.writeEnum(7, this.download_state);
+            if (this.mod_list.length)
+                writer.writeRepeatedString(8, this.mod_list);
+            if (this.has_stream_screen_coordinates)
+                writer.writeMessage(9, this.stream_screen_coordinates, () => this.stream_screen_coordinates.serialize(writer));
+            if (this.stream_delay_ms != 0)
+                writer.writeInt64(10, this.stream_delay_ms);
+            if (this.stream_sync_start_ms != 0)
+                writer.writeInt64(11, this.stream_sync_start_ms);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): User {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new User();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new User();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.guid = reader.readString();
@@ -1417,7 +1451,7 @@ export namespace Models {
                         message.client_type = reader.readEnum();
                         break;
                     case 5:
-                        reader.readMessage(message.team, () => (message.team = Team.deserialize(reader)));
+                        reader.readMessage(message.team, () => message.team = Team.deserialize(reader));
                         break;
                     case 6:
                         message.play_state = reader.readEnum();
@@ -1429,7 +1463,7 @@ export namespace Models {
                         pb_1.Message.addToRepeatedField(message, 8, reader.readString());
                         break;
                     case 9:
-                        reader.readMessage(message.stream_screen_coordinates, () => (message.stream_screen_coordinates = User.Point.deserialize(reader)));
+                        reader.readMessage(message.stream_screen_coordinates, () => message.stream_screen_coordinates = User.Point.deserialize(reader));
                         break;
                     case 10:
                         message.stream_delay_ms = reader.readInt64();
@@ -1437,8 +1471,7 @@ export namespace Models {
                     case 11:
                         message.stream_sync_start_ms = reader.readInt64();
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -1469,14 +1502,10 @@ export namespace Models {
         }
         export class Point extends pb_1.Message {
             private one_of_decls: number[][] = [];
-            constructor(
-                data?:
-                    | any[]
-                    | {
-                          x?: number;
-                          y?: number;
-                      }
-            ) {
+            constructor(data?: any[] | {
+                x?: number;
+                y?: number;
+            }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
                 if (!Array.isArray(data) && typeof data == "object") {
@@ -1500,7 +1529,10 @@ export namespace Models {
             set y(value: number) {
                 pb_1.Message.setField(this, 2, value);
             }
-            static fromObject(data: { x?: number; y?: number }): Point {
+            static fromObject(data: {
+                x?: number;
+                y?: number;
+            }): Point {
                 const message = new Point({});
                 if (data.x != null) {
                     message.x = data.x;
@@ -1527,15 +1559,18 @@ export namespace Models {
             serialize(w: pb_1.BinaryWriter): void;
             serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
                 const writer = w || new pb_1.BinaryWriter();
-                if (this.x != 0) writer.writeInt32(1, this.x);
-                if (this.y != 0) writer.writeInt32(2, this.y);
-                if (!w) return writer.getResultBuffer();
+                if (this.x != 0)
+                    writer.writeInt32(1, this.x);
+                if (this.y != 0)
+                    writer.writeInt32(2, this.y);
+                if (!w)
+                    return writer.getResultBuffer();
             }
             static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Point {
-                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                    message = new Point();
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Point();
                 while (reader.nextField()) {
-                    if (reader.isEndGroup()) break;
+                    if (reader.isEndGroup())
+                        break;
                     switch (reader.getFieldNumber()) {
                         case 1:
                             message.x = reader.readInt32();
@@ -1543,8 +1578,7 @@ export namespace Models {
                         case 2:
                             message.y = reader.readInt32();
                             break;
-                        default:
-                            reader.skipField();
+                        default: reader.skipField();
                     }
                 }
                 return message;
@@ -1559,19 +1593,15 @@ export namespace Models {
     }
     export class Match extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      guid?: string;
-                      associated_users?: string[];
-                      leader?: string;
-                      selected_level?: PreviewBeatmapLevel;
-                      selected_characteristic?: Characteristic;
-                      selected_difficulty?: number;
-                      start_time?: string;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            guid?: string;
+            associated_users?: string[];
+            leader?: string;
+            selected_level?: PreviewBeatmapLevel;
+            selected_characteristic?: Characteristic;
+            selected_difficulty?: number;
+            start_time?: string;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -1716,20 +1746,28 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.guid.length) writer.writeString(1, this.guid);
-            if (this.associated_users.length) writer.writeRepeatedString(2, this.associated_users);
-            if (this.leader.length) writer.writeString(3, this.leader);
-            if (this.has_selected_level) writer.writeMessage(5, this.selected_level, () => this.selected_level.serialize(writer));
-            if (this.has_selected_characteristic) writer.writeMessage(6, this.selected_characteristic, () => this.selected_characteristic.serialize(writer));
-            if (this.selected_difficulty != 0) writer.writeInt32(7, this.selected_difficulty);
-            if (this.start_time.length) writer.writeString(8, this.start_time);
-            if (!w) return writer.getResultBuffer();
+            if (this.guid.length)
+                writer.writeString(1, this.guid);
+            if (this.associated_users.length)
+                writer.writeRepeatedString(2, this.associated_users);
+            if (this.leader.length)
+                writer.writeString(3, this.leader);
+            if (this.has_selected_level)
+                writer.writeMessage(5, this.selected_level, () => this.selected_level.serialize(writer));
+            if (this.has_selected_characteristic)
+                writer.writeMessage(6, this.selected_characteristic, () => this.selected_characteristic.serialize(writer));
+            if (this.selected_difficulty != 0)
+                writer.writeInt32(7, this.selected_difficulty);
+            if (this.start_time.length)
+                writer.writeString(8, this.start_time);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Match {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new Match();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Match();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.guid = reader.readString();
@@ -1741,10 +1779,10 @@ export namespace Models {
                         message.leader = reader.readString();
                         break;
                     case 5:
-                        reader.readMessage(message.selected_level, () => (message.selected_level = PreviewBeatmapLevel.deserialize(reader)));
+                        reader.readMessage(message.selected_level, () => message.selected_level = PreviewBeatmapLevel.deserialize(reader));
                         break;
                     case 6:
-                        reader.readMessage(message.selected_characteristic, () => (message.selected_characteristic = Characteristic.deserialize(reader)));
+                        reader.readMessage(message.selected_characteristic, () => message.selected_characteristic = Characteristic.deserialize(reader));
                         break;
                     case 7:
                         message.selected_difficulty = reader.readInt32();
@@ -1752,8 +1790,7 @@ export namespace Models {
                     case 8:
                         message.start_time = reader.readString();
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -1767,19 +1804,15 @@ export namespace Models {
     }
     export class QualifierEvent extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      guid?: string;
-                      name?: string;
-                      guild?: dependency_1.proto.discord.Guild;
-                      info_channel?: dependency_1.proto.discord.Channel;
-                      qualifier_maps?: GameplayParameters[];
-                      send_scores_to_info_channel?: boolean;
-                      flags?: number;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            guid?: string;
+            name?: string;
+            guild?: dependency_1.proto.discord.Guild;
+            info_channel?: dependency_1.proto.discord.Channel;
+            qualifier_maps?: GameplayParameters[];
+            send_scores_to_info_channel?: boolean;
+            flags?: number;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [5], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -1924,20 +1957,28 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.guid.length) writer.writeString(1, this.guid);
-            if (this.name.length) writer.writeString(2, this.name);
-            if (this.has_guild) writer.writeMessage(3, this.guild, () => this.guild.serialize(writer));
-            if (this.has_info_channel) writer.writeMessage(4, this.info_channel, () => this.info_channel.serialize(writer));
-            if (this.qualifier_maps.length) writer.writeRepeatedMessage(5, this.qualifier_maps, (item: GameplayParameters) => item.serialize(writer));
-            if (this.send_scores_to_info_channel != false) writer.writeBool(6, this.send_scores_to_info_channel);
-            if (this.flags != 0) writer.writeInt32(7, this.flags);
-            if (!w) return writer.getResultBuffer();
+            if (this.guid.length)
+                writer.writeString(1, this.guid);
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (this.has_guild)
+                writer.writeMessage(3, this.guild, () => this.guild.serialize(writer));
+            if (this.has_info_channel)
+                writer.writeMessage(4, this.info_channel, () => this.info_channel.serialize(writer));
+            if (this.qualifier_maps.length)
+                writer.writeRepeatedMessage(5, this.qualifier_maps, (item: GameplayParameters) => item.serialize(writer));
+            if (this.send_scores_to_info_channel != false)
+                writer.writeBool(6, this.send_scores_to_info_channel);
+            if (this.flags != 0)
+                writer.writeInt32(7, this.flags);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualifierEvent {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new QualifierEvent();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualifierEvent();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.guid = reader.readString();
@@ -1946,10 +1987,10 @@ export namespace Models {
                         message.name = reader.readString();
                         break;
                     case 3:
-                        reader.readMessage(message.guild, () => (message.guild = dependency_1.proto.discord.Guild.deserialize(reader)));
+                        reader.readMessage(message.guild, () => message.guild = dependency_1.proto.discord.Guild.deserialize(reader));
                         break;
                     case 4:
-                        reader.readMessage(message.info_channel, () => (message.info_channel = dependency_1.proto.discord.Channel.deserialize(reader)));
+                        reader.readMessage(message.info_channel, () => message.info_channel = dependency_1.proto.discord.Channel.deserialize(reader));
                         break;
                     case 5:
                         reader.readMessage(message.qualifier_maps, () => pb_1.Message.addToRepeatedWrapperField(message, 5, GameplayParameters.deserialize(reader), GameplayParameters));
@@ -1960,8 +2001,7 @@ export namespace Models {
                     case 7:
                         message.flags = reader.readInt32();
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -1983,15 +2023,11 @@ export namespace Models {
     }
     export class CoreServer extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      name?: string;
-                      address?: string;
-                      port?: number;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            name?: string;
+            address?: string;
+            port?: number;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -2024,7 +2060,11 @@ export namespace Models {
         set port(value: number) {
             pb_1.Message.setField(this, 3, value);
         }
-        static fromObject(data: { name?: string; address?: string; port?: number }): CoreServer {
+        static fromObject(data: {
+            name?: string;
+            address?: string;
+            port?: number;
+        }): CoreServer {
             const message = new CoreServer({});
             if (data.name != null) {
                 message.name = data.name;
@@ -2058,16 +2098,20 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.name.length) writer.writeString(1, this.name);
-            if (this.address.length) writer.writeString(2, this.address);
-            if (this.port != 0) writer.writeInt32(3, this.port);
-            if (!w) return writer.getResultBuffer();
+            if (this.name.length)
+                writer.writeString(1, this.name);
+            if (this.address.length)
+                writer.writeString(2, this.address);
+            if (this.port != 0)
+                writer.writeInt32(3, this.port);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CoreServer {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new CoreServer();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CoreServer();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.name = reader.readString();
@@ -2078,8 +2122,7 @@ export namespace Models {
                     case 3:
                         message.port = reader.readInt32();
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -2093,17 +2136,13 @@ export namespace Models {
     }
     export class State extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      server_settings?: ServerSettings;
-                      users?: User[];
-                      matches?: Match[];
-                      events?: QualifierEvent[];
-                      known_hosts?: CoreServer[];
-                  }
-        ) {
+        constructor(data?: any[] | {
+            server_settings?: ServerSettings;
+            users?: User[];
+            matches?: Match[];
+            events?: QualifierEvent[];
+            known_hosts?: CoreServer[];
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2, 4, 5, 6], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -2211,21 +2250,27 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_server_settings) writer.writeMessage(1, this.server_settings, () => this.server_settings.serialize(writer));
-            if (this.users.length) writer.writeRepeatedMessage(2, this.users, (item: User) => item.serialize(writer));
-            if (this.matches.length) writer.writeRepeatedMessage(4, this.matches, (item: Match) => item.serialize(writer));
-            if (this.events.length) writer.writeRepeatedMessage(5, this.events, (item: QualifierEvent) => item.serialize(writer));
-            if (this.known_hosts.length) writer.writeRepeatedMessage(6, this.known_hosts, (item: CoreServer) => item.serialize(writer));
-            if (!w) return writer.getResultBuffer();
+            if (this.has_server_settings)
+                writer.writeMessage(1, this.server_settings, () => this.server_settings.serialize(writer));
+            if (this.users.length)
+                writer.writeRepeatedMessage(2, this.users, (item: User) => item.serialize(writer));
+            if (this.matches.length)
+                writer.writeRepeatedMessage(4, this.matches, (item: Match) => item.serialize(writer));
+            if (this.events.length)
+                writer.writeRepeatedMessage(5, this.events, (item: QualifierEvent) => item.serialize(writer));
+            if (this.known_hosts.length)
+                writer.writeRepeatedMessage(6, this.known_hosts, (item: CoreServer) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): State {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new State();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new State();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.server_settings, () => (message.server_settings = ServerSettings.deserialize(reader)));
+                        reader.readMessage(message.server_settings, () => message.server_settings = ServerSettings.deserialize(reader));
                         break;
                     case 2:
                         reader.readMessage(message.users, () => pb_1.Message.addToRepeatedWrapperField(message, 2, User.deserialize(reader), User));
@@ -2239,8 +2284,7 @@ export namespace Models {
                     case 6:
                         reader.readMessage(message.known_hosts, () => pb_1.Message.addToRepeatedWrapperField(message, 6, CoreServer.deserialize(reader), CoreServer));
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -2254,14 +2298,10 @@ export namespace Models {
     }
     export class ModalOption extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      label?: string;
-                      value?: string;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            label?: string;
+            value?: string;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -2285,7 +2325,10 @@ export namespace Models {
         set value(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
-        static fromObject(data: { label?: string; value?: string }): ModalOption {
+        static fromObject(data: {
+            label?: string;
+            value?: string;
+        }): ModalOption {
             const message = new ModalOption({});
             if (data.label != null) {
                 message.label = data.label;
@@ -2312,15 +2355,18 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.label.length) writer.writeString(1, this.label);
-            if (this.value.length) writer.writeString(2, this.value);
-            if (!w) return writer.getResultBuffer();
+            if (this.label.length)
+                writer.writeString(1, this.label);
+            if (this.value.length)
+                writer.writeString(2, this.value);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModalOption {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new ModalOption();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ModalOption();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.label = reader.readString();
@@ -2328,8 +2374,7 @@ export namespace Models {
                     case 2:
                         message.value = reader.readString();
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -2343,19 +2388,15 @@ export namespace Models {
     }
     export class LeaderboardScore extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      event_id?: string;
-                      parameters?: GameplayParameters;
-                      user_id?: string;
-                      username?: string;
-                      score?: number;
-                      full_combo?: boolean;
-                      color?: string;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            event_id?: string;
+            parameters?: GameplayParameters;
+            user_id?: string;
+            username?: string;
+            score?: number;
+            full_combo?: boolean;
+            color?: string;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -2427,7 +2468,15 @@ export namespace Models {
         set color(value: string) {
             pb_1.Message.setField(this, 7, value);
         }
-        static fromObject(data: { event_id?: string; parameters?: ReturnType<typeof GameplayParameters.prototype.toObject>; user_id?: string; username?: string; score?: number; full_combo?: boolean; color?: string }): LeaderboardScore {
+        static fromObject(data: {
+            event_id?: string;
+            parameters?: ReturnType<typeof GameplayParameters.prototype.toObject>;
+            user_id?: string;
+            username?: string;
+            score?: number;
+            full_combo?: boolean;
+            color?: string;
+        }): LeaderboardScore {
             const message = new LeaderboardScore({});
             if (data.event_id != null) {
                 message.event_id = data.event_id;
@@ -2489,26 +2538,34 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.event_id.length) writer.writeString(1, this.event_id);
-            if (this.has_parameters) writer.writeMessage(2, this.parameters, () => this.parameters.serialize(writer));
-            if (this.user_id.length) writer.writeString(3, this.user_id);
-            if (this.username.length) writer.writeString(4, this.username);
-            if (this.score != 0) writer.writeInt32(5, this.score);
-            if (this.full_combo != false) writer.writeBool(6, this.full_combo);
-            if (this.color.length) writer.writeString(7, this.color);
-            if (!w) return writer.getResultBuffer();
+            if (this.event_id.length)
+                writer.writeString(1, this.event_id);
+            if (this.has_parameters)
+                writer.writeMessage(2, this.parameters, () => this.parameters.serialize(writer));
+            if (this.user_id.length)
+                writer.writeString(3, this.user_id);
+            if (this.username.length)
+                writer.writeString(4, this.username);
+            if (this.score != 0)
+                writer.writeInt32(5, this.score);
+            if (this.full_combo != false)
+                writer.writeBool(6, this.full_combo);
+            if (this.color.length)
+                writer.writeString(7, this.color);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LeaderboardScore {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new LeaderboardScore();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LeaderboardScore();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.event_id = reader.readString();
                         break;
                     case 2:
-                        reader.readMessage(message.parameters, () => (message.parameters = GameplayParameters.deserialize(reader)));
+                        reader.readMessage(message.parameters, () => message.parameters = GameplayParameters.deserialize(reader));
                         break;
                     case 3:
                         message.user_id = reader.readString();
@@ -2525,8 +2582,7 @@ export namespace Models {
                     case 7:
                         message.color = reader.readString();
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -2540,28 +2596,24 @@ export namespace Models {
     }
     export class RealtimeScore extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      user_guid?: string;
-                      score?: number;
-                      score_with_modifiers?: number;
-                      max_score?: number;
-                      max_score_with_modifiers?: number;
-                      combo?: number;
-                      player_health?: number;
-                      accuracy?: number;
-                      song_position?: number;
-                      notesMissed?: number;
-                      badCuts?: number;
-                      bombHits?: number;
-                      wallHits?: number;
-                      maxCombo?: number;
-                      leftHand?: ScoreTrackerHand;
-                      rightHand?: ScoreTrackerHand;
-                  }
-        ) {
+        constructor(data?: any[] | {
+            user_guid?: string;
+            score?: number;
+            score_with_modifiers?: number;
+            max_score?: number;
+            max_score_with_modifiers?: number;
+            combo?: number;
+            player_health?: number;
+            accuracy?: number;
+            song_position?: number;
+            notesMissed?: number;
+            badCuts?: number;
+            bombHits?: number;
+            wallHits?: number;
+            maxCombo?: number;
+            leftHand?: ScoreTrackerHand;
+            rightHand?: ScoreTrackerHand;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -2859,29 +2911,46 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.user_guid.length) writer.writeString(1, this.user_guid);
-            if (this.score != 0) writer.writeInt32(2, this.score);
-            if (this.score_with_modifiers != 0) writer.writeInt32(3, this.score_with_modifiers);
-            if (this.max_score != 0) writer.writeInt32(4, this.max_score);
-            if (this.max_score_with_modifiers != 0) writer.writeInt32(5, this.max_score_with_modifiers);
-            if (this.combo != 0) writer.writeInt32(6, this.combo);
-            if (this.player_health != 0) writer.writeFloat(7, this.player_health);
-            if (this.accuracy != 0) writer.writeFloat(8, this.accuracy);
-            if (this.song_position != 0) writer.writeFloat(9, this.song_position);
-            if (this.notesMissed != 0) writer.writeInt32(10, this.notesMissed);
-            if (this.badCuts != 0) writer.writeInt32(11, this.badCuts);
-            if (this.bombHits != 0) writer.writeInt32(12, this.bombHits);
-            if (this.wallHits != 0) writer.writeInt32(13, this.wallHits);
-            if (this.maxCombo != 0) writer.writeInt32(14, this.maxCombo);
-            if (this.has_leftHand) writer.writeMessage(15, this.leftHand, () => this.leftHand.serialize(writer));
-            if (this.has_rightHand) writer.writeMessage(16, this.rightHand, () => this.rightHand.serialize(writer));
-            if (!w) return writer.getResultBuffer();
+            if (this.user_guid.length)
+                writer.writeString(1, this.user_guid);
+            if (this.score != 0)
+                writer.writeInt32(2, this.score);
+            if (this.score_with_modifiers != 0)
+                writer.writeInt32(3, this.score_with_modifiers);
+            if (this.max_score != 0)
+                writer.writeInt32(4, this.max_score);
+            if (this.max_score_with_modifiers != 0)
+                writer.writeInt32(5, this.max_score_with_modifiers);
+            if (this.combo != 0)
+                writer.writeInt32(6, this.combo);
+            if (this.player_health != 0)
+                writer.writeFloat(7, this.player_health);
+            if (this.accuracy != 0)
+                writer.writeFloat(8, this.accuracy);
+            if (this.song_position != 0)
+                writer.writeFloat(9, this.song_position);
+            if (this.notesMissed != 0)
+                writer.writeInt32(10, this.notesMissed);
+            if (this.badCuts != 0)
+                writer.writeInt32(11, this.badCuts);
+            if (this.bombHits != 0)
+                writer.writeInt32(12, this.bombHits);
+            if (this.wallHits != 0)
+                writer.writeInt32(13, this.wallHits);
+            if (this.maxCombo != 0)
+                writer.writeInt32(14, this.maxCombo);
+            if (this.has_leftHand)
+                writer.writeMessage(15, this.leftHand, () => this.leftHand.serialize(writer));
+            if (this.has_rightHand)
+                writer.writeMessage(16, this.rightHand, () => this.rightHand.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RealtimeScore {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new RealtimeScore();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new RealtimeScore();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.user_guid = reader.readString();
@@ -2926,13 +2995,12 @@ export namespace Models {
                         message.maxCombo = reader.readInt32();
                         break;
                     case 15:
-                        reader.readMessage(message.leftHand, () => (message.leftHand = ScoreTrackerHand.deserialize(reader)));
+                        reader.readMessage(message.leftHand, () => message.leftHand = ScoreTrackerHand.deserialize(reader));
                         break;
                     case 16:
-                        reader.readMessage(message.rightHand, () => (message.rightHand = ScoreTrackerHand.deserialize(reader)));
+                        reader.readMessage(message.rightHand, () => message.rightHand = ScoreTrackerHand.deserialize(reader));
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
@@ -2946,16 +3014,12 @@ export namespace Models {
     }
     export class ScoreTrackerHand extends pb_1.Message {
         private one_of_decls: number[][] = [];
-        constructor(
-            data?:
-                | any[]
-                | {
-                      hit?: number;
-                      miss?: number;
-                      badCut?: number;
-                      avgCut?: number[];
-                  }
-        ) {
+        constructor(data?: any[] | {
+            hit?: number;
+            miss?: number;
+            badCut?: number;
+            avgCut?: number[];
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [4], this.one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -2997,7 +3061,12 @@ export namespace Models {
         set avgCut(value: number[]) {
             pb_1.Message.setField(this, 4, value);
         }
-        static fromObject(data: { hit?: number; miss?: number; badCut?: number; avgCut?: number[] }): ScoreTrackerHand {
+        static fromObject(data: {
+            hit?: number;
+            miss?: number;
+            badCut?: number;
+            avgCut?: number[];
+        }): ScoreTrackerHand {
             const message = new ScoreTrackerHand({});
             if (data.hit != null) {
                 message.hit = data.hit;
@@ -3038,17 +3107,22 @@ export namespace Models {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.hit != 0) writer.writeInt32(1, this.hit);
-            if (this.miss != 0) writer.writeInt32(2, this.miss);
-            if (this.badCut != 0) writer.writeInt32(3, this.badCut);
-            if (this.avgCut.length) writer.writePackedFloat(4, this.avgCut);
-            if (!w) return writer.getResultBuffer();
+            if (this.hit != 0)
+                writer.writeInt32(1, this.hit);
+            if (this.miss != 0)
+                writer.writeInt32(2, this.miss);
+            if (this.badCut != 0)
+                writer.writeInt32(3, this.badCut);
+            if (this.avgCut.length)
+                writer.writePackedFloat(4, this.avgCut);
+            if (!w)
+                return writer.getResultBuffer();
         }
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ScoreTrackerHand {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new ScoreTrackerHand();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ScoreTrackerHand();
             while (reader.nextField()) {
-                if (reader.isEndGroup()) break;
+                if (reader.isEndGroup())
+                    break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.hit = reader.readInt32();
@@ -3062,8 +3136,7 @@ export namespace Models {
                     case 4:
                         message.avgCut = reader.readPackedFloat();
                         break;
-                    default:
-                        reader.skipField();
+                    default: reader.skipField();
                 }
             }
             return message;
