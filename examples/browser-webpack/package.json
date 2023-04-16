@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf dist && webpack",
-    "start": "npm run build && npx http-server . -o"
+    "test": "npm run build && npx http-server . -o"
   },
   "author": "",
   "license": "ISC",
