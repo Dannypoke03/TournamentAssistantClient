@@ -204,7 +204,7 @@ export class StateManager {
         this.emitter.emit("userUpdated", { from: from, data: user });
     }
 
-    private realTimeScoreUpdated(data: Packets.Push.RealtimeScore, from: string) {
+    private realTimeScoreUpdated(data: Models.RealtimeScore, from: string) {
         const index = this.Players.findIndex(x => x.guid === data.user_guid);
         if (index > -1) this.Players[index].updateScore(data);
         this.emitter.emit("realtimeScore", { from: from, data: data });

@@ -1,13 +1,13 @@
 import EventEmitter from "events";
 import { Emitter } from "../models/EventEmitter";
+import { TAEvents } from "../models/TAEvents";
 import { Models } from "../models/proto/models";
 import { Packets } from "../models/proto/packets";
-import { TAEvents } from "../models/TAEvents";
 import { TAClientVersion } from "../utils/constants";
 import { generateUUID } from "../utils/uuid";
+import { ConnectionOptions, TAWebsocket } from "./TAWebsocket";
 import { StateManager } from "./client/StateManager";
 import { PlayerWithScore } from "./client/User";
-import { ConnectionOptions, TAWebsocket } from "./TAWebsocket";
 
 export class Client {
     public Self: Models.User;
@@ -462,7 +462,7 @@ export class Client {
         });
         const gameplayParameters = new Models.GameplayParameters({
             player_settings: new Models.PlayerSpecificSettings({
-                options: Models.PlayerSpecificSettings.PlayerOptions.None
+                options: Models.PlayerSpecificSettings.PlayerOptions.NoPlayerOptions
             }),
             gameplay_modifiers: gm,
             beatmap: beatMap

@@ -1,12 +1,11 @@
 import { Models } from "../../models/proto/models";
-import { Packets } from "../../models/proto/packets";
 
 export class PlayerWithScore extends Models.User {
-    score_details: Packets.Push.RealtimeScore;
+    score_details: Models.RealtimeScore;
 
     constructor(player: Models.User) {
         super(player);
-        this.score_details = Packets.Push.RealtimeScore.fromObject(this._baseScoreDetails);
+        this.score_details = Models.RealtimeScore.fromObject(this._baseScoreDetails);
     }
 
     updateUser(user: Models.User) {
@@ -26,21 +25,20 @@ export class PlayerWithScore extends Models.User {
         this.stream_sync_start_ms = user.stream_sync_start_ms;
     }
 
-    updateScore(score: Packets.Push.RealtimeScore) {
+    updateScore(score: Models.RealtimeScore) {
         this.score_details = score;
     }
 
     resetScoreDetails() {
-        this.score_details = Packets.Push.RealtimeScore.fromObject(this._baseScoreDetails);
+        this.score_details = Models.RealtimeScore.fromObject(this._baseScoreDetails);
     }
 
     get _baseScoreDetails() {
-        const details = new Packets.Push.RealtimeScore();
-        details.scoreTracker = new Models.ScoreTracker();
-        details.scoreTracker.leftHand = new Models.ScoreTrackerHand();
-        details.scoreTracker.rightHand = new Models.ScoreTrackerHand();
-        details.scoreTracker.leftHand.avgCut = [0, 0, 0];
-        details.scoreTracker.rightHand.avgCut = [0, 0, 0];
+        const details = new Models.RealtimeScore();
+        details.leftHand = new Models.ScoreTrackerHand();
+        details.rightHand = new Models.ScoreTrackerHand();
+        details.leftHand.avgCut = [0, 0, 0];
+        details.rightHand.avgCut = [0, 0, 0];
         return details.toObject();
     }
 

@@ -25,9 +25,9 @@ export namespace TAEvents {
         showModal: PacketEvent<Packets.Command.ShowModal>;
 
         /* PUSH EVENTS */
-        pushLeaderboardScore: PacketEvent<Packets.Push.LeaderboardScore>;
+        pushLeaderboardScore: PacketEvent<Models.LeaderboardScore>;
         songFinished: PacketEvent<Packets.Push.SongFinished>;
-        realtimeScore: PacketEvent<Packets.Push.RealtimeScore>;
+        realtimeScore: PacketEvent<Models.RealtimeScore>;
 
         /* REQUESTS */
         connectRequest: PacketEvent<Packets.Request.Connect>;
