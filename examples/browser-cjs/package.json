@@ -1,0 +1,12 @@
+{
+  "name": "browser-cjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

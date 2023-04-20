@@ -5,7 +5,6 @@ ROOT="$(pwd)/$(dirname "$0")/.."
 cd "$ROOT" || exit 1
 
 DIR="$ROOT/dist"
-SRC_DIR="$DIR/tsOut"
 
 # Clean up output dir
 rm -rf "$DIR"
