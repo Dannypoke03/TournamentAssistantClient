@@ -9,7 +9,7 @@ do
   rm -rf ../examples/$dir/node_modules
   cd "$dir"
   npm install &> /dev/null
-  if ! npm run test &> /dev/null
+  if ! npm run test > /dev/null
   then
     echo "Testing: $dir... [FAIL]"
     exit 1
