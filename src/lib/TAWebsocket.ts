@@ -1,10 +1,10 @@
 import EventEmitter from "events";
-import WebSocket from "isomorphic-ws";
+import WebSocket from "ws";
 import { Config } from "../models/Config";
 import { Emitter } from "../models/EventEmitter";
+import { ITransport } from "../models/Transport";
 import { Models } from "../models/proto/models";
 import { Packets } from "../models/proto/packets";
-import { ITransport } from "../models/Transport";
 
 export interface ConnectionOptions {
     url: string;
