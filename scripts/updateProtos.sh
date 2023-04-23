@@ -10,10 +10,12 @@ then
     exit
 fi
 
-if [[ ! -d $protosDir ]]; then
+if [[ ! -d "$protosDir/.git" ]]; then
     echo "Initialising submodule..."
     git submodule update --init --recursive
 fi
+
+git submodule update --remote
 
 if [[ -d $modelsDir ]]; then
     echo "Removing old proto files..."
