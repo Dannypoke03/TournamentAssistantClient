@@ -14,12 +14,25 @@ npm i tournament-assistant-client
 
 The following will setup a basic Coordinator client and connect you to the TA server.
 
+### Import
+
 ```ts
 import { Client } from "tournament-assistant-client";
 
 new Client("Danny", {
     url: "ws://localhost:2053"
 });
+```
+
+### Browser Script
+
+```html
+<script src="https://www.unpkg.com/tournament-assistant-client@0.9.5/dist/tournament-assistant-client.min.js"></script>
+<script>
+    const taWS = new TournamentAssistantClient.Client("Danny", {
+        url: "ws://localhost:2053"
+    });
+</script>
 ```
 
 ### Base Options
@@ -124,6 +137,7 @@ taClient.on("EVENT_NAME", e => {
 
 | TA Version    | Client Version |
 | ------------- | -------------- |
+| 0.7.4         | 0.9.5          |
 | 0.7.3         | 0.9.4          |
 | 0.7.2         | 0.9.2          |
 | 0.7.0 ~ 0.7.1 | 0.9.1          |
