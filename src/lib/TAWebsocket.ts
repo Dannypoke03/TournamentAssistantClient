@@ -2,9 +2,9 @@ import EventEmitter from "events";
 import WebSocket from "ws";
 import { Config } from "../models/Config";
 import { Emitter } from "../models/EventEmitter";
-import { ITransport } from "../models/Transport";
 import { Models } from "../models/proto/models";
 import { Packets } from "../models/proto/packets";
+import { ITransport } from "../models/Transport";
 
 export interface ConnectionOptions {
     url: string;
@@ -57,9 +57,7 @@ export class TAWebsocket {
     }
 
     private init() {
-        this.ws = new WebSocket(this.url, {
-            handshakeTimeout: this.config.handshakeTimeout
-        });
+        this.ws = new WebSocket(this.url);
         this.ws.binaryType = "arraybuffer";
         const connectTimeout = setTimeout(() => {
             if (this.ws?.readyState !== WebSocket.OPEN && this.config.handshakeTimeout > 0) {
