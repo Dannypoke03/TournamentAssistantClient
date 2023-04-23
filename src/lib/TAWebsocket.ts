@@ -57,11 +57,13 @@ export class TAWebsocket {
     }
 
     private init() {
-        this.ws = new WebSocket(this.url);
+        this.ws = new WebSocket(this.url, {
+            handshakeTimeout: this.config.handshakeTimeout
+        });
         this.ws.binaryType = "arraybuffer";
         const connectTimeout = setTimeout(() => {
             if (this.ws?.readyState !== WebSocket.OPEN && this.config.handshakeTimeout > 0) {
-                this.ws?.close();
+                this.ws?.terminate();
                 this.ws = null;
             }
         }, this.config.handshakeTimeout);
@@ -102,9 +104,10 @@ export class TAWebsocket {
         this.sendToSocket(packet.serializeBinary());
     }
 
-    close() {
+    close(force: boolean = false) {
+        if (force) return this.ws?.terminate();
         if (this.ws?.readyState === WebSocket.OPEN) {
-            this.ws.close();
+            this.ws?.close();
         }
     }
 }

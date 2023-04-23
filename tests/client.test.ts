@@ -5,6 +5,8 @@ describe("Client Test", () => {
     let player: Client;
     let coordinator: Client;
 
+    jest.setTimeout(10000);
+
     beforeAll(() => {
         client = new Client("Test Client", {
             url: "ws://ta.beatsaberleague.com:2053"
@@ -21,12 +23,6 @@ describe("Client Test", () => {
                 connectionMode: Models.User.ClientTypes.Coordinator
             }
         });
-    });
-
-    afterAll(async () => {
-        client.close();
-        player.close();
-        coordinator.close();
     });
 
     test("Can connect", async () => {
@@ -107,6 +103,7 @@ describe("Client Test", () => {
             }
         });
         client.on("error", () => {
+            client.close(true);
             try {
                 expect(1).toBe(1);
                 done();
@@ -298,5 +295,32 @@ describe("Client Test", () => {
         client.reset();
         expect(client.users.length).toBe(0);
         expect(client.State.users.length).toBe(0);
+    });
+
+    afterAll(done => {
+        console.log("Closing clients");
+        client.close(true);
+        player.close(true);
+        coordinator.close(true);
+
+        const allClosed = () => {
+            setTimeout(() => {
+                done();
+            }, 5000);
+        };
+
+        let closeCount = 0;
+        player.once("close", () => {
+            closeCount++;
+            if (closeCount === 3) allClosed();
+        });
+        coordinator.once("close", () => {
+            closeCount++;
+            if (closeCount === 3) allClosed();
+        });
+        client.once("close", () => {
+            closeCount++;
+            if (closeCount === 3) allClosed();
+        });
     });
 });

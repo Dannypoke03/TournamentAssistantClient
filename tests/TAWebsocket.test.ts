@@ -28,8 +28,8 @@ describe("TAWebsocket Test", () => {
             url: "ws://cool-broken-link:2053",
             password: "",
             options: {
-                autoReconnectInterval: 1000,
-                handshakeTimeout: 500,
+                autoReconnectInterval: 500,
+                handshakeTimeout: 100,
                 autoReconnectMaxRetries: 3
             }
         });
@@ -50,5 +50,9 @@ describe("TAWebsocket Test", () => {
                 done(error);
             }
         }, 7000);
+    });
+
+    afterAll(() => {
+        ws.terminate();
     });
 });

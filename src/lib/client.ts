@@ -511,7 +511,8 @@ export class Client {
         );
     }
 
-    close(): void {
+    close(force = false): void {
+        if (force) return this.transport.close(force);
         this.sendEvent(
             new Packets.Event({
                 user_left_event: new Packets.Event.UserLeftEvent({
