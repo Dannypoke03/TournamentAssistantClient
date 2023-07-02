@@ -1,6 +1,6 @@
 {
     "name": "tournament-assistant-client",
-    "version": "0.9.5",
+    "version": "0.9.6",
     "description": "A typescript based client for Tournament Assistant a Beat Saber tournament mod",
     "scripts": {
         "test": "npm run lint && jest && ./scripts/exampleTest.sh",
