@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf dist && webpack",
+	"dev": "webpack --watch",
     "test": "npm run build"
   },
   "author": "",

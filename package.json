@@ -57,7 +57,10 @@
     "exports": {
         ".": {
             "node": "./dist/index.js",
-            "browser": "./dist/tournament-assistant-client.min.js",
+            "browser": {
+                "module": "./dist/tournament-assistant-client.module.js",
+                "default": "./dist/tournament-assistant-client.min.js"
+            },
             "default": "./dist/index.js"
         },
         "./package.json": "./package.json"

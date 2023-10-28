@@ -11,10 +11,10 @@ rm -rf "$DIR"
 mkdir -p "$DIR"
 
 npx tsc || exit 1
-node esbuild.js || exit 1
+bun esbuild.js || exit 1
 
 for file in $(find ./dist -type f -name '*.js'); do
-    npx uglifyjs $file -c -o $file &
+    bunx uglifyjs $file -c -o $file &
 done
 
 wait

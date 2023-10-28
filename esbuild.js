@@ -7,7 +7,7 @@ const GlobalsPlugin = require("esbuild-plugin-globals");
 
 
 esbuild.build({
-    entryPoints: ["dist/index.js"],
+    entryPoints: ["src/index.ts"],
     bundle: true,
     outfile: pkg.browser,
     globalName: "TournamentAssistantClient",
@@ -15,6 +15,29 @@ esbuild.build({
     define: {
         global: "window"
     },
+    target: ["chrome60", "edge18", "firefox60", "safari11"],
+    plugins: [
+        GlobalsPlugin({
+            ws: "WebSocket",
+        }),
+        NodeGlobalsPolyfillPlugin({
+            process: true,
+            buffer: true,
+        }),
+        NodeModulesPolyfillPlugin(),
+    ],
+});
+
+esbuild.build({
+    entryPoints: ["src/index.ts"],
+    bundle: true,
+    outfile: pkg.browser.replace("min", "module"),
+    globalName: "TournamentAssistantClient",
+    platform: "browser",
+    define: {
+        global: "window"
+    },
+    format: "esm",
     target: ["chrome60", "edge18", "firefox60", "safari11"],
     plugins: [
         GlobalsPlugin({
