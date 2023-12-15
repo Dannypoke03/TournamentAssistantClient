@@ -1068,6 +1068,8 @@ export namespace Packets {
                 beatmap?: dependency_2.Models.Beatmap;
                 type?: Push.SongFinished.CompletionType;
                 score?: number;
+                misses?: number;
+                end_time?: number;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.one_of_decls);
@@ -1083,6 +1085,12 @@ export namespace Packets {
                     }
                     if ("score" in data && data.score != undefined) {
                         this.score = data.score;
+                    }
+                    if ("misses" in data && data.misses != undefined) {
+                        this.misses = data.misses;
+                    }
+                    if ("end_time" in data && data.end_time != undefined) {
+                        this.end_time = data.end_time;
                     }
                 }
             }
@@ -1116,11 +1124,25 @@ export namespace Packets {
             set score(value: number) {
                 pb_1.Message.setField(this, 4, value);
             }
+            get misses() {
+                return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+            }
+            set misses(value: number) {
+                pb_1.Message.setField(this, 5, value);
+            }
+            get end_time() {
+                return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+            }
+            set end_time(value: number) {
+                pb_1.Message.setField(this, 6, value);
+            }
             static fromObject(data: {
                 player?: ReturnType<typeof dependency_2.Models.User.prototype.toObject>;
                 beatmap?: ReturnType<typeof dependency_2.Models.Beatmap.prototype.toObject>;
                 type?: Push.SongFinished.CompletionType;
                 score?: number;
+                misses?: number;
+                end_time?: number;
             }): SongFinished {
                 const message = new SongFinished({});
                 if (data.player != null) {
@@ -1135,6 +1157,12 @@ export namespace Packets {
                 if (data.score != null) {
                     message.score = data.score;
                 }
+                if (data.misses != null) {
+                    message.misses = data.misses;
+                }
+                if (data.end_time != null) {
+                    message.end_time = data.end_time;
+                }
                 return message;
             }
             toObject() {
@@ -1143,6 +1171,8 @@ export namespace Packets {
                     beatmap?: ReturnType<typeof dependency_2.Models.Beatmap.prototype.toObject>;
                     type?: Push.SongFinished.CompletionType;
                     score?: number;
+                    misses?: number;
+                    end_time?: number;
                 } = {};
                 if (this.player != null) {
                     data.player = this.player.toObject();
@@ -1155,6 +1185,12 @@ export namespace Packets {
                 }
                 if (this.score != null) {
                     data.score = this.score;
+                }
+                if (this.misses != null) {
+                    data.misses = this.misses;
+                }
+                if (this.end_time != null) {
+                    data.end_time = this.end_time;
                 }
                 return data;
             }
@@ -1170,6 +1206,10 @@ export namespace Packets {
                     writer.writeEnum(3, this.type);
                 if (this.score != 0)
                     writer.writeInt32(4, this.score);
+                if (this.misses != 0)
+                    writer.writeInt32(5, this.misses);
+                if (this.end_time != 0)
+                    writer.writeFloat(6, this.end_time);
                 if (!w)
                     return writer.getResultBuffer();
             }
@@ -1190,6 +1230,12 @@ export namespace Packets {
                             break;
                         case 4:
                             message.score = reader.readInt32();
+                            break;
+                        case 5:
+                            message.misses = reader.readInt32();
+                            break;
+                        case 6:
+                            message.end_time = reader.readFloat();
                             break;
                         default: reader.skipField();
                     }
