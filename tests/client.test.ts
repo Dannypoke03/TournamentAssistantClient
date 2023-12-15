@@ -298,7 +298,6 @@ describe("Client Test", () => {
     });
 
     afterAll(done => {
-        console.log("Closing clients");
         client.close(true);
         player.close(true);
         coordinator.close(true);
